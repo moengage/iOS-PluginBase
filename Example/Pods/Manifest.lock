@@ -1,0 +1,32 @@
+PODS:
+  - MoEngage-iOS-SDK (6.2.0):
+    - MORichNotification (~> 4.0)
+  - MoEngageInApp (1.0.1):
+    - MoEngage-iOS-SDK (~> 6.0)
+  - MoEPluginBase (1.0.0):
+    - MoEngage-iOS-SDK (~> 6.2.0)
+    - MoEngageInApp (~> 1.0.0)
+  - MORichNotification (4.0.0)
+
+DEPENDENCIES:
+  - MoEPluginBase (from `../`)
+
+SPEC REPOS:
+  https://cdn.cocoapods.org/:
+    - MoEngage-iOS-SDK
+    - MoEngageInApp
+    - MORichNotification
+
+EXTERNAL SOURCES:
+  MoEPluginBase:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MoEngage-iOS-SDK: 3e354c721db3f9d019fa12d9ffd4e6cda36eb45e
+  MoEngageInApp: 719c2c31b6429a670f17e37afc0b2d23744f8f9e
+  MoEPluginBase: 04edebad01234fb5f6ce7fbf5f46fc7a79d27044
+  MORichNotification: f1903895ef2b2e8c2af27208c0257fb2a3b5cb40
+
+PODFILE CHECKSUM: 1736dea3536ef91a9969ddf25cdd3e2f9c8b70dd
+
+COCOAPODS: 1.8.4
