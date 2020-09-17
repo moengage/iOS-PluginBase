@@ -62,6 +62,7 @@
 		951293919C9DC16C08D6632C2F223726 /* MOInAppCampaign+Utility.h in Headers */ = {isa = PBXBuildFile; fileRef = C2ADC0ACF25D0EA331E8FEEFE61C9992 /* MOInAppCampaign+Utility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		987F89D49FCE422DF1151696AB4BC702 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FA25020B96B86E3A3E00AD9B070823 /* UIKit.framework */; };
 		AF6A63782513D4B50083F408 /* MoEPluginBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AF6A63762513D4B50083F408 /* MoEPluginBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AF6A637B2513DA6A0083F408 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = AF6A637A2513DA6A0083F408 /* CHANGELOG.md */; };
 		BCD1A2CE572BFF5F8C83B99E479F7DFE /* MoEPluginMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 045376CD32D8B8D83047F3F8F59A7C3F /* MoEPluginMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C22011EC8EE6C7CDA1F6EC4748B3D601 /* Pods-MoEPluginBaseExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 646A0F3D60C7CE124608010D68EE4319 /* Pods-MoEPluginBaseExample-dummy.m */; };
 		CE7C1868B583F74B12883AF673A82507 /* MoEPluginMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB15A78CF9F05918C1F173C6FC2F97 /* MoEPluginMessage.m */; };
@@ -189,6 +190,7 @@
 		AD7AE93AB8D03DB00F834762A89E4332 /* MORichNotification.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MORichNotification.framework; path = Frameworks/MORichNotification.framework; sourceTree = "<group>"; };
 		AF6A63752513D4B50083F408 /* MoEPluginBase-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MoEPluginBase-Info.plist"; sourceTree = "<group>"; };
 		AF6A63762513D4B50083F408 /* MoEPluginBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoEPluginBase.h; path = MoEPluginBase/MoEPluginBase.h; sourceTree = "<group>"; };
+		AF6A637A2513DA6A0083F408 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B03BA97C6F18371A9EE770B8A8140A41 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C005E2978DE6221C912FCAF7F4B33CE1 /* MoEngage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MoEngage.framework; path = Frameworks/MoEngage.framework; sourceTree = "<group>"; };
 		C050A6577A7960CD773D37F8B7F9733B /* NSDictionary+Utility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Utility.h"; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				B03BA97C6F18371A9EE770B8A8140A41 /* LICENSE */,
 				955EBF7B2ACAAAC1260A370FFD23AD57 /* MoEPluginBase.podspec */,
 				7510D216BE53E8021AAED4A56A41F0E5 /* README.md */,
+				AF6A637A2513DA6A0083F408 /* CHANGELOG.md */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF6A637B2513DA6A0083F408 /* CHANGELOG.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
