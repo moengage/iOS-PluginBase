@@ -60,8 +60,8 @@
         [UNUserNotificationCenter currentNotificationCenter].delegate = self;
     }
     
-    // Add Push Callback Observers
-    [self addObserversForPushCallbacks];
+    [MOInApp sharedInstance].inAppDelegate = self;
+    [MOMessaging sharedInstance].messagingDelegate = self;
     
     // Initialize SDK
     NSString* appID = self.moeAppID;
@@ -75,9 +75,6 @@
     [[MoEngage sharedInstance] initializeProdWithAppID:appID withLaunchOptions:launchOptions];
 #endif
     
-    [MOInApp sharedInstance].inAppDelegate = self;
-    [MOMessaging sharedInstance].messagingDelegate = self;
-    
     if([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]){
         if (@available(iOS 10.0, *)) {
             [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:self];
@@ -87,17 +84,27 @@
     }
 }
 
-#pragma mark- Add Push Observers
+#pragma mark- Add Messaging Delegate
+-(void)notificationClickedWithScreenName:(NSString *)screenName KVPairs:(NSDictionary *)kvPairs andPushPayload:(NSDictionary *)userInfo{
+    if (userInfo) {
+        NSMutableDictionary* actionPayloadDict = [NSMutableDictionary dictionary];
+        if (screenName && screenName.length > 0) {
+            actionPayloadDict[@"type"] = @"screenName";
+            actionPayloadDict[@"value"] = screenName;
+        }
+        if (kvPairs) {
+            actionPayloadDict[@"kvPair"] = kvPairs;
+        }
+        
+        NSMutableDictionary* clickedAction = [NSMutableDictionary dictionary];
+        if ([actionPayloadDict allKeys].count > 0) {
+            clickedAction[@"type"] = @"navigation";
+            clickedAction[@"payload"] = actionPayloadDict;
+        }
 
--(void)addObserversForPushCallbacks{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationClickedCallback:) name:MoEngage_Notification_Received_Notification object:nil];
-}
-
--(void)notificationClickedCallback:(NSNotification*)notification{
-    NSDictionary* pushPayload = notification.userInfo;
-    if (pushPayload) {
         NSDictionary *payload = @{
-            @"payload" : pushPayload
+            @"payload" : userInfo,
+            @"clickedAction" : clickedAction
         };
         MoEPluginMessage* pushClick = [[MoEPluginMessage alloc] initWithMethodName:kEventNamePushClicked andInfoDict:payload];
         [[MoEPluginMessageQueueHandler sharedInstance] queueMessage:pushClick];

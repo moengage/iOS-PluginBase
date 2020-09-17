@@ -65,6 +65,7 @@
 		AF1C725F2507947C004DDCE3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AF1C72602507947C004DDCE3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AF1C72612507947C004DDCE3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AF6A63742513CD0B0083F408 /* MoEPluginBaseExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoEPluginBaseExample.entitlements; sourceTree = "<group>"; };
 		B9C3DBFCAB8B2967125634AF /* MoEPluginBase.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MoEPluginBase.podspec; path = ../MoEPluginBase.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C50B89C0CEE5418CE6B0917A /* Pods-MoEPluginBaseExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExampleTests.release.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExampleTests/Pods-MoEPluginBaseExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		E1013D5AF43864F2C6CB4B5E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -165,6 +166,7 @@
 		AF1C72532507947C004DDCE3 /* MoEPluginBaseExample */ = {
 			isa = PBXGroup;
 			children = (
+				AF6A63742513CD0B0083F408 /* MoEPluginBaseExample.entitlements */,
 				AF1C72572507947C004DDCE3 /* AppDelegate.h */,
 				AF1C72602507947C004DDCE3 /* AppDelegate.m */,
 				AF1C72612507947C004DDCE3 /* ViewController.h */,
@@ -253,6 +255,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Chengappa C D";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = BPWYRAF5X7;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -521,11 +526,14 @@
 			baseConfigurationReference = 1A03377D673F17F934F2E56E /* Pods-MoEPluginBaseExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MoEPluginBaseExample/MoEPluginBaseExample.entitlements;
+				DEVELOPMENT_TEAM = BPWYRAF5X7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "MoEPluginBaseExample/MoEPluginBaseExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.moengage.SampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
@@ -537,11 +545,14 @@
 			baseConfigurationReference = 225FC7B89B38B6F09B0D8891 /* Pods-MoEPluginBaseExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MoEPluginBaseExample/MoEPluginBaseExample.entitlements;
+				DEVELOPMENT_TEAM = BPWYRAF5X7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "MoEPluginBaseExample/MoEPluginBaseExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.moengage.SampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;

@@ -1,6 +1,6 @@
 {
   "name": "MoEPluginBase",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "summary": "MoEngage Plugin Base for Hybrid SDKs",
   "description": "MoEngage is a mobile marketing automation company. This framework is used by our plugins built for different hybrid frameworks i.e, Flutter, Cordova, React Native etc.",
   "homepage": "https://www.moengage.com",
@@ -18,7 +18,7 @@
   },
   "source": {
     "git": "https://github.com/moengage/MoEngage-iOS-SDK.git",
-    "tag": "MoEPluginBase-1.0.0"
+    "tag": "MoEPluginBase-0.0.1"
   },
   "source_files": "MoEPluginBase/**/*",
   "public_header_files": "MoEPluginBase/**/*.h",
@@ -29,7 +29,8 @@
   ],
   "dependencies": {
     "MoEngage-iOS-SDK": [
-      "~> 6.2.0"
+      ">= 6.2.1",
+      "< 7.0.0"
     ],
     "MoEngageInApp": [
       "~> 1.0.0"

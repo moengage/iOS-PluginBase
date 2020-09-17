@@ -15,13 +15,13 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '9.0'
     
     s.source       = {
-                        :git => 'https://github.com/moengage/MoEngage-iOS-SDK.git',
+                        :git => 'https://github.com/moengage/iOS-PluginBase.git',
                         :tag => 'MoEPluginBase-' + s.version.to_s
                     }
 
     s.source_files = 'MoEPluginBase/**/*'
     s.public_header_files = 'MoEPluginBase/**/*.h'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngage-iOS-SDK', '~> 6.2.0'
+    s.dependency 'MoEngage-iOS-SDK', '>= 6.2.1', '< 7.0.0'
     s.dependency 'MoEngageInApp', '~> 1.0.0'
 end
