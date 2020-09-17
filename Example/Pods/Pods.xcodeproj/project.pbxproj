@@ -61,7 +61,6 @@
 		8E77725FFB14BC515F4AE5AF20D6B38E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB9A57B4342D5D960CCD724525D2E0E /* Foundation.framework */; };
 		951293919C9DC16C08D6632C2F223726 /* MOInAppCampaign+Utility.h in Headers */ = {isa = PBXBuildFile; fileRef = C2ADC0ACF25D0EA331E8FEEFE61C9992 /* MOInAppCampaign+Utility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		987F89D49FCE422DF1151696AB4BC702 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FA25020B96B86E3A3E00AD9B070823 /* UIKit.framework */; };
-		AF6A63772513D4B50083F408 /* MoEPluginBase-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF6A63752513D4B50083F408 /* MoEPluginBase-Info.plist */; };
 		AF6A63782513D4B50083F408 /* MoEPluginBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AF6A63762513D4B50083F408 /* MoEPluginBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCD1A2CE572BFF5F8C83B99E479F7DFE /* MoEPluginMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 045376CD32D8B8D83047F3F8F59A7C3F /* MoEPluginMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C22011EC8EE6C7CDA1F6EC4748B3D601 /* Pods-MoEPluginBaseExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 646A0F3D60C7CE124608010D68EE4319 /* Pods-MoEPluginBaseExample-dummy.m */; };
@@ -188,7 +187,7 @@
 		A88B508300E30893AE1467D293712FC1 /* MoEngage-iOS-SDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MoEngage-iOS-SDK.debug.xcconfig"; sourceTree = "<group>"; };
 		ACA887E89AE5227856B9241FD8CD6704 /* MoEPluginInitializer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MoEPluginInitializer.m; path = MoEPluginBase/MoEPluginInitializer.m; sourceTree = "<group>"; };
 		AD7AE93AB8D03DB00F834762A89E4332 /* MORichNotification.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MORichNotification.framework; path = Frameworks/MORichNotification.framework; sourceTree = "<group>"; };
-		AF6A63752513D4B50083F408 /* MoEPluginBase-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MoEPluginBase-Info.plist"; path = "MoEPluginBase/MoEPluginBase-Info.plist"; sourceTree = "<group>"; };
+		AF6A63752513D4B50083F408 /* MoEPluginBase-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MoEPluginBase-Info.plist"; sourceTree = "<group>"; };
 		AF6A63762513D4B50083F408 /* MoEPluginBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoEPluginBase.h; path = MoEPluginBase/MoEPluginBase.h; sourceTree = "<group>"; };
 		B03BA97C6F18371A9EE770B8A8140A41 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C005E2978DE6221C912FCAF7F4B33CE1 /* MoEngage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MoEngage.framework; path = Frameworks/MoEngage.framework; sourceTree = "<group>"; };
@@ -285,7 +284,6 @@
 		1ABFF82045AA0654F8BCD1379AEB1429 /* MoEPluginBase */ = {
 			isa = PBXGroup;
 			children = (
-				AF6A63752513D4B50083F408 /* MoEPluginBase-Info.plist */,
 				AF6A63762513D4B50083F408 /* MoEPluginBase.h */,
 				ED66FC56E61F1B529215AE06C1DFF1E8 /* MoEPluginBridge.h */,
 				CD77ECB691873D6EAA7A2560DF2C0D80 /* MoEPluginBridge.m */,
@@ -411,6 +409,7 @@
 		A9AD26DE1923D772E5B9D7CEC84DB75B /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				AF6A63752513D4B50083F408 /* MoEPluginBase-Info.plist */,
 				57B9FE5CFD8D7F4EFD3689CDB0A5A586 /* MoEPluginBase.modulemap */,
 				188B9AEC7BAB2315FBC34A9C82C07148 /* MoEPluginBase-prefix.pch */,
 				041728219CFC53188BAF517F8E291EC4 /* MoEPluginBase.debug.xcconfig */,
@@ -638,7 +637,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF6A63772513D4B50083F408 /* MoEPluginBase-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +798,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREFIX_HEADER = "Target Support Files/MoEPluginBase/MoEPluginBase-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MoEPluginBase/MoEPluginBase-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1076,6 +1075,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREFIX_HEADER = "Target Support Files/MoEPluginBase/MoEPluginBase-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MoEPluginBase/MoEPluginBase-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
