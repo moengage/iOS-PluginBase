@@ -29,7 +29,6 @@
         if ([dictEvents isKindOfClass:[NSDictionary class]]) {
             [self addLocationAttributeFromDictionary:[dictEvents objectForKey:@"locationAttributes"]];
             [self addDateAttributeFromDictionary:[dictEvents objectForKey:@"dateTimeAttributes"]];
-            [self modifyEventInteractionFromDictionary:dictEvents];
         }
     }
     return self;
@@ -73,7 +72,6 @@
 }
 
 - (void)modifyEventInteractionFromDictionary:(NSDictionary*)dictEvent {
-    
     BOOL nonInteractive = [dictEvent getBooleanForKey:@"isNonInteractive"];
     if (nonInteractive) {
         [self setNonInteractive];

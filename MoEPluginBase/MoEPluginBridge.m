@@ -157,6 +157,7 @@
             NSDictionary *eventAttributes = [eventPayloadDict objectForKey:@"eventAttributes"];
             if ([MoEPluginUtils isValidDictionary:eventAttributes]) {
                 MOProperties *properties = [[MOProperties alloc] initWithTrackEventsDictionary:eventAttributes];
+                [properties modifyEventInteractionFromDictionary:eventPayloadDict];
                 [[MoEngage sharedInstance] trackEvent: eventName withProperties:properties];
             }
         }
@@ -210,24 +211,23 @@
     }];
 }
 
-- (void)selfHandledCampaignShown:(NSDictionary*)selfHandledCampaignDict{
-    MOInAppSelfHandledCampaign *info = [[MOInAppSelfHandledCampaign alloc] initWithDictionary:selfHandledCampaignDict];
-    [[MOInApp sharedInstance] selfHandledShownWithCampaignInfo:info];
-}
-
-- (void)selfHandledPrimaryClickedWithCampaignInfo:(NSDictionary*)selfHandledCampaignDict{
-    MOInAppSelfHandledCampaign *info = [[MOInAppSelfHandledCampaign alloc] initWithCampaignInfoDictionary: selfHandledCampaignDict];
-    [[MOInApp sharedInstance] selfHandledPrimaryClickedWithCampaignInfo:info];
-}
-
-- (void)selfHandledCampaignClicked:(NSDictionary*)selfHandledCampaignDict{
-    MOInAppSelfHandledCampaign *info = [[MOInAppSelfHandledCampaign alloc] initWithCampaignInfoDictionary: selfHandledCampaignDict];
-    [[MOInApp sharedInstance] selfHandledClickedWithCampaignInfo:info];
-}
-
-- (void)selfHandledCampaignDismissed:(NSDictionary*)selfHandledCampaignDict{
-    MOInAppSelfHandledCampaign *info = [[MOInAppSelfHandledCampaign alloc] initWithCampaignInfoDictionary: selfHandledCampaignDict];
-    [[MOInApp sharedInstance] selfHandledDismissedWithCampaignInfo:info];
+- (void)updateSelfHandledInAppStatusWithPayload:(NSDictionary*)selfHandledCampaignDict{
+    NSString* updateType = [selfHandledCampaignDict validObjectForKey:@"type"];
+    MOInAppSelfHandledCampaign *info = [[MOInAppSelfHandledCampaign alloc] initWithCampaignInfoDictionary:selfHandledCampaignDict];
+    if (updateType && info) {
+        if ([updateType isEqualToString:@"impression"]) {
+            [[MOInApp sharedInstance] selfHandledShownWithCampaignInfo:info];
+        }
+        else if ([updateType isEqualToString:@"dismissed"]){
+            [[MOInApp sharedInstance] selfHandledDismissedWithCampaignInfo:info];
+        }
+        else if ([updateType isEqualToString:@"click"]) {
+            [[MOInApp sharedInstance] selfHandledClickedWithCampaignInfo:info];
+        }
+        else if ([updateType isEqualToString:@"primary_clicked"]) {
+            [[MOInApp sharedInstance] selfHandledPrimaryClickedWithCampaignInfo:info];
+        }
+    }
 }
 
 #pragma mark- GeoFence Monitoring

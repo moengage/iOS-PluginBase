@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MOProperties (Utility)
 
 -(instancetype)initWithTrackEventsDictionary:(NSDictionary*)dictEvents;
-
+-(void)modifyEventInteractionFromDictionary:(NSDictionary*)dictEvent;
 @end
 
 NS_ASSUME_NONNULL_END

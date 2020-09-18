@@ -19,8 +19,6 @@
     
     self = [super init];
     if (self && dictInfo) {
-        
-        self.autoDismissInterval = [dictInfo getIntegerForKey:@"dismissInterval"];
         self.campaign_id = [dictInfo getStringForKey:@"campaignId"];
         self.campaign_name = [dictInfo getStringForKey:@"campaignName"];
         NSDate *date = [dictInfo getDateForKey:@"expiryTime" dateFormat: kISODateFormat1];
@@ -28,6 +26,11 @@
             date = [dictInfo getDateForKey:@"expiryTime" dateFormat: kISODateFormat2];
         }
         self.expiry_time = date;
+        
+        NSDictionary* selfHandledDict = [dictInfo validObjectForKey:@"selfHandled"];
+        if (selfHandledDict) {
+            self.autoDismissInterval = [selfHandledDict getIntegerForKey:@"dismissInterval"];
+        }
     }
     return self;
 }

@@ -42,10 +42,7 @@ typedef enum : NSUInteger {
 - (void)invalidateInAppContexts;
 
 - (void)getSelfHandledInApp;
-- (void)selfHandledCampaignShown:(NSDictionary*)selfHandledCampaignDict;
-- (void)selfHandledPrimaryClickedWithCampaignInfo:(NSDictionary*)selfHandledCampaignDict;
-- (void)selfHandledCampaignClicked:(NSDictionary*)selfHandledCampaignDict;
-- (void)selfHandledCampaignDismissed:(NSDictionary*)selfHandledCampaignDict;
+- (void)updateSelfHandledInAppStatusWithPayload:(NSDictionary*)selfHandledCampaignDict;
 
 - (void)startGeofenceMonitoring;
 
