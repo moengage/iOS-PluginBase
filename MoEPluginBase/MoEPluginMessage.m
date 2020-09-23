@@ -20,7 +20,7 @@
             [updatedInfoDict addEntriesFromDictionary:infoDict];
         }
         NSDictionary *dictPayload = @{
-            @"payload" : infoDict
+            @"payload" : updatedInfoDict
         };
         self.msgInfoDict = dictPayload;
     }
