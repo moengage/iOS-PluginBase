@@ -50,4 +50,8 @@ typedef enum : NSUInteger {
 - (void)resetUser;
 - (void)optOutTracking:(NSDictionary *)dictTracking;
 
+-(void)getInboxMessagesWithCompletionBlock:(void(^) (NSDictionary* inboxMessages))completionBlock;
+-(void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo;
+-(void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo;
+-(NSInteger)getUnreadMessageCount;
 @end

@@ -25,5 +25,36 @@ NSString* const kISODateFormat2 = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 NSString* const kMinSDKVersionSupported = @"6.0.0";
 NSString* const kMaxSDKVersionSupported = @"7.0.0";
 
+// Inbox Keys
+NSString* const kInboxKeyID             = @"id";
+NSString* const kInboxKeyCampaignID     = @"campaignId";
+NSString* const kInboxKeyTag            = @"tag";
+NSString* const kInboxKeyIsClicked      = @"isClicked";
+NSString* const kInboxKeyReceivedTime   = @"receivedTime";
+NSString* const kInboxKeyExpiry         = @"expiry";
+NSString* const kInboxKeyPayload        = @"payload";
+NSString* const kInboxKeyText           = @"text";
+NSString* const kInboxKeyMedia          = @"media";
+NSString* const kInboxKeyAction         = @"action";
 
+NSString* const kInboxKeyTextTitle      = @"title";
+NSString* const kInboxKeyTextSubTitle   = @"subtitle";
+NSString* const kInboxKeyTextMessage    = @"message";
 
+NSString* const kInboxKeyMediaType      = @"type";
+NSString* const kInboxKeyMediaURL       = @"url";
+
+NSString* const kInboxKeyActionType     = @"actionType";
+NSString* const kInboxKeyActionNavType  = @"navigationType";
+NSString* const kInboxKeyActionValue    = @"value";
+NSString* const kInboxKeyActionKVPair   = @"kvPair";
+
+NSString* const kInboxValActionTypeNav  = @"navigation";
+
+NSString* const kInboxValNavActionDeepLink      = @"deepLink";
+NSString* const kInboxValNavActionScreenName    = @"screenName";
+NSString* const kInboxValNavActionRichLanding   = @"richLanding";
+
+NSString* const kInboxValMediaTypeImage   = @"image";
+NSString* const kInboxValMediaTypeAudio   = @"audio";
+NSString* const kInboxValMediaTypeVideo   = @"video";

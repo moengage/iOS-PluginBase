@@ -63,6 +63,8 @@
 		987F89D49FCE422DF1151696AB4BC702 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FA25020B96B86E3A3E00AD9B070823 /* UIKit.framework */; };
 		AF6A63782513D4B50083F408 /* MoEPluginBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AF6A63762513D4B50083F408 /* MoEPluginBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF6A637B2513DA6A0083F408 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = AF6A637A2513DA6A0083F408 /* CHANGELOG.md */; };
+		AFA7AC912550486900876691 /* MOInboxModel+Utility.h in Headers */ = {isa = PBXBuildFile; fileRef = AFA7AC8F2550486900876691 /* MOInboxModel+Utility.h */; };
+		AFA7AC922550486900876691 /* MOInboxModel+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA7AC902550486900876691 /* MOInboxModel+Utility.m */; };
 		BCD1A2CE572BFF5F8C83B99E479F7DFE /* MoEPluginMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 045376CD32D8B8D83047F3F8F59A7C3F /* MoEPluginMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C22011EC8EE6C7CDA1F6EC4748B3D601 /* Pods-MoEPluginBaseExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 646A0F3D60C7CE124608010D68EE4319 /* Pods-MoEPluginBaseExample-dummy.m */; };
 		CE7C1868B583F74B12883AF673A82507 /* MoEPluginMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB15A78CF9F05918C1F173C6FC2F97 /* MoEPluginMessage.m */; };
@@ -191,6 +193,8 @@
 		AF6A63752513D4B50083F408 /* MoEPluginBase-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MoEPluginBase-Info.plist"; sourceTree = "<group>"; };
 		AF6A63762513D4B50083F408 /* MoEPluginBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoEPluginBase.h; path = MoEPluginBase/MoEPluginBase.h; sourceTree = "<group>"; };
 		AF6A637A2513DA6A0083F408 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		AFA7AC8F2550486900876691 /* MOInboxModel+Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MOInboxModel+Utility.h"; sourceTree = "<group>"; };
+		AFA7AC902550486900876691 /* MOInboxModel+Utility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MOInboxModel+Utility.m"; sourceTree = "<group>"; };
 		B03BA97C6F18371A9EE770B8A8140A41 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C005E2978DE6221C912FCAF7F4B33CE1 /* MoEngage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MoEngage.framework; path = Frameworks/MoEngage.framework; sourceTree = "<group>"; };
 		C050A6577A7960CD773D37F8B7F9733B /* NSDictionary+Utility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Utility.h"; sourceTree = "<group>"; };
@@ -318,6 +322,8 @@
 				89AB81A620873BD64C03C41423A3039B /* MOProperties+Utility.m */,
 				C050A6577A7960CD773D37F8B7F9733B /* NSDictionary+Utility.h */,
 				8BF55637D3117DB37C7C0731FABCCA6A /* NSDictionary+Utility.m */,
+				AFA7AC8F2550486900876691 /* MOInboxModel+Utility.h */,
+				AFA7AC902550486900876691 /* MOInboxModel+Utility.m */,
 			);
 			name = Categories;
 			path = MoEPluginBase/Categories;
@@ -503,6 +509,7 @@
 				D16BFFA4463A31A4ACF540319BFC8111 /* MoEPluginMessageQueueHandler.h in Headers */,
 				17BA78E147E068A429627E5C90894034 /* MoEPluginUtils.h in Headers */,
 				951293919C9DC16C08D6632C2F223726 /* MOInAppCampaign+Utility.h in Headers */,
+				AFA7AC912550486900876691 /* MOInboxModel+Utility.h in Headers */,
 				4B363A8096175CD02CF5CE0476106DB8 /* MOInAppSelfHandledCampaign+Utility.h in Headers */,
 				88E177E69BD63FF43F2CFF0E613BCCD0 /* MOProperties+Utility.h in Headers */,
 				877726DA7B8DBACE1040B5071C602BDA /* NSDictionary+Utility.h in Headers */,
@@ -661,6 +668,7 @@
 				40C6787B475F75FB9A2F6CB5D64EB8E4 /* MOInAppSelfHandledCampaign+Utility.m in Sources */,
 				14EE5DAD10A1F0876343D3BA85BBBFC1 /* MOProperties+Utility.m in Sources */,
 				8CB3DA5B91F495F26384FC57B265D572 /* NSDictionary+Utility.m in Sources */,
+				AFA7AC922550486900876691 /* MOInboxModel+Utility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

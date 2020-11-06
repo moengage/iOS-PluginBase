@@ -23,6 +23,7 @@
 		AF1C72672507947C004DDCE3 /* MoEPluginBaseExample-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF1C725E2507947C004DDCE3 /* MoEPluginBaseExample-Info.plist */; };
 		AF1C72682507947C004DDCE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF1C725F2507947C004DDCE3 /* Images.xcassets */; };
 		AF1C72692507947C004DDCE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1C72602507947C004DDCE3 /* AppDelegate.m */; };
+		AFA7ACD025518F9C00876691 /* InboxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA7ACCF25518F9C00876691 /* InboxController.m */; };
 		DC1DD2F66380DF0E71927D51 /* Pods_MoEPluginBaseExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3865F29A1C33ADEC374F6D /* Pods_MoEPluginBaseExample.framework */; };
 		E2F8F2699409151E1F2D9498 /* Pods_MoEPluginBaseExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F160815D231C97F82C3688 /* Pods_MoEPluginBaseExampleTests.framework */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,8 @@
 		AF1C72602507947C004DDCE3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AF1C72612507947C004DDCE3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AF6A63742513CD0B0083F408 /* MoEPluginBaseExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoEPluginBaseExample.entitlements; sourceTree = "<group>"; };
+		AFA7ACCE25518F9C00876691 /* InboxController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InboxController.h; sourceTree = "<group>"; };
+		AFA7ACCF25518F9C00876691 /* InboxController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InboxController.m; sourceTree = "<group>"; };
 		B9C3DBFCAB8B2967125634AF /* MoEPluginBase.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MoEPluginBase.podspec; path = ../MoEPluginBase.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C50B89C0CEE5418CE6B0917A /* Pods-MoEPluginBaseExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExampleTests.release.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExampleTests/Pods-MoEPluginBaseExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		E1013D5AF43864F2C6CB4B5E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				AF1C72602507947C004DDCE3 /* AppDelegate.m */,
 				AF1C72612507947C004DDCE3 /* ViewController.h */,
 				AF1C72582507947C004DDCE3 /* ViewController.m */,
+				AFA7ACCE25518F9C00876691 /* InboxController.h */,
+				AFA7ACCF25518F9C00876691 /* InboxController.m */,
 				AF1C725D2507947C004DDCE3 /* main.m */,
 				AF1C726B250794AD004DDCE3 /* Resources */,
 			);
@@ -388,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA7ACD025518F9C00876691 /* InboxController.m in Sources */,
 				AF1C72662507947C004DDCE3 /* main.m in Sources */,
 				AF1C72632507947C004DDCE3 /* ViewController.m in Sources */,
 				AF1C72692507947C004DDCE3 /* AppDelegate.m in Sources */,

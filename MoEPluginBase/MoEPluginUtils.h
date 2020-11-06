@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isValidDictionary:(id)value;
 + (BOOL)isValidArray:(id)value;
 + (void)dispatchOnMainQueue:(dispatch_block_t)block;
-
++ (NSString* __nullable)jsonStringFromDict:(NSDictionary *)dict;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -18,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity"];
+    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count"];
     
 }
 
@@ -197,6 +197,13 @@
         }
         case 13:{
             [[MoEPluginBridge sharedInstance] isValidNativeDependencyIntegrated];
+            break;
+        }
+        case 14:{
+            
+        }
+        case 15:{
+            NSLog(@"Unread Count : %ld",(long)[[MoEPluginBridge sharedInstance] getUnreadMessageCount]);
             break;
         }
         default:

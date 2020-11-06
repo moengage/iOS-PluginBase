@@ -133,5 +133,13 @@
     }
 }
 
++(NSString *)jsonStringFromDict:(NSDictionary *)dict {
+    NSError *err;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
+    if(err != nil) {
+        return nil;
+    }
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
 
 @end

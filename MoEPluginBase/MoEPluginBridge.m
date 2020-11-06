@@ -21,6 +21,7 @@
 #import "NSDictionary+Utility.h"
 #import "MOProperties+Utility.h"
 #import "MOInAppCampaign+Utility.h"
+#import "MOInboxModel+Utility.h"
 #import "MOInAppSelfHandledCampaign+Utility.h"
 
 @interface MoEPluginBridge()
@@ -288,6 +289,59 @@
         NSLog(@"MoEngage: Bridge - Invalid SDK version integrated.‼️\nSupported SDK versions are from %@ to %@(Not Included) ",kMinSDKVersionSupported,kMaxSDKVersionSupported);
         return false;
     }
+}
+
+#pragma mark- Inbox Methods
+
+-(void)getInboxMessagesWithCompletionBlock:(void(^) (NSDictionary* inboxMessages))completionBlock{
+    if (completionBlock == nil) {
+        return;
+    }
+    
+    [MOInbox getInboxMessagesWithCompletionBlock:^(NSArray<MOInboxModel *> *inboxMessages) {
+        NSMutableArray* messages = [NSMutableArray array];
+        if (inboxMessages && inboxMessages.count > 0) {
+            for (MOInboxModel* inboxEntry in inboxMessages) {
+                NSDictionary* pluginDictEntry = [inboxEntry getPluginDictionaryRepresentation];
+                if (pluginDictEntry && [pluginDictEntry allKeys].count > 0) {
+                    [messages addObject:pluginDictEntry];
+                }
+            }
+        }
+        
+        NSMutableDictionary* inboxPayloadDict = [NSMutableDictionary dictionary];
+        inboxPayloadDict[@"platform"] = @"ios";
+        inboxPayloadDict[@"messages"] = messages;
+        completionBlock(inboxPayloadDict);
+    }];
+}
+
+-(void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo{
+    if (campaignInfo && [campaignInfo allKeys].count > 0) {
+        NSString* cid = [campaignInfo validObjectForKey:kInboxKeyCampaignID];
+        if (cid && cid.length > 0) {
+            [MOInbox trackInboxNotificationClickWithCampaignID:cid];
+        }
+        else{
+            MOLog(@"Campaign ID Not Present‼️");
+        }
+    }
+}
+
+-(void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo{
+    if (campaignInfo && [campaignInfo allKeys].count > 0) {
+        NSString* cid = [campaignInfo validObjectForKey:kInboxKeyCampaignID];
+        if (cid && cid.length > 0) {
+            [MOInbox removeMessageWithCampaignID:cid];
+        }
+        else{
+            MOLog(@"Campaign ID Not Present‼️");
+        }
+    }
+}
+
+-(NSInteger)getUnreadMessageCount{
+    return [MOInbox getUnreadNotifictionCount];
 }
 
 @end
