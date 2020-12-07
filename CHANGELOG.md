@@ -3,6 +3,10 @@
 
 ## Change Log:
 
+### Version 1.1.1  *(7th December, 2020)*
+-------------------------------------------
+* UNUserNotificationCenter Delegate set only if its nil.
+
 ### Version 1.1.0  *(6th November, 2020)*
 -------------------------------------------
 * Inbox support added.

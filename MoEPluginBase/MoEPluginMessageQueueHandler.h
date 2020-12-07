@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MoEPluginMessage.h"
+#import <MoEPluginBase/MoEPluginMessage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -9,16 +9,26 @@
 #import "AppDelegate.h"
 #import <MoEPluginBase/MoEPluginBase.h>
 
-@interface AppDelegate()<MoEPluginBridgeDelegate>
+@interface AppDelegate()<MoEPluginBridgeDelegate, UNUserNotificationCenterDelegate>
 
 @end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{   [[MoEPluginBridge sharedInstance] enableLogs];
+{
+    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+    [[MoEPluginBridge sharedInstance] enableLogs];
     [[MoEPluginInitializer sharedInstance] intializeSDKWithAppID:@"DAO6UGZ73D9RTK8B5W96TPYN" andLaunchOptions:launchOptions];
     [MoEPluginBridge sharedInstance].bridgeDelegate = self;
     return YES;
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+    completionHandler((UNNotificationPresentationOptionAlert|UNNotificationPresentationOptionSound));
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler{
+    completionHandler();
 }
 
 -(void)sendMessageWithName:(NSString *)name andPayload:(NSDictionary *)payloadDict{

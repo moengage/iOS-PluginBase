@@ -10,11 +10,10 @@
 #import "MoEPluginConstants.h"
 #import "MoEPluginMessageQueueHandler.h"
 #import <MoEngage/MoEngage.h>
-#import <UserNotifications/UserNotifications.h>
 #import <MOInApp/MOInApp.h>
 #import "MOInAppCampaign+Utility.h"
 
-@interface MoEPluginInitializer() <UNUserNotificationCenterDelegate, MOInAppNativDelegate, MOMessagingDelegate>
+@interface MoEPluginInitializer() <MOInAppNativDelegate, MOMessagingDelegate>
 @property(assign, nonatomic) BOOL isSDKIntialized;
 @end
 
@@ -57,7 +56,9 @@
 -(void)setupSDKWithLaunchOptions:(NSDictionary * _Nullable)launchOptions{
     
     if (@available(iOS 10.0, *)) {
-        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
+            [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        }
     }
     
     [MOInApp sharedInstance].inAppDelegate = self;
@@ -77,7 +78,7 @@
     
     if([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]){
         if (@available(iOS 10.0, *)) {
-            [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:self];
+            [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
         } else {
             [[MoEngage sharedInstance] registerForRemoteNotificationForBelowiOS10WithCategories:nil];
         }

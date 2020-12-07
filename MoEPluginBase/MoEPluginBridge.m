@@ -169,6 +169,9 @@
 
 - (void)registerForPush{
     if (@available(iOS 10, *)) {
+        if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
+            [UNUserNotificationCenter currentNotificationCenter].delegate = [MoEPluginInitializer sharedInstance];
+        }
         [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
     }
     else{

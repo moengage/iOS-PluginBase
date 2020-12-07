@@ -10,16 +10,16 @@
 #endif
 #endif
 
-#import "MOInAppCampaign+Utility.h"
-#import "MOInAppSelfHandledCampaign+Utility.h"
-#import "MOProperties+Utility.h"
-#import "NSDictionary+Utility.h"
-#import "MoEPluginBridge.h"
-#import "MoEPluginConstants.h"
-#import "MoEPluginInitializer.h"
-#import "MoEPluginMessage.h"
-#import "MoEPluginMessageQueueHandler.h"
-#import "MoEPluginUtils.h"
+#import <MoEPluginBase/MOInAppCampaign+Utility.h>
+#import <MoEPluginBase/MOInAppSelfHandledCampaign+Utility.h>
+#import <MoEPluginBase/MOProperties+Utility.h>
+#import <MoEPluginBase/NSDictionary+Utility.h>
+#import <MoEPluginBase/MoEPluginBridge.h>
+#import <MoEPluginBase/MoEPluginConstants.h>
+#import <MoEPluginBase/MoEPluginInitializer.h>
+#import <MoEPluginBase/MoEPluginMessage.h>
+#import <MoEPluginBase/MoEPluginMessageQueueHandler.h>
+#import <MoEPluginBase/MoEPluginUtils.h>
 
 FOUNDATION_EXPORT double MoEPluginBaseVersionNumber;
 FOUNDATION_EXPORT const unsigned char MoEPluginBaseVersionString[];
