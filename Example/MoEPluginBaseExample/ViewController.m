@@ -18,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count"];
+    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count",@"Enable SDK",@"Disable SDK"];
     
 }
 
@@ -200,10 +200,20 @@
             break;
         }
         case 14:{
-            
+            [[MoEPluginBridge sharedInstance] getInboxMessagesWithCompletionBlock:^(NSDictionary *inboxMessages) {
+                            NSLog(@"Messages : %@",inboxMessages);
+            }];
         }
         case 15:{
             NSLog(@"Unread Count : %ld",(long)[[MoEPluginBridge sharedInstance] getUnreadMessageCount]);
+            break;
+        }
+        case 16:{
+            [[MoEPluginBridge sharedInstance] updateSDKState:@{@"isSdkEnabled": @1}];
+            break;
+        }
+        case 17:{
+            [[MoEPluginBridge sharedInstance] updateSDKState:@{@"isSdkEnabled": @0}];
             break;
         }
         default:

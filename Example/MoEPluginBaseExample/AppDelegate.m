@@ -18,7 +18,7 @@
 {
     [UNUserNotificationCenter currentNotificationCenter].delegate = self;
     [[MoEPluginBridge sharedInstance] enableLogs];
-    [[MoEPluginInitializer sharedInstance] intializeSDKWithAppID:@"DAO6UGZ73D9RTK8B5W96TPYN" andLaunchOptions:launchOptions];
+    [[MoEPluginInitializer sharedInstance] intializeSDKWithAppID:@"DAO6UGZ73D9RTK8B5W96TPYN" withSDKState:true andLaunchOptions:launchOptions];
     [MoEPluginBridge sharedInstance].bridgeDelegate = self;
     return YES;
 }

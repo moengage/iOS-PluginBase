@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedInstance;
 - (void)intializeSDKWithAppID:(NSString*)appID andLaunchOptions:(NSDictionary*)launchOptions;
+- (void)intializeSDKWithAppID:(NSString*)appID withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
 - (void)pluginInitialized;
 @end
 

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'MoEPluginBase'
-    s.version      = '1.1.1'
+    s.version      = '1.2.0'
     s.summary      = 'MoEngage Plugin Base for Hybrid SDKs'
     s.description  = <<-DESC
     MoEngage is a mobile marketing automation company. This framework is used by our plugins built for different hybrid frameworks i.e, Flutter, Cordova, React Native etc.
@@ -22,8 +22,8 @@ Pod::Spec.new do |s|
     s.source_files = 'MoEPluginBase/**/*'
     s.public_header_files = 'MoEPluginBase/**/*.h'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngage-iOS-SDK', '>= 6.2.4', '< 7.0.0'
-    s.dependency 'MoEngageInApp', '~> 1.0.0'
+    s.dependency 'MoEngage-iOS-SDK', '>= 6.3.0', '< 7.0.0'
+    s.dependency 'MoEngageInApp', '~> 1.1.0'
     s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
     s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 end

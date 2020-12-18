@@ -35,6 +35,7 @@
     self = [super init];
     if (self) {
         self.isSDKIntialized = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushTokenRegistered:) name:MoEngage_Notification_Registered_Notification object:nil];
     }
     return self;
 }
@@ -44,6 +45,18 @@
     self.isSDKIntialized = YES;
     self.moeAppID = appID;
     [self setupSDKWithLaunchOptions:launchOptions];
+}
+
+- (void)intializeSDKWithAppID:(NSString*)appID withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions{
+    
+    if (isSdkEnabled) {
+        [[MoEngage sharedInstance] enableSDK];
+    }
+    else{
+        [[MoEngage sharedInstance] disableSDK];
+    }
+    
+    [self intializeSDKWithAppID:appID andLaunchOptions:launchOptions];
 }
 
 //this will works as fallback method if Client does not call intializeSDKWithAppID:andLaunchOptions:
@@ -113,6 +126,29 @@
 }
 
 #pragma mark- iOS10 UserNotification Framework delegate methods
+
+-(void)pushTokenRegistered:(NSNotification*)notif{
+    NSDictionary* userInfo = notif.userInfo;
+    if (userInfo != nil) {
+        id deviceToken = userInfo[MoEngage_Device_Token_Key];
+        NSString* hexToken = nil;
+        if ([deviceToken isKindOfClass:[NSData class]]) {
+            hexToken = [MOCoreUtils hexTokenForData:deviceToken];
+        }
+        else{
+            hexToken = deviceToken;
+        }
+        
+        if (hexToken != nil && hexToken.length > 0) {
+            NSDictionary *payload = @{
+                @"token" : hexToken,
+                @"pushService" : @"APNS"
+            };
+            MoEPluginMessage* pushTokenMsg = [[MoEPluginMessage alloc] initWithMethodName:kEventNamePushTokenRegistered andInfoDict:payload];
+            [[MoEPluginMessageQueueHandler sharedInstance] queueMessage:pushTokenMsg];
+        }
+    }
+}
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response

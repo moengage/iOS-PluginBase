@@ -54,4 +54,7 @@ typedef enum : NSUInteger {
 -(void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo;
 -(void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo;
 -(NSInteger)getUnreadMessageCount;
+
+- (void)updateSDKState:(NSDictionary*)stateInfo;
+
 @end

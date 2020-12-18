@@ -347,4 +347,16 @@
     return [MOInbox getUnreadNotifictionCount];
 }
 
+- (void)updateSDKState:(NSDictionary*)stateInfo{
+    if ([MoEPluginUtils isValidDictionary:stateInfo]) {
+        BOOL state = [stateInfo getBooleanForKey:@"isSdkEnabled"];
+        if (state) {
+            [[MoEngage sharedInstance] enableSDK];
+        }
+        else{
+            [[MoEngage sharedInstance] disableSDK];
+        }
+    }
+}
+
 @end
