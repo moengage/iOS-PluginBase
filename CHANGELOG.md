@@ -3,6 +3,11 @@
 
 ## Change Log:
 
+### Version 1.2.0  *(18th December, 2020)*
+-------------------------------------------
+* Enable/Disable SDK support added.
+* PushToken Registration callback implementation.
+
 ### Version 1.1.1  *(7th December, 2020)*
 -------------------------------------------
 * UNUserNotificationCenter Delegate set only if its nil.
