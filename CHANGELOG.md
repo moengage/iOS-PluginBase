@@ -3,6 +3,10 @@
 
 ## Change Log:
 
+### Version 1.2.1  *(15th January, 2021)*
+-------------------------------------------
+* Import statement changes and updated MoEngageInApp dependency.
+
 ### Version 1.2.0  *(18th December, 2020)*
 -------------------------------------------
 * Enable/Disable SDK support added.

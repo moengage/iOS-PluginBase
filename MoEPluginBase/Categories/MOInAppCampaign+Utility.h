@@ -7,7 +7,7 @@
 //
 
 
-#import <MoEngage/MoEngage.h>
+#import <MOInApp/MOInApp.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

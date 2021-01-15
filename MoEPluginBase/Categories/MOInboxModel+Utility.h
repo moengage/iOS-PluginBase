@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MoEngage/MoEngage.h>
+#import <MOMessaging/MOMessaging.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MOInboxModel (Utility)

@@ -7,6 +7,7 @@
 
 #import "MOInboxModel+Utility.h"
 #import "MoEPluginConstants.h"
+#import <MoEngage/MoEngage.h>
 
 @implementation MOInboxModel (Utility)
 -(NSDictionary*)getPluginDictionaryRepresentation{
