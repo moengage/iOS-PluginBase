@@ -3,6 +3,11 @@
 
 ## Change Log:
 
+### Version 2.0.0  *(27th January, 2021)*
+-------------------------------------------
+* Deployment target updated to iOS 10.0.
+* MoEngage-iOS-SDK dependency updated to 7.0.* and MoEngageInApp dependency updated to 2.0.*.
+
 ### Version 1.2.1  *(15th January, 2021)*
 -------------------------------------------
 * Import statement changes and updated MoEngageInApp dependency.

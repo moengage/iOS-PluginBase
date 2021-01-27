@@ -168,15 +168,10 @@
 #pragma mark- Push Notifications
 
 - (void)registerForPush{
-    if (@available(iOS 10, *)) {
-        if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
-            [UNUserNotificationCenter currentNotificationCenter].delegate = [MoEPluginInitializer sharedInstance];
-        }
-        [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
+    if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
+        [UNUserNotificationCenter currentNotificationCenter].delegate = [MoEPluginInitializer sharedInstance];
     }
-    else{
-        [[MoEngage sharedInstance] registerForRemoteNotificationForBelowiOS10WithCategories:nil];
-    }
+    [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
 }
 
 #pragma mark- inApp Methods
@@ -252,7 +247,7 @@
 #pragma mark- Enable SDK Logs
 
 - (void)enableLogs{
-    [MoEngage debug:LOG_ALL];
+    [MoEngage enableSDKLogs:true];
 }
 
 #pragma mark- Reset User

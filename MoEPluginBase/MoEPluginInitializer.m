@@ -83,18 +83,16 @@
         NSAssert(NO, @"MoEngage - Configure the APP ID for your MoEngage App.To get the AppID login to your MoEngage account, after that go to Settings -> App Settings. You will find the App ID in this screen. And refer to docs.moengage.com for more info");
     }
     
+    MOSDKConfig* currentConfig = [[MoEngage sharedInstance] getDefaultSDKConfiguration];
+    currentConfig.moeAppID = appID;
 #ifdef DEBUG
-    [[MoEngage sharedInstance] initializeDevWithAppID:appID withLaunchOptions:launchOptions];
+    [[MoEngage sharedInstance] initializeTestWithConfig:currentConfig andLaunchOptions:launchOptions];
 #else
-    [[MoEngage sharedInstance] initializeProdWithAppID:appID withLaunchOptions:launchOptions];
+    [[MoEngage sharedInstance] initializeLiveWithConfig:currentConfig andLaunchOptions:launchOptions];
 #endif
     
     if([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]){
-        if (@available(iOS 10.0, *)) {
-            [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
-        } else {
-            [[MoEngage sharedInstance] registerForRemoteNotificationForBelowiOS10WithCategories:nil];
-        }
+        [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
     }
 }
 
