@@ -9,15 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
 #import <UIKit/UIKit.h>
+#import <MoEngage/MoEngage.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MoEPluginInitializer : NSObject <UNUserNotificationCenterDelegate>
 @property(assign, nonatomic, readonly) BOOL isSDKIntialized;
 @property(strong, nonatomic) NSString *moeAppID;
+@property(nonatomic, assign) MOSDKConfig *sdkConfig;
 
 + (instancetype)sharedInstance;
-- (void)intializeSDKWithAppID:(NSString*)appID andLaunchOptions:(NSDictionary*)launchOptions;
-- (void)intializeSDKWithAppID:(NSString*)appID withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
+- (void)intializeSDKWithConfig:(MOSDKConfig*)sdkConfig andLaunchOptions:(NSDictionary*)launchOptions;
+- (void)intializeSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
 - (void)pluginInitialized;
 @end
 
