@@ -85,7 +85,7 @@
 #ifdef DEBUG
     [[MoEngage sharedInstance] initializeTestWithConfig: _sdkConfig andLaunchOptions:launchOptions];
 #else
-    [[MoEngage sharedInstance] initializeLiveWithConfig: _ssdkConfig andLaunchOptions:launchOptions];
+    [[MoEngage sharedInstance] initializeLiveWithConfig: _sdkConfig andLaunchOptions:launchOptions];
 #endif
     
     if([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]){

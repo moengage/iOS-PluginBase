@@ -354,4 +354,14 @@
     }
 }
 
+#pragma mark- Update SDKConfig
+
+-(MOSDKConfig *)getDefaultSDKConfig {
+    return [[MoEngage sharedInstance] getDefaultSDKConfiguration];
+}
+
+-(void)updateSDKConfig:(MOSDKConfig*)config{
+    [[MoEngage sharedInstance] updateSDKConfig:config];
+}
+
 @end

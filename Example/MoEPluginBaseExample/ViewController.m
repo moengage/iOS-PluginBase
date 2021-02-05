@@ -18,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count",@"Enable SDK",@"Disable SDK"];
+    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count",@"Enable SDK",@"Disable SDK", @"Update SDK Config"];
     
 }
 
@@ -215,6 +215,12 @@
         case 17:{
             [[MoEPluginBridge sharedInstance] updateSDKState:@{@"isSdkEnabled": @0}];
             break;
+        }
+        case 18: {
+            MOSDKConfig *config = [[MoEPluginBridge sharedInstance] getDefaultSDKConfig];
+            config.moeDataCenter = DATA_CENTER_03;
+            config.optOutPushNotification = TRUE;
+            [[MoEPluginBridge sharedInstance] updateSDKConfig: config];
         }
         default:
             break;
