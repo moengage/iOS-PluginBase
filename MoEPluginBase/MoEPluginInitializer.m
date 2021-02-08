@@ -42,8 +42,7 @@
 
 - (void)intializeSDKWithConfig:(MOSDKConfig*)sdkConfig andLaunchOptions:(NSDictionary*)launchOptions {
     self.isSDKIntialized = YES;
-    self.sdkConfig = sdkConfig;
-    [self setupSDKWithLaunchOptions:launchOptions];
+    [self setupSDKWithLaunchOptions:sdkConfig launchOptions:launchOptions];
 }
 
 - (void)intializeSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions{
@@ -61,11 +60,11 @@
 //this will works as fallback method if Client does not call intializeSDKWithAppID:andLaunchOptions:
 - (void)pluginInitialized {
     if (!self.isSDKIntialized) {
-        [self setupSDKWithLaunchOptions:nil];
+        [self setupSDKWithLaunchOptions:nil launchOptions:nil];
     }
 }
 
--(void)setupSDKWithLaunchOptions:(NSDictionary * _Nullable)launchOptions{
+-(void)setupSDKWithLaunchOptions:(MOSDKConfig *)sdkConfig launchOptions:(NSDictionary * _Nullable)launchOptions{
     
     if (@available(iOS 10.0, *)) {
         if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
@@ -77,15 +76,15 @@
     [MOMessaging sharedInstance].messagingDelegate = self;
     
     // Initialize SDK
-    NSString* appID = self.sdkConfig.moeAppID;
+    NSString* appID = sdkConfig.moeAppID;
     if (appID == nil) {
         NSAssert(NO, @"MoEngage - Configure the APP ID for your MoEngage App.To get the AppID login to your MoEngage account, after that go to Settings -> App Settings. You will find the App ID in this screen. And refer to docs.moengage.com for more info");
     }
     
 #ifdef DEBUG
-    [[MoEngage sharedInstance] initializeTestWithConfig: _sdkConfig andLaunchOptions:launchOptions];
+    [[MoEngage sharedInstance] initializeTestWithConfig: sdkConfig andLaunchOptions:launchOptions];
 #else
-    [[MoEngage sharedInstance] initializeLiveWithConfig: _sdkConfig andLaunchOptions:launchOptions];
+    [[MoEngage sharedInstance] initializeLiveWithConfig: sdkConfig andLaunchOptions:launchOptions];
 #endif
     
     if([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]){

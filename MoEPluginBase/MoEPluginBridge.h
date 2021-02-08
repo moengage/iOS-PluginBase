@@ -56,7 +56,5 @@ typedef enum : NSUInteger {
 -(void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo;
 -(NSInteger)getUnreadMessageCount;
 -(void)updateSDKState:(NSDictionary*)stateInfo;
--(MOSDKConfig*)getDefaultSDKConfig;
--(void)updateSDKConfig:(MOSDKConfig*) config;
 
 @end
