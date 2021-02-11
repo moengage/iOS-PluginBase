@@ -18,7 +18,10 @@
 {
     [UNUserNotificationCenter currentNotificationCenter].delegate = self;
     [[MoEPluginBridge sharedInstance] enableLogs];
-    [[MoEPluginInitializer sharedInstance] intializeSDKWithAppID:@"DAO6UGZ73D9RTK8B5W96TPYN" withSDKState:true andLaunchOptions:launchOptions];
+    NSString* yourMoEngageAppID = @"DAO6UGZ73D9RTK8B5W96TPYN";
+    MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
+   
+    [[MoEPluginInitializer sharedInstance] intializeSDKWithConfig: sdkConfig withSDKState:true andLaunchOptions:launchOptions];
     [MoEPluginBridge sharedInstance].bridgeDelegate = self;
     return YES;
 }
