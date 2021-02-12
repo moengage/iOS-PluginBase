@@ -138,7 +138,7 @@
                 @"token" : hexToken,
                 @"pushService" : @"APNS"
             };
-            MoEPluginMessage* pushTokenMsg = [[MoEPluginMessage alloc] initWithMethodName:kEventNamePushTokenRegistered andInfoDict:payload];
+            MoEPluginMessage* pushTokenMsg = [[MoEPluginMessage alloc] initWithMethodName:kEventNamePushTokenGenerated andInfoDict:payload];
             [[MoEPluginMessageQueueHandler sharedInstance] queueMessage:pushTokenMsg];
         }
     }

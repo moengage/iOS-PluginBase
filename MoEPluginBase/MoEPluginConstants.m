@@ -8,7 +8,7 @@
 
 #import "MoEPluginConstants.h"
 
-NSString* const kEventNamePushTokenRegistered             = @"MoEPushTokenRegistered";
+NSString* const kEventNamePushTokenGenerated              = @"MoEPushTokenGenerated";
 NSString* const kEventNamePushClicked                     = @"MoEPushClicked";
 NSString* const kEventNameInAppCampaignShown              = @"MoEInAppCampaignShown";
 NSString* const kEventNameInAppCampaignClicked            = @"MoEInAppCampaignClicked";

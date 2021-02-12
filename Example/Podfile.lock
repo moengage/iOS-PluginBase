@@ -3,7 +3,7 @@ PODS:
     - MORichNotification (= 5.0)
   - MoEngageInApp (2.0.1):
     - MoEngage-iOS-SDK (< 7.1.0, >= 7.0.0)
-  - MoEPluginBase (2.0.1):
+  - MoEPluginBase (2.0.2):
     - MoEngage-iOS-SDK (< 7.1.0, >= 7.0.1)
     - MoEngageInApp (< 2.1.0, >= 2.0.0)
   - MOGeofence (3.0.1):
@@ -28,7 +28,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   MoEngage-iOS-SDK: 4ac34dc84bc363ea877d1dd067ed33caab68252c
   MoEngageInApp: 3a3de7e7659ab3c582578b8428ae5d817cdc3a01
-  MoEPluginBase: 44b95f371e690d3d3f3a4ba4a69995bc375b92b5
+  MoEPluginBase: 490c5b1ab57761ff0aa44c09bdd7662a13f8e1ee
   MOGeofence: 5e139f99a3b319e9ca17ab39dd1dcae5dfd53df8
   MORichNotification: abf1f1aaed3a9366dc8e966c55652bff7716b3b8
 
