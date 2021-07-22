@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString* const kEventNamePushTokenRegistered;
+extern NSString* const kEventNamePushTokenGenerated;
 extern NSString* const kEventNamePushClicked;
 extern NSString* const kEventNameInAppCampaignShown;
 extern NSString* const kEventNameInAppCampaignDismissed;

@@ -3,6 +3,14 @@
 
 ## Change Log:
 
+### Version 2.0.2  *(12th February, 2021)*
+-------------------------------------------
+* Push Token Callback name updated.
+
+### Version 2.0.1  *(10th February, 2021)*
+-------------------------------------------
+* Initialization methods updated to accept `MOSDKConfig` instance.
+
 ### Version 2.0.0  *(27th January, 2021)*
 -------------------------------------------
 * Deployment target updated to iOS 10.0.
