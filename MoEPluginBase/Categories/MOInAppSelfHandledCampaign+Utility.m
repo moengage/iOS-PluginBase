@@ -7,7 +7,6 @@
 //
 
 #import "MOInAppSelfHandledCampaign+Utility.h"
-#import "NSDictionary+Utility.h"
 #import "MoEPluginConstants.h"
 #import "MoEPluginUtils.h"
 

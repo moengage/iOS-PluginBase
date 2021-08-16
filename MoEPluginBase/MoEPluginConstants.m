@@ -59,3 +59,7 @@ NSString* const kInboxValNavActionRichLanding   = @"richLanding";
 NSString* const kInboxValMediaTypeImage   = @"image";
 NSString* const kInboxValMediaTypeAudio   = @"audio";
 NSString* const kInboxValMediaTypeVideo   = @"video";
+
+NSString* const kTrackEventName         = @"eventName";
+NSString* const kEventAttributes        = @"eventAttributes";
+NSString* const kIsNonInteractive       = @"isNonInteractive";

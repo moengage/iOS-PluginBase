@@ -57,3 +57,6 @@ extern NSString* const kInboxValMediaTypeImage;
 extern NSString* const kInboxValMediaTypeAudio;
 extern NSString* const kInboxValMediaTypeVideo;
 
+extern NSString* const kTrackEventName;
+extern NSString* const kEventAttributes;
+extern NSString* const kIsNonInteractive;

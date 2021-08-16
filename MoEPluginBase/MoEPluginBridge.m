@@ -18,8 +18,6 @@
 #import "MoEPluginInitializer.h"
 #import "MoEPluginMessageQueueHandler.h"
 
-#import "NSDictionary+Utility.h"
-#import "MOProperties+Utility.h"
 #import "MOInAppCampaign+Utility.h"
 #import "MOInboxModel+Utility.h"
 #import "MOInAppSelfHandledCampaign+Utility.h"
@@ -153,12 +151,12 @@
 
 - (void)trackEventWithPayload:(NSDictionary*)eventPayloadDict{
     if (eventPayloadDict) {
-        NSString *eventName = [eventPayloadDict getStringForKey:@"eventName"];
+        NSString *eventName = [eventPayloadDict getStringForKey:kTrackEventName];
         if ([MoEPluginUtils isValidString:eventName]) {
-            NSDictionary *eventAttributes = [eventPayloadDict objectForKey:@"eventAttributes"];
+            NSDictionary *eventAttributes = [eventPayloadDict objectForKey:kEventAttributes];
             if ([MoEPluginUtils isValidDictionary:eventAttributes]) {
-                MOProperties *properties = [[MOProperties alloc] initWithTrackEventsDictionary:eventAttributes];
-                [properties modifyEventInteractionFromDictionary:eventPayloadDict];
+                [eventAttributes setValue:[eventPayloadDict valueForKey:kIsNonInteractive] forKey:kIsNonInteractive];
+                MOProperties *properties = [[MOProperties alloc] initWithPluginPayloadDict:eventAttributes];
                 [[MoEngage sharedInstance] trackEvent: eventName withProperties:properties];
             }
         }
