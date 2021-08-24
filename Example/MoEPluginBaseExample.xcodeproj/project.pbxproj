@@ -557,7 +557,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "MoEPluginBaseExample/MoEPluginBaseExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alphadevs.MoEngage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -577,7 +577,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "MoEPluginBaseExample/MoEPluginBaseExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alphadevs.MoEngage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
