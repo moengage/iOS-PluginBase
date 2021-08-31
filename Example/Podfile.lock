@@ -15,7 +15,7 @@ DEPENDENCIES:
   - MOGeofence
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - MoEngage-iOS-SDK
     - MoEngageInApp
     - MOGeofence

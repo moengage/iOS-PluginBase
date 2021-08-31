@@ -153,7 +153,7 @@
     if (eventPayloadDict) {
         NSString *eventName = [eventPayloadDict getStringForKey:kTrackEventName];
         if ([MoEPluginUtils isValidString:eventName]) {
-            NSDictionary *eventAttributes = [eventPayloadDict objectForKey:kEventAttributes];
+            NSMutableDictionary *eventAttributes = [[eventPayloadDict objectForKey:kEventAttributes] mutableCopy];
             if ([MoEPluginUtils isValidDictionary:eventAttributes]) {
                 [eventAttributes setValue:[eventPayloadDict valueForKey:kIsNonInteractive] forKey:kIsNonInteractive];
                 MOProperties *properties = [[MOProperties alloc] initWithPluginPayloadDict:eventAttributes];
