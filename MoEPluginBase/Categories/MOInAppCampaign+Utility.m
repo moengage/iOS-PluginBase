@@ -17,6 +17,7 @@
    return @{
         @"campaignName" : self.campaign_name,
         @"campaignId" : self.campaign_id,
+        @"campaignContext": self.campaign_context,
     };
 }
 

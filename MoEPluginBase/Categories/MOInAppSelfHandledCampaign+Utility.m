@@ -7,7 +7,6 @@
 //
 
 #import "MOInAppSelfHandledCampaign+Utility.h"
-#import "NSDictionary+Utility.h"
 #import "MoEPluginConstants.h"
 #import "MoEPluginUtils.h"
 
@@ -21,6 +20,7 @@
     if (self && dictInfo) {
         self.campaign_id = [dictInfo getStringForKey:@"campaignId"];
         self.campaign_name = [dictInfo getStringForKey:@"campaignName"];
+        self.campaign_context = [dictInfo validObjectForKey:@"campaignContext"];
         NSDate *date = [dictInfo getDateForKey:@"expiryTime" dateFormat: kISODateFormat1];
         if (date == NULL) {
             date = [dictInfo getDateForKey:@"expiryTime" dateFormat: kISODateFormat2];
@@ -40,6 +40,7 @@
     NSMutableDictionary *dict = [@{
         @"campaignName" : self.campaign_name,
         @"campaignId" : self.campaign_id,
+        @"campaignContext": self.campaign_context,
 
     } mutableCopy];
     

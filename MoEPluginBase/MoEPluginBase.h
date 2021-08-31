@@ -12,8 +12,6 @@
 
 #import <MoEPluginBase/MOInAppCampaign+Utility.h>
 #import <MoEPluginBase/MOInAppSelfHandledCampaign+Utility.h>
-#import <MoEPluginBase/MOProperties+Utility.h>
-#import <MoEPluginBase/NSDictionary+Utility.h>
 #import <MoEPluginBase/MoEPluginBridge.h>
 #import <MoEPluginBase/MoEPluginConstants.h>
 #import <MoEPluginBase/MoEPluginInitializer.h>

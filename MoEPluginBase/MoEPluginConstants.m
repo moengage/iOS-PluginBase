@@ -23,8 +23,8 @@ NSString* const kISODateFormat1 = @"yyyy-MM-dd'T'HH:mm:ss'Z";
 NSString* const kISODateFormat2 = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 // Version format: Major.Minor.Patch
-NSString* const kMinSDKVersionSupported = @"7.0.0";
-NSString* const kMaxSDKVersionSupported = @"7.1.0";
+NSString* const kMinSDKVersionSupported = @"7.1.0";
+NSString* const kMaxSDKVersionSupported = @"7.2.0";
 
 // Inbox Keys
 NSString* const kInboxKeyID             = @"id";
@@ -59,3 +59,7 @@ NSString* const kInboxValNavActionRichLanding   = @"richLanding";
 NSString* const kInboxValMediaTypeImage   = @"image";
 NSString* const kInboxValMediaTypeAudio   = @"audio";
 NSString* const kInboxValMediaTypeVideo   = @"video";
+
+NSString* const kTrackEventName         = @"eventName";
+NSString* const kEventAttributes        = @"eventAttributes";
+NSString* const kIsNonInteractive       = @"isNonInteractive";

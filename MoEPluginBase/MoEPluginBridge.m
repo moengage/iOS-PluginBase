@@ -18,8 +18,6 @@
 #import "MoEPluginInitializer.h"
 #import "MoEPluginMessageQueueHandler.h"
 
-#import "NSDictionary+Utility.h"
-#import "MOProperties+Utility.h"
 #import "MOInAppCampaign+Utility.h"
 #import "MOInboxModel+Utility.h"
 #import "MOInAppSelfHandledCampaign+Utility.h"
@@ -153,14 +151,18 @@
 
 - (void)trackEventWithPayload:(NSDictionary*)eventPayloadDict{
     if (eventPayloadDict) {
-        NSString *eventName = [eventPayloadDict getStringForKey:@"eventName"];
-        if ([MoEPluginUtils isValidString:eventName]) {
-            NSDictionary *eventAttributes = [eventPayloadDict objectForKey:@"eventAttributes"];
-            if ([MoEPluginUtils isValidDictionary:eventAttributes]) {
-                MOProperties *properties = [[MOProperties alloc] initWithTrackEventsDictionary:eventAttributes];
-                [properties modifyEventInteractionFromDictionary:eventPayloadDict];
-                [[MoEngage sharedInstance] trackEvent: eventName withProperties:properties];
+        NSString *eventName = [eventPayloadDict getStringForKey:kTrackEventName];
+        NSDictionary* attrDict = [eventPayloadDict validObjectForKey:kEventAttributes];
+        
+        if ([MoEPluginUtils isValidString:eventName] && [MoEPluginUtils isValidDictionary:attrDict]) {
+            NSMutableDictionary *eventAttributes = [attrDict mutableCopy];
+            id isNonInteractive = [eventPayloadDict validObjectForKey:kIsNonInteractive];
+            if (isNonInteractive) {
+                [eventAttributes setValue:isNonInteractive forKey:kIsNonInteractive];
             }
+            
+            MOProperties *properties = [[MOProperties alloc] initWithPluginPayloadDict:eventAttributes];
+            [[MoEngage sharedInstance] trackEvent: eventName withProperties:properties];
         }
     }
 }
