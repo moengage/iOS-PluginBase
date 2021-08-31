@@ -3,6 +3,11 @@
 
 ## Change Log:
 
+### Version 2.1.0  *(31st August, 2021)*
+-------------------------------------------
+* MoEngage-iOS-SDK dependency updated to 7.1.* and MoEngageInApp dependency updated to 2.1.*.
+* HTML InApp Changes done.
+
 ### Version 2.0.2  *(12th February, 2021)*
 -------------------------------------------
 * Push Token Callback name updated.

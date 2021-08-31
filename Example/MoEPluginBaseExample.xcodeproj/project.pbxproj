@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4BF33625E804E8C068A7E868 /* Pods_MoEPluginBaseExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 313DF7C7019B975A3E96ABB2 /* Pods_MoEPluginBaseExample.framework */; };
+		0DBFF7F888BA427E51BC0F17 /* Pods_MoEPluginBaseExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72DA4E60D00CFD0AF062ED33 /* Pods_MoEPluginBaseExampleTests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -16,7 +16,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		72881AF569384B463B358FEE /* Pods_MoEPluginBaseExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1934735A41C66F30AC1B7B19 /* Pods_MoEPluginBaseExampleTests.framework */; };
+		981C369CF807056A32C45B03 /* Pods_MoEPluginBaseExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF52F92E5B722C67D83D2C6 /* Pods_MoEPluginBaseExample.framework */; };
 		AF1C72622507947C004DDCE3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF1C72552507947C004DDCE3 /* InfoPlist.strings */; };
 		AF1C72632507947C004DDCE3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1C72582507947C004DDCE3 /* ViewController.m */; };
 		AF1C72642507947C004DDCE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF1C72592507947C004DDCE3 /* LaunchScreen.storyboard */; };
@@ -38,10 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1934735A41C66F30AC1B7B19 /* Pods_MoEPluginBaseExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoEPluginBaseExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2FFC82217693BE997FCEF263 /* Pods-MoEPluginBaseExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExample.debug.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample.debug.xcconfig"; sourceTree = "<group>"; };
-		313DF7C7019B975A3E96ABB2 /* Pods_MoEPluginBaseExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoEPluginBaseExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4821FFD61451B03C22FF2E29 /* Pods-MoEPluginBaseExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExampleTests/Pods-MoEPluginBaseExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0E74DF3C347290DB8D056CB1 /* Pods-MoEPluginBaseExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExampleTests/Pods-MoEPluginBaseExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1BF52F92E5B722C67D83D2C6 /* Pods_MoEPluginBaseExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoEPluginBaseExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* MoEPluginBaseExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoEPluginBaseExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -52,7 +50,9 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		988C17A7C203DF30804C913C /* Pods-MoEPluginBaseExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExample.release.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample.release.xcconfig"; sourceTree = "<group>"; };
+		72DA4E60D00CFD0AF062ED33 /* Pods_MoEPluginBaseExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoEPluginBaseExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A89DBCE1B2C87C5E94E27EC /* Pods-MoEPluginBaseExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExampleTests.release.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExampleTests/Pods-MoEPluginBaseExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		969899CD3BCCDA97699CED8D /* Pods-MoEPluginBaseExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExample.debug.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample.debug.xcconfig"; sourceTree = "<group>"; };
 		A72804FB0320C64226A0773B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		AF1C72562507947C004DDCE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AF1C72572507947C004DDCE3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		AFA7ACCE25518F9C00876691 /* InboxController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InboxController.h; sourceTree = "<group>"; };
 		AFA7ACCF25518F9C00876691 /* InboxController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InboxController.m; sourceTree = "<group>"; };
 		B9C3DBFCAB8B2967125634AF /* MoEPluginBase.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MoEPluginBase.podspec; path = ../MoEPluginBase.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BABC2A66F9B48C4AD2151295 /* Pods-MoEPluginBaseExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExampleTests.release.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExampleTests/Pods-MoEPluginBaseExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		E00EE524B5404E1E88831410 /* Pods-MoEPluginBaseExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoEPluginBaseExample.release.xcconfig"; path = "Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample.release.xcconfig"; sourceTree = "<group>"; };
 		E1013D5AF43864F2C6CB4B5E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,7 +80,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				4BF33625E804E8C068A7E868 /* Pods_MoEPluginBaseExample.framework in Frameworks */,
+				981C369CF807056A32C45B03 /* Pods_MoEPluginBaseExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +91,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				72881AF569384B463B358FEE /* Pods_MoEPluginBaseExampleTests.framework in Frameworks */,
+				0DBFF7F888BA427E51BC0F17 /* Pods_MoEPluginBaseExampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,8 +126,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				313DF7C7019B975A3E96ABB2 /* Pods_MoEPluginBaseExample.framework */,
-				1934735A41C66F30AC1B7B19 /* Pods_MoEPluginBaseExampleTests.framework */,
+				1BF52F92E5B722C67D83D2C6 /* Pods_MoEPluginBaseExample.framework */,
+				72DA4E60D00CFD0AF062ED33 /* Pods_MoEPluginBaseExampleTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -192,10 +192,10 @@
 		C435D4DDDFE99AF4BC6CFA37 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2FFC82217693BE997FCEF263 /* Pods-MoEPluginBaseExample.debug.xcconfig */,
-				988C17A7C203DF30804C913C /* Pods-MoEPluginBaseExample.release.xcconfig */,
-				4821FFD61451B03C22FF2E29 /* Pods-MoEPluginBaseExampleTests.debug.xcconfig */,
-				BABC2A66F9B48C4AD2151295 /* Pods-MoEPluginBaseExampleTests.release.xcconfig */,
+				969899CD3BCCDA97699CED8D /* Pods-MoEPluginBaseExample.debug.xcconfig */,
+				E00EE524B5404E1E88831410 /* Pods-MoEPluginBaseExample.release.xcconfig */,
+				0E74DF3C347290DB8D056CB1 /* Pods-MoEPluginBaseExampleTests.debug.xcconfig */,
+				7A89DBCE1B2C87C5E94E27EC /* Pods-MoEPluginBaseExampleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -207,11 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "MoEPluginBaseExample" */;
 			buildPhases = (
-				6A915A2BA0E0F4C218EF4306 /* [CP] Check Pods Manifest.lock */,
+				D29807A875A763036BC1502F /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				9403B5C2D4DBF1E3E2C5AEA7 /* [CP] Embed Pods Frameworks */,
+				CFE1213FF55A9542B12599DD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -226,7 +226,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "MoEPluginBaseExampleTests" */;
 			buildPhases = (
-				CD2E6789ACE1149AFD72B6A0 /* [CP] Check Pods Manifest.lock */,
+				66BB31D86655A9F46DB45729 /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
@@ -301,61 +301,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6A915A2BA0E0F4C218EF4306 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MoEPluginBaseExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9403B5C2D4DBF1E3E2C5AEA7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample-frameworks.sh",
-				"${PODS_ROOT}/MOGeofence/Frameworks/MOGeofence.framework",
-				"${PODS_ROOT}/MORichNotification/Frameworks/MORichNotification.framework",
-				"${BUILT_PRODUCTS_DIR}/MoEPluginBase/MoEPluginBase.framework",
-				"${PODS_ROOT}/MoEngage-iOS-SDK/Frameworks/MoEngage.framework",
-				"${PODS_ROOT}/MoEngage-iOS-SDK/Frameworks/MoEngageCore.framework",
-				"${PODS_ROOT}/MoEngage-iOS-SDK/Frameworks/MOAnalytics.framework",
-				"${PODS_ROOT}/MoEngage-iOS-SDK/Frameworks/MOMessaging.framework",
-				"${PODS_ROOT}/MoEngageInApp/Frameworks/MOInApp.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MOGeofence.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MORichNotification.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoEPluginBase.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoEngage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoEngageCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MOAnalytics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MOMessaging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MOInApp.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CD2E6789ACE1149AFD72B6A0 /* [CP] Check Pods Manifest.lock */ = {
+		66BB31D86655A9F46DB45729 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -371,6 +317,60 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-MoEPluginBaseExampleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFE1213FF55A9542B12599DD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MoEPluginBase/MoEPluginBase.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MOGeofence/MOGeofence.framework/MOGeofence",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MORichNotification/MORichNotification.framework/MORichNotification",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MoEngage/MoEngage.framework/MoEngage",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MoEngageCore/MoEngageCore.framework/MoEngageCore",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MOAnalytics/MOAnalytics.framework/MOAnalytics",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MOMessaging/MOMessaging.framework/MOMessaging",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MOInApp/MOInApp.framework/MOInApp",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoEPluginBase.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MOGeofence.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MORichNotification.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoEngage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoEngageCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MOAnalytics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MOMessaging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MOInApp.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D29807A875A763036BC1502F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MoEPluginBaseExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -548,7 +548,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FFC82217693BE997FCEF263 /* Pods-MoEPluginBaseExample.debug.xcconfig */;
+			baseConfigurationReference = 969899CD3BCCDA97699CED8D /* Pods-MoEPluginBaseExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MoEPluginBaseExample/MoEPluginBaseExample.entitlements;
@@ -568,7 +568,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 988C17A7C203DF30804C913C /* Pods-MoEPluginBaseExample.release.xcconfig */;
+			baseConfigurationReference = E00EE524B5404E1E88831410 /* Pods-MoEPluginBaseExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MoEPluginBaseExample/MoEPluginBaseExample.entitlements;
@@ -588,7 +588,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4821FFD61451B03C22FF2E29 /* Pods-MoEPluginBaseExampleTests.debug.xcconfig */;
+			baseConfigurationReference = 0E74DF3C347290DB8D056CB1 /* Pods-MoEPluginBaseExampleTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -613,7 +613,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BABC2A66F9B48C4AD2151295 /* Pods-MoEPluginBaseExampleTests.release.xcconfig */;
+			baseConfigurationReference = 7A89DBCE1B2C87C5E94E27EC /* Pods-MoEPluginBaseExampleTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
