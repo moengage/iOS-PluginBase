@@ -13,11 +13,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MoEPluginInitializer : NSObject <UNUserNotificationCenterDelegate>
-@property(assign, nonatomic, readonly) BOOL isSDKIntialized;
+@property(assign, nonatomic, readonly) BOOL isSDKInitialized;
 
 + (instancetype)sharedInstance;
-- (void)intializeSDKWithConfig:(MOSDKConfig*)sdkConfig andLaunchOptions:(NSDictionary*)launchOptions;
-- (void)intializeSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
+- (void)initializeSDKWithConfig:(MOSDKConfig*)sdkConfig andLaunchOptions:(NSDictionary*)launchOptions;
+- (void)initializeSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
 - (void)pluginInitialized;
 @end
 

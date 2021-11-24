@@ -48,43 +48,11 @@
 }
 
 - (void)pluginInitialized{
-    if (![MoEPluginInitializer sharedInstance].isSDKIntialized) {
-        NSAssert(NO, @"MoEngage - Your SDK is not properly initialized. You should call initializeSDKwithAppID:andLaunchOptions: from you AppDelegate didFinishLaunching method. Please refer to doc for more details.");
+    if (![MoEPluginInitializer sharedInstance].isSDKInitialized) {
+        NSAssert(NO, @"MoEngage - Your SDK is not properly initialized. You should call initializeSDKWithConfig:andLaunchOptions: from you AppDelegate didFinishLaunching method. Please refer to doc for more details.");
         [[MoEPluginInitializer sharedInstance] pluginInitialized];
     }
     [[MoEPluginMessageQueueHandler sharedInstance] flushMessageQueue];
-}
-
-- (void)trackPluginVersion:(NSString*)version forIntegrationType:(MoEIntegrationType)integrationType{
-    if (version == nil) {
-        return;
-    }
-    NSString* integrationVersionKey = nil;
-    switch (integrationType) {
-        case Cordova:
-            integrationVersionKey = MoEngage_Cordova_SDK_Version;
-            break;
-        case Flutter:
-            integrationVersionKey = MoEngage_Flutter_SDK_Version;
-            break;
-        case ReactNative:
-            integrationVersionKey = MoEngage_React_Native_SDK_Version;
-            break;
-        case Unity:
-            integrationVersionKey = MoEngage_Unity_SDK_Version;
-            break;
-        case Xamarin:
-            integrationVersionKey = MoEngage_Xamarin_SDK_Version;
-            break;
-        default:
-            break;
-    }
-    if (integrationVersionKey == nil) {
-        return;
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:version forKey:integrationVersionKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark- Set AppStatus

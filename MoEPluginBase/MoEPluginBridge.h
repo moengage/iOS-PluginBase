@@ -28,7 +28,6 @@ typedef enum : NSUInteger {
 @property(nonatomic, weak) id<MoEPluginBridgeDelegate> bridgeDelegate;
 
 - (void)pluginInitialized;
-- (void)trackPluginVersion:(NSString*)version forIntegrationType:(MoEIntegrationType)integrationType;
 - (BOOL)isValidNativeDependencyIntegrated;
 
 - (void)setAppStatus:(NSDictionary*)appStatusDict;

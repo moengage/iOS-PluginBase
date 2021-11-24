@@ -3,6 +3,10 @@
 
 ## Change Log:
 
+### Version 2.2.0  *(24th November, 2021)*
+-------------------------------------------
+* Initialization method name fixes.
+
 ### Version 2.1.0  *(31st August, 2021)*
 -------------------------------------------
 * MoEngage-iOS-SDK dependency updated to 7.1.* and MoEngageInApp dependency updated to 2.1.*.

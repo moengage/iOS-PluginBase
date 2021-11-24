@@ -21,7 +21,7 @@
     NSString* yourMoEngageAppID = @"DAO6UGZ73D9RTK8B5W96TPYN";
     MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
    
-    [[MoEPluginInitializer sharedInstance] intializeSDKWithConfig: sdkConfig withSDKState:true andLaunchOptions:launchOptions];
+    [[MoEPluginInitializer sharedInstance] initializeSDKWithConfig:sdkConfig withSDKState:true andLaunchOptions:launchOptions];
     [MoEPluginBridge sharedInstance].bridgeDelegate = self;
     return YES;
 }

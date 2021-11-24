@@ -14,7 +14,7 @@
 #import "MOInAppCampaign+Utility.h"
 
 @interface MoEPluginInitializer() <MOInAppNativDelegate, MOMessagingDelegate>
-@property(assign, nonatomic) BOOL isSDKIntialized;
+@property(assign, nonatomic) BOOL isSDKInitialized;
 @end
 
 @implementation MoEPluginInitializer
@@ -34,18 +34,18 @@
 {
     self = [super init];
     if (self) {
-        self.isSDKIntialized = NO;
+        self.isSDKInitialized = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushTokenRegistered:) name:MoEngage_Notification_Registered_Notification object:nil];
     }
     return self;
 }
 
-- (void)intializeSDKWithConfig:(MOSDKConfig*)sdkConfig andLaunchOptions:(NSDictionary*)launchOptions {
-    self.isSDKIntialized = YES;
+- (void)initializeSDKWithConfig:(MOSDKConfig*)sdkConfig andLaunchOptions:(NSDictionary*)launchOptions {
+    self.isSDKInitialized = YES;
     [self setupSDKWithLaunchOptions:sdkConfig launchOptions:launchOptions];
 }
 
-- (void)intializeSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions{
+- (void)initializeSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions{
     
     if (isSdkEnabled) {
         [[MoEngage sharedInstance] enableSDK];
@@ -54,12 +54,12 @@
         [[MoEngage sharedInstance] disableSDK];
     }
     
-    [self intializeSDKWithConfig:sdkConfig andLaunchOptions:launchOptions];
+    [self initializeSDKWithConfig:sdkConfig andLaunchOptions:launchOptions];
 }
 
-//this will works as fallback method if Client does not call intializeSDKWithAppID:andLaunchOptions:
+//this will works as fallback method if Client does not call initializeSDKWithAppID:andLaunchOptions:
 - (void)pluginInitialized {
-    if (!self.isSDKIntialized) {
+    if (!self.isSDKInitialized) {
         [self setupSDKWithLaunchOptions:nil launchOptions:nil];
     }
 }
