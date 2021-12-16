@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import <MoEPluginBase/MoEPluginBase.h>
+#import <MoEPluginInbox/MoEPluginInbox.h>
+#import <MoEPluginGeofence/MoEPluginGeofence.h>
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) NSArray* dataSourceArray;
@@ -18,7 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count",@"Enable SDK",@"Disable SDK"];
+    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count",@"Enable SDK",@"Disable SDK", @"Enable logs", @"Start Geofence Monitoring"];
     
 }
 
@@ -42,14 +44,52 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.row) {
         case 0:{
-            [[MoEPluginBridge sharedInstance] pluginInitialized];
+            NSDictionary* appstatusDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                }
+            };
+            [[MoEPluginBridge sharedInstance] pluginInitialized: appstatusDict];
+            
+            NSDictionary* dict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                }
+            };
+            [[MoEPluginBridge sharedInstance]enableLogs:dict];
+            
+            appstatusDict = @{
+               @"accountMeta": @{
+                   @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+               }
+           };
+           [[MoEPluginBridge sharedInstance] pluginInitialized:appstatusDict];
+        
             break;
         }
         case 1:{
             NSDictionary* appstatusDict = @{
-                @"appStatus": @"INSTALL"
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @{
+                    @"appStatus": @"INSTALL"
+                    
+                }
             };
             [[MoEPluginBridge sharedInstance] setAppStatus:appstatusDict];
+
+             appstatusDict = @{
+                @"accountMeta": @{
+                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                },
+                @"data": @{
+                    @"appStatus": @"UPDATE"
+                    
+                }
+            };
+            [[MoEPluginBridge sharedInstance] setAppStatus:appstatusDict];
+
             break;
         }
         case 2:{
@@ -57,7 +97,11 @@
             dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
             NSString* timeAttr = [dateFormatter stringFromDate:[NSDate date]];
             NSDictionary* trackEventDict = @{
-                @"eventName": @"Test Event Name",
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @ {
+                @"eventName": @"Product Purchased",
                 @"eventAttributes": @{
                         @"generalAttributes": @{
                                 @"StringAttr": @"Hello MoEngage!!",
@@ -76,6 +120,7 @@
                         }
                 },
                 @"isNonInteractive": @1
+                }
             };
             [[MoEPluginBridge sharedInstance] trackEventWithPayload:trackEventDict];
             break;
@@ -83,17 +128,27 @@
         case 3:{
             // 1. Unique ID Attribute
             NSDictionary* userAttrPayload1 = @{
-                @"attributeName":@"USER_ATTRIBUTE_UNIQUE_ID",
-                @"attributeValue":@"Unique ID",
-                @"type":@"general"
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @ {
+                    @"attributeName":@"USER_ATTRIBUTE_UNIQUE_ID",
+                    @"attributeValue":@"Unique ID",
+                    @"type":@"general"
+                }
             };
             [[MoEPluginBridge sharedInstance] setUserAttributeWithPayload:userAttrPayload1];
             
             // 2. Custom Attribute
             NSDictionary* userAttrPayload2 = @{
-                @"attributeName":@"Attr 1",
-                @"attributeValue":@23.45,
-                @"type":@"general"
+                @"accountMeta": @{
+                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                },
+                @"data": @ {
+                    @"attributeName":@"Attr 1",
+                    @"attributeValue":@23.45,
+                    @"type":@"general"
+                }
             };
             [[MoEPluginBridge sharedInstance] setUserAttributeWithPayload:userAttrPayload2];
             
@@ -102,19 +157,30 @@
             dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
             NSString* timeAttr = [dateFormatter stringFromDate:[NSDate date]];
             NSDictionary* userAttrPayload3 = @{
-                @"attributeName":@"timestamp user attr",
-                @"attributeValue":timeAttr,
-                @"type":@"timestamp"
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @ {
+                    
+                    @"attributeName":@"timestamp user attr",
+                    @"attributeValue":timeAttr,
+                    @"type":@"timestamp"
+                }
             };
             [[MoEPluginBridge sharedInstance] setUserAttributeWithPayload:userAttrPayload3];
             
             // 4. Location Attribute
             NSDictionary* userAttrPayload4 = @{
-                @"attributeName":@"location user attr",
-                @"type":@"location",
-                @"locationAttribute":@{
+                @"accountMeta": @{
+                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                },
+                @"data": @ {
+                    @"attributeName":@"location user attr",
+                    @"type":@"location",
+                    @"locationAttribute":@{
                         @"latitude": @23.23,
                         @"longitude": @43.34
+                    }
                 }
             };
             [[MoEPluginBridge sharedInstance] setUserAttributeWithPayload:userAttrPayload4];
@@ -122,7 +188,12 @@
         }
         case 4:{
             NSDictionary* aliasDict = @{
-              @"alias": @"alias ID"
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @ {
+                    @"alias": @"alias ID"
+                }
             };
             [[MoEPluginBridge sharedInstance] setAlias:aliasDict];
             break;
@@ -132,67 +203,95 @@
             break;
         }
         case 6:{
-            [[MoEPluginBridge sharedInstance] showInApp];
+            NSDictionary* dict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @{
+                    @"appStatus": @"INSTALL"
+                    
+                }
+            };
+            [[MoEPluginBridge sharedInstance] showInApp: dict];
+            
+            dict = @{
+                @"accountMeta": @{
+                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                },
+                @"data": @{
+                    @"appStatus": @"INSTALL"
+                    
+                }
+            };
+            [[MoEPluginBridge sharedInstance] showInApp: dict];
+            
             break;
         }
         case 7:{
-            [[MoEPluginBridge sharedInstance] getSelfHandledInApp];
+            NSDictionary* aliasDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+            };
+            [[MoEPluginBridge sharedInstance] getSelfHandledInApp:aliasDict];
             break;
         }
         case 8:{
             NSDictionary* contextDict = @{
-              @"contexts": @[@"Home", @"Settings"]
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data":@ {
+                    @"contexts": @[@"Home", @"Settings"]
+                }
             };
             
             [[MoEPluginBridge sharedInstance] setInAppContexts:contextDict];
             break;
         }
         case 9:{
-            [[MoEPluginBridge sharedInstance] invalidateInAppContexts];
+            NSDictionary* aliasDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                }
+            };
+            [[MoEPluginBridge sharedInstance] invalidateInAppContexts: aliasDict];
             break;
         }
         case 10:{
-            [[MoEPluginBridge sharedInstance] resetUser];
+            NSDictionary* aliasDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                }
+            };
+            [[MoEPluginBridge sharedInstance] resetUser: aliasDict];
             break;
         }
         case 11:{
             NSDictionary* optOutDataDict = @{
-              @"type": @"data",
-              @"state": @1
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @ {
+                    @"type": @"data",
+                    @"state": @1
+                }
             };
             [[MoEPluginBridge sharedInstance] optOutTracking:optOutDataDict];
-            
-            NSDictionary* optOutPushDict = @{
-              @"type": @"push",
-              @"state": @1
-            };
-            [[MoEPluginBridge sharedInstance] optOutTracking:optOutPushDict];
-            
-            NSDictionary* optOutInAppDict = @{
-              @"type": @"inapp",
-              @"state": @1
-            };
-            [[MoEPluginBridge sharedInstance] optOutTracking:optOutInAppDict];
             break;
         }
         case 12:{
             NSDictionary* optOutDataDict = @{
-              @"type": @"data",
-              @"state": @0
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @ {
+                    @"type": @"data",
+                    @"state": @0
+                }
             };
             [[MoEPluginBridge sharedInstance] optOutTracking:optOutDataDict];
             
-            NSDictionary* optOutPushDict = @{
-              @"type": @"push",
-              @"state": @0
-            };
-            [[MoEPluginBridge sharedInstance] optOutTracking:optOutPushDict];
-            
-            NSDictionary* optOutInAppDict = @{
-              @"type": @"inapp",
-              @"state": @0
-            };
-            [[MoEPluginBridge sharedInstance] optOutTracking:optOutInAppDict];
             break;
         }
         case 13:{
@@ -200,22 +299,93 @@
             break;
         }
         case 14:{
-            [[MoEPluginBridge sharedInstance] getInboxMessagesWithCompletionBlock:^(NSDictionary *inboxMessages) {
-                            NSLog(@"Messages : %@",inboxMessages);
+            NSDictionary* aliasDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                }
+            };
+            
+            [[MoEInboxBridge sharedInstance] getInboxMessagesForAccount:aliasDict withCompletionBlock:^(NSDictionary *inboxMessages) {
+                NSLog(@"inboxMessages %@", inboxMessages);
             }];
         }
+            break;
         case 15:{
-            NSLog(@"Unread Count : %ld",(long)[[MoEPluginBridge sharedInstance] getUnreadMessageCount]);
+            NSDictionary* aliasDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                }
+            };
+            [[MoEInboxBridge sharedInstance] getUnreadMessageCount:aliasDict completionBlock:^(NSDictionary *inboxDataDict) {
+                NSLog(@"inboxMessages unread count %@", inboxDataDict);
+            }];
             break;
         }
         case 16:{
-            [[MoEPluginBridge sharedInstance] updateSDKState:@{@"isSdkEnabled": @1}];
+            NSDictionary* enableSDKDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @{
+                    @"isSdkEnabled": @1
+                }
+            };
+            
+            [[MoEPluginBridge sharedInstance] updateSDKState:enableSDKDict];
             break;
         }
         case 17:{
-            [[MoEPluginBridge sharedInstance] updateSDKState:@{@"isSdkEnabled": @0}];
+            NSDictionary* enableSDKDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @{
+                    @"isSdkEnabled": @0
+                }
+            };
+            
+            [[MoEPluginBridge sharedInstance] updateSDKState:enableSDKDict];
+            break;
             break;
         }
+            
+        case 18:{
+            NSDictionary* enableLogsDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @{
+                    @"state": @1
+                }
+            };
+            
+            [[MoEPluginBridge sharedInstance]enableLogs:enableLogsDict];
+            
+            enableLogsDict = @{
+                @"accountMeta": @{
+                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                },
+                @"data": @{
+                    @"state": @1
+                }
+            };
+            
+            [[MoEPluginBridge sharedInstance]enableLogs:enableLogsDict];
+            
+            break;
+        }
+            
+        case 19:{
+            NSDictionary* aliasDict = @{
+                @"accountMeta": @{
+                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                }
+            };
+            
+            [[MoEGeofenceBridge sharedInstance] startGeofenceMonitoring:aliasDict];
+            break;
+        }
+            
         default:
             break;
     }

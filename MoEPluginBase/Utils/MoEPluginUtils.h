@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isValidArray:(id)value;
 + (void)dispatchOnMainQueue:(dispatch_block_t)block;
 + (NSString* __nullable)jsonStringFromDict:(NSDictionary *)dict;
++(NSString*)getAppID:(NSDictionary *) dict;
++(NSDictionary*)getDataDict:(NSDictionary *) dict;
++(NSString*)getAppIDFromNotificationPayload:(NSDictionary * _Nonnull)userInfo;
 @end
 
 NS_ASSUME_NONNULL_END

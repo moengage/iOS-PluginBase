@@ -22,8 +22,16 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Want to access the location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Need to access the location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need to access the location</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

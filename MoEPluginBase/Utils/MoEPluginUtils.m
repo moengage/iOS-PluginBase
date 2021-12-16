@@ -142,4 +142,28 @@
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
++(NSDictionary*)getDataDict:(NSDictionary *)dict {
+    return [dict valueForKey: kDataDictKey];
+}
+
++(NSString*)getAppID:(NSDictionary *)dict {
+    NSDictionary* accountMetaDict = [dict valueForKey:kAccountMetaKey];
+    NSString* appID = [accountMetaDict valueForKey:kAppID];
+    
+    if (appID == nil || appID.length == 0) {
+        appID = [[MoEngage sharedInstance] getDefaultSDKConfiguration].moeAppID;
+    }
+    
+    return appID;
+}
+
++(NSString*)getAppIDFromNotificationPayload:(NSDictionary * _Nonnull)userInfo {
+    NSString* appID = [userInfo valueForKeyPath:@"moengage.app_id"];
+    if([appID hasSuffix:kDebugKey]) {
+        appID = [appID stringByReplacingOccurrencesOfString:kDebugKey
+                                                 withString:@""];
+    }
+    return appID;
+}
+
 @end

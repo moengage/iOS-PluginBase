@@ -12,8 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MoEPluginMessageQueueHandler : NSObject
+
 @property(nonatomic,assign) BOOL isSDKInitialized;
-+(instancetype)sharedInstance;
 
 -(void)queueMessage:(MoEPluginMessage*)message;
 -(void)flushMessageQueue;

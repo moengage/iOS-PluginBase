@@ -7,19 +7,15 @@
 //
 
 #import <MoEngage/MoEngage.h>
-#import <MOInApp/MOInApp.h>
-#if __has_include(<MOGeofence/MOGeofence.h>)
-#import <MOGeofence/MOGeofence.h>
-#endif
-
+#import <MoEngageObjCUtils/MoEngageObjCUtils.h>
+#import <MOEngageInApps/MOInApp.h>
+#import "MoEPluginCoordinator.h"
 #import "MoEPluginUtils.h"
 #import "MoEPluginBridge.h"
 #import "MoEPluginConstants.h"
 #import "MoEPluginInitializer.h"
 #import "MoEPluginMessageQueueHandler.h"
-
 #import "MOInAppCampaign+Utility.h"
-#import "MOInboxModel+Utility.h"
 #import "MOInAppSelfHandledCampaign+Utility.h"
 
 @interface MoEPluginBridge()
@@ -47,23 +43,30 @@
     return self;
 }
 
-- (void)pluginInitialized{
-    if (![MoEPluginInitializer sharedInstance].isSDKInitialized) {
+- (void)pluginInitialized: (NSDictionary*)dict{
+    NSString* appID = [MoEPluginUtils getAppID:dict];
+    MoEPluginController *controller = [[MoEPluginCoordinator sharedInstance] getPluginController:appID];
+    if (!controller.isSDKInitialized) {
         NSAssert(NO, @"MoEngage - Your SDK is not properly initialized. You should call initializeSDKWithConfig:andLaunchOptions: from you AppDelegate didFinishLaunching method. Please refer to doc for more details.");
-        [[MoEPluginInitializer sharedInstance] pluginInitialized];
+        [controller pluginInitialized];
     }
-    [[MoEPluginMessageQueueHandler sharedInstance] flushMessageQueue];
+    [controller flushMessageQueue];
 }
 
 #pragma mark- Set AppStatus
 
 - (void)setAppStatus:(NSDictionary*)appStatusDict{
     if([MoEPluginUtils isValidDictionary:appStatusDict]) {
-        NSString *status = [[appStatusDict getStringForKey:@"appStatus"] uppercaseString];
+        
+        NSDictionary* dataDict = [MoEPluginUtils getDataDict:appStatusDict];
+        NSString *status = [[dataDict getStringForKey:@"appStatus"] uppercaseString];
+        
+        NSString* appID = [MoEPluginUtils getAppID:appStatusDict];
+        
         if ([status isEqualToString: @"INSTALL"]) {
-            [[MoEngage sharedInstance] appStatus:INSTALL];
+            [[MoEngage sharedInstance] appStatus:AppStatusInstall forAppID: appID];
         } else if ([status isEqualToString: @"UPDATE"]) {
-            [[MoEngage sharedInstance] appStatus:UPDATE];
+            [[MoEngage sharedInstance] appStatus:AppStatusUpdate forAppID: appID];
         }
     }
 }
@@ -73,30 +76,33 @@
 - (void)setUserAttributeWithPayload:(NSDictionary*)userAttributeDict{
     if ([MoEPluginUtils isValidDictionary:userAttributeDict]) {
         
-        NSString *type = [[userAttributeDict getStringForKey:@"type"] lowercaseString];
-        NSString* attributeName = [userAttributeDict getStringForKey:@"attributeName"];
-        NSString *attributeValue = [userAttributeDict getStringForKey:@"attributeValue"];
+        NSString* appID = [MoEPluginUtils getAppID: userAttributeDict];
+        NSDictionary* userAttributeDataDict = [MoEPluginUtils getDataDict: userAttributeDict];
+        NSString *type = [[userAttributeDataDict getStringForKey:@"type"] lowercaseString];
+        NSString* attributeName = [userAttributeDataDict getStringForKey:@"attributeName"];
+        NSString *attributeValue = [userAttributeDataDict getStringForKey:@"attributeValue"];
         
         if ([MoEPluginUtils isValidString:attributeName]) {
             if ([type isEqualToString:@"general"]) {
                 if ([MoEPluginUtils isValidString:attributeValue]) {
-                    [[MoEngage sharedInstance] setUserAttribute:attributeValue forKey:attributeName];
+                    [[MoEngage sharedInstance] setUserAttribute:attributeValue forKey:attributeName forAppID:appID];
                 }
             } else if ([type isEqualToString:@"timestamp"]) {
                 if ([MoEPluginUtils isValidString:attributeValue]) {
                     if (attributeValue) {
                         NSDate *date = [MoEPluginUtils getDateForString:attributeValue];
                         if (date) {
-                            [[MoEngage sharedInstance] setUserAttributeDate:date forKey:attributeName];
+                            [[MoEngage sharedInstance] setUserAttributeDate:date forKey:attributeName forAppID:appID];
                         }
                     }
                 }
             } else if ([type isEqualToString:@"location"]) {
-                NSDictionary *dictLocation = [userAttributeDict objectForKey:@"locationAttribute"];
+                NSDictionary *dictLocation = [userAttributeDataDict objectForKey:@"locationAttribute"];
                 if ([MoEPluginUtils isValidDictionary:dictLocation]) {
                     double latitude = [[dictLocation getStringForKey:@"latitude"] doubleValue];
                     double longitude = [[dictLocation getStringForKey:@"longitude"] doubleValue];
-                    [[MoEngage sharedInstance] setUserAttributeLocationLatitude:latitude longitude: longitude forKey: attributeName];
+                    MOGeoLocation *location = [[MOGeoLocation alloc] initWithLatitude:latitude andLongitude:longitude];
+                    [[MoEngage sharedInstance] setUserAttributeLocation:location forKey:attributeName forAppID:appID];
                 }
             } else {
                 NSLog(@"invlaid attribute type in MOReactBridge setUserAttribute");
@@ -107,9 +113,13 @@
 
 - (void)setAlias:(NSDictionary*)aliasPayloadDict{
     if ([MoEPluginUtils isValidDictionary:aliasPayloadDict]) {
-        NSString *alias = [aliasPayloadDict getStringForKey:@"alias"];
+        NSString* appID = [MoEPluginUtils getAppID:aliasPayloadDict];
+        
+        NSDictionary* aliasDataDict = [MoEPluginUtils getDataDict: aliasPayloadDict];
+        NSString *alias = [aliasDataDict getStringForKey:@"alias"];
+        
         if ([MoEPluginUtils isValidString:alias]) {
-            [[MoEngage sharedInstance] setAlias: alias];
+            [[MoEngage sharedInstance] setAlias:alias forAppID:appID];
         }
     }
 }
@@ -119,18 +129,21 @@
 
 - (void)trackEventWithPayload:(NSDictionary*)eventPayloadDict{
     if (eventPayloadDict) {
-        NSString *eventName = [eventPayloadDict getStringForKey:kTrackEventName];
-        NSDictionary* attrDict = [eventPayloadDict validObjectForKey:kEventAttributes];
+        NSString* appdID = [MoEPluginUtils getAppID:eventPayloadDict];
+        
+        NSDictionary* eventDataDict = [MoEPluginUtils getDataDict: eventPayloadDict];
+        NSString *eventName = [eventDataDict getStringForKey:kTrackEventName];
+        NSDictionary* attrDict = [eventDataDict validObjectForKey:kEventAttributes];
         
         if ([MoEPluginUtils isValidString:eventName] && [MoEPluginUtils isValidDictionary:attrDict]) {
             NSMutableDictionary *eventAttributes = [attrDict mutableCopy];
-            id isNonInteractive = [eventPayloadDict validObjectForKey:kIsNonInteractive];
+            id isNonInteractive = [eventDataDict validObjectForKey:kIsNonInteractive];
             if (isNonInteractive) {
                 [eventAttributes setValue:isNonInteractive forKey:kIsNonInteractive];
             }
             
-            MOProperties *properties = [[MOProperties alloc] initWithPluginPayloadDict:eventAttributes];
-            [[MoEngage sharedInstance] trackEvent: eventName withProperties:properties];
+            MOProperties *properties = [[MOProperties alloc] initWithAttributes:eventAttributes];
+            [[MoEngage sharedInstance] trackEvent:eventName withProperties:properties forAppID:appdID];
         }
     }
 }
@@ -139,7 +152,9 @@
 
 - (void)registerForPush{
     if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
-        [UNUserNotificationCenter currentNotificationCenter].delegate = [MoEPluginInitializer sharedInstance];
+        MOSDKConfig* sdkConfig = [[MoEngage sharedInstance] getDefaultSDKConfiguration];
+        MoEPluginController* controller = [[MoEPluginCoordinator sharedInstance] getPluginController:sdkConfig.moeAppID];
+        [UNUserNotificationCenter currentNotificationCenter].delegate = controller;
     }
     [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
 }
@@ -147,102 +162,98 @@
 #pragma mark- inApp Methods
 #pragma mark Show InApp
 
-- (void)showInApp{
-    [[MOInApp sharedInstance] showInApp];
+- (void)showInApp: (NSDictionary*) inAppDict{
+    NSString* appID = [MoEPluginUtils getAppID:inAppDict];
+    [[MOInApp sharedInstance] showInAppCampaignForAppID:appID];
 }
 
 #pragma mark InApp Contexts
 
 - (void)setInAppContexts:(NSDictionary*)contextsPayloadDict{
     if ([MoEPluginUtils isValidDictionary:contextsPayloadDict]) {
-        NSArray *contexts = [contextsPayloadDict objectForKey:@"contexts"];
+        NSString* appID = [MoEPluginUtils getAppID:contextsPayloadDict];
+        
+        NSDictionary* inAppContextDataDict = [MoEPluginUtils getDataDict: contextsPayloadDict];
+        NSArray *contexts = [inAppContextDataDict objectForKey:@"contexts"];
         if ([MoEPluginUtils isValidArray: contexts]) {
-            [[MOInApp sharedInstance] setCurrentInAppContexts:contexts];
+            [[MOInApp sharedInstance] setCurrentInAppContexts:contexts forAppID:appID];
         }
     }
 }
 
 
-- (void)invalidateInAppContexts{
-    [[MOInApp sharedInstance] invalidateInAppContexts];
+-(void)invalidateInAppContexts: (NSDictionary*)contextDict {
+    NSString* appID = [MoEPluginUtils getAppID:contextDict];
+    [[MOInApp sharedInstance] invalidateInAppContextsForAppID:appID];
 }
 
 #pragma mark Self handled In App
 
-- (void)getSelfHandledInApp{
+- (void)getSelfHandledInApp: (NSDictionary*)inAppDict{
+    NSString* appID = [MoEPluginUtils getAppID: inAppDict];
     [MoEPluginUtils dispatchOnMainQueue:^{
-        [[MOInApp sharedInstance] getSelfHandledInAppWithCompletionBlock:^(MOInAppSelfHandledCampaign * _Nullable campaignInfo) {
+        [[MOInApp sharedInstance] getSelfHandledInAppForAppID:appID withCompletionBlock:^(MOInAppSelfHandledCampaign * _Nullable campaignInfo, MOAccountMeta * _Nullable accountMeta) {
             if (campaignInfo) {
-                MoEPluginMessage* selfHandle = [[MoEPluginMessage alloc] initWithMethodName: kEventNameInAppSelfHandledCampaign andInfoDict: campaignInfo.dictionaryRepresentation];
-                [[MoEPluginMessageQueueHandler sharedInstance] queueMessage:selfHandle];
+                MoEPluginMessage* selfHandle = [[MoEPluginMessage alloc] initWithMethodName: kEventNameInAppSelfHandledCampaign withInfoDict:campaignInfo.dictionaryRepresentation andAccountMeta:accountMeta];
+
+                MoEPluginController *controller = [[MoEPluginCoordinator sharedInstance] getPluginController:appID];
+                [controller queueMessage:selfHandle];
             }
         }];
     }];
 }
 
 - (void)updateSelfHandledInAppStatusWithPayload:(NSDictionary*)selfHandledCampaignDict{
-    NSString* updateType = [selfHandledCampaignDict validObjectForKey:@"type"];
+    NSString* appID = [MoEPluginUtils getAppID: selfHandledCampaignDict];
+    
+    NSDictionary* selfHandledCampaignDataDict = [MoEPluginUtils getDataDict: selfHandledCampaignDict];
+    NSString* updateType = [selfHandledCampaignDataDict validObjectForKey:@"type"];
     MOInAppSelfHandledCampaign *info = [[MOInAppSelfHandledCampaign alloc] initWithCampaignInfoDictionary:selfHandledCampaignDict];
     if (updateType && info) {
         if ([updateType isEqualToString:@"impression"]) {
-            [[MOInApp sharedInstance] selfHandledShownWithCampaignInfo:info];
+            [[MOInApp sharedInstance] selfHandledShownWithCampaignInfo:info forAppID:appID];
         }
         else if ([updateType isEqualToString:@"dismissed"]){
-            [[MOInApp sharedInstance] selfHandledDismissedWithCampaignInfo:info];
+            [[MOInApp sharedInstance] selfHandledDismissedWithCampaignInfo:info forAppID: appID];
         }
         else if ([updateType isEqualToString:@"click"]) {
-            [[MOInApp sharedInstance] selfHandledClickedWithCampaignInfo:info];
+            [[MOInApp sharedInstance] selfHandledClickedWithCampaignInfo:info forAppID:appID];
         }
         else if ([updateType isEqualToString:@"primary_clicked"]) {
-            [[MOInApp sharedInstance] selfHandledPrimaryClickedWithCampaignInfo:info];
+            [[MOInApp sharedInstance] selfHandledPrimaryClickedWithCampaignInfo:info forAppID:appID];
         }
-    }
-}
-
-#pragma mark- GeoFence Monitoring
-
-- (void)startGeofenceMonitoring{
-    // Init Geofence if included
-    Class   geofenceHandlerClass    = nil;
-    id      geofenceHandler         = nil;
-    geofenceHandlerClass = NSClassFromString(@"MOGeofenceHandler");
-    if (geofenceHandlerClass != NULL){
-        geofenceHandler = [geofenceHandlerClass sharedInstance];
-        [geofenceHandler startGeofenceMonitoring];
-    }else {
-        MOLog(@"MOGeofence Framework unavailable");
     }
 }
 
 #pragma mark- Enable SDK Logs
 
-- (void)enableLogs{
-    [MoEngage enableSDKLogs:true];
+- (void)enableLogs:(NSDictionary *)logsDict {
+    NSString* appID = [MoEPluginUtils getAppID:logsDict];
+    NSDictionary* dataDict = [MoEPluginUtils getDataDict:logsDict];
+    BOOL state = [dataDict getBooleanForKey:@"state"];
+    
+    [MoEngage enableSDKLogs: state forAppID:appID];
 }
 
 #pragma mark- Reset User
 
-- (void)resetUser{
-    [[MoEngage sharedInstance] resetUser];
+- (void)resetUser: (NSDictionary*)userDict{
+    NSString* appID = [MoEPluginUtils getAppID: userDict];
+    [[MoEngage sharedInstance] resetUserForAppID: appID];
 }
 
 #pragma mark- Opt out Tracking
 - (void)optOutTracking:(NSDictionary *)dictTracking {
-    
     if ([MoEPluginUtils isValidDictionary:dictTracking]) {
-        NSString *type = [[dictTracking getStringForKey:@"type"] lowercaseString];
-        BOOL state = [dictTracking getBooleanForKey:@"state"];
         
-        if ([MoEPluginUtils isValidString:type]) {
-            if ([type isEqualToString:@"data"]) {
-                [[MoEngage sharedInstance] optOutOfDataTracking:state];
-            }
-            else if ([type isEqualToString:@"push"]) {
-                [[MoEngage sharedInstance] optOutOfMoEngagePushNotification: state];
-            }
-            else if ([type isEqualToString:@"inapp"]) {
-                [[MoEngage sharedInstance] optOutOfInAppCampaign:state];
-            }
+        NSDictionary* dataDict = [MoEPluginUtils getDataDict: dictTracking];
+        NSString* appID = [MoEPluginUtils getAppID:dictTracking];
+        BOOL state = [dataDict getBooleanForKey:@"state"];
+        
+        if (!state) {
+            [[MoEngage sharedInstance] enableDataTrackingForAppID:appID];
+        } else  {
+            [[MoEngage sharedInstance] disableDataTrackingForAppID:appID];
         }
     }
 }
@@ -259,67 +270,16 @@
     }
 }
 
-#pragma mark- Inbox Methods
-
--(void)getInboxMessagesWithCompletionBlock:(void(^) (NSDictionary* inboxMessages))completionBlock{
-    if (completionBlock == nil) {
-        return;
-    }
-    
-    [MOInbox getInboxMessagesWithCompletionBlock:^(NSArray<MOInboxModel *> *inboxMessages) {
-        NSMutableArray* messages = [NSMutableArray array];
-        if (inboxMessages && inboxMessages.count > 0) {
-            for (MOInboxModel* inboxEntry in inboxMessages) {
-                NSDictionary* pluginDictEntry = [inboxEntry getPluginDictionaryRepresentation];
-                if (pluginDictEntry && [pluginDictEntry allKeys].count > 0) {
-                    [messages addObject:pluginDictEntry];
-                }
-            }
-        }
-        
-        NSMutableDictionary* inboxPayloadDict = [NSMutableDictionary dictionary];
-        inboxPayloadDict[@"platform"] = @"ios";
-        inboxPayloadDict[@"messages"] = messages;
-        completionBlock(inboxPayloadDict);
-    }];
-}
-
--(void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo{
-    if (campaignInfo && [campaignInfo allKeys].count > 0) {
-        NSString* cid = [campaignInfo validObjectForKey:kInboxKeyCampaignID];
-        if (cid && cid.length > 0) {
-            [MOInbox trackInboxNotificationClickWithCampaignID:cid];
-        }
-        else{
-            MOLog(@"Campaign ID Not Present‼️");
-        }
-    }
-}
-
--(void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo{
-    if (campaignInfo && [campaignInfo allKeys].count > 0) {
-        NSString* cid = [campaignInfo validObjectForKey:kInboxKeyCampaignID];
-        if (cid && cid.length > 0) {
-            [MOInbox removeMessageWithCampaignID:cid];
-        }
-        else{
-            MOLog(@"Campaign ID Not Present‼️");
-        }
-    }
-}
-
--(NSInteger)getUnreadMessageCount{
-    return [MOInbox getUnreadNotifictionCount];
-}
-
-- (void)updateSDKState:(NSDictionary*)stateInfo{
-    if ([MoEPluginUtils isValidDictionary:stateInfo]) {
-        BOOL state = [stateInfo getBooleanForKey:@"isSdkEnabled"];
+- (void)updateSDKState:(NSDictionary*)stateInfoDict{
+    if ([MoEPluginUtils isValidDictionary:stateInfoDict]) {
+        NSString* appID = [MoEPluginUtils getAppID: stateInfoDict];
+        NSDictionary* dataDict = [MoEPluginUtils getDataDict: stateInfoDict];
+        BOOL state = [dataDict getBooleanForKey:@"isSdkEnabled"];
         if (state) {
-            [[MoEngage sharedInstance] enableSDK];
+            [[MoEngage sharedInstance] enableSDKForAppID:appID];
         }
         else{
-            [[MoEngage sharedInstance] disableSDK];
+            [[MoEngage sharedInstance] disableSDKForAppID:appID];
         }
     }
 }

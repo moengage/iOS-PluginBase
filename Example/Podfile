@@ -4,7 +4,16 @@ platform :ios, '10.0'
 
 target 'MoEPluginBaseExample' do
   pod 'MoEPluginBase', :path => '../'
-  pod 'MOGeofence'
+  pod 'MoEPluginInbox', :path => '../'
+  pod 'MoEPluginGeofence', :path => '../'
+
+  pod 'MoEngageRichNotification', :git => 'https://github.com/moengage/MoEngage-iOS-Pods.git', :branch => 'framework'
+  pod 'MoEngage-iOS-SDK', :git => 'https://github.com/moengage/MoEngage-iOS-Pods.git', :branch => 'framework'
+ pod 'MoEngageRealTimeTrigger', :git => 'https://github.com/moengage/MoEngage-iOS-Pods.git', :branch => 'framework'
+ pod 'MoEngageInApp', :git => 'https://github.com/moengage/MoEngage-iOS-Pods.git', :branch => 'framework'
+ pod 'MoEngageGeofence', :git => 'https://github.com/moengage/MoEngage-iOS-Pods.git', :branch => 'framework'
+ pod 'MoEngageCards', :git => 'https://github.com/moengage/MoEngage-iOS-Pods.git', :branch => 'framework'
+ pod 'MoEngageInbox', :git => 'https://github.com/moengage/MoEngage-iOS-Pods.git', :branch => 'framework'
   target 'MoEPluginBaseExampleTests' do
     inherit! :search_paths
   end

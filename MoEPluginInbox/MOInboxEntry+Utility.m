@@ -1,15 +1,16 @@
 //
-//  MOInboxData+Utility.m
-//  MoEPluginBase
+//  MOInboxEntry+Utility.m
+//  MoEPluginInbox
 //
 //  Created by Chengappa C D on 02/11/20.
 //
 
-#import "MOInboxModel+Utility.h"
-#import "MoEPluginConstants.h"
-#import <MoEngage/MoEngage.h>
+#import "MOInboxEntry+Utility.h"
+#import <MoEPluginBase/MoEPluginBase.h>
+#import <MoEngageObjCUtils/MoEngageObjCUtils.h>
 
-@implementation MOInboxModel (Utility)
+
+@implementation MOInboxEntry (Utility)
 -(NSDictionary*)getPluginDictionaryRepresentation{
     NSMutableDictionary* pluginDict = [NSMutableDictionary dictionary];
     //Campaign ID
@@ -21,13 +22,13 @@
     pluginDict[kInboxKeyIsClicked] = [NSNumber numberWithBool:self.isRead];
     
     // Received Time
-    NSString* receivedDateStr = [MODateUtils getStringForDate:self.receivedDate withFormat:kMODateFormatISO8601MilliSec andForGMTTimeZone:true];
+    NSString* receivedDateStr = [MODateUtils getStringForDate:self.receivedDate withFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" andForGMTTimeZone:true];
     if (receivedDateStr) {
         pluginDict[kInboxKeyReceivedTime] = receivedDateStr;
     }
     
     // Expiry Time
-    NSString* expiryStr = [MODateUtils getStringForDate:self.inboxExpiryDate withFormat:kMODateFormatISO8601MilliSec andForGMTTimeZone:true];
+    NSString* expiryStr = [MODateUtils getStringForDate:self.inboxExpiryDate withFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" andForGMTTimeZone:true];
     if (expiryStr) {
         pluginDict[kInboxKeyExpiry] = expiryStr;
     }

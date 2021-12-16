@@ -18,6 +18,8 @@
 #import <MoEPluginBase/MoEPluginMessage.h>
 #import <MoEPluginBase/MoEPluginMessageQueueHandler.h>
 #import <MoEPluginBase/MoEPluginUtils.h>
+#import <MoEPluginBase/MoEPluginCoordinator.h>
+
 
 FOUNDATION_EXPORT double MoEPluginBaseVersionNumber;
 FOUNDATION_EXPORT const unsigned char MoEPluginBaseVersionString[];

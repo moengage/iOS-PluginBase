@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <MoEngage/MoEngage.h>
 
+
 @protocol MoEPluginBridgeDelegate <NSObject>
--(void)sendMessageWithName:(NSString*)name andPayload:(NSDictionary*)payloadDict;
+-(void)sendMessageWithName:(NSString*)name andPayload:(NSMutableDictionary*)payloadDict;
 @end
 
 typedef enum : NSUInteger {
@@ -27,7 +28,7 @@ typedef enum : NSUInteger {
 
 @property(nonatomic, weak) id<MoEPluginBridgeDelegate> bridgeDelegate;
 
-- (void)pluginInitialized;
+- (void)pluginInitialized:(NSDictionary*)dict;
 - (BOOL)isValidNativeDependencyIntegrated;
 
 - (void)setAppStatus:(NSDictionary*)appStatusDict;
@@ -37,23 +38,17 @@ typedef enum : NSUInteger {
 
 - (void)registerForPush;
 
-- (void)showInApp;
+- (void)showInApp: (NSDictionary*)inAppDict;
 - (void)setInAppContexts:(NSDictionary*)contextsPayload;
-- (void)invalidateInAppContexts;
+- (void)invalidateInAppContexts: (NSDictionary*)contextDict;
 
-- (void)getSelfHandledInApp;
+- (void)getSelfHandledInApp:(NSDictionary*)inAppDict;
 - (void)updateSelfHandledInAppStatusWithPayload:(NSDictionary*)selfHandledCampaignDict;
 
-- (void)startGeofenceMonitoring;
+- (void)enableLogs:(NSDictionary*)logsDict;
+- (void)resetUser: (NSDictionary*)userDict;
+- (void)optOutTracking:(NSDictionary*)dictTracking;
 
-- (void)enableLogs;
-- (void)resetUser;
-- (void)optOutTracking:(NSDictionary *)dictTracking;
-
--(void)getInboxMessagesWithCompletionBlock:(void(^) (NSDictionary* inboxMessages))completionBlock;
--(void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo;
--(void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo;
--(NSInteger)getUnreadMessageCount;
 -(void)updateSDKState:(NSDictionary*)stateInfo;
 
 @end

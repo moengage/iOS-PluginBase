@@ -10,6 +10,7 @@
 
 NSString* const kEventNamePushTokenGenerated              = @"MoEPushTokenGenerated";
 NSString* const kEventNamePushClicked                     = @"MoEPushClicked";
+NSString* const kEventNamePushReceived                    = @"MoEPushReceived";
 NSString* const kEventNameInAppCampaignShown              = @"MoEInAppCampaignShown";
 NSString* const kEventNameInAppCampaignClicked            = @"MoEInAppCampaignClicked";
 NSString* const kEventNameInAppCampaignDismissed          = @"MoEInAppCampaignDismissed";
@@ -23,8 +24,9 @@ NSString* const kISODateFormat1 = @"yyyy-MM-dd'T'HH:mm:ss'Z";
 NSString* const kISODateFormat2 = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 // Version format: Major.Minor.Patch
-NSString* const kMinSDKVersionSupported = @"7.1.0";
-NSString* const kMaxSDKVersionSupported = @"7.2.0";
+//# will support only next minor versions.
+NSString* const kMinSDKVersionSupported = @"8.0.0";
+NSString* const kMaxSDKVersionSupported = @"8.1.0";
 
 // Inbox Keys
 NSString* const kInboxKeyID             = @"id";
@@ -63,3 +65,11 @@ NSString* const kInboxValMediaTypeVideo   = @"video";
 NSString* const kTrackEventName         = @"eventName";
 NSString* const kEventAttributes        = @"eventAttributes";
 NSString* const kIsNonInteractive       = @"isNonInteractive";
+
+NSString* const kDataDictKey      = @"data";
+NSString* const kAccountMetaKey   = @"accountMeta";
+NSString* const kAppID            = @"appID";
+NSString* const kPlatform         = @"platform";
+NSString* const kiOS              = @"ios";
+
+NSString* const kDebugKey       = @"_DEBUG";

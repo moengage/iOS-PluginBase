@@ -9,8 +9,7 @@
 #import "MOInAppSelfHandledCampaign+Utility.h"
 #import "MoEPluginConstants.h"
 #import "MoEPluginUtils.h"
-
-
+#import <MoEngageObjCUtils/MoEngageObjCUtils.h>
 
 @implementation MOInAppSelfHandledCampaign (Utility)
 

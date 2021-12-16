@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <MoEPluginBase/MoEPluginBase.h>
 
+
 @interface AppDelegate()<MoEPluginBridgeDelegate, UNUserNotificationCenterDelegate>
 
 @end
@@ -17,11 +18,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-    [[MoEPluginBridge sharedInstance] enableLogs];
-    NSString* yourMoEngageAppID = @"DAO6UGZ73D9RTK8B5W96TPYN";
+    [MoEngage enableDefaultConsoleLogger:true];
+    
+    //Set default instance
+    NSString* yourMoEngageAppID = @"NBZ7V0U8Y3KODMQL3ZDEI4FM";
     MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
-   
-    [[MoEPluginInitializer sharedInstance] initializeSDKWithConfig:sdkConfig withSDKState:true andLaunchOptions:launchOptions];
+    [[MoEPluginInitializer sharedInstance] initializeDefaultSDKWithConfig:sdkConfig withSDKState:true andLaunchOptions:launchOptions];
+
+    //Set Secondary Instance
+    NSString* yourMoEngageAppID2 = @"DAO6UGZ73D9RTK8B5W96TPYN";
+    MOSDKConfig *sdkConfig2 = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID2];
+    [[MoEPluginInitializer sharedInstance] initializeSDKWithConfig:sdkConfig2 withSDKState:true andLaunchOptions:launchOptions];
+
     [MoEPluginBridge sharedInstance].bridgeDelegate = self;
     return YES;
 }
@@ -34,7 +42,7 @@
     completionHandler();
 }
 
--(void)sendMessageWithName:(NSString *)name andPayload:(NSDictionary *)payloadDict{
+-(void)sendMessageWithName:(NSString *)name andPayload:(NSMutableDictionary *)payloadDict{
     NSLog(@"Received Message : ");
     NSLog(@"Message Name : %@",name);
     NSLog(@"Message Payload : %@",payloadDict);

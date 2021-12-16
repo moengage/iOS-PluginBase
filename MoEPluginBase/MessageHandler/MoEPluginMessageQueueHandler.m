@@ -17,16 +17,6 @@
 
 #pragma mark- Initialization
 
-+(instancetype)sharedInstance{
-    static dispatch_once_t onceToken;
-    static MoEPluginMessageQueueHandler *instance;
-    dispatch_once(&onceToken, ^{
-        instance = [[MoEPluginMessageQueueHandler alloc] init];
-    });
-    return instance;
-}
-
-
 -(instancetype)init{
     self = [super init];
     if (self) {

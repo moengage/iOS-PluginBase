@@ -10,6 +10,7 @@
 
 extern NSString* const kEventNamePushTokenGenerated;
 extern NSString* const kEventNamePushClicked;
+extern NSString* const kEventNamePushReceived;
 extern NSString* const kEventNameInAppCampaignShown;
 extern NSString* const kEventNameInAppCampaignDismissed;
 extern NSString* const kEventNameInAppCampaignClicked;
@@ -60,3 +61,11 @@ extern NSString* const kInboxValMediaTypeVideo;
 extern NSString* const kTrackEventName;
 extern NSString* const kEventAttributes;
 extern NSString* const kIsNonInteractive;
+
+extern NSString* const kDataDictKey;
+extern NSString* const kAccountMetaKey;
+extern NSString* const kAppID;
+extern NSString* const kPlatform;
+extern NSString* const kiOS;
+
+extern NSString* const kDebugKey;

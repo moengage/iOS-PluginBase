@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MoEngage/MoEngage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MoEPluginMessage : NSObject
 @property(nonatomic, strong) NSString* msgMethodName;
-@property(nonatomic, strong) NSDictionary* msgInfoDict;
+@property(nonatomic, strong) NSMutableDictionary* msgInfoDict;
 @property(nonatomic, assign) BOOL dontQueue;
 
--(instancetype)initWithMethodName:(NSString*)methodName andInfoDict:(NSDictionary*)infoDict;
+-(instancetype)initWithMethodName:(NSString*)methodName withInfoDict:(NSDictionary*)infoDict andAccountMeta:(MOAccountMeta* _Nullable) accountMeta;
 
 @end
 

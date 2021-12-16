@@ -1,37 +1,103 @@
 PODS:
-  - MoEngage-iOS-SDK (7.1.2):
-    - MORichNotification (< 5.3.0, >= 5.2.0)
-  - MoEngageInApp (2.1.0):
-    - MoEngage-iOS-SDK (< 7.2.0, >= 7.1.0)
-  - MoEPluginBase (2.1.0):
-    - MoEngage-iOS-SDK (< 7.2.0, >= 7.1.2)
-    - MoEngageInApp (< 2.2.0, >= 2.1.0)
-  - MOGeofence (3.1.0):
-    - MoEngage-iOS-SDK (< 7.2.0, >= 7.1.0)
-  - MORichNotification (5.2.0)
+  - MoEngage-iOS-SDK (8.0.0)
+  - MoEngageCards (3.0.0):
+    - MoEngage-iOS-SDK (< 8.2.0, >= 8.0.0)
+  - MoEngageGeofence (4.0.0):
+    - MoEngage-iOS-SDK (< 8.2.0, >= 8.0.0)
+  - MoEngageInApp (3.0.0):
+    - MoEngage-iOS-SDK (< 8.2.0, >= 8.0.0)
+  - MoEngageInbox (1.0.1):
+    - MoEngage-iOS-SDK (< 8.2.0, >= 8.0.0)
+  - MoEngageRealTimeTrigger (1.0.1):
+    - MoEngage-iOS-SDK (< 8.2.0, >= 8.0.0)
+  - MoEngageRichNotification (6.0.0):
+    - MoEngage-iOS-SDK (< 8.2.0, >= 8.0.0)
+  - MoEPluginBase (3.0.0):
+    - MoEngage-iOS-SDK (< 8.2.0, >= 8.0.0)
+    - MoEngageInApp (< 3.2.0, >= 3.0.0)
+  - MoEPluginGeofence (1.0.0):
+    - MoEngageGeofence (< 4.2.0, >= 4.0.0)
+    - MoEPluginBase (< 3.2.0, >= 3.0.0)
+  - MoEPluginInbox (1.0.0):
+    - MoEngageInbox (< 2.2.0, >= 1.0.0)
+    - MoEPluginBase (< 3.2.0, >= 3.0.0)
 
 DEPENDENCIES:
+  - MoEngage-iOS-SDK (from `https://github.com/moengage/MoEngage-iOS-Pods.git`, branch `framework`)
+  - MoEngageCards (from `https://github.com/moengage/MoEngage-iOS-Pods.git`, branch `framework`)
+  - MoEngageGeofence (from `https://github.com/moengage/MoEngage-iOS-Pods.git`, branch `framework`)
+  - MoEngageInApp (from `https://github.com/moengage/MoEngage-iOS-Pods.git`, branch `framework`)
+  - MoEngageInbox (from `https://github.com/moengage/MoEngage-iOS-Pods.git`, branch `framework`)
+  - MoEngageRealTimeTrigger (from `https://github.com/moengage/MoEngage-iOS-Pods.git`, branch `framework`)
+  - MoEngageRichNotification (from `https://github.com/moengage/MoEngage-iOS-Pods.git`, branch `framework`)
   - MoEPluginBase (from `../`)
-  - MOGeofence
-
-SPEC REPOS:
-  https://cdn.cocoapods.org/:
-    - MoEngage-iOS-SDK
-    - MoEngageInApp
-    - MOGeofence
-    - MORichNotification
+  - MoEPluginGeofence (from `../`)
+  - MoEPluginInbox (from `../`)
 
 EXTERNAL SOURCES:
+  MoEngage-iOS-SDK:
+    :branch: framework
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageCards:
+    :branch: framework
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageGeofence:
+    :branch: framework
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageInApp:
+    :branch: framework
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageInbox:
+    :branch: framework
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageRealTimeTrigger:
+    :branch: framework
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageRichNotification:
+    :branch: framework
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
   MoEPluginBase:
     :path: "../"
+  MoEPluginGeofence:
+    :path: "../"
+  MoEPluginInbox:
+    :path: "../"
+
+CHECKOUT OPTIONS:
+  MoEngage-iOS-SDK:
+    :commit: b45b2ed4c09179ee747f00b0f7f1e6c5f1d56820
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageCards:
+    :commit: b45b2ed4c09179ee747f00b0f7f1e6c5f1d56820
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageGeofence:
+    :commit: b45b2ed4c09179ee747f00b0f7f1e6c5f1d56820
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageInApp:
+    :commit: b45b2ed4c09179ee747f00b0f7f1e6c5f1d56820
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageInbox:
+    :commit: b45b2ed4c09179ee747f00b0f7f1e6c5f1d56820
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageRealTimeTrigger:
+    :commit: b45b2ed4c09179ee747f00b0f7f1e6c5f1d56820
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
+  MoEngageRichNotification:
+    :commit: b45b2ed4c09179ee747f00b0f7f1e6c5f1d56820
+    :git: https://github.com/moengage/MoEngage-iOS-Pods.git
 
 SPEC CHECKSUMS:
-  MoEngage-iOS-SDK: 7fb1978324f395fe105d4c9ccbdb455b843fea99
-  MoEngageInApp: 0713efdeb1123bac134db942f5588745c8c78c0c
-  MoEPluginBase: c92291af6077f7108712aeeb472ae5f2257fe716
-  MOGeofence: 63ac8906b7cdba22bc60747cbc85a2db89e161af
-  MORichNotification: e97f0d7462ee6c46796852e81b92c72706fe4105
+  MoEngage-iOS-SDK: 7fb6b375af08e6819055f74fe027c95253911453
+  MoEngageCards: 43d44c4bd24688cd2c0be8d123bf376801f2ace7
+  MoEngageGeofence: 652b649bd96f98e4e4646ef6a6dfabd7ca86b8b3
+  MoEngageInApp: 243a3eb0828c33c6edfed5b2de95ad7ff75f8e58
+  MoEngageInbox: f689a105327d4859b14a3792b152dc56c14793f2
+  MoEngageRealTimeTrigger: 474aaa1d797b9c4a6ec319b552853fd83040e9a6
+  MoEngageRichNotification: 4618f9c4d22f1d629239893e6b79eb1fe5d0e8f0
+  MoEPluginBase: bf3011468446f3dfcb7211510b9f68f2de06aea7
+  MoEPluginGeofence: fe6acf67264c6e4215d7398ef9faeb9c0f894816
+  MoEPluginInbox: f1a3139a052ad600df35e250392ab2f9cd0e4c4a
 
-PODFILE CHECKSUM: 4e3ec85d383e058c20214173c3246f08abd520b5
+PODFILE CHECKSUM: 415fda42975a8bc2abacadd5359d8472c02c5020
 
-COCOAPODS: 1.11.0
+COCOAPODS: 1.11.2

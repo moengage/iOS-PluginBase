@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name         = 'MoEPluginBase'
-    s.version      = '3.0.0'
+    s.name         = 'MoEPluginInbox'
+    s.version      = '1.0.0'
     s.summary      = 'MoEngage Plugin Base for Hybrid SDKs'
     s.description  = <<-DESC
     MoEngage is a mobile marketing automation company. This framework is used by our plugins built for different hybrid frameworks i.e, Flutter, Cordova, React Native etc.
@@ -16,12 +16,12 @@ Pod::Spec.new do |s|
     
     s.source       = {
                         :git => 'https://github.com/moengage/iOS-PluginBase.git',
-                        :tag => 'MoEPluginBase-' + s.version.to_s
+                        :tag => 'MoEPluginInbox-' + s.version.to_s
                     }
 
-    s.source_files = 'MoEPluginBase/**/*'
-    s.public_header_files = 'MoEPluginBase/**/*.h'
+    s.source_files = 'MoEPluginInbox/**/*'
+    s.public_header_files = 'MoEPluginInbox/**/*.h'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngage-iOS-SDK', '>= 8.0.0', '< 8.1.0'
-    s.dependency 'MoEngageInApp', '>= 3.0.0', '< 3.1.0'
+    s.dependency 'MoEPluginBase', '>= 3.0.0', '< 3.1.0'
+    s.dependency 'MoEngageInbox', '>= 1.0.0', '< 1.2.0'
 end
