@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
     s.public_header_files = 'MoEPluginInbox/**/*.h'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
     s.dependency 'MoEPluginBase', '>= 3.0.0', '< 3.1.0'
-    s.dependency 'MoEngageInbox', '>= 1.0.0', '< 1.2.0'
+    s.dependency 'MoEngageInbox', '>= 1.0.0', '< 1.1.0'
 end

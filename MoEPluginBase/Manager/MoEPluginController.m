@@ -38,16 +38,16 @@
     [self.messageHandler queueMessage:message];
 }
 
-- (void)initializeSDKWithConfig:(MOSDKConfig*)sdkConfig isSecondaryInstance:(BOOL)isSecondary andLaunchOptions:(NSDictionary*)launchOptions {
+- (void)initializeSDKWithConfig:(MOSDKConfig*)sdkConfig isDefaultInstance:(BOOL)isDefault andLaunchOptions:(NSDictionary*)launchOptions {
     self.isSDKInitialized = YES;
-    [self setupSDKWithLaunchOptions:sdkConfig isSecondaryInstance:isSecondary launchOptions:launchOptions];
+    [self setupSDKWithLaunchOptions:sdkConfig isDefaultInstance:isDefault launchOptions:launchOptions];
 }
 
 - (void)initializeDefaultSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions{
     
     [self handleSDKState:isSdkEnabled];
 
-    [self initializeSDKWithConfig:sdkConfig isSecondaryInstance:false andLaunchOptions:launchOptions];
+    [self initializeSDKWithConfig:sdkConfig isDefaultInstance:true andLaunchOptions:launchOptions];
 }
 
 - (void)handleSDKState:(BOOL)isSdkEnabled {
@@ -63,18 +63,18 @@
     
     [self handleSDKState:isSdkEnabled];
     
-    [self initializeSDKWithConfig:sdkConfig isSecondaryInstance:true andLaunchOptions:launchOptions];
+    [self initializeSDKWithConfig:sdkConfig isDefaultInstance:false andLaunchOptions:launchOptions];
 }
 
 
 //this will works as fallback method if Client does not call initializeSDKWithAppID:andLaunchOptions:
 - (void)pluginInitialized {
     if (!self.isSDKInitialized) {
-        [self setupSDKWithLaunchOptions:nil isSecondaryInstance:false launchOptions: nil];
+        [self setupSDKWithLaunchOptions:nil isDefaultInstance:false launchOptions: nil];
     }
 }
 
--(void)setupSDKWithLaunchOptions:(MOSDKConfig *)sdkConfig isSecondaryInstance:(BOOL)isSecondary launchOptions:(NSDictionary * _Nullable)launchOptions{
+-(void)setupSDKWithLaunchOptions:(MOSDKConfig *)sdkConfig isDefaultInstance:(BOOL)isDefault launchOptions:(NSDictionary * _Nullable)launchOptions{
     if (@available(iOS 10.0, *)) {
         if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
             [UNUserNotificationCenter currentNotificationCenter].delegate = self;
@@ -91,16 +91,17 @@
    
 
 #ifdef DEBUG
-    if (isSecondary) {
-        [[MoEngage sharedInstance] initializeTestInstanceWithConfig:sdkConfig andLaunchOptions:launchOptions];
-    } else {
+    if (isDefault) {
         [[MoEngage sharedInstance] initializeDefaultTestInstanceWithConfig:sdkConfig andLaunchOptions:launchOptions];
+    } else {
+        [[MoEngage sharedInstance] initializeTestInstanceWithConfig:sdkConfig andLaunchOptions:launchOptions];
     }
 #else
-    if (isSecondary) {
-        [[MoEngage sharedInstance] initializeLiveInstanceWithConfig:sdkConfig andLaunchOptions:launchOptions];
-    } else {
+    if (isDefault) {
         [[MoEngage sharedInstance] initializeDefaultLiveInstanceWithConfig: sdkConfig andLaunchOptions:launchOptions];
+    } else {
+        [[MoEngage sharedInstance] initializeLiveInstanceWithConfig:sdkConfig andLaunchOptions:launchOptions];
+
     }
 #endif
     
