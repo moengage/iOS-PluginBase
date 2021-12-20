@@ -146,7 +146,7 @@
     return [dict valueForKey: kDataDictKey];
 }
 
-+(NSString*)getAppID:(NSDictionary *)dict {
++(NSString* __nullable)getAppID:(NSDictionary *)dict {
     NSDictionary* accountMetaDict = [dict valueForKey:kAccountMetaKey];
     NSString* appID = [accountMetaDict valueForKey:kAppID];
     
@@ -156,14 +156,4 @@
     
     return appID;
 }
-
-+(NSString*)getAppIDFromNotificationPayload:(NSDictionary * _Nonnull)userInfo {
-    NSString* appID = [userInfo valueForKeyPath:@"moengage.app_id"];
-    if([appID hasSuffix:kDebugKey]) {
-        appID = [appID stringByReplacingOccurrencesOfString:kDebugKey
-                                                 withString:@""];
-    }
-    return appID;
-}
-
 @end

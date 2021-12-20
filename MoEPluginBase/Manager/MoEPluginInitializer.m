@@ -7,14 +7,8 @@
 //
 
 #import "MoEPluginInitializer.h"
-#import "MoEPluginConstants.h"
-#import "MoEPluginMessageQueueHandler.h"
-#import <MoEngage/MoEngage.h>
-#import <MoEngageInApps/MOInApp.h>
-#import "MOInAppCampaign+Utility.h"
 #import "MoEPluginCoordinator.h"
 #import "MoEPluginController.h"
-@import MoEngageMessaging;
 
 @interface MoEPluginInitializer()
 @end
@@ -35,14 +29,14 @@
 #pragma mark - Utility Method -
 
     
-- (void)initializeDefaultSDKWithConfig:(MOSDKConfig*)sdkConfig  withSDKState:(BOOL)sdkState andLaunchOptions:(NSDictionary*)launchOptions{
+- (void)initializeDefaultInstanceWithConfig:(MOSDKConfig*)sdkConfig  withSDKState:(BOOL)sdkState andLaunchOptions:(NSDictionary*)launchOptions{
         MoEPluginController *controller = [[MoEPluginCoordinator sharedInstance] getPluginController:sdkConfig.identifier];
         if (controller != nil) {
             [controller initializeDefaultSDKWithConfig:sdkConfig withSDKState:sdkState andLaunchOptions:launchOptions];
     }
 }
 
-- (void)initializeSDKWithConfig:(MOSDKConfig*)sdkConfig  withSDKState:(BOOL)sdkState andLaunchOptions:(NSDictionary*)launchOptions{
+- (void)initializeInstanceWithConfig:(MOSDKConfig*)sdkConfig  withSDKState:(BOOL)sdkState andLaunchOptions:(NSDictionary*)launchOptions{
         MoEPluginController *controller = [[MoEPluginCoordinator sharedInstance] getPluginController:sdkConfig.identifier];
         if (controller != nil) {
             [controller initializeSDKWithConfig:sdkConfig withSDKState:sdkState andLaunchOptions:launchOptions];

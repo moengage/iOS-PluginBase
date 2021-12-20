@@ -54,6 +54,9 @@
             NSDictionary* dict = @{
                 @"accountMeta": @{
                     @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                },
+                @"data": @{
+                    @"state": @1
                 }
             };
             [[MoEPluginBridge sharedInstance]enableLogs:dict];
@@ -139,6 +142,18 @@
             };
             [[MoEPluginBridge sharedInstance] setUserAttributeWithPayload:userAttrPayload1];
             
+             userAttrPayload1 = @{
+                @"accountMeta": @{
+                    @"appID":@""
+                },
+                @"data": @ {
+                    @"attributeName":@"USER_ATTRIBUTE_UNIQUE_ID",
+                    @"attributeValue":@"New Unique id",
+                    @"type":@"general"
+                }
+            };
+            [[MoEPluginBridge sharedInstance] setUserAttributeWithPayload:userAttrPayload1];
+            
             // 2. Custom Attribute
             NSDictionary* userAttrPayload2 = @{
                 @"accountMeta": @{
@@ -178,8 +193,8 @@
                     @"attributeName":@"location user attr",
                     @"type":@"location",
                     @"locationAttribute":@{
-                        @"latitude": @23.23,
-                        @"longitude": @43.34
+                        @"latitude": @20,
+                        @"longitude": @23
                     }
                 }
             };
@@ -206,10 +221,6 @@
             NSDictionary* dict = @{
                 @"accountMeta": @{
                     @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
-                },
-                @"data": @{
-                    @"appStatus": @"INSTALL"
-                    
                 }
             };
             [[MoEPluginBridge sharedInstance] showInApp: dict];
@@ -217,10 +228,6 @@
             dict = @{
                 @"accountMeta": @{
                     @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
-                },
-                @"data": @{
-                    @"appStatus": @"INSTALL"
-                    
                 }
             };
             [[MoEPluginBridge sharedInstance] showInApp: dict];
@@ -228,12 +235,12 @@
             break;
         }
         case 7:{
-            NSDictionary* aliasDict = @{
+            NSDictionary* dict = @{
                 @"accountMeta": @{
                     @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
             };
-            [[MoEPluginBridge sharedInstance] getSelfHandledInApp:aliasDict];
+            [[MoEPluginBridge sharedInstance] getSelfHandledInApp:dict];
             break;
         }
         case 8:{
@@ -299,13 +306,24 @@
             break;
         }
         case 14:{
-            NSDictionary* aliasDict = @{
+            NSDictionary* inboxDict = @{
                 @"accountMeta": @{
                     @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 }
             };
             
-            [[MoEInboxBridge sharedInstance] getInboxMessagesForAccount:aliasDict withCompletionBlock:^(NSDictionary *inboxMessages) {
+            [[MoEInboxBridge sharedInstance] getInboxMessagesForAccount:inboxDict withCompletionBlock:^(NSDictionary *inboxMessages) {
+                NSLog(@"inboxMessages %@", inboxMessages);
+            }];
+            
+            inboxDict = @{
+                @"accountMeta": @{
+                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                }
+            };
+            
+            
+            [[MoEInboxBridge sharedInstance] getInboxMessagesForAccount:inboxDict withCompletionBlock:^(NSDictionary *inboxMessages) {
                 NSLog(@"inboxMessages %@", inboxMessages);
             }];
         }
@@ -345,7 +363,6 @@
             };
             
             [[MoEPluginBridge sharedInstance] updateSDKState:enableSDKDict];
-            break;
             break;
         }
             

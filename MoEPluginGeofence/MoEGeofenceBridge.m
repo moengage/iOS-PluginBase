@@ -30,15 +30,10 @@
 
 - (void)startGeofenceMonitoring: (NSDictionary*)geofenceDict {
     NSString* appID = [MoEPluginUtils getAppID: geofenceDict];
-    
-    Class   geofenceClass   = nil;
-    id      geofence        = nil;
-    geofenceClass = NSClassFromString(@"MoEngageGeofence.MOGeofence");
-    if (geofenceClass != NULL){
-        geofence = [geofenceClass sharedInstance];
-        [geofence startGeofenceMonitoringForAppID:appID];
-    }else {
-        [MOLogger debug:@"MoEngageGeofence Framework unavailable" label:nil sdkConfig:nil];
+    if (appID.length <= 0) {
+        [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+        return;
     }
+    [[MOGeofence sharedInstance] startGeofenceMonitoringForAppID:appID];
 }
 @end

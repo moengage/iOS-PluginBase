@@ -6,12 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MoEPluginBase/MoEPluginBase.h>
-@import MoEngageMessaging;
-
-#if __has_include(<MoEngageInbox/MoEngageInbox-Swift.h>)
-    #import <MoEngageInbox/MoEngageInbox-Swift.h>
-#endif
+#import <MoEngageInbox/MoEngageInbox-Swift.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

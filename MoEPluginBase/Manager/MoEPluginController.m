@@ -15,7 +15,11 @@
 #import "MoEPluginMessageQueueHandler.h"
 #import "MoEngage/MoEngage.h"
 #import "MoEPluginCoordinator.h"
-@import MoEngageObjCUtils;
+#import <MoEngageObjCUtils/MoEngageObjCUtils.h>
+#import <MOEngageInApps/MOInApp.h>
+#import <MoEngageMessaging/MoEngageMessaging-Swift.h>
+#import "MOInAppSelfHandledCampaign+Utility.h"
+
 
 @interface MoEPluginController()<MOInAppNativDelegate, MOMessagingDelegate>
 @property(nonatomic, strong) MoEPluginMessageQueueHandler* messageHandler;
@@ -81,15 +85,12 @@
         }
     }
     
-    
     // Initialize SDK
     NSString* appID = sdkConfig.moeAppID;
     if (appID == nil) {
         NSAssert(NO, @"MoEngage - Configure the APP ID for your MoEngage App.To get the AppID login to your MoEngage account, after that go to Settings -> App Settings. You will find the App ID in this screen. And refer to docs.moengage.com for more info");
     }
     
-   
-
 #ifdef DEBUG
     if (isDefault) {
         [[MoEngage sharedInstance] initializeDefaultTestInstanceWithConfig:sdkConfig andLaunchOptions:launchOptions];
@@ -143,7 +144,7 @@
         @"payload": userInfo
     };
     
-    NSString * appID = [MoEPluginUtils getAppIDFromNotificationPayload:userInfo];
+    NSString * appID = [MOMessagingUtils getAppIDFromNotificationPayload:userInfo];
     
     MOAccountMeta* accountMeta = [[MOAccountMeta alloc] initWithInstanceID: appID];
     MoEPluginMessage* pushClick = [[MoEPluginMessage alloc] initWithMethodName:kEventNamePushReceived withInfoDict:payloadDict andAccountMeta: accountMeta];
@@ -172,7 +173,7 @@
             @"clickedAction" : clickedAction
         };
         
-        NSString * appID = [MoEPluginUtils getAppIDFromNotificationPayload:userInfo];
+        NSString * appID = [MOMessagingUtils getAppIDFromNotificationPayload:userInfo];
         
         MOAccountMeta* accountMeta = [[MOAccountMeta alloc] initWithInstanceID: appID];
         MoEPluginMessage* pushClick = [[MoEPluginMessage alloc] initWithMethodName:kEventNamePushClicked withInfoDict:payload andAccountMeta: accountMeta];
@@ -244,6 +245,286 @@
     }
 }
 
+#pragma mark- Set App status
+- (void)setAppStatus:(NSDictionary*)appStatusDict{
+    if([MoEPluginUtils isValidDictionary:appStatusDict]) {
+        
+        NSDictionary* dataDict = [MoEPluginUtils getDataDict:appStatusDict];
+        NSString *status = [[dataDict getStringForKey:@"appStatus"] uppercaseString];
+        
+        NSString* appID = [MoEPluginUtils getAppID:appStatusDict];
+        
+        if (appID.length <= 0) {
+            [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+            return;
+        }
+        
+        if ([status isEqualToString: @"INSTALL"]) {
+            [[MoEngage sharedInstance] appStatus:AppStatusInstall forAppID: appID];
+        } else if ([status isEqualToString: @"UPDATE"]) {
+            [[MoEngage sharedInstance] appStatus:AppStatusUpdate forAppID: appID];
+        }
+    }
+}
 
+#pragma mark- User Attribute Methods
+
+- (void)setUserAttributeWithPayload:(NSDictionary*)userAttributeDict{
+    if ([MoEPluginUtils isValidDictionary:userAttributeDict]) {
+        
+        NSString* appID = [MoEPluginUtils getAppID: userAttributeDict];
+      
+        if (appID.length <= 0) {
+            [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+            return;
+        }
+        
+        NSDictionary* userAttributeDataDict = [MoEPluginUtils getDataDict: userAttributeDict];
+        NSString *type = [[userAttributeDataDict getStringForKey:@"type"] lowercaseString];
+        NSString* attributeName = [userAttributeDataDict getStringForKey:@"attributeName"];
+        NSString *attributeValue = [userAttributeDataDict getStringForKey:@"attributeValue"];
+        
+        if ([MoEPluginUtils isValidString:attributeName]) {
+            if ([type isEqualToString:@"general"]) {
+                if ([MoEPluginUtils isValidString:attributeValue]) {
+                    [[MoEngage sharedInstance] setUserAttribute:attributeValue forKey:attributeName forAppID:appID];
+                }
+            } else if ([type isEqualToString:@"timestamp"]) {
+                if ([MoEPluginUtils isValidString:attributeValue]) {
+                    if (attributeValue) {
+                        NSDate *date = [MoEPluginUtils getDateForString:attributeValue];
+                        if (date) {
+                            [[MoEngage sharedInstance] setUserAttributeDate:date forKey:attributeName forAppID:appID];
+                        }
+                    }
+                }
+            } else if ([type isEqualToString:@"location"]) {
+                NSDictionary *dictLocation = [userAttributeDataDict objectForKey:@"locationAttribute"];
+                if ([MoEPluginUtils isValidDictionary:dictLocation]) {
+                    double latitude = [[dictLocation getStringForKey:@"latitude"] doubleValue];
+                    double longitude = [[dictLocation getStringForKey:@"longitude"] doubleValue];
+                    MOGeoLocation *location = [[MOGeoLocation alloc] initWithLatitude:latitude andLongitude:longitude];
+                    [[MoEngage sharedInstance] setUserAttributeLocation:location forKey:attributeName forAppID:appID];
+                }
+            } else {
+                NSLog(@"invlaid attribute type in MOReactBridge setUserAttribute");
+            }
+        }
+    }
+}
+
+- (void)setAlias:(NSDictionary*)aliasPayloadDict{
+    if ([MoEPluginUtils isValidDictionary:aliasPayloadDict]) {
+      
+        NSString* appID = [MoEPluginUtils getAppID:aliasPayloadDict];
+        if (appID.length <= 0) {
+            [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+            return;
+        }
+        
+        
+        NSDictionary* aliasDataDict = [MoEPluginUtils getDataDict: aliasPayloadDict];
+        NSString *alias = [aliasDataDict getStringForKey:@"alias"];
+        
+        if ([MoEPluginUtils isValidString:alias]) {
+            [[MoEngage sharedInstance] setAlias:alias forAppID:appID];
+        }
+    }
+}
+
+
+#pragma mark - trackEvent
+
+- (void)trackEventWithPayload:(NSDictionary*)eventPayloadDict{
+    if (eventPayloadDict) {
+        NSString* appID = [MoEPluginUtils getAppID:eventPayloadDict];
+        if (appID.length <= 0) {
+            [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+            return;
+        }
+        
+        
+        NSDictionary* eventDataDict = [MoEPluginUtils getDataDict: eventPayloadDict];
+        NSString *eventName = [eventDataDict getStringForKey:kTrackEventName];
+        NSDictionary* attrDict = [eventDataDict validObjectForKey:kEventAttributes];
+        
+        if ([MoEPluginUtils isValidString:eventName] && [MoEPluginUtils isValidDictionary:attrDict]) {
+            NSMutableDictionary *eventAttributes = [attrDict mutableCopy];
+            id isNonInteractive = [eventDataDict validObjectForKey:kIsNonInteractive];
+            if (isNonInteractive) {
+                [eventAttributes setValue:isNonInteractive forKey:kIsNonInteractive];
+            }
+            
+            MOProperties *properties = [[MOProperties alloc] initWithAttributes:eventAttributes];
+            [[MoEngage sharedInstance] trackEvent:eventName withProperties:properties forAppID:appID];
+        }
+    }
+}
+
+#pragma mark- Push Notifications
+
+- (void)registerForPush{
+    if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
+        MOSDKConfig* sdkConfig = [[MoEngage sharedInstance] getDefaultSDKConfiguration];
+        MoEPluginController* controller = [[MoEPluginCoordinator sharedInstance] getPluginController:sdkConfig.moeAppID];
+        if (controller != nil) {
+           [UNUserNotificationCenter currentNotificationCenter].delegate = controller;
+        }
+    }
+    [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
+}
+
+#pragma mark- inApp Methods
+#pragma mark Show InApp
+
+- (void)showInApp: (NSDictionary*) inAppDict{
+    NSString* appID = [MoEPluginUtils getAppID:inAppDict];
+    if (appID.length <= 0) {
+        [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+        return;
+    }
+    
+    [[MOInApp sharedInstance] showInAppCampaignForAppID:appID];
+}
+
+#pragma mark InApp Contexts
+
+- (void)setInAppContexts:(NSDictionary*)contextsPayloadDict{
+    if ([MoEPluginUtils isValidDictionary:contextsPayloadDict]) {
+        NSString* appID = [MoEPluginUtils getAppID:contextsPayloadDict];
+        if (appID.length <= 0) {
+            [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+            return;
+        }
+        
+        
+        NSDictionary* inAppContextDataDict = [MoEPluginUtils getDataDict: contextsPayloadDict];
+        NSArray *contexts = [inAppContextDataDict objectForKey:@"contexts"];
+        if ([MoEPluginUtils isValidArray: contexts]) {
+            [[MOInApp sharedInstance] setCurrentInAppContexts:contexts forAppID:appID];
+        }
+    }
+}
+
+
+-(void)invalidateInAppContexts: (NSDictionary*)contextDict {
+    NSString* appID = [MoEPluginUtils getAppID:contextDict];
+    if (appID.length <= 0) {
+        [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+        return;
+    }
+    
+    [[MOInApp sharedInstance] invalidateInAppContextsForAppID:appID];
+}
+
+#pragma mark Self handled In App
+
+- (void)getSelfHandledInApp: (NSDictionary*)inAppDict{
+    NSString* appID = [MoEPluginUtils getAppID: inAppDict];
+    if (appID.length <= 0) {
+        [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+        return;
+    }
+    
+    [MoEPluginUtils dispatchOnMainQueue:^{
+        [[MOInApp sharedInstance] getSelfHandledInAppForAppID:appID withCompletionBlock:^(MOInAppSelfHandledCampaign * _Nullable campaignInfo, MOAccountMeta * _Nullable accountMeta) {
+            if (campaignInfo) {
+                MoEPluginMessage* selfHandle = [[MoEPluginMessage alloc] initWithMethodName: kEventNameInAppSelfHandledCampaign withInfoDict:campaignInfo.dictionaryRepresentation andAccountMeta:accountMeta];
+
+                MoEPluginController *controller = [[MoEPluginCoordinator sharedInstance] getPluginController:appID];
+                [controller queueMessage:selfHandle];
+            }
+        }];
+    }];
+}
+
+- (void)updateSelfHandledInAppStatusWithPayload:(NSDictionary*)selfHandledCampaignDict{
+    NSString* appID = [MoEPluginUtils getAppID: selfHandledCampaignDict];
+    if (appID.length <= 0) {
+        [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+        return;
+    }
+    
+    
+    NSDictionary* selfHandledCampaignDataDict = [MoEPluginUtils getDataDict: selfHandledCampaignDict];
+    NSString* updateType = [selfHandledCampaignDataDict validObjectForKey:@"type"];
+    MOInAppSelfHandledCampaign *info = [[MOInAppSelfHandledCampaign alloc] initWithCampaignInfoDictionary:selfHandledCampaignDict];
+    if (updateType && info) {
+        if ([updateType isEqualToString:@"impression"]) {
+            [[MOInApp sharedInstance] selfHandledShownWithCampaignInfo:info forAppID:appID];
+        }
+        else if ([updateType isEqualToString:@"dismissed"]){
+            [[MOInApp sharedInstance] selfHandledDismissedWithCampaignInfo:info forAppID: appID];
+        }
+        else if ([updateType isEqualToString:@"click"]) {
+            [[MOInApp sharedInstance] selfHandledClickedWithCampaignInfo:info forAppID:appID];
+        }
+        else if ([updateType isEqualToString:@"primary_clicked"]) {
+            [[MOInApp sharedInstance] selfHandledPrimaryClickedWithCampaignInfo:info forAppID:appID];
+        }
+    }
+}
+
+#pragma mark- Enable SDK Logs
+
+- (void)enableLogs:(NSDictionary *)logsDict {
+    NSString* appID = [MoEPluginUtils getAppID:logsDict];
+    if (appID.length <= 0) {
+        [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+        return;
+    }
+    
+    NSDictionary* dataDict = [MoEPluginUtils getDataDict:logsDict];
+    BOOL state = [dataDict getBooleanForKey:@"state"];
+    
+    [MoEngage enableSDKLogs: state forAppID:appID];
+}
+
+#pragma mark- Reset User
+
+- (void)resetUser: (NSDictionary*)userDict{
+    NSString* appID = [MoEPluginUtils getAppID: userDict];
+    if (appID.length <= 0) {
+        [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+        return;
+    }
+    
+    [[MoEngage sharedInstance] resetUserForAppID: appID];
+}
+
+#pragma mark- Opt out Tracking
+- (void)optOutTracking:(NSDictionary *)dictTracking {
+    if ([MoEPluginUtils isValidDictionary:dictTracking]) {
+        
+        NSDictionary* dataDict = [MoEPluginUtils getDataDict: dictTracking];
+        NSString* appID = [MoEPluginUtils getAppID:dictTracking];
+        BOOL state = [dataDict getBooleanForKey:@"state"];
+        
+        if (!state) {
+            [[MoEngage sharedInstance] enableDataTrackingForAppID:appID];
+        } else  {
+            [[MoEngage sharedInstance] disableDataTrackingForAppID:appID];
+        }
+    }
+}
+
+- (void)updateSDKState:(NSDictionary*)stateInfoDict{
+    if ([MoEPluginUtils isValidDictionary:stateInfoDict]) {
+        NSString* appID = [MoEPluginUtils getAppID: stateInfoDict];
+        if (appID.length <= 0) {
+            [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+            return;
+        }
+        
+        NSDictionary* dataDict = [MoEPluginUtils getDataDict: stateInfoDict];
+        BOOL state = [dataDict getBooleanForKey:@"isSdkEnabled"];
+        if (state) {
+            [[MoEngage sharedInstance] enableSDKForAppID:appID];
+        }
+        else{
+            [[MoEngage sharedInstance] disableSDKForAppID:appID];
+        }
+    }
+}
 
 @end

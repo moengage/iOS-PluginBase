@@ -9,7 +9,8 @@
 #import "MoEPluginCoordinator.h"
 #import "MoEPluginController.h"
 #import "MoEngage/MoEngage.h"
-@import MoEngageObjCUtils;
+#import <MoEngageObjCUtils/MoEngageObjCUtils.h>
+
 @interface MoEPluginCoordinator()
 @property(strong, nonatomic) NSMutableDictionary* pluginDictionary;
 @end
@@ -37,6 +38,9 @@
 
 
 -(MoEPluginController* _Nullable)getPluginController:(NSString*)appID{
+    if (appID.length <= 0) {
+        return nil;
+    }
     
     MoEPluginController* controller = [self.pluginDictionary valueForKey:appID];
     if (controller != nil) {

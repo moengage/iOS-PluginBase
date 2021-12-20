@@ -6,10 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#if __has_include(<MoEngageGeofence/MoEngageGeofence-Swift.h>)
-    #import <MoEngageGeofence/MoEngageGeofence-Swift.h>
-#endif
+#import <MoEngageGeofence/MoEngageGeofence-Swift.h>
 
 
 @interface MoEGeofenceBridge : NSObject

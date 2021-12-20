@@ -23,12 +23,12 @@
     //Set default instance
     NSString* yourMoEngageAppID = @"NBZ7V0U8Y3KODMQL3ZDEI4FM";
     MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
-    [[MoEPluginInitializer sharedInstance] initializeDefaultSDKWithConfig:sdkConfig withSDKState:true andLaunchOptions:launchOptions];
+    [[MoEPluginInitializer sharedInstance] initializeDefaultInstanceWithConfig:sdkConfig withSDKState:true andLaunchOptions:launchOptions];
 
     //Set Secondary Instance
     NSString* yourMoEngageAppID2 = @"DAO6UGZ73D9RTK8B5W96TPYN";
     MOSDKConfig *sdkConfig2 = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID2];
-    [[MoEPluginInitializer sharedInstance] initializeSDKWithConfig:sdkConfig2 withSDKState:true andLaunchOptions:launchOptions];
+    [[MoEPluginInitializer sharedInstance] initializeInstanceWithConfig:sdkConfig2 withSDKState:true andLaunchOptions:launchOptions];
 
     [MoEPluginBridge sharedInstance].bridgeDelegate = self;
     return YES;
