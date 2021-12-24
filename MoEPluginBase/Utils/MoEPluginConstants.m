@@ -68,7 +68,7 @@ NSString* const kIsNonInteractive       = @"isNonInteractive";
 
 NSString* const kDataDictKey      = @"data";
 NSString* const kAccountMetaKey   = @"accountMeta";
-NSString* const kAppID            = @"appID";
+NSString* const kAppID            = @"appId";
 NSString* const kPlatform         = @"platform";
 NSString* const kiOS              = @"ios";
 

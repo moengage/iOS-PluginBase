@@ -46,14 +46,14 @@
         case 0:{
             NSDictionary* appstatusDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 }
             };
             [[MoEPluginBridge sharedInstance] pluginInitialized: appstatusDict];
             
             NSDictionary* dict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @{
                     @"state": @1
@@ -63,7 +63,7 @@
             
             appstatusDict = @{
                @"accountMeta": @{
-                   @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                   @"appId":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
                }
            };
            [[MoEPluginBridge sharedInstance] pluginInitialized:appstatusDict];
@@ -73,7 +73,7 @@
         case 1:{
             NSDictionary* appstatusDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @{
                     @"appStatus": @"INSTALL"
@@ -84,7 +84,7 @@
 
              appstatusDict = @{
                 @"accountMeta": @{
-                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                    @"appId":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
                 },
                 @"data": @{
                     @"appStatus": @"UPDATE"
@@ -101,7 +101,7 @@
             NSString* timeAttr = [dateFormatter stringFromDate:[NSDate date]];
             NSDictionary* trackEventDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @ {
                 @"eventName": @"Product Purchased",
@@ -132,7 +132,7 @@
             // 1. Unique ID Attribute
             NSDictionary* userAttrPayload1 = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @ {
                     @"attributeName":@"USER_ATTRIBUTE_UNIQUE_ID",
@@ -144,7 +144,7 @@
             
              userAttrPayload1 = @{
                 @"accountMeta": @{
-                    @"appID":@""
+                    @"appId":@""
                 },
                 @"data": @ {
                     @"attributeName":@"USER_ATTRIBUTE_UNIQUE_ID",
@@ -157,7 +157,7 @@
             // 2. Custom Attribute
             NSDictionary* userAttrPayload2 = @{
                 @"accountMeta": @{
-                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                    @"appId":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
                 },
                 @"data": @ {
                     @"attributeName":@"Attr 1",
@@ -173,7 +173,7 @@
             NSString* timeAttr = [dateFormatter stringFromDate:[NSDate date]];
             NSDictionary* userAttrPayload3 = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @ {
                     
@@ -187,7 +187,7 @@
             // 4. Location Attribute
             NSDictionary* userAttrPayload4 = @{
                 @"accountMeta": @{
-                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                    @"appId":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
                 },
                 @"data": @ {
                     @"attributeName":@"location user attr",
@@ -204,7 +204,7 @@
         case 4:{
             NSDictionary* aliasDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @ {
                     @"alias": @"alias ID"
@@ -220,14 +220,14 @@
         case 6:{
             NSDictionary* dict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 }
             };
             [[MoEPluginBridge sharedInstance] showInApp: dict];
             
             dict = @{
                 @"accountMeta": @{
-                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                    @"appId":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
                 }
             };
             [[MoEPluginBridge sharedInstance] showInApp: dict];
@@ -237,7 +237,7 @@
         case 7:{
             NSDictionary* dict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
             };
             [[MoEPluginBridge sharedInstance] getSelfHandledInApp:dict];
@@ -246,7 +246,7 @@
         case 8:{
             NSDictionary* contextDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data":@ {
                     @"contexts": @[@"Home", @"Settings"]
@@ -259,7 +259,7 @@
         case 9:{
             NSDictionary* aliasDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 }
             };
             [[MoEPluginBridge sharedInstance] invalidateInAppContexts: aliasDict];
@@ -268,7 +268,7 @@
         case 10:{
             NSDictionary* aliasDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 }
             };
             [[MoEPluginBridge sharedInstance] resetUser: aliasDict];
@@ -277,7 +277,7 @@
         case 11:{
             NSDictionary* optOutDataDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @ {
                     @"type": @"data",
@@ -290,7 +290,7 @@
         case 12:{
             NSDictionary* optOutDataDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @ {
                     @"type": @"data",
@@ -308,7 +308,7 @@
         case 14:{
             NSDictionary* inboxDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 }
             };
             
@@ -318,7 +318,7 @@
             
             inboxDict = @{
                 @"accountMeta": @{
-                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                    @"appId":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
                 }
             };
             
@@ -331,7 +331,7 @@
         case 15:{
             NSDictionary* aliasDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 }
             };
             [[MoEInboxBridge sharedInstance] getUnreadMessageCount:aliasDict completionBlock:^(NSDictionary *inboxDataDict) {
@@ -342,7 +342,7 @@
         case 16:{
             NSDictionary* enableSDKDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @{
                     @"isSdkEnabled": @1
@@ -355,7 +355,7 @@
         case 17:{
             NSDictionary* enableSDKDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @{
                     @"isSdkEnabled": @0
@@ -369,7 +369,7 @@
         case 18:{
             NSDictionary* enableLogsDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 },
                 @"data": @{
                     @"state": @1
@@ -380,7 +380,7 @@
             
             enableLogsDict = @{
                 @"accountMeta": @{
-                    @"appID":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
+                    @"appId":@"NBZ7V0U8Y3KODMQL3ZDEI4FM"
                 },
                 @"data": @{
                     @"state": @1
@@ -395,7 +395,7 @@
         case 19:{
             NSDictionary* aliasDict = @{
                 @"accountMeta": @{
-                    @"appID":@"DAO6UGZ73D9RTK8B5W96TPYN"
+                    @"appId":@"DAO6UGZ73D9RTK8B5W96TPYN"
                 }
             };
             
