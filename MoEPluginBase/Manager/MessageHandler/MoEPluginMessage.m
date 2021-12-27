@@ -13,18 +13,18 @@
 
 @implementation MoEPluginMessage
 
--(instancetype)initWithMethodName:(NSString*)methodName withInfoDict:(NSDictionary*)infoDict andAccountMeta:(MOAccountMeta*) accountMeta {
+- (instancetype)initWithMethodName:(NSString*)methodName withInfoDict:(NSDictionary*)infoDict andAccountMeta:(MOAccountMeta*)accountMeta {
     self = [super init];
     if (self) {
         self.msgMethodName = methodName;
         self.msgInfoDict = [NSMutableDictionary dictionary];
-      
+        
         NSMutableDictionary* dataDict = [NSMutableDictionary dictionary];
         dataDict[kPlatform] = kiOS;
         if (infoDict) {
             [dataDict addEntriesFromDictionary:infoDict];
         }
-
+        
         
         [self.msgInfoDict setValue:dataDict forKey:kDataDictKey];
         if (accountMeta.appID != nil ) {

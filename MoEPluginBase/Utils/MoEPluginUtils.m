@@ -12,7 +12,7 @@
 
 @implementation MoEPluginUtils
 
-+(BOOL)isSDKProxyEnabled{
++ (BOOL)isSDKProxyEnabled{
     // AppDelegate in core SDK is from version 5.0.0
     if (![self isSDKVersionGreaterThan5]) {
         return false;
@@ -28,7 +28,7 @@
     }
 }
 
-+(BOOL)isSDKVersionGreaterThan5{
++ (BOOL)isSDKVersionGreaterThan5{
     NSDictionary *infoDictionary = [[NSBundle bundleForClass:[MoEngage class]] infoDictionary];
     NSString *sdk_version_str = [infoDictionary valueForKey:@"CFBundleShortVersionString"];
     if(sdk_version_str != nil){
@@ -44,7 +44,7 @@
 }
 
 // Check if version >= Min Version && version < Max Version
-+(BOOL)isCurrentSDKVersionValid {
++ (BOOL)isCurrentSDKVersionValid {
     NSDictionary *infoDictionary = [[NSBundle bundleForClass:[MoEngage class]] infoDictionary];
     NSString *sdkVersionStr = [infoDictionary valueForKey:@"CFBundleShortVersionString"];
     if(sdkVersionStr != nil){
@@ -64,7 +64,7 @@
 }
 
 
-+(long)getNumberRepresentationForVersion:(NSString*)versionStr{
++ (long)getNumberRepresentationForVersion:(NSString*)versionStr{
     // Version format: Major.Minor.Patch
     // eg: 99.99.999
     // Number representation  = major * 100000 + minor * 1000 + patch
@@ -88,7 +88,7 @@
     return versionNumRep;
 }
 
-+(NSDate * __nullable)getDateForString:(NSString *)strDate {
++ (NSDate * __nullable)getDateForString:(NSString *)strDate {
     if (strDate == NULL || strDate.length == 0) {
         return NULL;
     }
@@ -133,7 +133,7 @@
     }
 }
 
-+(NSString *)jsonStringFromDict:(NSDictionary *)dict {
++ (NSString *)jsonStringFromDict:(NSDictionary *)dict {
     NSError *err;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
     if(err != nil) {
@@ -142,11 +142,11 @@
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
-+(NSDictionary*)getDataDict:(NSDictionary *)dict {
++ (NSDictionary*)getDataDict:(NSDictionary *)dict {
     return [dict valueForKey: kDataDictKey];
 }
 
-+(NSString* __nullable)getAppID:(NSDictionary *)dict {
++ (NSString* __nullable)getAppID:(NSDictionary *)dict {
     NSDictionary* accountMetaDict = [dict valueForKey:kAccountMetaKey];
     NSString* appID = [accountMetaDict valueForKey:kAppID];
     

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSMutableDictionary* msgInfoDict;
 @property(nonatomic, assign) BOOL dontQueue;
 
--(instancetype)initWithMethodName:(NSString*)methodName withInfoDict:(NSDictionary*)infoDict andAccountMeta:(MOAccountMeta* _Nullable) accountMeta;
+- (instancetype)initWithMethodName:(NSString*)methodName withInfoDict:(NSDictionary*)infoDict andAccountMeta:(MOAccountMeta* _Nullable)accountMeta;
 
 @end
 

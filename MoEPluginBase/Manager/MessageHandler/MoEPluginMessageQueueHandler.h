@@ -15,8 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign) BOOL isSDKInitialized;
 
--(void)queueMessage:(MoEPluginMessage*)message;
--(void)flushMessageQueue;
+- (void)queueMessage:(MoEPluginMessage*)message;
+- (void)flushMessageQueue;
+
 @end
 
 NS_ASSUME_NONNULL_END

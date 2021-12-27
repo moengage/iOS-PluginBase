@@ -11,7 +11,7 @@
 @interface MoEInboxCoordinator : NSObject
 
 #pragma mark - Shared instance
-+(instancetype _Nonnull)sharedInstance;
--(MoEInboxController* _Nullable)getInboxPluginController:(NSString*_Nullable)appID;
++ (instancetype _Nonnull)sharedInstance;
+- (MoEInboxController* _Nullable)getInboxPluginController:(NSString*_Nullable)appID;
 @end
 

@@ -14,25 +14,23 @@
 
 -(instancetype)init;
 
-- (void)initializeDefaultSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
-- (void)initializeSDKWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
-- (void) flushMessageQueue;
+- (void)initializeDefaultInstanceWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
+- (void)initializeInstanceWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)isSdkEnabled andLaunchOptions:(NSDictionary*)launchOptions;
+- (void)flushMessageQueue;
 - (void)queueMessage:(MoEPluginMessage*)message;
 - (void)pluginInitialized;
-
 
 - (void)setAppStatus:(NSDictionary*)appStatusDict;
 - (void)setAlias:(NSDictionary*)aliasPayloadDict;
 - (void)setUserAttributeWithPayload:(NSDictionary*)userAttributeDict;
 - (void)trackEventWithPayload:(NSDictionary*)eventPayloadDict;
 
-- (void)showInApp: (NSDictionary*)inAppDict;
+- (void)showInApp:(NSDictionary*)inAppDict;
 - (void)setInAppContexts:(NSDictionary*)contextsPayload;
 - (void)invalidateInAppContexts: (NSDictionary*)contextDict;
 
 - (void)getSelfHandledInApp:(NSDictionary*)inAppDict;
 - (void)updateSelfHandledInAppStatusWithPayload:(NSDictionary*)selfHandledCampaignDict;
-
 
 - (void)enableLogs:(NSDictionary*)logsDict;
 - (void)resetUser: (NSDictionary*)userDict;

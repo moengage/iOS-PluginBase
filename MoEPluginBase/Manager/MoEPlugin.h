@@ -1,5 +1,5 @@
 //
-//  MoEPluginInitializer.h
+//  MoEPlugin.h
 //  MoEPluginBase
 //
 //  Created by Chengappa C D on 14/02/20.
@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MoEPluginInitializer : NSObject
+@interface MoEPlugin : NSObject
 
 + (instancetype)sharedInstance;
 - (void)initializeDefaultInstanceWithConfig:(MOSDKConfig*)sdkConfig withSDKState:(BOOL)sdkState andLaunchOptions:(NSDictionary*)launchOptions;

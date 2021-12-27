@@ -11,7 +11,7 @@
 #import "MoEPluginUtils.h"
 #import "MoEPluginBridge.h"
 #import "MoEPluginConstants.h"
-#import "MoEPluginInitializer.h"
+#import "MoEPlugin.h"
 
 @interface MoEPluginBridge()
 
@@ -21,7 +21,7 @@
 
 #pragma mark- Initialization
 
-+(instancetype)sharedInstance{
++ (instancetype)sharedInstance{
     static dispatch_once_t onceToken;
     static MoEPluginBridge *instance;
     dispatch_once(&onceToken, ^{
@@ -38,7 +38,7 @@
     return self;
 }
 
-- (void)pluginInitialized: (NSDictionary*)dict{
+- (void)pluginInitialized:(NSDictionary*)dict{
     NSString* appID = [MoEPluginUtils getAppID:dict];
     MoEPluginController *controller = [[MoEPluginCoordinator sharedInstance] getPluginController:appID];
     if (!controller.isSDKInitialized || appID.length <= 0) {
@@ -49,7 +49,7 @@
 }
 
 
--(MoEPluginController* __nullable) getPluginController:(NSDictionary*)dict {
+- (MoEPluginController* __nullable)getPluginController:(NSDictionary*)dict {
     NSString* appID = [MoEPluginUtils getAppID:dict];
     MoEPluginController* controller = [[MoEPluginCoordinator sharedInstance] getPluginController:appID];
     return  controller;
@@ -60,7 +60,7 @@
 - (void)setAppStatus:(NSDictionary*)appStatusDict{
     MoEPluginController* controller = [self getPluginController:appStatusDict];
     if (controller != nil) {
-       [controller setAppStatus:appStatusDict];
+        [controller setAppStatus:appStatusDict];
     }
 }
 
@@ -94,20 +94,12 @@
 #pragma mark- Push Notifications
 
 - (void)registerForPush{
-    if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
-        MOSDKConfig* sdkConfig = [[MoEngage sharedInstance] getDefaultSDKConfiguration];
-        MoEPluginController* controller = [[MoEPluginCoordinator sharedInstance] getPluginController:sdkConfig.moeAppID];
-        if (controller != nil) {
-           [UNUserNotificationCenter currentNotificationCenter].delegate = controller;
-        }
-    }
     [[MoEngage sharedInstance] registerForRemoteNotificationWithCategories:nil withUserNotificationCenterDelegate:[UNUserNotificationCenter currentNotificationCenter].delegate];
 }
 
-#pragma mark- inApp Methods
 #pragma mark Show InApp
 
-- (void)showInApp: (NSDictionary*) inAppDict{
+- (void)showInApp:(NSDictionary*)inAppDict{
     MoEPluginController* controller = [self getPluginController:inAppDict];
     if (controller != nil) {
         [controller showInApp:inAppDict];
@@ -123,8 +115,7 @@
     }
 }
 
-
--(void)invalidateInAppContexts: (NSDictionary*)contextDict {
+- (void)invalidateInAppContexts:(NSDictionary*)contextDict {
     MoEPluginController* controller = [self getPluginController:contextDict];
     if (controller != nil) {
         [controller invalidateInAppContexts:contextDict];
@@ -133,7 +124,7 @@
 
 #pragma mark Self handled In App
 
-- (void)getSelfHandledInApp: (NSDictionary*)inAppDict{
+- (void)getSelfHandledInApp:(NSDictionary*)inAppDict{
     MoEPluginController* controller = [self getPluginController:inAppDict];
     if (controller != nil) {
         [controller getSelfHandledInApp:inAppDict];
@@ -158,7 +149,7 @@
 
 #pragma mark- Reset User
 
-- (void)resetUser: (NSDictionary*)userDict{
+- (void)resetUser:(NSDictionary*)userDict{
     MoEPluginController* controller = [self getPluginController:userDict];
     if (controller != nil) {
         [controller resetUser:userDict];
@@ -175,7 +166,7 @@
 
 #pragma mark- Validate App version
 
--(BOOL)isValidNativeDependencyIntegrated{
+- (BOOL)isValidNativeDependencyIntegrated{
     if ([MoEPluginUtils isCurrentSDKVersionValid]) {
         NSLog(@"MoEngage: Bridge - Valid SDK version integrated.✅");
         return true;

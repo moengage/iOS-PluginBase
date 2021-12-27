@@ -28,10 +28,10 @@
     return self;
 }
 
-- (void)startGeofenceMonitoring: (NSDictionary*)geofenceDict {
+- (void)startGeofenceMonitoring:(NSDictionary*)geofenceDict {
     NSString* appID = [MoEPluginUtils getAppID: geofenceDict];
-    if (appID.length <= 0) {
-        [MOLogger debug:@"AppID is not available" label:nil sdkConfig:nil];
+    if (appID == nil || appID.length <= 0) {
+        [MOLogger debug:@"AppID is not available" label:kLoggerPluginBase sdkConfig:nil];
         return;
     }
     [[MOGeofence sharedInstance] startGeofenceMonitoringForAppID:appID];

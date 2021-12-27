@@ -10,11 +10,11 @@
 
 @interface MoEInboxBridge : NSObject
 
-+(instancetype)sharedInstance;
++ (instancetype)sharedInstance;
 
--(void)getInboxMessagesForAccount:(NSDictionary*)inboxDict withCompletionBlock: (void(^) (NSDictionary* inboxMessages))completionBlock;
--(void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo;
--(void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo;
--(void)getUnreadMessageCount:(NSDictionary*)inboxDict completionBlock:(void(^) (NSDictionary* inboxDataDict))completionBlock;
+- (void)getInboxMessagesForAccount:(NSDictionary*)inboxDict withCompletionBlock: (void(^) (NSDictionary* inboxMessages))completionBlock;
+- (void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo;
+- (void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo;
+- (void)getUnreadMessageCount:(NSDictionary*)inboxDict completionBlock:(void(^) (NSDictionary* inboxDataDict))completionBlock;
 
 @end

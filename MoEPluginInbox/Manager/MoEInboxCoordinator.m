@@ -10,13 +10,11 @@
 #import "MoEInboxController.h"
 
 @interface MoEInboxCoordinator()
-@property(strong, nonatomic) NSMutableDictionary* inboxDictionary;
+@property(strong, nonatomic) NSMutableDictionary* inboxControllersDict;
 @end
 
 @implementation MoEInboxCoordinator
-
-
-+(instancetype)sharedInstance{
++ (instancetype)sharedInstance{
     static dispatch_once_t onceToken;
     static MoEInboxCoordinator *instance;
     dispatch_once(&onceToken, ^{
@@ -25,25 +23,27 @@
     return instance;
 }
 
--(instancetype)init{
+- (instancetype)init{
     self = [super init];
     if (self != nil) {
-        self.inboxDictionary = [NSMutableDictionary dictionary];
+        self.inboxControllersDict = [NSMutableDictionary dictionary];
 
     }
     return self;
 }
 
 
--(MoEInboxController* _Nullable)getInboxPluginController:(NSString*)appID{
+- (MoEInboxController* _Nullable)getInboxPluginController:(NSString*)appID{
+    if (appID == nil || appID.length <= 0) {
+        return nil;
+    }
     
-    MoEInboxController* controller = [self.inboxDictionary valueForKey:appID];
+    MoEInboxController* controller = [self.inboxControllersDict valueForKey:appID];
     if (controller != nil) {
         return controller;
-    }
-    else{
+    } else {
         MoEInboxController* controller = [[MoEInboxController alloc] init];
-        self.inboxDictionary[appID] = controller;
+        self.inboxControllersDict[appID] = controller;
         return controller;
     }
     return nil;

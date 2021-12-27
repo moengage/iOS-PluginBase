@@ -13,7 +13,7 @@
 
 @implementation MoEInboxBridge
 
-+(instancetype)sharedInstance{
++ (instancetype)sharedInstance{
     static dispatch_once_t onceToken;
     static MoEInboxBridge* instance;
     dispatch_once(&onceToken, ^{
@@ -32,31 +32,31 @@
 
 #pragma mark- Inbox Methods
 
--(void)getInboxMessagesForAccount:(NSDictionary*)inboxDict withCompletionBlock: (void(^) (NSDictionary* inboxMessages))completionBlock{
+- (void)getInboxMessagesForAccount:(NSDictionary*)inboxDict withCompletionBlock: (void(^) (NSDictionary* inboxMessages))completionBlock{
     MoEInboxController *controller = [self getInboxController:inboxDict];
     [controller getInboxMessagesForAccount:inboxDict withCompletionBlock:^(NSDictionary *inboxMessages) {
         completionBlock(inboxMessages);
     }];
 }
 
--(void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo{
+- (void)trackInboxClickForCampaign:(NSDictionary*)campaignInfo{
     MoEInboxController *controller = [self getInboxController:campaignInfo];
     [controller trackInboxClickForCampaign:campaignInfo];
 }
 
--(void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo{
+- (void)deleteInboxEntryForCampaign:(NSDictionary*)campaignInfo{
     MoEInboxController *controller = [self getInboxController:campaignInfo];
     [controller deleteInboxEntryForCampaign:campaignInfo];
 }
 
--(void)getUnreadMessageCount:(NSDictionary*)inboxDict completionBlock:(void(^) (NSDictionary* inboxDataDict))completionBlock{
+- (void)getUnreadMessageCount:(NSDictionary*)inboxDict completionBlock:(void(^) (NSDictionary* inboxDataDict))completionBlock{
     MoEInboxController *controller = [self getInboxController:inboxDict];
     [controller getUnreadMessageCount:inboxDict completionBlock:^(NSDictionary *inboxDataDict) {
         completionBlock(inboxDataDict);
     }];
 }
 
--(MoEInboxController*) getInboxController:(NSDictionary*)inboxDict {
+- (MoEInboxController*) getInboxController:(NSDictionary*)inboxDict {
     NSString* appID = [MoEPluginUtils getAppID:inboxDict];
     MoEInboxController *controller = [[MoEInboxCoordinator sharedInstance] getInboxPluginController:appID];
     return  controller;

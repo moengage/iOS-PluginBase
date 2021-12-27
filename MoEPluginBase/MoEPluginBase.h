@@ -14,7 +14,7 @@
 #import <MoEPluginBase/MOInAppSelfHandledCampaign+Utility.h>
 #import <MoEPluginBase/MoEPluginBridge.h>
 #import <MoEPluginBase/MoEPluginConstants.h>
-#import <MoEPluginBase/MoEPluginInitializer.h>
+#import <MoEPluginBase/MoEPlugin.h>
 #import <MoEPluginBase/MoEPluginMessage.h>
 #import <MoEPluginBase/MoEPluginMessageQueueHandler.h>
 #import <MoEPluginBase/MoEPluginUtils.h>

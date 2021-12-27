@@ -12,13 +12,13 @@
 #import <MoEngageObjCUtils/MoEngageObjCUtils.h>
 
 @interface MoEPluginCoordinator()
-@property(strong, nonatomic) NSMutableDictionary* pluginDictionary;
+@property(strong, nonatomic) NSMutableDictionary* pluginControllersDict;
 @end
 
 @implementation MoEPluginCoordinator
 
 
-+(instancetype)sharedInstance{
++ (instancetype)sharedInstance{
     static dispatch_once_t onceToken;
     static MoEPluginCoordinator *instance;
     dispatch_once(&onceToken, ^{
@@ -27,31 +27,47 @@
     return instance;
 }
 
--(instancetype)init{
+- (instancetype)init{
     self = [super init];
     if (self != nil) {
-        self.pluginDictionary = [NSMutableDictionary dictionary];
-
+        self.pluginControllersDict = [NSMutableDictionary dictionary];
+        
+        if (@available(iOS 10.0, *)) {
+            if ([UNUserNotificationCenter currentNotificationCenter].delegate == nil) {
+                [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+            }
+        }
+        
     }
     return self;
 }
 
-
--(MoEPluginController* _Nullable)getPluginController:(NSString*)appID{
-    if (appID.length <= 0) {
+- (MoEPluginController* _Nullable)getPluginController:(NSString*)appID{
+    if (appID == nil || appID.length <= 0) {
         return nil;
     }
     
-    MoEPluginController* controller = [self.pluginDictionary valueForKey:appID];
+    MoEPluginController* controller = [self.pluginControllersDict valueForKey:appID];
     if (controller != nil) {
         return controller;
-    }
-    else{
+    } else {
         MoEPluginController* controller = [[MoEPluginController alloc] init];
-        self.pluginDictionary[appID] = controller;
+        self.pluginControllersDict[appID] = controller;
         return controller;
     }
     return nil;
+}
+
+#pragma mark- UserNotificationCenter Delegate
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    [[MoEngage sharedInstance] userNotificationCenter:center didReceiveNotificationResponse:response];
+    completionHandler();
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    completionHandler((UNNotificationPresentationOptionSound
+                       | UNNotificationPresentationOptionAlert ));
 }
 
 

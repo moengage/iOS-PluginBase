@@ -17,7 +17,7 @@
 
 #pragma mark- Initialization
 
--(instancetype)init{
+- (instancetype)init{
     self = [super init];
     if (self) {
         self.messageQueue = [NSMutableArray array];
@@ -27,7 +27,7 @@
 
 #pragma mark- Queue Message
 
--(void)queueMessage:(MoEPluginMessage*)message{
+- (void)queueMessage:(MoEPluginMessage*)message{
     if (message == nil || message.msgMethodName == nil) {
         return;
     }
@@ -45,7 +45,7 @@
 
 #pragma mark- Flush Message Queue
 
--(void)flushMessageQueue{
+- (void)flushMessageQueue{
     self.isSDKInitialized = true;
     if (self.messageQueue != nil && self.messageQueue.count > 0) {
         for (MoEPluginMessage* message in self.messageQueue) {
@@ -57,7 +57,7 @@
 
 #pragma mark- Send Message
 
--(void)sendMessage:(MoEPluginMessage*)message{
+- (void)sendMessage:(MoEPluginMessage*)message{
     SEL selector = @selector(sendMessageWithName:andPayload:);
     if ([MoEPluginBridge sharedInstance].bridgeDelegate != nil && [[MoEPluginBridge sharedInstance].bridgeDelegate respondsToSelector:selector]) {
         [[MoEPluginBridge sharedInstance].bridgeDelegate sendMessageWithName:message.msgMethodName andPayload:message.msgInfoDict];

@@ -72,4 +72,6 @@ NSString* const kAppID            = @"appId";
 NSString* const kPlatform         = @"platform";
 NSString* const kiOS              = @"ios";
 
-NSString* const kDebugKey       = @"_DEBUG";
+NSString* const kDebugKey         = @"_DEBUG";
+
+NSString* const kLoggerPluginBase = @"PluginBase";

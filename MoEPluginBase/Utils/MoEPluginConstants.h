@@ -69,3 +69,4 @@ extern NSString* const kPlatform;
 extern NSString* const kiOS;
 
 extern NSString* const kDebugKey;
+extern NSString* const kLoggerPluginBase;

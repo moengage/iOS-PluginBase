@@ -6,10 +6,10 @@
 //
 #import "MoEPluginController.h"
 
-@interface MoEPluginCoordinator : NSObject
+@interface MoEPluginCoordinator : NSObject<UNUserNotificationCenterDelegate>
 
 #pragma mark - Shared instance
-+(instancetype _Nonnull)sharedInstance;
--(MoEPluginController* _Nullable)getPluginController:(NSString*_Nullable)identifier;
++ (instancetype _Nonnull)sharedInstance;
+- (MoEPluginController* _Nullable)getPluginController:(NSString*_Nullable)identifier;
 @end
 

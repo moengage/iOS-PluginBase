@@ -10,8 +10,8 @@
 
 
 @interface MoEGeofenceBridge : NSObject
-+(instancetype)sharedInstance;
-- (void)startGeofenceMonitoring: (NSDictionary*)geofenceDict ;
++ (instancetype)sharedInstance;
+- (void)startGeofenceMonitoring:(NSDictionary*)geofenceDict ;
 
 @end
 

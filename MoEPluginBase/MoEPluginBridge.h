@@ -38,17 +38,17 @@ typedef enum : NSUInteger {
 
 - (void)registerForPush;
 
-- (void)showInApp: (NSDictionary*)inAppDict;
+- (void)showInApp:(NSDictionary*)inAppDict;
 - (void)setInAppContexts:(NSDictionary*)contextsPayload;
-- (void)invalidateInAppContexts: (NSDictionary*)contextDict;
+- (void)invalidateInAppContexts:(NSDictionary*)contextDict;
 
 - (void)getSelfHandledInApp:(NSDictionary*)inAppDict;
 - (void)updateSelfHandledInAppStatusWithPayload:(NSDictionary*)selfHandledCampaignDict;
 
 - (void)enableLogs:(NSDictionary*)logsDict;
-- (void)resetUser: (NSDictionary*)userDict;
+- (void)resetUser:(NSDictionary*)userDict;
 - (void)optOutTracking:(NSDictionary*)dictTracking;
 
--(void)updateSDKState:(NSDictionary*)stateInfo;
+- (void)updateSDKState:(NSDictionary*)stateInfo;
 
 @end
