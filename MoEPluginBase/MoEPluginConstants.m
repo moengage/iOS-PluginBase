@@ -23,8 +23,8 @@ NSString* const kISODateFormat1 = @"yyyy-MM-dd'T'HH:mm:ss'Z";
 NSString* const kISODateFormat2 = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 // Version format: Major.Minor.Patch
-NSString* const kMinSDKVersionSupported = @"7.1.0";
-NSString* const kMaxSDKVersionSupported = @"7.2.0";
+NSString* const kMinSDKVersionSupported = @"7.2.0";
+NSString* const kMaxSDKVersionSupported = @"7.3.0";
 
 // Inbox Keys
 NSString* const kInboxKeyID             = @"id";
