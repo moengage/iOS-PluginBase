@@ -1,0 +1,32 @@
+//
+//  MoEInboxPluginCordinator.swift
+//  MoEPluginInbox
+//
+//  Created by Rakshitha on 27/06/22.
+//
+
+import Foundation
+
+class MoEInboxPluginCordinator {
+    
+    var pluginControllers = [String: Any]()
+    static let sharedInstance = MoEInboxPluginCordinator()
+    
+    private init() {
+    }
+    
+    func getPluginCoordinator(identifier: String) -> MoEInboxPluginController? {
+        if identifier.isEmpty {
+            assert(false,"MoEngage - Your SDK is not properly initialized. You should call initializeDefaultInstance:andLaunchOptions: from you AppDelegate didFinishLaunching method. Please refer to doc for more details.")
+            return nil
+        }
+        
+        if let controller = pluginControllers[identifier] as? MoEInboxPluginController {
+            return controller
+        } else {
+            let controller = MoEInboxPluginController(identifier: identifier)
+            pluginControllers[identifier] = controller
+            return controller
+        }
+    }
+}

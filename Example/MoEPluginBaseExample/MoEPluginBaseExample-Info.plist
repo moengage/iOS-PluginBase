@@ -20,10 +20,29 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>moeapp</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<string>moeapp</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MoEngageAppDelegateProxyEnabled</key>
+	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>location needed</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>location needed</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

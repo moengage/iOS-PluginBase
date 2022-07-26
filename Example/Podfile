@@ -4,7 +4,8 @@ platform :ios, '10.0'
 
 target 'MoEPluginBaseExample' do
   pod 'MoEPluginBase', :path => '../'
-  pod 'MOGeofence'
+ pod 'MoEPluginGeofence', :path => '../'
+ pod 'MoEPluginInbox', :path => '../'
   target 'MoEPluginBaseExampleTests' do
     inherit! :search_paths
   end
