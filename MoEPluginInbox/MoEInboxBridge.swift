@@ -41,7 +41,7 @@ import MoEPluginBase
         
     private func getController(inboxDict: [String: Any]) -> MoEInboxPluginController? {
         if let appID = MoEInboxBridge.fetchIdentifier(attribute: inboxDict),
-           let controller = MoEInboxPluginCordinator.sharedInstance.getPluginCoordinator(identifier: appID) {
+           let controller = MoEInboxPluginCoordinator.sharedInstance.getPluginCoordinator(identifier: appID) {
             return controller
             
         }

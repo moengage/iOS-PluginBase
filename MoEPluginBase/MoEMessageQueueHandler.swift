@@ -42,9 +42,9 @@ final class MoEMessageQueueHandler {
     func flushAllMessages() {
         isSDKInitialized = true
         
-        for messageQueue in messageQueue {
-            if let event = messageQueue[MoEPluginConstants.General.event] as? String,
-               let message = messageQueue[MoEPluginConstants.General.message] as? [String: Any] {
+        for payload in messageQueue {
+            if let event = payload[MoEPluginConstants.General.event] as? String,
+               let message = payload[MoEPluginConstants.General.message] as? [String: Any] {
                 flushMessage(eventName: event, message: message)
             }
         }

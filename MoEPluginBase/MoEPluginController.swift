@@ -63,12 +63,12 @@ final class MoEPluginController: NSObject, MoEPluginUtils {
     }
     
     private func setNotificationDelegate() {
-        if UIApplication.shared.isRegisteredForRemoteNotifications {
-            if let currentDelegate = UNUserNotificationCenter.current().delegate {
-                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
-            } else {
-                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
-            }
+        guard UIApplication.shared.isRegisteredForRemoteNotifications else { return }
+        
+        if let currentDelegate = UNUserNotificationCenter.current().delegate {
+            MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
+        } else {
+            MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
         }
     }
     

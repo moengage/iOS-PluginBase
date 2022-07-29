@@ -101,7 +101,7 @@ extension MoEPluginUtils {
         }
         
         var clickedActionDict = [String: Any]()
-        if actionPayloadDict.keys.count > 0 {
+        if !actionPayloadDict.isEmpty {
             clickedActionDict[MoEPluginConstants.General.type] = MoEPluginConstants.General.navigation
             clickedActionDict[MoEPluginConstants.General.payload] = actionPayloadDict
         }

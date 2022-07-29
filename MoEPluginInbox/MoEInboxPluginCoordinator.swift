@@ -1,5 +1,5 @@
 //
-//  MoEInboxPluginCordinator.swift
+//  MoEInboxPluginCoordinator.swift
 //  MoEPluginInbox
 //
 //  Created by Rakshitha on 27/06/22.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-final class MoEInboxPluginCordinator {
+final class MoEInboxPluginCoordinator {
     
     private var pluginControllers = [String: Any]()
-    static let sharedInstance = MoEInboxPluginCordinator()
+    static let sharedInstance = MoEInboxPluginCoordinator()
     
     private init() {
     }
