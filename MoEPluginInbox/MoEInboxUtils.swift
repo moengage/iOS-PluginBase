@@ -9,16 +9,17 @@ import Foundation
 import MoEngageInbox
 import MoEPluginBase
 
-class MoEInboxUtils {
+protocol MoEInboxUtils: MoEPluginUtils {
+    static func getInboxPayload(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any]
+    static func getUnreadCountPayload(count: Int, identifier: String) -> [String: Any]
+    static func getCampaignIdForStats(inboxDict: [String: Any]) -> String?
+}
+
+extension MoEInboxUtils {
     
-    static let sharedInstance = MoEInboxUtils()
-    
-    private init() {
-    }
-    
-    func getInboxPayload(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any] {
-        let accountMeta = MoEPluginUtils.sharedInstance.getAccountPayload(identifier: identifier)
-        var messages = [[String: Any]] ()
+    static func getInboxPayload(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any] {
+        let accountMeta = fetchAccountPayload(identifier: identifier)
+        var messages = [[String: Any]]()
         
         for inboxMessage in inboxMessages {
             var message = [String: Any]()
@@ -35,11 +36,11 @@ class MoEInboxUtils {
             messages.append(message)
         }
         
-        let data = [MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS,MoEPluginConstants.Inbox.messages: messages] as [String : Any]
+        let data = [MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS, MoEPluginConstants.Inbox.messages: messages] as [String: Any]
         return [MoEPluginConstants.General.accountMeta: accountMeta, MoEPluginConstants.General.data: data]
     }
     
-    func getTextPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
+    static func getTextPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
         var textPayload = [String: Any]()
         
         textPayload[MoEPluginConstants.Inbox.title] = inboxMessage.notificationTitle
@@ -49,7 +50,7 @@ class MoEInboxUtils {
         return textPayload
     }
     
-    func getMediaPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
+    static func getMediaPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
         var mediaPayload = [String: Any]()
         
         let moengageDict = inboxMessage.notificationPayloadDict[MoEPluginConstants.Inbox.moengage] as? [String: Any]
@@ -59,7 +60,7 @@ class MoEInboxUtils {
         return mediaPayload
     }
     
-    func getActionPayload(inboxMessage: MOInboxEntry) -> [[String: Any]] {
+    static func getActionPayload(inboxMessage: MOInboxEntry) -> [[String: Any]] {
         var actionDict = [[String: Any]]()
         
         if let deepLinkURL = inboxMessage.deepLinkURL, !deepLinkURL.isEmpty {
@@ -98,17 +99,16 @@ class MoEInboxUtils {
         return actionDict
     }
     
-    func getUnreadCountPayload(count: Int, identifier: String) -> [String: Any] {
-        let accountMeta = MoEPluginUtils.sharedInstance.getAccountPayload(identifier: identifier)
+    static func getUnreadCountPayload(count: Int, identifier: String) -> [String: Any] {
+        let accountMeta = fetchAccountPayload(identifier: identifier)
         let data = [MoEPluginConstants.Inbox.unClickedCount: count]
         return [MoEPluginConstants.General.accountMeta: accountMeta, MoEPluginConstants.General.data: data]
     }
     
-    func getCampaignIdForStats(inboxDict: [String: Any]) -> String? {
+    static func getCampaignIdForStats(inboxDict: [String: Any]) -> String? {
         if let data = inboxDict[MoEPluginConstants.General.data] as? [String: Any],
            let campaignID = data[MoEPluginConstants.General.campaignId] as? String,
-           !campaignID.isEmpty
-        {
+           !campaignID.isEmpty {
             return campaignID
         }
         

@@ -8,9 +8,12 @@
 import Foundation
 import MoEngageSDK
 
-@objc public class MoEPluginBridge: NSObject {
+@objc final public class MoEPluginBridge: NSObject, MoEPluginUtils {
     
     @objc public static let sharedInstance = MoEPluginBridge()
+    
+    private override init() {
+    }
     
     @objc public func pluginInitialized(_ accountInfo: [String: Any]) {
         if let controller = getController(payload: accountInfo) {
@@ -66,7 +69,7 @@ import MoEngageSDK
         }
     }
     
-    //MARK: InApp
+    // MARK: InApp
     @objc public func showInApp(_ inApp: [String: Any]) {
         if let controller = getController(payload: inApp) {
             controller.showInApp(inApp: inApp)
@@ -97,14 +100,13 @@ import MoEngageSDK
         }
     }
     
-    //MARK: Push
+    // MARK: Push
     @objc public func registerForPush() {
         MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: UNUserNotificationCenter.current().delegate)
     }
     
-    
     private func getController(payload: [String: Any]) -> MoEPluginController? {
-        if let appID = MoEPluginUtils.sharedInstance.getIdentifier(attribute: payload),
+        if let appID = MoEPluginBridge.fetchIdentifier(attribute: payload),
            let controller = MoEPluginCoordinator.sharedInstance.getPluginCoordinator(identifier: appID) {
             return controller
             

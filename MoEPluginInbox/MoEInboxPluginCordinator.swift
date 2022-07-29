@@ -7,9 +7,9 @@
 
 import Foundation
 
-class MoEInboxPluginCordinator {
+final class MoEInboxPluginCordinator {
     
-    var pluginControllers = [String: Any]()
+    private var pluginControllers = [String: Any]()
     static let sharedInstance = MoEInboxPluginCordinator()
     
     private init() {
@@ -17,7 +17,7 @@ class MoEInboxPluginCordinator {
     
     func getPluginCoordinator(identifier: String) -> MoEInboxPluginController? {
         if identifier.isEmpty {
-            assert(false,"MoEngage - Your SDK is not properly initialized. You should call initializeDefaultInstance:andLaunchOptions: from you AppDelegate didFinishLaunching method. Please refer to doc for more details.")
+            assert(false, "MoEngage - Your SDK is not properly initialized. You should call initializeDefaultInstance:andLaunchOptions: from you AppDelegate didFinishLaunching method. Please refer to doc for more details.")
             return nil
         }
         

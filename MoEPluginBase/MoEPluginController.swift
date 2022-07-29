@@ -11,11 +11,11 @@ import MoEngageInApps
 import UserNotifications
 import CoreText
 
-class MoEPluginController: NSObject {
-    var identifier: String
-    var messageHandler: MoEMessageQueueHandler
+final class MoEPluginController: NSObject, MoEPluginUtils {
+    private var identifier: String
+    private var messageHandler: MoEMessageQueueHandler
     
-    init(identifier: String){
+    init(identifier: String) {
         self.identifier = identifier
         messageHandler = MoEMessageQueueHandler(identifier: identifier)
     }
@@ -28,7 +28,7 @@ class MoEPluginController: NSObject {
         messageHandler.setBridgeDelegate(delegate: delegate)
     }
     
-    func initializeDefaultInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions:[String: Any]) {
+    func initializeDefaultInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [String: Any]) {
         #if DEBUG
         MoEngage.sharedInstance().initializeDefaultTestInstance(with: sdkConfig, andLaunchOptions: launchOptions)
         #else
@@ -40,7 +40,7 @@ class MoEPluginController: NSObject {
         setDelegates()
     }
     
-    func initializeInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions:[String: Any]) {
+    func initializeInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [String: Any]) {
         #if DEBUG
         MoEngage.sharedInstance().initializeTestInstance(with: sdkConfig, andLaunchOptions: launchOptions)
         #else
@@ -64,16 +64,16 @@ class MoEPluginController: NSObject {
     
     private func setNotificationDelegate() {
         if UIApplication.shared.isRegisteredForRemoteNotifications {
-            if UNUserNotificationCenter.current().delegate == nil {
-                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
+            if let currentDelegate = UNUserNotificationCenter.current().delegate {
+                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
             } else {
-                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: UNUserNotificationCenter.current().delegate)
+                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
             }
         }
     }
     
-    //MARK: Opt out
-    fileprivate func handleSDKState(_ sdkState: Bool) {
+    // MARK: Opt out
+    private func handleSDKState(_ sdkState: Bool) {
         if sdkState {
             MoEngage.sharedInstance().enableSDK(forAppID: identifier)
         } else {
@@ -84,8 +84,7 @@ class MoEPluginController: NSObject {
     func updateSDKState(sdkState: [String: Any]) {
         guard let dataDict = sdkState[MoEPluginConstants.General.data] as? [String: Any],
               let sdkState = dataDict[MoEPluginConstants.SDKState.isSdkEnabled] as? Bool
-        else
-        {
+        else {
             return
         }
         
@@ -97,8 +96,7 @@ class MoEPluginController: NSObject {
               let type = dataDict[MoEPluginConstants.General.type] as? String,
               let state = dataDict[MoEPluginConstants.SDKState.state] as? Bool
                 
-        else
-        {
+        else {
             return
         }
         
@@ -111,9 +109,9 @@ class MoEPluginController: NSObject {
         }
     }
     
-    //MARK: Analytics
+    // MARK: Analytics
     
-    func setAppStatus(appStatus:[String: Any]) {
+    func setAppStatus(appStatus: [String: Any]) {
         if let dataDict = appStatus[MoEPluginConstants.General.data] as? [String: Any],
            let appStatus = dataDict[MoEPluginConstants.AppStatus.appStatus] as? String,
            !appStatus.isEmpty {
@@ -145,8 +143,7 @@ class MoEPluginController: NSObject {
         guard let dataDict = userAttribute[MoEPluginConstants.General.data] as? [String: Any],
               let type = dataDict[MoEPluginConstants.General.type] as? String,
               let attributeName = dataDict[MoEPluginConstants.UserAttribute.attributeName] as? String
-        else
-        {
+        else {
             return
         }
         
@@ -158,14 +155,13 @@ class MoEPluginController: NSObject {
             
         case MoEPluginConstants.UserAttribute.timestamp:
             if let timeStamp = attributeValue as? String {
-                MOAnalytics.sharedInstance.setUserAttributeISODate(timeStamp, withAttributeName:attributeName,forAppID: identifier)
+                MOAnalytics.sharedInstance.setUserAttributeISODate(timeStamp, withAttributeName: attributeName, forAppID: identifier)
             }
             
         case MoEPluginConstants.UserAttribute.location:
             if let locationAttributeDict = dataDict[MoEPluginConstants.UserAttribute.locationAttribute] as? [String: Any],
                let latitude = locationAttributeDict[MoEPluginConstants.UserAttribute.latitude] as? Double,
-               let longitude = locationAttributeDict[MoEPluginConstants.UserAttribute.longitude] as? Double
-            {
+               let longitude = locationAttributeDict[MoEPluginConstants.UserAttribute.longitude] as? Double {
                 MOAnalytics.sharedInstance.setLocation(MOGeoLocation(withLatitude: latitude, andLongitude: longitude), withAttributeName: attributeName, forAppID: identifier)
             }
             
@@ -177,8 +173,7 @@ class MoEPluginController: NSObject {
     func trackEvent(eventAttribute: [String: Any]) {
         guard let dataDict = eventAttribute[MoEPluginConstants.General.data] as? [String: Any],
               let eventName = dataDict[MoEPluginConstants.EventTracking.eventName] as? String
-        else
-        {
+        else {
             return
         }
         
@@ -192,16 +187,16 @@ class MoEPluginController: NSObject {
         MOAnalytics.sharedInstance.trackEvent(eventName, withProperties: properties, forAppID: identifier)
     }
     
-    //MARK: InApp
+    // MARK: InApp
     
     func showInApp(inApp: [String: Any]) {
         MOInApp.sharedInstance().showInAppCampaign(forAppID: identifier)
     }
     
     func getSelfHandledInApp(inApp: [String: Any]) {
-        MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { [weak self] selfHandledCampaign, accountMeta in
+        MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { [weak self] selfHandledCampaign, _ in
             if let self = self {
-                let message = MoEPluginUtils.sharedInstance.getSelfHandledPayload(selfHandledCampaign: selfHandledCampaign, identifier: self.identifier)
+                let message = MoEPluginController.fetchSelfHandledPayload(selfHandledCampaign: selfHandledCampaign, identifier: self.identifier)
                 self.messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppSelfHandled, message: message)
             }
         }
@@ -210,8 +205,7 @@ class MoEPluginController: NSObject {
     func setInAppContext(context: [String: Any]) {
         guard let dataDict = context[MoEPluginConstants.General.data] as? [String: Any],
               let contexts = dataDict[MoEPluginConstants.InApp.contexts] as? [String]
-        else
-        {
+        else {
             return
         }
         
@@ -225,8 +219,7 @@ class MoEPluginController: NSObject {
     func updateSelfHandledImpression(inApp: [String: Any]) {
         guard let dataDict = inApp[MoEPluginConstants.General.data] as? [String: Any],
               let impressionType = dataDict[MoEPluginConstants.General.type] as? String
-        else
-        {
+        else {
             return
         }
         
@@ -245,45 +238,44 @@ class MoEPluginController: NSObject {
 
 }
     
-//MARK: MOInAppNativDelegate
+// MARK: MOInAppNativDelegate
 extension MoEPluginController: MOInAppNativDelegate {
     func inAppShown(withCampaignInfo inappCampaign: MOInAppCampaign, for accountMeta: MOAccountMeta) {
-        let message = MoEPluginUtils.sharedInstance.getInAppPayload(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
+        let message = MoEPluginController.fetchInAppPayload(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
         messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppShown, message: message)
     }
     
     func inAppDismissed(withCampaignInfo inappCampaign: MOInAppCampaign, for accountMeta: MOAccountMeta) {
-        let message = MoEPluginUtils.sharedInstance.getInAppPayload(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
+        let message = MoEPluginController.fetchInAppPayload(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
         messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppDismissed, message: message)
     }
     
     func inAppClicked(withCampaignInfo inappCampaign: MOInAppCampaign, andCustomActionInfo customAction: MOInAppAction, for accountMeta: MOAccountMeta) {
-        let message = MoEPluginUtils.sharedInstance.getInAppPayload(inAppCampaign: inappCampaign, inAppAction: customAction, identifier: accountMeta.appID)
+        let message = MoEPluginController.fetchInAppPayload(inAppCampaign: inappCampaign, inAppAction: customAction, identifier: accountMeta.appID)
         messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppCustomAction, message: message)
     }
     
     func inAppClicked(withCampaignInfo inappCampaign: MOInAppCampaign, andNavigationActionInfo navigationAction: MOInAppAction, for accountMeta: MOAccountMeta) {
-        let message = MoEPluginUtils.sharedInstance.getInAppPayload(inAppCampaign: inappCampaign, inAppAction: navigationAction, identifier: accountMeta.appID)
+        let message = MoEPluginController.fetchInAppPayload(inAppCampaign: inappCampaign, inAppAction: navigationAction, identifier: accountMeta.appID)
         messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppClicked, message: message)
     }
 }
     
-//MARK: MOMessagingDelegate
+// MARK: MOMessagingDelegate
 extension MoEPluginController: MOMessagingDelegate {
     
     func notificationRegistered(withDeviceToken deviceToken: String) {
-        let message = MoEPluginUtils.sharedInstance.getTokenPayload(deviceToken: deviceToken)
+        let message = MoEPluginController.fetchTokenPayload(deviceToken: deviceToken)
         messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.pushTokenGenerated, message: message)
     }
     
-    func notificationClicked(withScreenName screenName: String?, kvPairs: [AnyHashable : Any]?, andPushPayload userInfo: [AnyHashable : Any]) {
-        let message = MoEPluginUtils.sharedInstance.getPushClickedPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
+    func notificationClicked(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any]) {
+        let message = MoEPluginController.fetchPushClickedPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
         messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.pushClicked, message: message)
     }
 }
 
-
-//MARK: UNUserNotificationCenterDelegate
+// MARK: UNUserNotificationCenterDelegate
 extension MoEPluginController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])

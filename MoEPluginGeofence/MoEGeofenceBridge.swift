@@ -9,16 +9,16 @@ import Foundation
 import MoEngageGeofence
 import MoEPluginBase
 
-
-@objc public class MoEGeofenceBridge: NSObject {
+@objc final public class MoEGeofenceBridge: NSObject, MoEPluginUtils {
     
     @objc public static let sharedInstance = MoEGeofenceBridge()
     
     private override init() {
+        super.init()
     }
     
     @objc public func startGeofenceMonitoring(_ payload: [String: Any]) {
-        let identifier = MoEPluginUtils.sharedInstance.getIdentifier(attribute: payload)
+        let identifier = MoEGeofenceBridge.fetchIdentifier(attribute: payload)
         MOGeofence.sharedInstance.startGeofenceMonitoring(forAppID: identifier)
     }
 }

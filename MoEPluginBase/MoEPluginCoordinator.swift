@@ -8,9 +8,9 @@
 import Foundation
 import MoEngageSDK
 
-class MoEPluginCoordinator {
+final class MoEPluginCoordinator {
     
-    var pluginControllers = [String: Any]()
+    private var pluginControllers = [String: Any]()
     static let sharedInstance = MoEPluginCoordinator()
     
     private init() {
@@ -18,7 +18,7 @@ class MoEPluginCoordinator {
     
     func getPluginCoordinator(identifier: String) -> MoEPluginController? {
         if identifier.isEmpty {
-            assert(false,"MoEngage - Your SDK is not properly initialized. You should call initializeDefaultInstance:andLaunchOptions: from you AppDelegate didFinishLaunching method. Please refer to doc for more details.")
+            assert(false, "MoEngage - Your SDK is not properly initialized. You should call initializeDefaultInstance:andLaunchOptions: from you AppDelegate didFinishLaunching method. Please refer to doc for more details.")
             return nil
         }
         
@@ -31,4 +31,3 @@ class MoEPluginCoordinator {
         }
     }
 }
-

@@ -12,11 +12,11 @@ import MoEngageSDK
     @objc func sendMessage(event: String, message: [String: Any])
 }
 
-class MoEMessageQueueHandler {
-    var identifier: String
-    var messageQueue = [[String: Any]]()
-    var isSDKInitialized = false
-    weak var delegate: MoEPluginBridgeDelegate?
+final class MoEMessageQueueHandler {
+    private var identifier: String
+    private var messageQueue = [[String: Any]]()
+    private var isSDKInitialized = false
+    private weak var delegate: MoEPluginBridgeDelegate?
     
     init(identifier: String) {
         self.identifier =  identifier
@@ -26,15 +26,15 @@ class MoEMessageQueueHandler {
         self.delegate = delegate
     }
     
-    func flushMessage(eventName: String, message: [String: Any]) {
-        if message.isEmpty {
+    func flushMessage(eventName: String, message: [String: Any]? = nil) {
+        guard let message = message, !message.isEmpty else {
             return
         }
-        
+
         if isSDKInitialized {
             delegate?.sendMessage(event: eventName, message: message)
         } else {
-            let payload = [MoEPluginConstants.General.event: eventName, MoEPluginConstants.General.message: message] as [String : Any]
+            let payload = [MoEPluginConstants.General.event: eventName, MoEPluginConstants.General.message: message] as [String: Any]
             messageQueue.append(payload)
         }
     }

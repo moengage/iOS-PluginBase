@@ -13,11 +13,8 @@ public struct MoEPluginConstants {
     }
         
     public struct General {
-        static let type = "type"
-        static let appId = "appId"
         public static let accountMeta = "accountMeta"
         public static let data = "data"
-        static let campaignName = "campaignName"
         public static let campaignId = "campaignId"
         public static let platform = "platform"
         public static let iOS = "iOS"
@@ -25,14 +22,16 @@ public struct MoEPluginConstants {
         public static let value = "value"
         public static let navigation = "navigation"
         public static let payload = "payload"
-        static let event = "event"
-        static let message = "message"
         public static let navigationType = "navigationType"
         public static let actionType = "actionType"
-
+        static let type = "type"
+        static let appId = "appId"
+        static let campaignName = "campaignName"
+        static let event = "event"
+        static let message = "message"
     }
     
-    //user attribute
+    // user attribute
     struct UserAttribute {
         static let alias = "alias"
         static let type = "type"
@@ -46,14 +45,14 @@ public struct MoEPluginConstants {
         static let location = "location"
     }
     
-    //event
+    // event
     struct EventTracking {
         static let eventName = "eventName"
         static let eventAttributes = "eventAttributes"
         static let isNonInteractive = "isNonInteractive"
     }
     
-    //OptOuts
+    // OptOuts
     struct SDKState {
        static let isSdkEnabled = "isSdkEnabled"
        static let state = "state"
@@ -80,7 +79,7 @@ public struct MoEPluginConstants {
         static let campaignName = "campaignName"
     }
     
-    //Push
+    // Push
     struct Push {
         static let pushService = "pushService"
         static let APNS = "APNS"
@@ -89,7 +88,7 @@ public struct MoEPluginConstants {
         static let clickedAction = "clickedAction"
     }
     
-    //Callback
+    // Callback
     struct CallBackEvents {
         static let inAppShown = "MoEInAppCampaignShown"
         static let inAppDismissed = "MoEInAppCampaignDismissed"
@@ -100,7 +99,7 @@ public struct MoEPluginConstants {
         static let pushClicked = "MoEPushClicked"
     }
     
-    //Inbox
+    // Inbox
     public struct Inbox {
         public static let unClickedCount = "unClickedCount"
         public static let title = "title"

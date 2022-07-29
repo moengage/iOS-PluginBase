@@ -9,15 +9,19 @@ import Foundation
 import MoEngageInApps
 import MoEngageSDK
 
-public class MoEPluginUtils {
+public protocol MoEPluginUtils: class {
+    static func fetchIdentifier(attribute: [String: Any]) -> String?
+    static func fetchAccountPayload(identifier: String) -> [String: Any]
+    static func fetchInAppPayload(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction?, identifier: String) -> [String: Any]
+    static func fetchSelfHandledPayload(selfHandledCampaign: MOInAppSelfHandledCampaign?, identifier: String) -> [String: Any]
+    static func fetchTokenPayload(deviceToken: String) -> [String: Any]
+    static func fetchPushClickedPayload(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any], identifier: String) -> [String: Any]
+}
+
+extension MoEPluginUtils {
     
-    public static let sharedInstance = MoEPluginUtils()
-    
-    private init() {
-    }
-    
-    //MARK: General Utilities
-    public func getIdentifier(attribute: [String: Any]) -> String? {
+    // MARK: General Utilities
+    public static func fetchIdentifier(attribute: [String: Any]) -> String? {
         if let accountMeta = attribute[MoEPluginConstants.General.accountMeta] as? [String: Any],
            let appID = accountMeta[MoEPluginConstants.General.appId] as? String,
            !appID.isEmpty {
@@ -31,14 +35,14 @@ public class MoEPluginUtils {
         return nil
     }
     
-    public func getAccountPayload(identifier: String) -> [String: Any] {
+    public static func fetchAccountPayload(identifier: String) -> [String: Any] {
         let appIdDict = [MoEPluginConstants.General.appId: identifier]
         return appIdDict
     }
     
-    //MARK: InApp Utilities
-    func getInAppPayload(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction? = nil, identifier: String) -> [String: Any] {
-        let accountMeta = getAccountPayload(identifier: identifier)
+    // MARK: InApp Utilities
+    public static func fetchInAppPayload(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction? = nil, identifier: String) -> [String: Any] {
+        let accountMeta = fetchAccountPayload(identifier: identifier)
         
         var inAppDataPayload = inAppCampaign.fetchInAppPaylaod()
         
@@ -58,11 +62,10 @@ public class MoEPluginUtils {
         return inAppPayload
     }
     
-    
-    func getSelfHandledPayload(selfHandledCampaign: MOInAppSelfHandledCampaign?, identifier: String) -> [String: Any] {
+    public static func fetchSelfHandledPayload(selfHandledCampaign: MOInAppSelfHandledCampaign?, identifier: String) -> [String: Any] {
         var inAppPayload = [String: Any]()
         
-        let accountMeta = getAccountPayload(identifier: identifier)
+        let accountMeta = fetchAccountPayload(identifier: identifier)
         
         var inAppDataPayload = [String: Any]()
         
@@ -79,13 +82,13 @@ public class MoEPluginUtils {
         return inAppPayload
     }
     
-    //MARK: Push Utilities
-    func getTokenPayload(deviceToken: String) -> [String: Any] {
+    // MARK: Push Utilities
+    public static func fetchTokenPayload(deviceToken: String) -> [String: Any] {
         let tokenPayload = [MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS, MoEPluginConstants.Push.pushService: MoEPluginConstants.Push.APNS, MoEPluginConstants.Push.token: deviceToken]
         return tokenPayload
     }
     
-    func getPushClickedPayload(withScreenName screenName: String?, kvPairs: [AnyHashable : Any]?, andPushPayload userInfo: [AnyHashable : Any], identifier: String) -> [String: Any] {
+    public static func fetchPushClickedPayload(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any], identifier: String) -> [String: Any] {
         
         var actionPayloadDict = [String: Any]()
         if let screenName = screenName, !screenName.isEmpty {
@@ -103,18 +106,17 @@ public class MoEPluginUtils {
             clickedActionDict[MoEPluginConstants.General.payload] = actionPayloadDict
         }
         
-        let data = [MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS, MoEPluginConstants.General.payload: userInfo, MoEPluginConstants.Push.clickedAction: clickedActionDict] as [String : Any];
+        let data = [MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS, MoEPluginConstants.General.payload: userInfo, MoEPluginConstants.Push.clickedAction: clickedActionDict] as [String: Any]
         
-        let accountMeta = getAccountPayload(identifier: identifier)
+        let accountMeta = fetchAccountPayload(identifier: identifier)
         let payload = [MoEPluginConstants.General.data: data, MoEPluginConstants.General.accountMeta: accountMeta]
         return payload
     }
 }
 
-
 extension MOInAppCampaign {
     func fetchInAppPaylaod() -> [String: Any] {
-        let inAppPayload = [MoEPluginConstants.General.campaignName: campaign_name, MoEPluginConstants.General.campaignId: campaign_id, MoEPluginConstants.InApp.campaignContext: campaign_context,MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS] as [String : Any]
+        let inAppPayload = [MoEPluginConstants.General.campaignName: campaign_name, MoEPluginConstants.General.campaignId: campaign_id, MoEPluginConstants.InApp.campaignContext: campaign_context, MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS] as [String: Any]
         return inAppPayload
     }
 }
@@ -138,7 +140,6 @@ extension MOInAppAction {
         return actionPayload
     }
 }
-
 
 extension MOInAppSelfHandledCampaign {
     
