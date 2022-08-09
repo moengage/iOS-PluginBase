@@ -12,8 +12,8 @@ import UserNotifications
 import CoreText
 
 final class MoEPluginController: NSObject, MoEPluginUtils {
-    private var identifier: String
-    private var messageHandler: MoEMessageQueueHandler
+    var identifier: String
+    var messageHandler: MoEMessageQueueHandler
     
     init(identifier: String) {
         self.identifier = identifier
@@ -236,53 +236,4 @@ final class MoEPluginController: NSObject, MoEPluginUtils {
         }
     }
 
-}
-    
-// MARK: MOInAppNativDelegate
-extension MoEPluginController: MOInAppNativDelegate {
-    func inAppShown(withCampaignInfo inappCampaign: MOInAppCampaign, for accountMeta: MOAccountMeta) {
-        let message = MoEPluginController.fetchInAppPayload(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
-        messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppShown, message: message)
-    }
-    
-    func inAppDismissed(withCampaignInfo inappCampaign: MOInAppCampaign, for accountMeta: MOAccountMeta) {
-        let message = MoEPluginController.fetchInAppPayload(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
-        messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppDismissed, message: message)
-    }
-    
-    func inAppClicked(withCampaignInfo inappCampaign: MOInAppCampaign, andCustomActionInfo customAction: MOInAppAction, for accountMeta: MOAccountMeta) {
-        let message = MoEPluginController.fetchInAppPayload(inAppCampaign: inappCampaign, inAppAction: customAction, identifier: accountMeta.appID)
-        messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppCustomAction, message: message)
-    }
-    
-    func inAppClicked(withCampaignInfo inappCampaign: MOInAppCampaign, andNavigationActionInfo navigationAction: MOInAppAction, for accountMeta: MOAccountMeta) {
-        let message = MoEPluginController.fetchInAppPayload(inAppCampaign: inappCampaign, inAppAction: navigationAction, identifier: accountMeta.appID)
-        messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppClicked, message: message)
-    }
-}
-    
-// MARK: MOMessagingDelegate
-extension MoEPluginController: MOMessagingDelegate {
-    
-    func notificationRegistered(withDeviceToken deviceToken: String) {
-        let message = MoEPluginController.fetchTokenPayload(deviceToken: deviceToken)
-        messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.pushTokenGenerated, message: message)
-    }
-    
-    func notificationClicked(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any]) {
-        let message = MoEPluginController.fetchPushClickedPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
-        messageHandler.flushMessage(eventName: MoEPluginConstants.CallBackEvents.pushClicked, message: message)
-    }
-}
-
-// MARK: UNUserNotificationCenterDelegate
-extension MoEPluginController: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        MoEngage.sharedInstance().userNotificationCenter(center, didReceive: response)
-        completionHandler()
-    }
 }

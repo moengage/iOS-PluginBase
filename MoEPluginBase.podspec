@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     s.homepage     = 'https://www.moengage.com'
     s.documentation_url = 'https://developers.moengage.com/'
     s.license      = { :type => 'Commercial', :file => 'LICENSE' }
-    s.author       = { 'Chengappa C D' => 'chengappa@moengage.com' }
+    s.author       = { 'MobileDevs' => 'mobiledevs@moengage.com' }
     s.social_media_url   = 'https://twitter.com/moengage'
     s.platform     = :ios
     s.ios.deployment_target = '10.0'
