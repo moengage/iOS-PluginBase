@@ -26,7 +26,7 @@ class MoEPluginMessageDelegateHandler: NSObject, MOMessagingDelegate, MoEPluginU
     }
     
     func notificationClicked(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any]) {
-        let message = MoEPluginMessageDelegateHandler.fetchPushClickedPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: "")
+        let message = MoEPluginMessageDelegateHandler.fetchPushClickedPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
         messageHandler?.flushMessage(eventName: MoEPluginConstants.CallBackEvents.pushClicked, message: message)
     }
     
