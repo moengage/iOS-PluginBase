@@ -128,7 +128,7 @@ extension MOInAppAction {
         if actionType == NavigationAction {
             actionPayload[MoEPluginConstants.General.navigationType] = MoEPluginConstants.InApp.screen
         }
-  
+        
         if !screenName.isEmpty {
             actionPayload[MoEPluginConstants.General.value] = screenName
         }
@@ -157,6 +157,5 @@ extension MOInAppSelfHandledCampaign {
         if let campaign_context = campaignPayload[MoEPluginConstants.InApp.campaignContext] as? [String: Any] {
             self.campaign_context = campaign_context
         }
-        
     }
 }
