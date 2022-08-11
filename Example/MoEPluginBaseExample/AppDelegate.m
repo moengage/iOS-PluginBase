@@ -23,8 +23,8 @@
     NSString* yourMoEngageAppID = @"";
     MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
     sdkConfig.enableLogs = true;
-   
-    [[MoEPlugin sharedInstance] initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:true launchOptions:launchOptions];
+
+    [[[MoEPlugin alloc] init] initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:true launchOptions:launchOptions];
     [[MoEPluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:yourMoEngageAppID];
 
     return YES;

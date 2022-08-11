@@ -28,10 +28,10 @@ import MoEngageSDK
         }
     }
     
-    //MARK: Analytics
+    // MARK: Analytics
     @objc public func updateSDKState(_ sdkState: [String: Any]) {
         if let identifier = MoEPluginBridge.fetchIdentifier(attribute: sdkState),
-           let sdkState = MoEPluginBridge.updateSDKState(sdkState: sdkState){
+           let sdkState = MoEPluginBridge.updateSDKState(sdkState: sdkState) {
             if sdkState {
                 MoEngage.sharedInstance().enableSDK(forAppID: identifier)
             } else {
@@ -99,21 +99,21 @@ import MoEngageSDK
     }
     
     @objc public func resetUser(_ userAttribute: [String: Any]) {
-        if let identifier = MoEPluginBridge.fetchIdentifier(attribute: userAttribute){
+        if let identifier = MoEPluginBridge.fetchIdentifier(attribute: userAttribute) {
             MOAnalytics.sharedInstance.resetUser(forAppID: identifier)
         }
     }
     
     // MARK: InApp
     @objc public func showInApp(_ inApp: [String: Any]) {
-        if let identifier = MoEPluginBridge.fetchIdentifier(attribute: inApp){
+        if let identifier = MoEPluginBridge.fetchIdentifier(attribute: inApp) {
             MOInApp.sharedInstance().showInAppCampaign(forAppID: identifier)
         }
     }
     
     @objc public func getSelfHandledInApp(_ inApp: [String: Any], completionHandler: @escaping(([String: Any]) -> Void)) {
-        if let identifier = MoEPluginBridge.fetchIdentifier(attribute: inApp){
-            MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { selfHandledCampaign, accountMeta
+        if let identifier = MoEPluginBridge.fetchIdentifier(attribute: inApp) {
+            MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { selfHandledCampaign, _
                 in
                 let message = MoEPluginBridge.fetchSelfHandledPayload(selfHandledCampaign: selfHandledCampaign, identifier: identifier)
                 completionHandler(message)

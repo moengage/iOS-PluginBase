@@ -10,13 +10,11 @@ import MoEngageSDK
 import MoEngageInApps
 
 @objc final public class MoEPlugin: NSObject {
-    @objc public static let sharedInstance = MoEPlugin()
     
-    var inAppDelegateHandler: MoEPluginInAppDelegateHandler?
-    var messageDelegateHandler: MoEPluginMessageDelegateHandler?
-    
-    //MARK: Initialization
+    // MARK: Initialization
     @objc public func initializeDefaultInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [String: Any]) {
+        guard !sdkConfig.identifier.isEmpty else { return }
+
         #if DEBUG
             MoEngage.sharedInstance().initializeDefaultTestInstance(with: sdkConfig, andLaunchOptions: launchOptions)
         #else
@@ -29,6 +27,8 @@ import MoEngageInApps
     }
     
     @objc public func initializeInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [String: Any]) {
+        guard !sdkConfig.identifier.isEmpty else { return }
+
         #if DEBUG
             MoEngage.sharedInstance().initializeTestInstance(with: sdkConfig, andLaunchOptions: launchOptions)
         #else
@@ -40,27 +40,10 @@ import MoEngageInApps
         setDelegates(identifier: sdkConfig.identifier)
     }
     
-    //MARK: Delegate setup
+    // MARK: Delegate setup
     private func setDelegates(identifier: String) {
-        setInAppDelegate(identifier: identifier)
-        setMessagingDelegate(identifier: identifier)
-    }
-    
-    private func setInAppDelegate(identifier: String) {
-        inAppDelegateHandler = MoEPluginInAppDelegateHandler(identifier: identifier)
-        MOInApp.sharedInstance().setInAppDelegate(inAppDelegateHandler, forAppID: identifier)
-    }
-    
-    private func setMessagingDelegate(identifier: String) {
-        messageDelegateHandler = MoEPluginMessageDelegateHandler(identifier: identifier)
-        MOMessaging.sharedInstance.setMessagingDelegate(messageDelegateHandler, forAppID: identifier)
-        guard UIApplication.shared.isRegisteredForRemoteNotifications else { return }
-        
-        if let currentDelegate = UNUserNotificationCenter.current().delegate {
-            MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
-        } else {
-            MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: messageDelegateHandler)
-        }
+        _ = MoEPluginInAppDelegateHandler(identifier: identifier)
+        _ = MoEPluginMessageDelegateHandler(identifier: identifier)
     }
     
     private func handleSDKState(_ sdkState: Bool, identifier: String) {

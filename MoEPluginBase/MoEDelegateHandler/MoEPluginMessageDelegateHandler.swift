@@ -8,16 +8,29 @@
 import Foundation
 import MoEngageSDK
 
-class MoEPluginMessageDelegateHandler: NSObject, MOMessagingDelegate, MoEPluginUtils, MoEMessageHandler {
+final class MoEPluginMessageDelegateHandler: NSObject, MOMessagingDelegate, MoEPluginUtils, MoEMessageHandler {
     
-    var identifier: String
+    private var identifier: String
+    
+    private var messageHandler: MoEMessageQueueHandler? {
+        return MoEPluginMessageDelegateHandler.fetchMessageQueueHandler(identifier: identifier)
+    }
     
     init(identifier: String) {
         self.identifier = identifier
+        super.init()
+        setMessagingDelegate()
     }
     
-    var messageHandler: MoEMessageQueueHandler? {
-        return MoEPluginMessageDelegateHandler.fetchMessageQueueHandler(identifier: identifier)
+    private func setMessagingDelegate() {
+        MOMessaging.sharedInstance.setMessagingDelegate(self, forAppID: identifier)
+        guard UIApplication.shared.isRegisteredForRemoteNotifications else { return }
+        
+        if let currentDelegate = UNUserNotificationCenter.current().delegate {
+            MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
+        } else {
+            MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
+        }
     }
     
     func notificationRegistered(withDeviceToken deviceToken: String) {

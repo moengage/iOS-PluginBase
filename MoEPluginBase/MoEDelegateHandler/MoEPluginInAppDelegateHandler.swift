@@ -8,18 +8,23 @@
 import Foundation
 import MoEngageInApps
 
-class MoEPluginInAppDelegateHandler: NSObject, MOInAppNativDelegate, MoEPluginUtils, MoEMessageHandler {
+final class MoEPluginInAppDelegateHandler: NSObject, MOInAppNativDelegate, MoEPluginUtils, MoEMessageHandler {
     
-    var identifier: String
-    
-    init(identifier: String) {
-        self.identifier = identifier
-    }
+    private static var handlers = [String: Any]()
 
-    var messageHandler: MoEMessageQueueHandler? {
+    private var identifier: String
+    
+    private var messageHandler: MoEMessageQueueHandler? {
         return MoEPluginInAppDelegateHandler.fetchMessageQueueHandler(identifier: identifier)
     }
     
+    init(identifier: String) {
+        self.identifier = identifier
+        super.init()
+        MOInApp.sharedInstance().setInAppDelegate(self, forAppID: identifier)
+        MoEPluginInAppDelegateHandler.handlers[identifier] = self
+    }
+
     func inAppShown(withCampaignInfo inappCampaign: MOInAppCampaign, for accountMeta: MOAccountMeta) {
         let message = MoEPluginInAppDelegateHandler.fetchInAppPayload(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
         messageHandler?.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppShown, message: message)

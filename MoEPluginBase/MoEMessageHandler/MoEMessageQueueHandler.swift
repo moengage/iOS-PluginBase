@@ -8,21 +8,6 @@
 import Foundation
 import MoEngageSDK
 
-
-protocol MoEMessageHandler {
-    static func fetchMessageQueueHandler(identifier: String) -> MoEMessageQueueHandler?
-}
-
-extension MoEMessageHandler {
-    static func fetchMessageQueueHandler(identifier: String) -> MoEMessageQueueHandler? {
-        return MoEMessageInstanceProvider.sharedInstance.getMessageQueueHandler(identifier: identifier)
-    }
-}
-
-@objc public protocol MoEPluginBridgeDelegate {
-    @objc func sendMessage(event: String, message: [String: Any])
-}
-
 final class MoEMessageQueueHandler {
     private var identifier: String
     private var messageQueue = [[String: Any]]()
