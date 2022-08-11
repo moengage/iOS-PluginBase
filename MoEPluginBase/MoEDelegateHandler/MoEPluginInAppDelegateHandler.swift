@@ -21,6 +21,11 @@ final class MoEPluginInAppDelegateHandler: NSObject, MOInAppNativDelegate, MoEPl
     init(identifier: String) {
         self.identifier = identifier
         super.init()
+        
+        setInAppDelegate()
+    }
+    
+    private func setInAppDelegate() {
         MOInApp.sharedInstance().setInAppDelegate(self, forAppID: identifier)
         MoEPluginInAppDelegateHandler.handlers[identifier] = self
     }
