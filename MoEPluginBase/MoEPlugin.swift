@@ -12,7 +12,7 @@ import MoEngageInApps
 @objc final public class MoEPlugin: NSObject {
     
     // MARK: Initialization
-    @objc public func initializeDefaultInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [String: Any]) {
+    @objc public func initializeDefaultInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         guard !sdkConfig.identifier.isEmpty else { return }
 
         #if DEBUG
@@ -26,7 +26,7 @@ import MoEngageInApps
         setDelegates(identifier: sdkConfig.identifier)
     }
     
-    @objc public func initializeInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [String: Any]) {
+    @objc public func initializeInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         guard !sdkConfig.identifier.isEmpty else { return }
 
         #if DEBUG
@@ -38,6 +38,11 @@ import MoEngageInApps
         handleSDKState(sdkState, identifier: sdkConfig.identifier)
         
         setDelegates(identifier: sdkConfig.identifier)
+    }
+    
+    @objc public func trackPluginInfo(_ pluginType: String, version: String) {
+        let integrationInfo = MOIntegrationInfo(pluginType: pluginType, version: version)
+        MOCoreIntegrator.sharedInstance.addIntergrationInfo(info: integrationInfo)
     }
     
     // MARK: Delegate setup

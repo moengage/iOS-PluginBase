@@ -89,14 +89,14 @@ public struct MoEPluginConstants {
     }
     
     // Callback
-    struct CallBackEvents {
-        static let inAppShown = "MoEInAppCampaignShown"
-        static let inAppDismissed = "MoEInAppCampaignDismissed"
-        static let inAppClicked = "MoEInAppCampaignClicked"
-        static let inAppCustomAction = "MoEInAppCampaignCustomAction"
-        static let inAppSelfHandled = "MoEInAppCampaignSelfHandled"
-        static let pushTokenGenerated = "MoEPushTokenGenerated"
-        static let pushClicked = "MoEPushClicked"
+    public struct CallBackEvents {
+        public static let inAppShown = "MoEInAppCampaignShown"
+        public static let inAppDismissed = "MoEInAppCampaignDismissed"
+        public static let inAppClicked = "MoEInAppCampaignClicked"
+        public static let inAppCustomAction = "MoEInAppCampaignCustomAction"
+        public static let inAppSelfHandled = "MoEInAppCampaignSelfHandled"
+        public static let pushTokenGenerated = "MoEPushTokenGenerated"
+        public static let pushClicked = "MoEPushClicked"
     }
     
     // Inbox
