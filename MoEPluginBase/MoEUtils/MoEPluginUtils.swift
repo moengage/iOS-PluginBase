@@ -9,7 +9,7 @@ import Foundation
 import MoEngageInApps
 import MoEngageSDK
 
-public protocol MoEPluginUtils: class {
+public protocol MoEPluginUtils {
     static func fetchIdentifier(attribute: [String: Any]) -> String?
     static func fetchAccountPayload(identifier: String) -> [String: Any]
     static func fetchInAppPayload(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction?, identifier: String) -> [String: Any]

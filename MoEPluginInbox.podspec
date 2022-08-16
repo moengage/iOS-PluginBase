@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
                     }
 
     s.source_files = 'MoEPluginInbox/**/*'
+    s.swift_version = '5.0'
     s.public_header_files = 'MoEPluginInbox/**/*.h'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
     s.dependency 'MoEPluginBase', '>= 3.0.0', '< 3.1.0'

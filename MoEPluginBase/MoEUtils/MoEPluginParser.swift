@@ -9,7 +9,7 @@ import Foundation
 import MoEngageSDK
 import MoEngageInApps
 
-protocol MoEPluginParser: class {
+protocol MoEPluginParser {
     static func optOutDataTracking(dataTrack: [String: Any]) -> (String, Bool)?
     static func setAppStatus(appStatus: [String: Any]) -> AppStatus?
     static func setAlias(alias: [String: Any]) -> String?

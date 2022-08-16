@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
                     }
 
     s.source_files = 'MoEPluginGeofence/**/*'
+    s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
     s.dependency 'MoEngageGeofence', '>= 4.3.0', '< 4.4.0'
     s.dependency 'MoEPluginBase', '>= 3.0.0', '< 3.1.0'

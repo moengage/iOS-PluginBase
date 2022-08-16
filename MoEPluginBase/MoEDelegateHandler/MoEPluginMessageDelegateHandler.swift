@@ -24,7 +24,12 @@ final class MoEPluginMessageDelegateHandler: NSObject, MOMessagingDelegate, MoEP
     
     private func setMessagingDelegate() {
         MOMessaging.sharedInstance.setMessagingDelegate(self, forAppID: identifier)
-        guard UIApplication.shared.isRegisteredForRemoteNotifications else { return }
+    
+        guard let sharedApplication = MOCoreUtils.sharedUIApplication(),
+        sharedApplication.isRegisteredForRemoteNotifications
+        else {
+            return
+        }
         
         if let currentDelegate = UNUserNotificationCenter.current().delegate {
             MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
