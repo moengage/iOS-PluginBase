@@ -112,7 +112,7 @@ import MoEngageSDK
         }
     }
     
-    @objc public func getSelfHandledInApp(_ inApp: [String: Any], completionHandler: @escaping(([String: Any]) -> Void)) {
+    @objc public func getSelfHandledInApp(_ inApp: [String: Any]) {
         if let identifier = MoEPluginBridge.fetchIdentifier(attribute: inApp) {
             MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { selfHandledCampaign, _
                 in
