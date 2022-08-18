@@ -22,10 +22,16 @@ import MoEngageSDK
         }
     }
     
+    @objc public func setPluginBridgeDelegate(_ delegate: MoEPluginBridgeDelegate, identifier: String) {
+        if !identifier.isEmpty {
+            let messageHandler = MoEPluginBridge.fetchMessageQueueHandler(identifier: identifier)
+            messageHandler?.setBridgeDelegate(delegate: delegate)
+        }
+    }
+    
     @objc public func setPluginBridgeDelegate(_ delegate: MoEPluginBridgeDelegate, payload: [String: Any]) {
-        if let identifier = MoEPluginBridge.fetchIdentifier(attribute: payload),
-           let messageHandler = MoEPluginBridge.fetchMessageQueueHandler(identifier: identifier) {
-            messageHandler.setBridgeDelegate(delegate: delegate)
+        if let identifier = MoEPluginBridge.fetchIdentifier(attribute: payload) {
+          setPluginBridgeDelegate(delegate, identifier: identifier)
         }
     }
     

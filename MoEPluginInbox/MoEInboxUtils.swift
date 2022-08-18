@@ -8,6 +8,7 @@
 import Foundation
 import MoEngageInbox
 import MoEPluginBase
+import MoEngageSDK
 
 protocol MoEInboxUtils: MoEPluginUtils {
     static func getInboxPayload(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any]
@@ -28,8 +29,8 @@ extension MoEInboxUtils {
             message[MoEPluginConstants.Inbox.text] = getTextPayload(inboxMessage: inboxMessage)
             message[MoEPluginConstants.Inbox.media] = getMediaPayload(inboxMessage: inboxMessage)
             message[MoEPluginConstants.Inbox.isClicked] = inboxMessage.isRead
-            message[MoEPluginConstants.Inbox.receivedTime] = inboxMessage.receivedDate
-            message[MoEPluginConstants.Inbox.expiry] = inboxMessage.inboxExpiryDate
+            message[MoEPluginConstants.Inbox.receivedTime] = MODateUtils.getString(forDate: inboxMessage.receivedDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
+            message[MoEPluginConstants.Inbox.expiry] = MODateUtils.getString(forDate: inboxMessage.inboxExpiryDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             message[MoEPluginConstants.General.payload] = inboxMessage.notificationPayloadDict
             message[MoEPluginConstants.Inbox.action] = getActionPayload(inboxMessage: inboxMessage)
             
