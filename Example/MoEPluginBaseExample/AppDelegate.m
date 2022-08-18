@@ -24,8 +24,16 @@
     MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
     sdkConfig.enableLogs = true;
 
-    [[[MoEPlugin alloc] init] initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:true launchOptions:launchOptions];
-    [[MoEPluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:yourMoEngageAppID];
+    MoEPlugin *plugin = [[MoEPlugin alloc] init];
+    [plugin initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:true launchOptions:launchOptions];
+    
+    NSDictionary* pluginDict = @{
+        @"accountMeta": @{
+          @"appId": yourMoEngageAppID
+        }
+    };
+    
+    [[MoEPluginBridge sharedInstance] setPluginBridgeDelegate:self payload:pluginDict];
 
     return YES;
 }

@@ -12,6 +12,12 @@ public struct MoEPluginConstants {
     private init() {
     }
         
+    struct SDKVersions {
+        static let currentVersion = "8.3.0"
+        static let minimumVersion = "8.3.0"
+        static let maximumVersion = "8.4.0"
+    }
+    
     public struct General {
         public static let accountMeta = "accountMeta"
         public static let data = "data"

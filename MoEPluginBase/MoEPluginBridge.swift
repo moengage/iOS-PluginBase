@@ -47,9 +47,9 @@ import MoEngageSDK
             
             if type == MoEPluginConstants.SDKState.data {
                 if value {
-                    MOAnalytics.sharedInstance.enableDataTracking(forAppID: identifier)
-                } else {
                     MOAnalytics.sharedInstance.disableDataTracking(forAppID: identifier)
+                } else {
+                    MOAnalytics.sharedInstance.enableDataTracking(forAppID: identifier)
                 }
             }
         }
@@ -116,8 +116,9 @@ import MoEngageSDK
         if let identifier = MoEPluginBridge.fetchIdentifier(attribute: inApp) {
             MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { selfHandledCampaign, _
                 in
+                let messageHandler = MoEPluginBridge.fetchMessageQueueHandler(identifier: identifier)
                 let message = MoEPluginBridge.fetchSelfHandledPayload(selfHandledCampaign: selfHandledCampaign, identifier: identifier)
-                completionHandler(message)
+                messageHandler?.flushMessage(eventName: MoEPluginConstants.CallBackEvents.inAppSelfHandled, message: message)
             }
         }
     }
@@ -154,5 +155,15 @@ import MoEngageSDK
     // MARK: Push
     @objc public func registerForPush() {
         MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: UNUserNotificationCenter.current().delegate)
+    }
+    
+    // MARK: Other
+    @objc public func validateSDKVersion() -> Bool {
+        if MoEPluginConstants.SDKVersions.currentVersion >=  MoEPluginConstants.SDKVersions.minimumVersion &&  MoEPluginConstants.SDKVersions.currentVersion < MoEPluginConstants.SDKVersions.maximumVersion {
+            return true
+        }
+        
+        print("MoEngage: Plugin Bridge - Native Dependencies not integrated")
+        return false
     }
 }
