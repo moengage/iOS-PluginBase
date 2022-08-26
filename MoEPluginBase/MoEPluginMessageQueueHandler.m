@@ -58,7 +58,7 @@
 -(void)flushMessageQueue{
     self.isSDKInitialized = true;
     if (self.messageQueue != nil && self.messageQueue.count > 0) {
-        for (MoEPluginMessage* message in self.messageQueue) {
+        for (MoEPluginMessage* message in [self.messageQueue copy]) {
             [self sendMessage:message];
         }
         [self.messageQueue removeAllObjects];
