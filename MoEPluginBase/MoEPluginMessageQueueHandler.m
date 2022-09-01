@@ -11,6 +11,7 @@
 
 @interface MoEPluginMessageQueueHandler()
 @property(nonatomic,strong) NSMutableArray* messageQueue;
+@property (nonatomic, strong) dispatch_queue_t syncQueue;
 @end
 
 @implementation MoEPluginMessageQueueHandler
@@ -30,6 +31,7 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
+        self.syncQueue = dispatch_queue_create("com.moengage.pluginBase.messageQueue", DISPATCH_QUEUE_SERIAL);
         self.messageQueue = [NSMutableArray array];
     }
     return self;
@@ -46,10 +48,12 @@
         [self sendMessage:message];
     }
     else{
-        if (self.messageQueue == nil) {
-            self.messageQueue = [NSMutableArray array];
-        }
-        [self.messageQueue addObject:message];
+        dispatch_async(self.syncQueue, ^{
+            if (self.messageQueue == nil) {
+                self.messageQueue = [NSMutableArray array];
+            }
+            [self.messageQueue addObject:message];
+        });
     }
 }
 
@@ -57,12 +61,14 @@
 
 -(void)flushMessageQueue{
     self.isSDKInitialized = true;
-    if (self.messageQueue != nil && self.messageQueue.count > 0) {
-        for (MoEPluginMessage* message in [self.messageQueue copy]) {
-            [self sendMessage:message];
+    dispatch_async(self.syncQueue, ^{
+        if (self.messageQueue != nil && self.messageQueue.count > 0) {
+            for (MoEPluginMessage* message in self.messageQueue) {
+                [self sendMessage:message];
+            }
+            [self.messageQueue removeAllObjects];
         }
-        [self.messageQueue removeAllObjects];
-    }
+    });
 }
 
 #pragma mark- Send Message
