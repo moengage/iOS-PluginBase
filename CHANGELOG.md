@@ -3,6 +3,10 @@
 
 ## Change Log:
 
+### Version 2.3.1  *(02nd September, 2022)*
+-------------------------------------------
+* Fixed the crash due to multithreading.
+
 ### Version 2.2.0  *(24th November, 2021)*
 -------------------------------------------
 * Initialization method name fixes.
