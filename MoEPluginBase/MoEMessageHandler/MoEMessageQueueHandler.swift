@@ -14,6 +14,8 @@ final class MoEMessageQueueHandler {
     private var isSDKInitialized = false
     private weak var delegate: MoEPluginBridgeDelegate?
     
+    private let syncMessageQueue = DispatchQueue(label: "com.moengage.pluginBase.messageQueue")
+    
     init(identifier: String) {
         self.identifier =  identifier
     }
@@ -30,21 +32,23 @@ final class MoEMessageQueueHandler {
         if isSDKInitialized {
             delegate?.sendMessage(event: eventName, message: message)
         } else {
-            let payload = [MoEPluginConstants.General.event: eventName, MoEPluginConstants.General.message: message] as [String: Any]
-            messageQueue.append(payload)
+            syncMessageQueue.sync {
+                let payload = [MoEPluginConstants.General.event: eventName, MoEPluginConstants.General.message: message] as [String: Any]
+                messageQueue.append(payload)
+            }
         }
     }
     
     func flushAllMessages() {
         isSDKInitialized = true
-        
-        for payload in messageQueue {
-            if let event = payload[MoEPluginConstants.General.event] as? String,
-               let message = payload[MoEPluginConstants.General.message] as? [String: Any] {
-                flushMessage(eventName: event, message: message)
+        syncMessageQueue.sync {
+            for payload in messageQueue {
+                if let event = payload[MoEPluginConstants.General.event] as? String,
+                   let message = payload[MoEPluginConstants.General.message] as? [String: Any] {
+                    flushMessage(eventName: event, message: message)
+                }
             }
+            messageQueue.removeAll()
         }
-        
-        messageQueue.removeAll()
     }
 }
