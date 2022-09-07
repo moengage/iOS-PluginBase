@@ -1,6 +1,6 @@
 //
-//  MoEPluginMessageDelegateHandler.swift
-//  MoEPluginBase
+//  MoEngagePluginMessageDelegateHandler.swift
+//  MoEngagePlugin
 //
 //  Created by Rakshitha on 09/08/22.
 //
@@ -8,12 +8,12 @@
 import Foundation
 import MoEngageSDK
 
-final class MoEPluginMessageDelegateHandler: NSObject, MOMessagingDelegate, MoEPluginUtils, MoEMessageHandler {
+final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate, MoEngagePluginUtils, MoEngagePluginMessageDelegate {
     
     private var identifier: String
     
-    private var messageHandler: MoEMessageQueueHandler? {
-        return MoEPluginMessageDelegateHandler.fetchMessageQueueHandler(identifier: identifier)
+    private var messageHandler: MoEngagePluginMessageHandler? {
+        return MoEngagePluginMessageDelegateHandler.fetchMessageQueueHandler(identifier: identifier)
     }
     
     init(identifier: String) {
@@ -39,18 +39,18 @@ final class MoEPluginMessageDelegateHandler: NSObject, MOMessagingDelegate, MoEP
     }
     
     func notificationRegistered(withDeviceToken deviceToken: String) {
-        let message = MoEPluginMessageDelegateHandler.fetchTokenPayload(deviceToken: deviceToken)
-        messageHandler?.flushMessage(eventName: MoEPluginConstants.CallBackEvents.pushTokenGenerated, message: message)
+        let message = MoEngagePluginMessageDelegateHandler.fetchTokenPayload(deviceToken: deviceToken)
+        messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.pushTokenGenerated, message: message)
     }
     
     func notificationClicked(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any]) {
-        let message = MoEPluginMessageDelegateHandler.fetchPushClickedPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
-        messageHandler?.flushMessage(eventName: MoEPluginConstants.CallBackEvents.pushClicked, message: message)
+        let message = MoEngagePluginMessageDelegateHandler.fetchPushClickedPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
+        messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.pushClicked, message: message)
     }
     
 }
 
-extension MoEPluginMessageDelegateHandler: UNUserNotificationCenterDelegate {
+extension MoEngagePluginMessageDelegateHandler: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])
     }

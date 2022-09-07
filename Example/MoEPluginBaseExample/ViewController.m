@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-@import MoEPluginBase;
-@import MoEPluginInbox;
-@import MoEPluginGeofence;
+@import MoEngagePluginBase;
+@import MoEngagePluginInbox;
+@import MoEngagePluginGeofence;
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) NSArray* dataSourceArray;
@@ -50,7 +50,7 @@
                   @"appId": self.defaultAppID
                 }
             };
-            [[MoEPluginBridge sharedInstance] pluginInitialized: pluginDict];
+            [[MoEngagePluginBridge sharedInstance] pluginInitialized: pluginDict];
             
             break;
         }
@@ -63,7 +63,7 @@
                     @"appStatus": @"INSTALL"
                   }
             };
-            [[MoEPluginBridge sharedInstance] setAppStatus:appstatusDict];
+            [[MoEngagePluginBridge sharedInstance] setAppStatus:appstatusDict];
             break;
         }
         case 2:{
@@ -96,7 +96,7 @@
                     @"isNonInteractive": @0
                 }
             };
-            [[MoEPluginBridge sharedInstance] trackEvent: trackEventDict];
+            [[MoEngagePluginBridge sharedInstance] trackEvent: trackEventDict];
             break;
         }
         case 3:{
@@ -111,7 +111,7 @@
                     @"type":@"general"
                 }
             };
-            [[MoEPluginBridge sharedInstance] setUserAttribute:userAttrPayload1];
+            [[MoEngagePluginBridge sharedInstance] setUserAttribute:userAttrPayload1];
             
             // 2. Custom Attribute
             NSDictionary* userAttrPayload2 = @{
@@ -124,7 +124,7 @@
                     @"type":@"general"
                 }
             };
-            [[MoEPluginBridge sharedInstance] setUserAttribute:userAttrPayload2];
+            [[MoEngagePluginBridge sharedInstance] setUserAttribute:userAttrPayload2];
             userAttrPayload2 = @{
                 @"accountMeta": @{
                     @"appId": self.defaultAppID
@@ -135,7 +135,7 @@
                     @"type":@"general"
                 }
             };
-            [[MoEPluginBridge sharedInstance] setUserAttribute:userAttrPayload2];
+            [[MoEngagePluginBridge sharedInstance] setUserAttribute:userAttrPayload2];
             
             // 3. Timestamp Attribute
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -151,7 +151,7 @@
                     @"type":@"timestamp"
                 }
             };
-            [[MoEPluginBridge sharedInstance] setUserAttribute:userAttrPayload3];
+            [[MoEngagePluginBridge sharedInstance] setUserAttribute:userAttrPayload3];
             
             // 4. Location Attribute
             NSDictionary* userAttrPayload4 = @{
@@ -167,7 +167,7 @@
                     }
                 }
             };
-            [[MoEPluginBridge sharedInstance] setUserAttribute:userAttrPayload4];
+            [[MoEngagePluginBridge sharedInstance] setUserAttribute:userAttrPayload4];
             break;
         }
         case 4:{
@@ -179,11 +179,11 @@
                     @"alias": @"alias ID"
                 }
             };
-            [[MoEPluginBridge sharedInstance] setAlias:aliasDict];
+            [[MoEngagePluginBridge sharedInstance] setAlias:aliasDict];
             break;
         }
         case 5:{
-            [[MoEPluginBridge sharedInstance] registerForPush];
+            [[MoEngagePluginBridge sharedInstance] registerForPush];
             break;
         }
         case 6:{
@@ -192,7 +192,7 @@
                 @"appId": self.defaultAppID
               }
             };
-            [[MoEPluginBridge sharedInstance] showInApp:inappDict];
+            [[MoEngagePluginBridge sharedInstance] showInApp:inappDict];
             break;
         }
         case 7:{
@@ -202,7 +202,7 @@
               }
             };
             
-            [[MoEPluginBridge sharedInstance] getSelfHandledInApp:inappDict];
+            [[MoEngagePluginBridge sharedInstance] getSelfHandledInApp:inappDict];
             break;
         }
         case 8:{
@@ -215,7 +215,7 @@
                 }
             };
             
-            [[MoEPluginBridge sharedInstance] setInAppContext:contextDict];
+            [[MoEngagePluginBridge sharedInstance] setInAppContext:contextDict];
             break;
         }
         case 9:{
@@ -225,7 +225,7 @@
                 }
             };
             
-            [[MoEPluginBridge sharedInstance] resetInAppContext:contextDict];
+            [[MoEngagePluginBridge sharedInstance] resetInAppContext:contextDict];
             break;
         }
         case 10:{
@@ -234,7 +234,7 @@
                     @"appId": self.defaultAppID
                 }
             };
-            [[MoEPluginBridge sharedInstance] resetUser:resetDict];
+            [[MoEngagePluginBridge sharedInstance] resetUser:resetDict];
             break;
         }
         case 11:{
@@ -247,7 +247,7 @@
                     @"state": @0
                 }
             };
-            [[MoEPluginBridge sharedInstance] optOutDataTracking: optOutDataDict];
+            [[MoEngagePluginBridge sharedInstance] optOutDataTracking: optOutDataDict];
             
             break;
         }
@@ -261,7 +261,7 @@
                     @"state": @1
                 }
             };
-            [[MoEPluginBridge sharedInstance] optOutDataTracking:optOutDataDict];
+            [[MoEngagePluginBridge sharedInstance] optOutDataTracking:optOutDataDict];
 
         }
         case 13:{
@@ -274,7 +274,7 @@
               }
             };
             
-            [[MoEInboxBridge sharedInstance]  getInboxMessages: inboxDict completionHandler:^(NSDictionary<NSString *,id> * _Nonnull inboxPayload) {
+            [[MoEngagePluginInboxBridge sharedInstance]  getInboxMessages: inboxDict completionHandler:^(NSDictionary<NSString *,id> * _Nonnull inboxPayload) {
                 NSLog(@"Fetched Inbox messages %@", inboxPayload);
                 
         
@@ -290,8 +290,8 @@
                         @"data": message
                     };
                     
-                    [[MoEInboxBridge sharedInstance] trackInboxClick: statsPayload];
-                    [[MoEInboxBridge sharedInstance] deleteInboxEntry: statsPayload];
+                    [[MoEngagePluginInboxBridge sharedInstance] trackInboxClick: statsPayload];
+                    [[MoEngagePluginInboxBridge sharedInstance] deleteInboxEntry: statsPayload];
                 }
             }];
         }
@@ -303,7 +303,7 @@
               }
             };
 
-            [[MoEInboxBridge sharedInstance] getUnreadMessageCount: inboxDict completionHandler:^(NSDictionary<NSString *,id> * _Nonnull unreadDict) {
+            [[MoEngagePluginInboxBridge sharedInstance] getUnreadMessageCount: inboxDict completionHandler:^(NSDictionary<NSString *,id> * _Nonnull unreadDict) {
                 NSLog(@"Unread count is %@",unreadDict);
             }];
             break;
@@ -317,7 +317,7 @@
                 @"isSdkEnabled": @1,
               }
             };
-            [[MoEPluginBridge sharedInstance] updateSDKState: sdkStateDict];
+            [[MoEngagePluginBridge sharedInstance] updateSDKState: sdkStateDict];
             break;
         }
         case 17:{
@@ -329,7 +329,7 @@
                 @"isSdkEnabled": @0,
               }
             };
-            [[MoEPluginBridge sharedInstance] updateSDKState:sdkStateDict];
+            [[MoEngagePluginBridge sharedInstance] updateSDKState:sdkStateDict];
             break;
         }
             
@@ -339,7 +339,7 @@
                 @"appId": self.defaultAppID
               }
             };
-            [[MoEGeofenceBridge sharedInstance] startGeofenceMonitoring: payload];
+            [[MoEngagePluginGeofenceBridge sharedInstance] startGeofenceMonitoring: payload];
             break;
         }
         default:

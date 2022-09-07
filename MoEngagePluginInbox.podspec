@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name         = 'MoEPluginInbox'
+    s.name         = 'MoEngagePluginInbox'
     s.version      = '1.0.0'
     s.summary      = 'MoEngage Plugin Base for Hybrid SDKs'
     s.description  = <<-DESC
@@ -19,10 +19,9 @@ Pod::Spec.new do |s|
                         :tag => 'MoEPluginInbox-' + s.version.to_s
                     }
 
-    s.source_files = 'MoEPluginInbox/**/*'
+    s.source_files = 'MoEngagePluginInbox/**/*'
     s.swift_version = '5.0'
-    s.public_header_files = 'MoEPluginInbox/**/*.h'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEPluginBase', '>= 3.0.0', '< 3.1.0'
+    s.dependency 'MoEngagePluginBase', '>= 3.0.0', '< 3.1.0'
     s.dependency 'MoEngageInbox', '>= 1.3.0', '< 1.4.0'
 end

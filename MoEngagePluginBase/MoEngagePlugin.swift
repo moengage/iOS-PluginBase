@@ -1,6 +1,6 @@
 //
-//  MoEPlugin.swift
-//  MoEPluginBase
+//  MoEngagePlugin.swift
+//  MoEngagePlugin
 //
 //  Created by Rakshitha on 23/06/22.
 //
@@ -9,7 +9,7 @@ import Foundation
 import MoEngageSDK
 import MoEngageInApps
 
-@objc final public class MoEPlugin: NSObject {
+@objc final public class MoEngagePlugin: NSObject {
     
     // MARK: Initialization of default instance
     @objc public func initializeDefaultInstance(sdkConfig: MOSDKConfig, sdkState: Bool, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
@@ -70,8 +70,8 @@ import MoEngageInApps
     
     // MARK: Delegate setup
     private func setDelegates(identifier: String) {
-        _ = MoEPluginInAppDelegateHandler(identifier: identifier)
-        _ = MoEPluginMessageDelegateHandler(identifier: identifier)
+        _ = MoEngagePluginInAppDelegateHandler(identifier: identifier)
+        _ = MoEngagePluginMessageDelegateHandler(identifier: identifier)
     }
     
     private func handleSDKState(_ sdkState: Bool, identifier: String) {

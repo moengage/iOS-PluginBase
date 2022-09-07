@@ -7,10 +7,10 @@
 //
 
 #import "AppDelegate.h"
-@import MoEPluginBase;
+@import MoEngagePluginBase;
 @import MoEngageSDK;
 
-@interface AppDelegate()< UNUserNotificationCenterDelegate, MoEPluginBridgeDelegate>
+@interface AppDelegate()< UNUserNotificationCenterDelegate, MoEngagePluginBridgeDelegate>
 
 @end
 @implementation AppDelegate
@@ -24,16 +24,10 @@
     MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
     sdkConfig.enableLogs = true;
 
-    MoEPlugin *plugin = [[MoEPlugin alloc] init];
+    MoEngagePlugin *plugin = [[MoEngagePlugin alloc] init];
     [plugin initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:true launchOptions:launchOptions];
     
-    NSDictionary* pluginDict = @{
-        @"accountMeta": @{
-          @"appId": yourMoEngageAppID
-        }
-    };
-    
-    [[MoEPluginBridge sharedInstance] setPluginBridgeDelegate:self payload:pluginDict];
+    [[MoEngagePluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:yourMoEngageAppID];
 
     return YES;
 }

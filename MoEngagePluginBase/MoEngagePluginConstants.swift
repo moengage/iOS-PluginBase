@@ -1,13 +1,13 @@
 //
-//  MoEPluginConstants.swift
-//  MoEPluginBase
+//  MoEngagePluginConstants.swift
+//  MoEngagePlugin
 //
 //  Created by Rakshitha on 23/06/22.
 //
 
 import Foundation
 
-public struct MoEPluginConstants {
+public struct MoEngagePluginConstants {
     
     private init() {
     }

@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name         = 'MoEPluginBase'
+    s.name         = 'MoEngagePluginBase'
     s.version      = '3.0.0'
     s.summary      = 'MoEngage Plugin Base for Hybrid SDKs'
     s.description  = <<-DESC
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
                         :tag => 'MoEPluginBase-' + s.version.to_s
                     }
 
-    s.source_files = 'MoEPluginBase/**/*'
+    s.source_files = 'MoEngagePluginBase/**/*'
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
     s.dependency 'MoEngage-iOS-SDK', '>= 8.3.0', '< 8.4.0'

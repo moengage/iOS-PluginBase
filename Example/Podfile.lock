@@ -7,22 +7,22 @@ PODS:
   - MoEngageInbox (1.3.0):
     - MoEngage-iOS-SDK (< 8.4.0, >= 8.3.0)
     - MoEngageRichNotification (< 6.4.0, >= 6.3.0)
-  - MoEngageRichNotification (6.3.0):
-    - MoEngage-iOS-SDK (< 8.4.0, >= 8.3.0)
-  - MoEPluginBase (3.0.0):
+  - MoEngagePluginBase (3.0.0):
     - MoEngage-iOS-SDK (< 8.4.0, >= 8.3.0)
     - MoEngageInApp (< 3.4.0, >= 3.3.0)
-  - MoEPluginGeofence (1.0.0):
+  - MoEngagePluginGeofence (1.0.0):
     - MoEngageGeofence (< 4.4.0, >= 4.3.0)
-    - MoEPluginBase (< 3.1.0, >= 3.0.0)
-  - MoEPluginInbox (1.0.0):
+    - MoEngagePluginBase (< 3.1.0, >= 3.0.0)
+  - MoEngagePluginInbox (1.0.0):
     - MoEngageInbox (< 1.4.0, >= 1.3.0)
-    - MoEPluginBase (< 3.1.0, >= 3.0.0)
+    - MoEngagePluginBase (< 3.1.0, >= 3.0.0)
+  - MoEngageRichNotification (6.3.1):
+    - MoEngage-iOS-SDK (< 8.4.0, >= 8.3.0)
 
 DEPENDENCIES:
-  - MoEPluginBase (from `../`)
-  - MoEPluginGeofence (from `../`)
-  - MoEPluginInbox (from `../`)
+  - MoEngagePluginBase (from `../`)
+  - MoEngagePluginGeofence (from `../`)
+  - MoEngagePluginInbox (from `../`)
 
 SPEC REPOS:
   trunk:
@@ -33,11 +33,11 @@ SPEC REPOS:
     - MoEngageRichNotification
 
 EXTERNAL SOURCES:
-  MoEPluginBase:
+  MoEngagePluginBase:
     :path: "../"
-  MoEPluginGeofence:
+  MoEngagePluginGeofence:
     :path: "../"
-  MoEPluginInbox:
+  MoEngagePluginInbox:
     :path: "../"
 
 SPEC CHECKSUMS:
@@ -45,11 +45,11 @@ SPEC CHECKSUMS:
   MoEngageGeofence: 813cba233d6272e46405da7564215cbc667249f1
   MoEngageInApp: 77d7166cfc04ec6ceb3878794e78d2316645f718
   MoEngageInbox: cba4be6581ff2a3357fa3b4ef7322ee9acb192d6
-  MoEngageRichNotification: 76d4b13099f8c6c27a6218cd0e703d46c5eeb92b
-  MoEPluginBase: 34a676d2469d7543dad60b107b33629e440479ac
-  MoEPluginGeofence: e4a704afc0adb3ebd58708bc75080d4043311cd0
-  MoEPluginInbox: 71599675e3e4e6ad9d1210cb46784133dc815f60
+  MoEngagePluginBase: 3791de4643ec1bf245da1a064048b82509272749
+  MoEngagePluginGeofence: 0f6e627208933316ea29671e9adf7acd4a8ea460
+  MoEngagePluginInbox: 7789399ec1f40250a22d892635a22f1f2e0c2009
+  MoEngageRichNotification: b8fa7d97b77f029ec0a56878973efcb09290d37d
 
-PODFILE CHECKSUM: 3c18db30aa3a2d962e4ab4453c241affd25ae5a6
+PODFILE CHECKSUM: 03600eb33379be6dce0e19b6f91e6a4e62084158
 
 COCOAPODS: 1.11.3

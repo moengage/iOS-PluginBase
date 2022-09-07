@@ -1,6 +1,6 @@
 //
-//  MoEPluginUtils.swift
-//  MoEPluginBase
+//  MoEngagePluginUtils.swift
+//  MoEngagePlugin
 //
 //  Created by Rakshitha on 23/06/22.
 //
@@ -9,7 +9,7 @@ import Foundation
 import MoEngageInApps
 import MoEngageSDK
 
-public protocol MoEPluginUtils {
+public protocol MoEngagePluginUtils {
     static func fetchIdentifier(attribute: [String: Any]) -> String?
     static func fetchAccountPayload(identifier: String) -> [String: Any]
     static func fetchInAppPayload(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction?, identifier: String) -> [String: Any]
@@ -18,12 +18,12 @@ public protocol MoEPluginUtils {
     static func fetchPushClickedPayload(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any], identifier: String) -> [String: Any]
 }
 
-extension MoEPluginUtils {
+extension MoEngagePluginUtils {
     
     // MARK: General Utilities
     public static func fetchIdentifier(attribute: [String: Any]) -> String? {
-        if let accountMeta = attribute[MoEPluginConstants.General.accountMeta] as? [String: Any],
-           let appID = accountMeta[MoEPluginConstants.General.appId] as? String,
+        if let accountMeta = attribute[MoEngagePluginConstants.General.accountMeta] as? [String: Any],
+           let appID = accountMeta[MoEngagePluginConstants.General.appId] as? String,
            !appID.isEmpty {
             return appID
         }
@@ -36,7 +36,7 @@ extension MoEPluginUtils {
     }
     
     public static func fetchAccountPayload(identifier: String) -> [String: Any] {
-        let appIdDict = [MoEPluginConstants.General.appId: identifier]
+        let appIdDict = [MoEngagePluginConstants.General.appId: identifier]
         return appIdDict
     }
     
@@ -50,15 +50,15 @@ extension MoEPluginUtils {
             let actionPayload = inAppAction.fetchInAppActionPayload()
             
             if inAppAction.actionType == NavigationAction {
-                inAppDataPayload[MoEPluginConstants.General.actionType] = MoEPluginConstants.General.navigation
-                inAppDataPayload[MoEPluginConstants.General.navigation] = actionPayload
+                inAppDataPayload[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.General.navigation
+                inAppDataPayload[MoEngagePluginConstants.General.navigation] = actionPayload
             } else if inAppAction.actionType == CustomAction {
-                inAppDataPayload[MoEPluginConstants.General.actionType] = MoEPluginConstants.InApp.customAction
-                inAppDataPayload[MoEPluginConstants.InApp.customAction] = actionPayload
+                inAppDataPayload[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.InApp.customAction
+                inAppDataPayload[MoEngagePluginConstants.InApp.customAction] = actionPayload
             }
         }
         
-        let inAppPayload = [MoEPluginConstants.General.accountMeta: accountMeta, MoEPluginConstants.General.data: inAppDataPayload]
+        let inAppPayload = [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
         return inAppPayload
     }
     
@@ -73,18 +73,18 @@ extension MoEPluginUtils {
             inAppDataPayload = selfHandledCampaign.fetchInAppPaylaod()
             
             var selfHandledPayload = [String: Any]()
-            selfHandledPayload[MoEPluginConstants.General.payload] = selfHandledCampaign.campaignContent
-            selfHandledPayload[MoEPluginConstants.InApp.dismissInterval] = selfHandledCampaign.autoDismissInterval
-            inAppDataPayload[MoEPluginConstants.InApp.selfHandled] = selfHandledPayload
+            selfHandledPayload[MoEngagePluginConstants.General.payload] = selfHandledCampaign.campaignContent
+            selfHandledPayload[MoEngagePluginConstants.InApp.dismissInterval] = selfHandledCampaign.autoDismissInterval
+            inAppDataPayload[MoEngagePluginConstants.InApp.selfHandled] = selfHandledPayload
         }
         
-        inAppPayload = [MoEPluginConstants.General.accountMeta: accountMeta, MoEPluginConstants.General.data: inAppDataPayload]
+        inAppPayload = [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
         return inAppPayload
     }
     
     // MARK: Push Utilities
     public static func fetchTokenPayload(deviceToken: String) -> [String: Any] {
-        let tokenPayload = [MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS, MoEPluginConstants.Push.pushService: MoEPluginConstants.Push.APNS, MoEPluginConstants.Push.token: deviceToken]
+        let tokenPayload = [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS, MoEngagePluginConstants.Push.pushService: MoEngagePluginConstants.Push.APNS, MoEngagePluginConstants.Push.token: deviceToken]
         return tokenPayload
     }
     
@@ -92,31 +92,31 @@ extension MoEPluginUtils {
         
         var actionPayloadDict = [String: Any]()
         if let screenName = screenName, !screenName.isEmpty {
-            actionPayloadDict[MoEPluginConstants.General.type] = MoEPluginConstants.Push.screenName
-            actionPayloadDict[MoEPluginConstants.General.value] = screenName
+            actionPayloadDict[MoEngagePluginConstants.General.type] = MoEngagePluginConstants.Push.screenName
+            actionPayloadDict[MoEngagePluginConstants.General.value] = screenName
         }
         
         if let kvPairs = kvPairs, !kvPairs.isEmpty {
-            actionPayloadDict[MoEPluginConstants.General.kvPair] = kvPairs
+            actionPayloadDict[MoEngagePluginConstants.General.kvPair] = kvPairs
         }
         
         var clickedActionDict = [String: Any]()
         if !actionPayloadDict.isEmpty {
-            clickedActionDict[MoEPluginConstants.General.type] = MoEPluginConstants.General.navigation
-            clickedActionDict[MoEPluginConstants.General.payload] = actionPayloadDict
+            clickedActionDict[MoEngagePluginConstants.General.type] = MoEngagePluginConstants.General.navigation
+            clickedActionDict[MoEngagePluginConstants.General.payload] = actionPayloadDict
         }
         
-        let data = [MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS, MoEPluginConstants.General.payload: userInfo, MoEPluginConstants.Push.clickedAction: clickedActionDict] as [String: Any]
+        let data = [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS, MoEngagePluginConstants.General.payload: userInfo, MoEngagePluginConstants.Push.clickedAction: clickedActionDict] as [String: Any]
         
         let accountMeta = fetchAccountPayload(identifier: identifier)
-        let payload = [MoEPluginConstants.General.data: data, MoEPluginConstants.General.accountMeta: accountMeta]
+        let payload = [MoEngagePluginConstants.General.data: data, MoEngagePluginConstants.General.accountMeta: accountMeta]
         return payload
     }
 }
 
 extension MOInAppCampaign {
     func fetchInAppPaylaod() -> [String: Any] {
-        let inAppPayload = [MoEPluginConstants.General.campaignName: campaign_name, MoEPluginConstants.General.campaignId: campaign_id, MoEPluginConstants.InApp.campaignContext: campaign_context, MoEPluginConstants.General.platform: MoEPluginConstants.General.iOS] as [String: Any]
+        let inAppPayload = [MoEngagePluginConstants.General.campaignName: campaign_name, MoEngagePluginConstants.General.campaignId: campaign_id, MoEngagePluginConstants.InApp.campaignContext: campaign_context, MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS] as [String: Any]
         return inAppPayload
     }
 }
@@ -126,15 +126,15 @@ extension MOInAppAction {
         var actionPayload = [String: Any]()
         
         if actionType == NavigationAction {
-            actionPayload[MoEPluginConstants.General.navigationType] = MoEPluginConstants.InApp.screen
+            actionPayload[MoEngagePluginConstants.General.navigationType] = MoEngagePluginConstants.InApp.screen
         }
         
         if !screenName.isEmpty {
-            actionPayload[MoEPluginConstants.General.value] = screenName
+            actionPayload[MoEngagePluginConstants.General.value] = screenName
         }
         
         if !keyValuePairs.isEmpty {
-            actionPayload[MoEPluginConstants.General.kvPair] = keyValuePairs
+            actionPayload[MoEngagePluginConstants.General.kvPair] = keyValuePairs
         }
         
         return actionPayload
@@ -146,15 +146,15 @@ extension MOInAppSelfHandledCampaign {
     convenience init(campaignPayload: [String: Any]) {
         self.init()
         
-        if let campaign_id = campaignPayload[MoEPluginConstants.InApp.campaignId] as? String {
+        if let campaign_id = campaignPayload[MoEngagePluginConstants.InApp.campaignId] as? String {
             self.campaign_id = campaign_id
         }
         
-        if let campaign_name = campaignPayload[MoEPluginConstants.InApp.campaignName] as? String {
+        if let campaign_name = campaignPayload[MoEngagePluginConstants.InApp.campaignName] as? String {
             self.campaign_name = campaign_name
         }
         
-        if let campaign_context = campaignPayload[MoEPluginConstants.InApp.campaignContext] as? [String: Any] {
+        if let campaign_context = campaignPayload[MoEngagePluginConstants.InApp.campaignContext] as? [String: Any] {
             self.campaign_context = campaign_context
         }
     }

@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name         = 'MoEPluginGeofence'
+    s.name         = 'MoEngagePluginGeofence'
     s.version      = '1.0.0'
     s.summary      = 'MoEngage Plugin Base for Hybrid SDKs'
     s.description  = <<-DESC
@@ -19,9 +19,9 @@ Pod::Spec.new do |s|
                         :tag => 'MoEPluginGeofence-' + s.version.to_s
                     }
 
-    s.source_files = 'MoEPluginGeofence/**/*'
+    s.source_files = 'MoEngagePluginGeofence/**/*'
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
     s.dependency 'MoEngageGeofence', '>= 4.3.0', '< 4.4.0'
-    s.dependency 'MoEPluginBase', '>= 3.0.0', '< 3.1.0'
+    s.dependency 'MoEngagePluginBase', '>= 3.0.0', '< 3.1.0'
 end
