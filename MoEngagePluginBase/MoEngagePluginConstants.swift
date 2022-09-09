@@ -104,27 +104,4 @@ public struct MoEngagePluginConstants {
         public static let pushTokenGenerated = "MoEPushTokenGenerated"
         public static let pushClicked = "MoEPushClicked"
     }
-    
-    // Inbox
-    public struct Inbox {
-        public static let unClickedCount = "unClickedCount"
-        public static let title = "title"
-        public static let subtitle = "subtitle"
-        public static let message = "message"
-        public static let text = "text"
-        public static let type = "type"
-        public static let url = "url"
-        public static let media = "media"
-        public static let isClicked = "isClicked"
-        public static let receivedTime = "receivedTime"
-        public static let expiry = "expiry"
-        public static let action = "action"
-        public static let messages = "messages"
-        public static let moengage = "moengage"
-        public static let mediaType = "media-type"
-        public static let deepLink = "deepLink"
-        public static let richLanding = "richLanding"
-        public static let screenName = "screenName"
-    }
-
 }

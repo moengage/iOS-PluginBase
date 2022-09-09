@@ -9,23 +9,23 @@ import Foundation
 
 final class MoEngagePluginMessageInstanceProvider {
     
-    private var messageHandlers = [String: Any]()
+    private var messageHandlers = [String: MoEngagePluginMessageHandler]()
     static let sharedInstance = MoEngagePluginMessageInstanceProvider()
+    
+    private var syncQueue = DispatchQueue(label: "com.moengage.pluginBase.instanceProvider")
     
     private init() {
     }
     
     func getMessageQueueHandler(identifier: String) -> MoEngagePluginMessageHandler? {
-        if identifier.isEmpty {
-            return nil
-        }
-        
-        if let messageHandler = messageHandlers[identifier] as? MoEngagePluginMessageHandler {
-            return messageHandler
-        } else {
-            let messageHandler  = MoEngagePluginMessageHandler(identifier: identifier)
-            messageHandlers[identifier] = messageHandler
-            return messageHandler
+        syncQueue.sync {
+            if let messageHandler = messageHandlers[identifier] {
+                return messageHandler
+            } else {
+                let messageHandler  = MoEngagePluginMessageHandler(identifier: identifier)
+                messageHandlers[identifier] = messageHandler
+                return messageHandler
+            }
         }
     }
 }

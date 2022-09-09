@@ -16,25 +16,32 @@ import MoEngagePluginBase
     }
     
     @objc public func getInboxMessages(_ inboxDict: [String: Any], completionHandler: @escaping(([String: Any]) -> Void)) {
-        guard let identifier = MoEngagePluginInboxBridge.fetchIdentifier(attribute: inboxDict) else { return }
-        MOInbox.sharedInstance.getInboxMessages(forAppID: identifier) { inboxMessages, _ in
-            let payload = MoEngagePluginInboxBridge.getInboxPayload(inboxMessages: inboxMessages, identifier: identifier)
+        guard let identifier = fetchIdentifierFromPayload(attribute: inboxDict) else { return }
+        MOInbox.sharedInstance.getInboxMessages(forAppID: identifier) { [weak self] inboxMessages, _ in
+            guard let self = self
+            else
+            {
+                completionHandler([:])
+                return
+            }
+            
+            let payload = self.inboxEntryToJSON(inboxMessages: inboxMessages, identifier: identifier)
             completionHandler(payload)
         }
         
     }
     
     @objc public func trackInboxClick(_ inboxDict: [String: Any]) {
-        guard let identifier = MoEngagePluginInboxBridge.fetchIdentifier(attribute: inboxDict),
-              let campaignID = MoEngagePluginInboxBridge.getCampaignIdForStats(inboxDict: inboxDict)
+        guard let identifier = fetchIdentifierFromPayload(attribute: inboxDict),
+              let campaignID = fetchCampaignIdFromPayload(inboxDict: inboxDict)
         else { return }
         
         MOInbox.sharedInstance.trackInboxClick(withCampaignID: campaignID, forAppID: identifier)
     }
     
     @objc public func deleteInboxEntry(_ inboxDict: [String: Any]) {
-        guard let identifier = MoEngagePluginInboxBridge.fetchIdentifier(attribute: inboxDict),
-              let campaignID = MoEngagePluginInboxBridge.getCampaignIdForStats(inboxDict: inboxDict)
+        guard let identifier = fetchIdentifierFromPayload(attribute: inboxDict),
+              let campaignID = fetchCampaignIdFromPayload(inboxDict: inboxDict)
         else { return }
         
         MOInbox.sharedInstance.removeInboxMessage(withCampaignID: campaignID, forAppID: identifier)
@@ -42,11 +49,17 @@ import MoEngagePluginBase
     
     @objc public func getUnreadMessageCount(_ inboxDict: [String: Any], completionHandler: @escaping(([String: Any]) -> Void)) {
         
-        guard let identifier = MoEngagePluginInboxBridge.fetchIdentifier(attribute: inboxDict) else { return }
+        guard let identifier = fetchIdentifierFromPayload(attribute: inboxDict) else { return }
         
-        MOInbox.sharedInstance.getUnreadNotificationCount(forAppID: identifier) { count, _ in
+        MOInbox.sharedInstance.getUnreadNotificationCount(forAppID: identifier) { [weak self] count, _ in
+            guard let self = self
+            else
+            {
+                completionHandler([:])
+                return
+            }
             
-            let payload = MoEngagePluginInboxBridge.getUnreadCountPayload(count: count, identifier: identifier)
+            let payload = self.createUnreadCountPayload(count: count, identifier: identifier)
             completionHandler(payload)
         }
     }

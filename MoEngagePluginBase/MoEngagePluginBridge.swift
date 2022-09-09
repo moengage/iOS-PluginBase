@@ -16,29 +16,29 @@ import MoEngageSDK
     }
     
     @objc public func pluginInitialized(_ accountInfo: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: accountInfo),
-           let messageHandler = MoEngagePluginBridge.fetchMessageQueueHandler(identifier: identifier) {
+        if let identifier = fetchIdentifierFromPayload(attribute: accountInfo),
+           let messageHandler = fetchMessageQueueHandler(identifier: identifier) {
             messageHandler.flushAllMessages()
         }
     }
     
     @objc public func setPluginBridgeDelegate(_ delegate: MoEngagePluginBridgeDelegate, identifier: String) {
         if !identifier.isEmpty {
-            let messageHandler = MoEngagePluginBridge.fetchMessageQueueHandler(identifier: identifier)
+            let messageHandler = fetchMessageQueueHandler(identifier: identifier)
             messageHandler?.setBridgeDelegate(delegate: delegate)
         }
     }
     
     @objc public func setPluginBridgeDelegate(_ delegate: MoEngagePluginBridgeDelegate, payload: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: payload) {
+        if let identifier = fetchIdentifierFromPayload(attribute: payload) {
           setPluginBridgeDelegate(delegate, identifier: identifier)
         }
     }
     
     // MARK: Analytics
     @objc public func updateSDKState(_ sdkState: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: sdkState),
-           let sdkState = MoEngagePluginBridge.updateSDKState(sdkState: sdkState) {
+        if let identifier = fetchIdentifierFromPayload(attribute: sdkState),
+           let sdkState = fetchSDKState(payload: sdkState) {
             if sdkState {
                 MoEngage.sharedInstance().enableSDK(forAppID: identifier)
             } else {
@@ -48,11 +48,11 @@ import MoEngageSDK
     }
     
     @objc public func optOutDataTracking(_ dataTrack: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: dataTrack),
-           let (type, value) = MoEngagePluginBridge.optOutDataTracking(dataTrack: dataTrack) {
+        if let identifier = fetchIdentifierFromPayload(attribute: dataTrack),
+           let optOutPayload = createOptOutData(payload: dataTrack) {
             
-            if type == MoEngagePluginConstants.SDKState.data {
-                if value {
+            if optOutPayload.type == MoEngagePluginConstants.SDKState.data {
+                if optOutPayload.value {
                     MOAnalytics.sharedInstance.disableDataTracking(forAppID: identifier)
                 } else {
                     MOAnalytics.sharedInstance.enableDataTracking(forAppID: identifier)
@@ -62,34 +62,34 @@ import MoEngageSDK
     }
     
     @objc public func setAppStatus(_ appStatus: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: appStatus),
-           let appStatus = MoEngagePluginBridge.setAppStatus(appStatus: appStatus) {
+        if let identifier = fetchIdentifierFromPayload(attribute: appStatus),
+           let appStatus = fetchAppStatus(payload: appStatus) {
             MoEngage.sharedInstance().appStatus(appStatus, forAppID: identifier)
         }
     }
     
     @objc public func setAlias(_ alias: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: alias),
-           let alias = MoEngagePluginBridge.setAlias(alias: alias) {
+        if let identifier = fetchIdentifierFromPayload(attribute: alias),
+           let alias = fetchAlias(payload: alias) {
             MOAnalytics.sharedInstance.setAlias(alias, forAppID: identifier)
         }
     }
     
     @objc public func setUserAttribute(_ userAttribute: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: userAttribute),
-           let (type, name, value) = MoEngagePluginBridge.setUserAttribute(userAttribute: userAttribute) {
-            switch type {
+        if let identifier = fetchIdentifierFromPayload(attribute: userAttribute),
+           let userAttribute = createUserAttributeData(payload: userAttribute) {
+            switch userAttribute.type {
             case MoEngagePluginConstants.UserAttribute.general:
-                MOAnalytics.sharedInstance.setUserAttribute(value, withAttributeName: name, forAppID: identifier)
+                MOAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
                 
             case MoEngagePluginConstants.UserAttribute.timestamp:
-                if let timeStamp = value as? String {
-                    MOAnalytics.sharedInstance.setUserAttributeISODate(timeStamp, withAttributeName: name, forAppID: identifier)
+                if let timeStamp = userAttribute.value as? String {
+                    MOAnalytics.sharedInstance.setUserAttributeISODate(timeStamp, withAttributeName: userAttribute.name, forAppID: identifier)
                 }
                 
             case MoEngagePluginConstants.UserAttribute.location:
-                if let geoLocation = value as? MOGeoLocation {
-                    MOAnalytics.sharedInstance.setLocation(geoLocation, withAttributeName: name, forAppID: identifier)
+                if let geoLocation = userAttribute.value as? MOGeoLocation {
+                    MOAnalytics.sharedInstance.setLocation(geoLocation, withAttributeName: userAttribute.name, forAppID: identifier)
                 }
                 
             default:
@@ -99,59 +99,59 @@ import MoEngageSDK
     }
     
     @objc public func trackEvent(_ eventAttribute: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: eventAttribute),
-           let (eventName, properties) = MoEngagePluginBridge.trackEvent(eventAttribute: eventAttribute) {
-            MOAnalytics.sharedInstance.trackEvent(eventName, withProperties: properties, forAppID: identifier)
+        if let identifier = fetchIdentifierFromPayload(attribute: eventAttribute),
+           let event = createEventData(payload: eventAttribute) {
+            MOAnalytics.sharedInstance.trackEvent(event.name, withProperties: event.properties, forAppID: identifier)
         }
     }
     
     @objc public func resetUser(_ userAttribute: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: userAttribute) {
+        if let identifier = fetchIdentifierFromPayload(attribute: userAttribute) {
             MOAnalytics.sharedInstance.resetUser(forAppID: identifier)
         }
     }
     
     // MARK: InApp
     @objc public func showInApp(_ inApp: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: inApp) {
+        if let identifier = fetchIdentifierFromPayload(attribute: inApp) {
             MOInApp.sharedInstance().showInAppCampaign(forAppID: identifier)
         }
     }
     
     @objc public func getSelfHandledInApp(_ inApp: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: inApp) {
-            MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { selfHandledCampaign, _
+        if let identifier = fetchIdentifierFromPayload(attribute: inApp) {
+            MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { [weak self] selfHandledCampaign, _
                 in
-                let messageHandler = MoEngagePluginBridge.fetchMessageQueueHandler(identifier: identifier)
-                let message = MoEngagePluginBridge.fetchSelfHandledPayload(selfHandledCampaign: selfHandledCampaign, identifier: identifier)
+                let messageHandler = self?.fetchMessageQueueHandler(identifier: identifier)
+                let message = self?.selfHandledCampaignToJSON(selfHandledCampaign: selfHandledCampaign, identifier: identifier)
                 messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.inAppSelfHandled, message: message)
             }
         }
     }
     
     @objc public func setInAppContext(_ context: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: context),
-           let contexts = MoEngagePluginBridge.setInAppContext(context: context) {
+        if let identifier = fetchIdentifierFromPayload(attribute: context),
+           let contexts = fetchContextData(payload: context) {
             MOInApp.sharedInstance().setCurrentInAppContexts(contexts, forAppID: identifier)
         }
     }
     
     @objc public func resetInAppContext(_ context: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: context) {
+        if let identifier = fetchIdentifierFromPayload(attribute: context) {
             MOInApp.sharedInstance().invalidateInAppContexts(forAppID: identifier)
         }
     }
     
     @objc public func updateSelfHandledImpression(_ inApp: [String: Any]) {
-        if let identifier = MoEngagePluginBridge.fetchIdentifier(attribute: inApp),
-           let (selfHandledCampaign, impressionType) = MoEngagePluginBridge.updateSelfHandledImpression(inApp: inApp) {
-            switch impressionType {
+        if let identifier = fetchIdentifierFromPayload(attribute: inApp),
+           let selfHandledImpressionPayload = createSelfHandledImpressionData(payload: inApp) {
+            switch selfHandledImpressionPayload.impressionType {
             case MoEngagePluginConstants.InApp.impression:
-                MOInApp.sharedInstance().selfHandledShown(withCampaignInfo: selfHandledCampaign, forAppID: identifier)
+                MOInApp.sharedInstance().selfHandledShown(withCampaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppID: identifier)
             case MoEngagePluginConstants.InApp.click:
-                MOInApp.sharedInstance().selfHandledClicked(withCampaignInfo: selfHandledCampaign, forAppID: identifier)
+                MOInApp.sharedInstance().selfHandledClicked(withCampaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppID: identifier)
             case MoEngagePluginConstants.InApp.dismissed:
-                MOInApp.sharedInstance().selfHandledDismissed(withCampaignInfo: selfHandledCampaign, forAppID: identifier)
+                MOInApp.sharedInstance().selfHandledDismissed(withCampaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppID: identifier)
             default:
                 break
             }

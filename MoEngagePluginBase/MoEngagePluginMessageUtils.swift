@@ -12,11 +12,11 @@ import Foundation
 }
 
 protocol MoEngagePluginMessageDelegate {
-    static func fetchMessageQueueHandler(identifier: String) -> MoEngagePluginMessageHandler?
+    func fetchMessageQueueHandler(identifier: String) -> MoEngagePluginMessageHandler?
 }
 
 extension MoEngagePluginMessageDelegate {
-    static func fetchMessageQueueHandler(identifier: String) -> MoEngagePluginMessageHandler? {
+    func fetchMessageQueueHandler(identifier: String) -> MoEngagePluginMessageHandler? {
         return MoEngagePluginMessageInstanceProvider.sharedInstance.getMessageQueueHandler(identifier: identifier)
     }
 }

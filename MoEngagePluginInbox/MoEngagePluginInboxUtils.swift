@@ -11,64 +11,64 @@ import MoEngagePluginBase
 import MoEngageSDK
 
 protocol MoEngagePluginInboxUtils: MoEngagePluginUtils {
-    static func getInboxPayload(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any]
-    static func getUnreadCountPayload(count: Int, identifier: String) -> [String: Any]
-    static func getCampaignIdForStats(inboxDict: [String: Any]) -> String?
+    func inboxEntryToJSON(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any]
+    func createUnreadCountPayload(count: Int, identifier: String) -> [String: Any]
+    func fetchCampaignIdFromPayload(inboxDict: [String: Any]) -> String?
 }
 
 extension MoEngagePluginInboxUtils {
     
-    static func getInboxPayload(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any] {
-        let accountMeta = fetchAccountPayload(identifier: identifier)
+    func inboxEntryToJSON(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any] {
+        let accountMeta = createAccountPayload(identifier: identifier)
         var messages = [[String: Any]]()
         
         for inboxMessage in inboxMessages {
             var message = [String: Any]()
             
             message[MoEngagePluginConstants.General.campaignId] = inboxMessage.campaignID
-            message[MoEngagePluginConstants.Inbox.text] = getTextPayload(inboxMessage: inboxMessage)
-            message[MoEngagePluginConstants.Inbox.media] = getMediaPayload(inboxMessage: inboxMessage)
-            message[MoEngagePluginConstants.Inbox.isClicked] = inboxMessage.isRead
-            message[MoEngagePluginConstants.Inbox.receivedTime] = MODateUtils.getString(forDate: inboxMessage.receivedDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
-            message[MoEngagePluginConstants.Inbox.expiry] = MODateUtils.getString(forDate: inboxMessage.inboxExpiryDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
+            message[MoEngagePluginInboxConstants.Inbox.text] = createTextPayload(inboxMessage: inboxMessage)
+            message[MoEngagePluginInboxConstants.Inbox.media] = createMediaPayload(inboxMessage: inboxMessage)
+            message[MoEngagePluginInboxConstants.Inbox.isClicked] = inboxMessage.isRead
+            message[MoEngagePluginInboxConstants.Inbox.receivedTime] = MODateUtils.getString(forDate: inboxMessage.receivedDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
+            message[MoEngagePluginInboxConstants.Inbox.expiry] = MODateUtils.getString(forDate: inboxMessage.inboxExpiryDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             message[MoEngagePluginConstants.General.payload] = inboxMessage.notificationPayloadDict
-            message[MoEngagePluginConstants.Inbox.action] = getActionPayload(inboxMessage: inboxMessage)
+            message[MoEngagePluginInboxConstants.Inbox.action] = createActionPayload(inboxMessage: inboxMessage)
             
             messages.append(message)
         }
         
-        let data = [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS, MoEngagePluginConstants.Inbox.messages: messages] as [String: Any]
+        let data = [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS, MoEngagePluginInboxConstants.Inbox.messages: messages] as [String: Any]
         return [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: data]
     }
     
-    static func getTextPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
+     func createTextPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
         var textPayload = [String: Any]()
         
-        textPayload[MoEngagePluginConstants.Inbox.title] = inboxMessage.notificationTitle
-        textPayload[MoEngagePluginConstants.Inbox.subtitle] = inboxMessage.notificationSubTitle
-        textPayload[MoEngagePluginConstants.Inbox.message] = inboxMessage.notificationBody
+        textPayload[MoEngagePluginInboxConstants.Inbox.title] = inboxMessage.notificationTitle
+        textPayload[MoEngagePluginInboxConstants.Inbox.subtitle] = inboxMessage.notificationSubTitle
+        textPayload[MoEngagePluginInboxConstants.Inbox.message] = inboxMessage.notificationBody
         
         return textPayload
     }
     
-    static func getMediaPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
+    func createMediaPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
         var mediaPayload = [String: Any]()
         
-        let moengageDict = inboxMessage.notificationPayloadDict[MoEngagePluginConstants.Inbox.moengage] as? [String: Any]
-        mediaPayload[MoEngagePluginConstants.Inbox.type] = moengageDict?[MoEngagePluginConstants.Inbox.mediaType]
-        mediaPayload[MoEngagePluginConstants.Inbox.url] = inboxMessage.notificationMediaURL
+        let moengageDict = inboxMessage.notificationPayloadDict[MoEngagePluginInboxConstants.Inbox.moengage] as? [String: Any]
+        mediaPayload[MoEngagePluginInboxConstants.Inbox.type] = moengageDict?[MoEngagePluginInboxConstants.Inbox.mediaType]
+        mediaPayload[MoEngagePluginInboxConstants.Inbox.url] = inboxMessage.notificationMediaURL
         
         return mediaPayload
     }
     
-    static func getActionPayload(inboxMessage: MOInboxEntry) -> [[String: Any]] {
+    func createActionPayload(inboxMessage: MOInboxEntry) -> [[String: Any]] {
         var actionDict = [[String: Any]]()
         
         if let deepLinkURL = inboxMessage.deepLinkURL, !deepLinkURL.isEmpty {
             var deepLinkAction = [String: Any]()
             
             deepLinkAction[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.General.navigation
-            deepLinkAction[MoEngagePluginConstants.General.navigationType] = MoEngagePluginConstants.Inbox.deepLink
+            deepLinkAction[MoEngagePluginConstants.General.navigationType] = MoEngagePluginInboxConstants.Inbox.deepLink
             deepLinkAction[MoEngagePluginConstants.General.value] = deepLinkURL
             deepLinkAction[MoEngagePluginConstants.General.kvPair] = inboxMessage.screenDataDict
             
@@ -79,7 +79,7 @@ extension MoEngagePluginInboxUtils {
             var richLandingAction = [String: Any]()
             
             richLandingAction[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.General.navigation
-            richLandingAction[MoEngagePluginConstants.General.navigationType] = MoEngagePluginConstants.Inbox.richLanding
+            richLandingAction[MoEngagePluginConstants.General.navigationType] = MoEngagePluginInboxConstants.Inbox.richLanding
             richLandingAction[MoEngagePluginConstants.General.value] = richLandingURL
             richLandingAction[MoEngagePluginConstants.General.kvPair] = inboxMessage.screenDataDict
             
@@ -90,7 +90,7 @@ extension MoEngagePluginInboxUtils {
             var navigateToScreenAction = [String: Any]()
             
             navigateToScreenAction[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.General.navigation
-            navigateToScreenAction[MoEngagePluginConstants.General.navigationType] = MoEngagePluginConstants.Inbox.screenName
+            navigateToScreenAction[MoEngagePluginConstants.General.navigationType] = MoEngagePluginInboxConstants.Inbox.screenName
             navigateToScreenAction[MoEngagePluginConstants.General.value] = screenName
             navigateToScreenAction[MoEngagePluginConstants.General.kvPair] = inboxMessage.screenDataDict
             
@@ -100,13 +100,13 @@ extension MoEngagePluginInboxUtils {
         return actionDict
     }
     
-    static func getUnreadCountPayload(count: Int, identifier: String) -> [String: Any] {
-        let accountMeta = fetchAccountPayload(identifier: identifier)
-        let data = [MoEngagePluginConstants.Inbox.unClickedCount: count]
+    func createUnreadCountPayload(count: Int, identifier: String) -> [String: Any] {
+        let accountMeta = createAccountPayload(identifier: identifier)
+        let data = [MoEngagePluginInboxConstants.Inbox.unClickedCount: count]
         return [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: data]
     }
     
-    static func getCampaignIdForStats(inboxDict: [String: Any]) -> String? {
+    func fetchCampaignIdFromPayload(inboxDict: [String: Any]) -> String? {
         if let data = inboxDict[MoEngagePluginConstants.General.data] as? [String: Any],
            let campaignID = data[MoEngagePluginConstants.General.campaignId] as? String,
            !campaignID.isEmpty {

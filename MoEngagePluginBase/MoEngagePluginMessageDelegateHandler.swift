@@ -13,7 +13,7 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate,
     private var identifier: String
     
     private var messageHandler: MoEngagePluginMessageHandler? {
-        return MoEngagePluginMessageDelegateHandler.fetchMessageQueueHandler(identifier: identifier)
+        return fetchMessageQueueHandler(identifier: identifier)
     }
     
     init(identifier: String) {
@@ -39,12 +39,12 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate,
     }
     
     func notificationRegistered(withDeviceToken deviceToken: String) {
-        let message = MoEngagePluginMessageDelegateHandler.fetchTokenPayload(deviceToken: deviceToken)
+        let message = createTokenPayload(deviceToken: deviceToken)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.pushTokenGenerated, message: message)
     }
     
     func notificationClicked(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any]) {
-        let message = MoEngagePluginMessageDelegateHandler.fetchPushClickedPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
+        let message = createPushClickPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.pushClicked, message: message)
     }
     

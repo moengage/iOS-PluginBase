@@ -244,7 +244,7 @@
                 },
                 @"data": @{
                     @"type": @"data",
-                    @"state": @0
+                    @"state": @1
                 }
             };
             [[MoEngagePluginBridge sharedInstance] optOutDataTracking: optOutDataDict];
@@ -258,7 +258,7 @@
                 },
                 @"data": @{
                     @"type": @"data",
-                    @"state": @1
+                    @"state": @0
                 }
             };
             [[MoEngagePluginBridge sharedInstance] optOutDataTracking:optOutDataDict];
