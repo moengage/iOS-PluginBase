@@ -11,12 +11,8 @@ import Foundation
     @objc func sendMessage(event: String, message: [String: Any])
 }
 
-protocol MoEngagePluginMessageDelegate {
-    func fetchMessageQueueHandler(identifier: String) -> MoEngagePluginMessageHandler?
-}
-
-extension MoEngagePluginMessageDelegate {
-    func fetchMessageQueueHandler(identifier: String) -> MoEngagePluginMessageHandler? {
+class MoEngagePluginMessageDelegate {
+    static func fetchMessageQueueHandler(identifier: String) -> MoEngagePluginMessageHandler? {
         return MoEngagePluginMessageInstanceProvider.sharedInstance.getMessageQueueHandler(identifier: identifier)
     }
 }

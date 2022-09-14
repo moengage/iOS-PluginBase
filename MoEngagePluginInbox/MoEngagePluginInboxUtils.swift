@@ -10,16 +10,10 @@ import MoEngageInbox
 import MoEngagePluginBase
 import MoEngageSDK
 
-protocol MoEngagePluginInboxUtils: MoEngagePluginUtils {
-    func inboxEntryToJSON(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any]
-    func createUnreadCountPayload(count: Int, identifier: String) -> [String: Any]
-    func fetchCampaignIdFromPayload(inboxDict: [String: Any]) -> String?
-}
-
-extension MoEngagePluginInboxUtils {
+class  MoEngagePluginInboxUtils {
     
-    func inboxEntryToJSON(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any] {
-        let accountMeta = createAccountPayload(identifier: identifier)
+    static func inboxEntryToJSON(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any] {
+        let accountMeta = MoEngagePluginUtils.createAccountPayload(identifier: identifier)
         var messages = [[String: Any]]()
         
         for inboxMessage in inboxMessages {
@@ -32,7 +26,7 @@ extension MoEngagePluginInboxUtils {
             message[MoEngagePluginInboxConstants.Inbox.receivedTime] = MODateUtils.getString(forDate: inboxMessage.receivedDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             message[MoEngagePluginInboxConstants.Inbox.expiry] = MODateUtils.getString(forDate: inboxMessage.inboxExpiryDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             message[MoEngagePluginConstants.General.payload] = inboxMessage.notificationPayloadDict
-            message[MoEngagePluginInboxConstants.Inbox.action] = createActionPayload(inboxMessage: inboxMessage)
+            message[MoEngagePluginInboxConstants.Inbox.action] = MoEngagePluginInboxUtils.createActionPayload(inboxMessage: inboxMessage)
             
             messages.append(message)
         }
@@ -41,7 +35,7 @@ extension MoEngagePluginInboxUtils {
         return [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: data]
     }
     
-     func createTextPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
+    static func createTextPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
         var textPayload = [String: Any]()
         
         textPayload[MoEngagePluginInboxConstants.Inbox.title] = inboxMessage.notificationTitle
@@ -51,7 +45,7 @@ extension MoEngagePluginInboxUtils {
         return textPayload
     }
     
-    func createMediaPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
+    static func createMediaPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
         var mediaPayload = [String: Any]()
         
         let moengageDict = inboxMessage.notificationPayloadDict[MoEngagePluginInboxConstants.Inbox.moengage] as? [String: Any]
@@ -61,7 +55,7 @@ extension MoEngagePluginInboxUtils {
         return mediaPayload
     }
     
-    func createActionPayload(inboxMessage: MOInboxEntry) -> [[String: Any]] {
+    static func createActionPayload(inboxMessage: MOInboxEntry) -> [[String: Any]] {
         var actionDict = [[String: Any]]()
         
         if let deepLinkURL = inboxMessage.deepLinkURL, !deepLinkURL.isEmpty {
@@ -100,13 +94,13 @@ extension MoEngagePluginInboxUtils {
         return actionDict
     }
     
-    func createUnreadCountPayload(count: Int, identifier: String) -> [String: Any] {
-        let accountMeta = createAccountPayload(identifier: identifier)
+    static func createUnreadCountPayload(count: Int, identifier: String) -> [String: Any] {
+        let accountMeta = MoEngagePluginUtils.createAccountPayload(identifier: identifier)
         let data = [MoEngagePluginInboxConstants.Inbox.unClickedCount: count]
         return [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: data]
     }
     
-    func fetchCampaignIdFromPayload(inboxDict: [String: Any]) -> String? {
+    static func fetchCampaignIdFromPayload(inboxDict: [String: Any]) -> String? {
         if let data = inboxDict[MoEngagePluginConstants.General.data] as? [String: Any],
            let campaignID = data[MoEngagePluginConstants.General.campaignId] as? String,
            !campaignID.isEmpty {

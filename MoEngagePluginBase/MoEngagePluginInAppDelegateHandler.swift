@@ -8,14 +8,14 @@
 import Foundation
 import MoEngageInApps
 
-final class MoEngagePluginInAppDelegateHandler: NSObject, MOInAppNativDelegate, MoEngagePluginUtils, MoEngagePluginMessageDelegate {
+final class MoEngagePluginInAppDelegateHandler: NSObject, MOInAppNativDelegate {
     
     private static var handlers = [String: Any]()
 
     private var identifier: String
     
     private var messageHandler: MoEngagePluginMessageHandler? {
-        return fetchMessageQueueHandler(identifier: identifier)
+        return MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier)
     }
     
     init(identifier: String) {
@@ -31,22 +31,22 @@ final class MoEngagePluginInAppDelegateHandler: NSObject, MOInAppNativDelegate, 
     }
 
     func inAppShown(withCampaignInfo inappCampaign: MOInAppCampaign, for accountMeta: MOAccountMeta) {
-        let message = inAppCampaignToJSON(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
+        let message = MoEngagePluginUtils.inAppCampaignToJSON(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.inAppShown, message: message)
     }
     
     func inAppDismissed(withCampaignInfo inappCampaign: MOInAppCampaign, for accountMeta: MOAccountMeta) {
-        let message = inAppCampaignToJSON(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
+        let message = MoEngagePluginUtils.inAppCampaignToJSON(inAppCampaign: inappCampaign, identifier: accountMeta.appID)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.inAppDismissed, message: message)
     }
     
     func inAppClicked(withCampaignInfo inappCampaign: MOInAppCampaign, andCustomActionInfo customAction: MOInAppAction, for accountMeta: MOAccountMeta) {
-        let message = inAppCampaignToJSON(inAppCampaign: inappCampaign, inAppAction: customAction, identifier: accountMeta.appID)
+        let message = MoEngagePluginUtils.inAppCampaignToJSON(inAppCampaign: inappCampaign, inAppAction: customAction, identifier: accountMeta.appID)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.inAppCustomAction, message: message)
     }
     
     func inAppClicked(withCampaignInfo inappCampaign: MOInAppCampaign, andNavigationActionInfo navigationAction: MOInAppAction, for accountMeta: MOAccountMeta) {
-        let message = inAppCampaignToJSON(inAppCampaign: inappCampaign, inAppAction: navigationAction, identifier: accountMeta.appID)
+        let message = MoEngagePluginUtils.inAppCampaignToJSON(inAppCampaign: inappCampaign, inAppAction: navigationAction, identifier: accountMeta.appID)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.inAppClicked, message: message)
     }
     

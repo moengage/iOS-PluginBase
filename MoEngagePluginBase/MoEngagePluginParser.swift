@@ -9,20 +9,8 @@ import Foundation
 import MoEngageSDK
 import MoEngageInApps
 
-protocol MoEngagePluginParser {
-    func fetchSDKState(payload: [String: Any]) -> Bool?
-    func fetchAppStatus(payload: [String: Any]) -> AppStatus?
-    func fetchAlias(payload: [String: Any]) -> String?
-    func fetchContextData(payload: [String: Any]) -> [String]?
-
-    func createOptOutData(payload: [String: Any]) -> MoEngagePluginOptOutData?
-    func createUserAttributeData(payload: [String: Any]) -> MoEngagePluginUserAttributeData?
-    func createEventData(payload: [String: Any]) -> MoEngagePluginEventData?
-    func createSelfHandledImpressionData(payload: [String: Any]) -> MoEngagePluginSelfHandledImpressionData?
-}
-
-extension MoEngagePluginParser {
-    func createOptOutData(payload: [String: Any]) -> MoEngagePluginOptOutData? {
+class MoEngagePluginParser {
+    static func mapJsonToOptOutData(payload: [String: Any]) -> MoEngagePluginOptOutData? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let type = dataDict[MoEngagePluginConstants.General.type] as? String,
               let state = dataDict[MoEngagePluginConstants.SDKState.state] as? Bool
@@ -33,7 +21,7 @@ extension MoEngagePluginParser {
         return MoEngagePluginOptOutData(type: type, value: state)
     }
     
-    func fetchAppStatus(payload: [String: Any]) -> AppStatus? {
+    static func fetchAppStatus(payload: [String: Any]) -> AppStatus? {
         if let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
            let appStatus = dataDict[MoEngagePluginConstants.AppStatus.appStatus] as? String,
            !appStatus.isEmpty {
@@ -51,7 +39,7 @@ extension MoEngagePluginParser {
         return nil
     }
     
-    func fetchAlias(payload: [String: Any]) -> String? {
+    static func fetchAlias(payload: [String: Any]) -> String? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let aliasValue = dataDict[MoEngagePluginConstants.UserAttribute.alias] as? String,
               !aliasValue.isEmpty
@@ -62,7 +50,7 @@ extension MoEngagePluginParser {
         return aliasValue
     }
     
-    func createUserAttributeData(payload: [String: Any]) -> MoEngagePluginUserAttributeData? {
+    static func mapJsonToUserAttributeData(payload: [String: Any]) -> MoEngagePluginUserAttributeData? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let type = dataDict[MoEngagePluginConstants.General.type] as? String,
               let attributeName = dataDict[MoEngagePluginConstants.UserAttribute.attributeName] as? String
@@ -85,7 +73,7 @@ extension MoEngagePluginParser {
         return nil
     }
     
-    func createEventData(payload: [String: Any]) -> MoEngagePluginEventData? {
+    static func mapJsonToEventData(payload: [String: Any]) -> MoEngagePluginEventData? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let eventName = dataDict[MoEngagePluginConstants.EventTracking.eventName] as? String
         else {
@@ -102,7 +90,7 @@ extension MoEngagePluginParser {
         return MoEngagePluginEventData(name: eventName, properties: properties)
     }
     
-    func fetchContextData(payload: [String: Any]) -> [String]? {
+    static func fetchContextData(payload: [String: Any]) -> [String]? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let contexts = dataDict[MoEngagePluginConstants.InApp.contexts] as? [String]
         else {
@@ -112,7 +100,7 @@ extension MoEngagePluginParser {
         return contexts
     }
     
-    func createSelfHandledImpressionData(payload: [String: Any]) -> MoEngagePluginSelfHandledImpressionData? {
+    static func mapJsonToSelfHandledImpressionData(payload: [String: Any]) -> MoEngagePluginSelfHandledImpressionData? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let impressionType = dataDict[MoEngagePluginConstants.General.type] as? String
         else {
@@ -123,7 +111,7 @@ extension MoEngagePluginParser {
         return MoEngagePluginSelfHandledImpressionData(selfHandledCampaign: selfHandledCampaign, impressionType: impressionType)
     }
 
-    func fetchSDKState(payload: [String: Any]) -> Bool? {
+    static func fetchSDKState(payload: [String: Any]) -> Bool? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let sdkState = dataDict[MoEngagePluginConstants.SDKState.isSdkEnabled] as? Bool
         else {
@@ -132,4 +120,5 @@ extension MoEngagePluginParser {
         
         return sdkState
     }
+
 }

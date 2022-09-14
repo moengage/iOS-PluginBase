@@ -8,12 +8,12 @@
 import Foundation
 import MoEngageSDK
 
-final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate, MoEngagePluginUtils, MoEngagePluginMessageDelegate {
+final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate {
     
     private var identifier: String
     
     private var messageHandler: MoEngagePluginMessageHandler? {
-        return fetchMessageQueueHandler(identifier: identifier)
+        return MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier)
     }
     
     init(identifier: String) {
@@ -39,12 +39,12 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate,
     }
     
     func notificationRegistered(withDeviceToken deviceToken: String) {
-        let message = createTokenPayload(deviceToken: deviceToken)
+        let message = MoEngagePluginUtils.createTokenPayload(deviceToken: deviceToken)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.pushTokenGenerated, message: message)
     }
     
     func notificationClicked(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any]) {
-        let message = createPushClickPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
+        let message = MoEngagePluginUtils.createPushClickPayload(withScreenName: screenName, kvPairs: kvPairs, andPushPayload: userInfo, identifier: identifier)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.pushClicked, message: message)
     }
     

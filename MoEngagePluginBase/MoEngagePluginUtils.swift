@@ -9,19 +9,10 @@ import Foundation
 import MoEngageInApps
 import MoEngageSDK
 
-public protocol MoEngagePluginUtils {
-    func fetchIdentifierFromPayload(attribute: [String: Any]) -> String?
-    func createAccountPayload(identifier: String) -> [String: Any]
-    func inAppCampaignToJSON(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction?, identifier: String) -> [String: Any]
-    func selfHandledCampaignToJSON(selfHandledCampaign: MOInAppSelfHandledCampaign?, identifier: String) -> [String: Any]
-    func createTokenPayload(deviceToken: String) -> [String: Any]
-    func createPushClickPayload(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any], identifier: String) -> [String: Any]
-}
-
-extension MoEngagePluginUtils {
+public class MoEngagePluginUtils {
     
     // MARK: General Utilities
-    public func fetchIdentifierFromPayload(attribute: [String: Any]) -> String? {
+    static public func fetchIdentifierFromPayload(attribute: [String: Any]) -> String? {
         if let accountMeta = attribute[MoEngagePluginConstants.General.accountMeta] as? [String: Any],
            let appID = accountMeta[MoEngagePluginConstants.General.appId] as? String,
            !appID.isEmpty {
@@ -31,13 +22,13 @@ extension MoEngagePluginUtils {
         return nil
     }
     
-    public func createAccountPayload(identifier: String) -> [String: Any] {
+    static public func createAccountPayload(identifier: String) -> [String: Any] {
         let appIdDict = [MoEngagePluginConstants.General.appId: identifier]
         return appIdDict
     }
     
     // MARK: InApp Utilities
-    public func inAppCampaignToJSON(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction? = nil, identifier: String) -> [String: Any] {
+    static func inAppCampaignToJSON(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction? = nil, identifier: String) -> [String: Any] {
         let accountMeta = createAccountPayload(identifier: identifier)
         
         var inAppDataPayload = inAppCampaign.fetchInAppPaylaod()
@@ -58,7 +49,7 @@ extension MoEngagePluginUtils {
         return inAppPayload
     }
     
-    public func selfHandledCampaignToJSON(selfHandledCampaign: MOInAppSelfHandledCampaign?, identifier: String) -> [String: Any] {
+    static func selfHandledCampaignToJSON(selfHandledCampaign: MOInAppSelfHandledCampaign?, identifier: String) -> [String: Any] {
         var inAppPayload = [String: Any]()
         
         let accountMeta = createAccountPayload(identifier: identifier)
@@ -79,12 +70,12 @@ extension MoEngagePluginUtils {
     }
     
     // MARK: Push Utilities
-    public func createTokenPayload(deviceToken: String) -> [String: Any] {
+    static func createTokenPayload(deviceToken: String) -> [String: Any] {
         let tokenPayload = [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS, MoEngagePluginConstants.Push.pushService: MoEngagePluginConstants.Push.APNS, MoEngagePluginConstants.Push.token: deviceToken]
         return tokenPayload
     }
     
-    public func createPushClickPayload(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any], identifier: String) -> [String: Any] {
+    static func createPushClickPayload(withScreenName screenName: String?, kvPairs: [AnyHashable: Any]?, andPushPayload userInfo: [AnyHashable: Any], identifier: String) -> [String: Any] {
         
         var actionPayloadDict = [String: Any]()
         if let screenName = screenName, !screenName.isEmpty {
