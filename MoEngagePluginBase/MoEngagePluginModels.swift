@@ -1,5 +1,5 @@
 //
-//  MoEnagagePluginModels.swift
+//  MoEngagePluginModels.swift
 //  MoEngagePlugin
 //
 //  Created by Rakshitha on 09/09/22.
