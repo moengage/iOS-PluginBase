@@ -24,17 +24,19 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate 
     
     private func setMessagingDelegate() {
         MOMessaging.sharedInstance.setMessagingDelegate(self, forAppID: identifier)
-    
-        guard let sharedApplication = MOCoreUtils.sharedUIApplication(),
-        sharedApplication.isRegisteredForRemoteNotifications
-        else {
-            return
-        }
         
-        if let currentDelegate = UNUserNotificationCenter.current().delegate {
-            MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
-        } else {
-            MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
+        DispatchQueue.main.async {
+            guard let sharedApplication = MOCoreUtils.sharedUIApplication(),
+                  sharedApplication.isRegisteredForRemoteNotifications
+            else {
+                return
+            }
+            
+            if let currentDelegate = UNUserNotificationCenter.current().delegate {
+                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
+            } else {
+                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
+            }
         }
     }
     
