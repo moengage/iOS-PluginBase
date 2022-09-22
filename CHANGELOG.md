@@ -1,7 +1,11 @@
-# MoEPluginBase
+# MoEngagePluginBase
 =================================
 
 ## Change Log:
+### Version 3.0.0  *(22nd September, 2022)*
+-------------------------------------------
+* Renamed the module to `MoEngagePluginBase`
+* MoEngage-iOS-SDK dependency updated to 8.3.* and MoEngageInApp dependency updated to 3.3.*.
 
 ### Version 2.2.0  *(24th November, 2021)*
 -------------------------------------------

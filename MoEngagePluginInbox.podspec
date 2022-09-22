@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     
     s.source       = {
                         :git => 'https://github.com/moengage/iOS-PluginBase.git',
-                        :tag => 'MoEPluginInbox-' + s.version.to_s
+                        :tag => 'pluginInbox-' + s.version.to_s
                     }
 
     s.source_files = 'MoEngagePluginInbox/**/*'

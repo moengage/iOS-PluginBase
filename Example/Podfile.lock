@@ -45,9 +45,9 @@ SPEC CHECKSUMS:
   MoEngageGeofence: 813cba233d6272e46405da7564215cbc667249f1
   MoEngageInApp: 77d7166cfc04ec6ceb3878794e78d2316645f718
   MoEngageInbox: cba4be6581ff2a3357fa3b4ef7322ee9acb192d6
-  MoEngagePluginBase: 3791de4643ec1bf245da1a064048b82509272749
-  MoEngagePluginGeofence: 0f6e627208933316ea29671e9adf7acd4a8ea460
-  MoEngagePluginInbox: 7789399ec1f40250a22d892635a22f1f2e0c2009
+  MoEngagePluginBase: 3cd6a44279b52e2ada15618c6a43da88d7dedf92
+  MoEngagePluginGeofence: 37841c9423d4cf950cf57dbb5fd926d43a6ee57f
+  MoEngagePluginInbox: 4a7e4f68ff83a9978b37c74667bbb70a1eb4a562
   MoEngageRichNotification: b8fa7d97b77f029ec0a56878973efcb09290d37d
 
 PODFILE CHECKSUM: 03600eb33379be6dce0e19b6f91e6a4e62084158
