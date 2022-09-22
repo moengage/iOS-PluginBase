@@ -7,6 +7,10 @@
 * Renamed the module to `MoEngagePluginBase`
 * MoEngage-iOS-SDK dependency updated to 8.3.* and MoEngageInApp dependency updated to 3.3.*.
 
+### Version 2.3.1  *(02nd September, 2022)*
+-------------------------------------------
+* Fixed the crash due to multithreading.
+
 ### Version 2.2.0  *(24th November, 2021)*
 -------------------------------------------
 * Initialization method name fixes.
