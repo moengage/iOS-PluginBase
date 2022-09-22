@@ -7,9 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import <MoEPluginBase/MoEPluginBase.h>
+@import MoEngagePluginBase;
+@import MoEngageSDK;
 
-@interface AppDelegate()<MoEPluginBridgeDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate()< UNUserNotificationCenterDelegate, MoEngagePluginBridgeDelegate>
 
 @end
 @implementation AppDelegate
@@ -17,12 +18,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-    [[MoEPluginBridge sharedInstance] enableLogs];
-    NSString* yourMoEngageAppID = @"DAO6UGZ73D9RTK8B5W96TPYN";
+    
+    //Primary Instance
+    NSString* yourMoEngageAppID = @"";
     MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
-   
-    [[MoEPluginInitializer sharedInstance] initializeSDKWithConfig:sdkConfig withSDKState:true andLaunchOptions:launchOptions];
-    [MoEPluginBridge sharedInstance].bridgeDelegate = self;
+    sdkConfig.enableLogs = true;
+
+    MoEngagePlugin *plugin = [[MoEngagePlugin alloc] init];
+    [plugin initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:true launchOptions:launchOptions];
+    
+    [[MoEngagePluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:yourMoEngageAppID];
+
     return YES;
 }
 
@@ -31,13 +37,14 @@
 }
 
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler{
+    [[MoEngage sharedInstance] userNotificationCenter:center didReceiveNotificationResponse:response];
     completionHandler();
 }
 
--(void)sendMessageWithName:(NSString *)name andPayload:(NSDictionary *)payloadDict{
+- (void)sendMessageWithEvent:(NSString *)event message:(NSDictionary<NSString *,id> *)message {
     NSLog(@"Received Message : ");
-    NSLog(@"Message Name : %@",name);
-    NSLog(@"Message Payload : %@",payloadDict);
+    NSLog(@"Message Name : %@",event);
+    NSLog(@"Message Payload : %@",message);
 }
 
 @end
