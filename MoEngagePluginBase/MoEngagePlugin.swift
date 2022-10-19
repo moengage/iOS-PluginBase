@@ -19,29 +19,29 @@ import MoEngageInApps
     }
     
     @objc public func initializeDefaultInstance(sdkConfig: MOSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
-     
+        
         guard !sdkConfig.identifier.isEmpty else { return }
-
+        
         initializeMoEngageDefaultInstance(sdkConfig: sdkConfig, launchOptions: launchOptions)
     }
     
     private func initializeMoEngageDefaultInstance(sdkConfig: MOSDKConfig, sdkState: MoEngageSDKState) {
-     #if DEBUG
-            MoEngage.sharedInstance().initializeDefaultTestInstance(with: sdkConfig, andSDKState: sdkState)
-     #else
-            MoEngage.sharedInstance().initializeDefaultLiveInstance(with: sdkConfig, andSDKState: sdkState)
-    #endif
+#if DEBUG
+        MoEngage.sharedInstance().initializeDefaultTestInstance(with: sdkConfig, andSDKState: sdkState)
+#else
+        MoEngage.sharedInstance().initializeDefaultLiveInstance(with: sdkConfig, andSDKState: sdkState)
+#endif
         
-    commonSetUp(identifier: sdkConfig.identifier)
+        commonSetUp(identifier: sdkConfig.identifier)
     }
     
     private func initializeMoEngageDefaultInstance(sdkConfig: MOSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
-
-        #if DEBUG
-            MoEngage.sharedInstance().initializeDefaultTestInstance(with: sdkConfig, andLaunchOptions: launchOptions)
-        #else
-            MoEngage.sharedInstance().initializeDefaultLiveInstance(with: sdkConfig, andLaunchOptions: launchOptions)
-        #endif
+        
+#if DEBUG
+        MoEngage.sharedInstance().initializeDefaultTestInstance(with: sdkConfig, andLaunchOptions: launchOptions)
+#else
+        MoEngage.sharedInstance().initializeDefaultLiveInstance(with: sdkConfig, andLaunchOptions: launchOptions)
+#endif
         
         commonSetUp(identifier: sdkConfig.identifier)
     }
@@ -49,7 +49,7 @@ import MoEngageInApps
     // MARK: Initialization of secondary instance
     @objc public func initializeInstance(sdkConfig: MOSDKConfig, sdkState: MoEngageSDKState, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         guard !sdkConfig.identifier.isEmpty else { return }
-    
+        
         initializeMoEngageSecondaryInstance(sdkConfig: sdkConfig, sdkState: sdkState)
     }
     
@@ -60,22 +60,22 @@ import MoEngageInApps
     }
     
     private func initializeMoEngageSecondaryInstance(sdkConfig: MOSDKConfig, sdkState: MoEngageSDKState) {
-       #if DEBUG
-         MoEngage.sharedInstance().initializeTestInstance(with: sdkConfig, andSDKState: sdkState)
-      #else
+#if DEBUG
+        MoEngage.sharedInstance().initializeTestInstance(with: sdkConfig, andSDKState: sdkState)
+#else
         MoEngage.sharedInstance().initializeLiveInstance(with: sdkConfig, andSDKState: sdkState)
-      #endif
+#endif
         
-     commonSetUp(identifier: sdkConfig.identifier)
-
+        commonSetUp(identifier: sdkConfig.identifier)
+        
     }
     
     private func initializeMoEngageSecondaryInstance(sdkConfig: MOSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
-        #if DEBUG
-            MoEngage.sharedInstance().initializeTestInstance(with: sdkConfig, andLaunchOptions: launchOptions)
-        #else
-            MoEngage.sharedInstance().initializeLiveInstance(with: sdkConfig, andLaunchOptions: launchOptions)
-        #endif
+#if DEBUG
+        MoEngage.sharedInstance().initializeTestInstance(with: sdkConfig, andLaunchOptions: launchOptions)
+#else
+        MoEngage.sharedInstance().initializeLiveInstance(with: sdkConfig, andLaunchOptions: launchOptions)
+#endif
         
         commonSetUp(identifier: sdkConfig.identifier)
     }
