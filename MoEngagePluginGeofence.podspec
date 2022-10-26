@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'MoEngagePluginGeofence'
-    s.version      = '1.0.0'
+    s.version      = '1.1.0'
     s.summary      = 'MoEngage Plugin Base for Hybrid SDKs'
     s.description  = <<-DESC
     MoEngage is a mobile marketing automation company. This framework is used by our plugins built for different hybrid frameworks i.e, Flutter, Cordova, React Native etc.
@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
     s.source_files = 'MoEngagePluginGeofence/**/*'
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngageGeofence', '>= 4.3.0', '< 4.4.0'
-    s.dependency 'MoEngagePluginBase', '>= 3.0.0', '< 3.1.0'
+    s.dependency 'MoEngageGeofence', '>= 4.4.0', '< 4.5.0'
+    s.dependency 'MoEngagePluginBase', '>= 3.1.0', '< 3.2.0'
 end

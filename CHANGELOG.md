@@ -2,6 +2,10 @@
 =================================
 
 ## Change Log:
+### Version 3.1.0  *(26th October, 2022)*
+-------------------------------------------
+* Updated MoEngage initialization method that accepts SDK state of type `MoEngageSDKState`.
+
 ### Version 3.0.0  *(22nd September, 2022)*
 -------------------------------------------
 * Renamed the module to `MoEngagePluginBase`
