@@ -2,7 +2,7 @@
 =================================
 
 ## Change Log:
-### Version 3.1.1  *(NEXT RELEASE)*
+### Version 3.1.1  *(12th December, 2022)*
 -------------------------------------------
 * Added an additional check to register for notification on app launch.
 
