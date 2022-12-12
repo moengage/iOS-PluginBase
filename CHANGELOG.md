@@ -2,6 +2,10 @@
 =================================
 
 ## Change Log:
+### Version 3.1.1  *(12th December, 2022)*
+-------------------------------------------
+* Added an additional check to register for notification on app launch.
+
 ### Version 3.1.0  *(26th October, 2022)*
 -------------------------------------------
 * Updated MoEngage initialization method that accepts SDK state of type `MoEngageSDKState`.

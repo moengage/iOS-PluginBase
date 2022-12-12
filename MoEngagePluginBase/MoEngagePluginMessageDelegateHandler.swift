@@ -25,19 +25,29 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate 
     private func setMessagingDelegate() {
         MOMessaging.sharedInstance.setMessagingDelegate(self, forAppID: identifier)
         
-        DispatchQueue.main.async {
-            guard let sharedApplication = MOCoreUtils.sharedUIApplication(),
-                  sharedApplication.isRegisteredForRemoteNotifications
-            else {
-                return
+        let current = UNUserNotificationCenter.current()
+        
+        current.getNotificationSettings(completionHandler: { (settings) in
+            switch settings.authorizationStatus {
+            case .authorized:
+                DispatchQueue.main.async {
+                    
+                    guard let sharedApplication = MOCoreUtils.sharedUIApplication(),
+                          sharedApplication.isRegisteredForRemoteNotifications
+                    else {
+                        return
+                    }
+                    
+                    if let currentDelegate = UNUserNotificationCenter.current().delegate {
+                        MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
+                    } else {
+                        MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
+                    }
+                }
+            default:
+                break
             }
-            
-            if let currentDelegate = UNUserNotificationCenter.current().delegate {
-                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
-            } else {
-                MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
-            }
-        }
+        })
     }
     
     func notificationRegistered(withDeviceToken deviceToken: String) {
