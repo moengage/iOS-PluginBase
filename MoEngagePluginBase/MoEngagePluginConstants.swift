@@ -11,7 +11,7 @@ public struct MoEngagePluginConstants {
     
     private init() {
     }
-        
+    
     struct SDKVersions {
         static let currentVersion = "8.3.0"
         static let minimumVersion = "8.3.0"
@@ -30,7 +30,7 @@ public struct MoEngagePluginConstants {
         public static let payload = "payload"
         public static let navigationType = "navigationType"
         public static let actionType = "actionType"
-        static let type = "type"
+        public static let type = "type"
         static let appId = "appId"
         static let campaignName = "campaignName"
         static let event = "event"
@@ -38,17 +38,17 @@ public struct MoEngagePluginConstants {
     }
     
     // user attribute
-    struct UserAttribute {
+    public struct UserAttribute {
         static let alias = "alias"
-        static let type = "type"
-        static let attributeName = "attributeName"
-        static let attributeValue = "attributeValue"
-        static let locationAttribute = "locationAttribute"
-        static let latitude = "latitude"
-        static let longitude = "longitude"
-        static let general = "general"
-        static let timestamp = "timestamp"
-        static let location = "location"
+        public static let type = "type"
+        public static let attributeName = "attributeName"
+        public static let attributeValue = "attributeValue"
+        public static let locationAttribute = "locationAttribute"
+        public static let latitude = "latitude"
+        public static let longitude = "longitude"
+        public static let general = "general"
+        public static let timestamp = "timestamp"
+        public static let location = "location"
     }
     
     // event
@@ -59,10 +59,10 @@ public struct MoEngagePluginConstants {
     }
     
     // OptOuts
-    struct SDKState {
-       static let isSdkEnabled = "isSdkEnabled"
-       static let state = "state"
-       static let data = "data"
+    public struct SDKState {
+        public static let isSdkEnabled = "isSdkEnabled"
+        public static let state = "state"
+        public static let data = "data"
     }
     
     struct AppStatus {
@@ -71,15 +71,15 @@ public struct MoEngagePluginConstants {
         static let update = "UPDATE"
     }
     
-    struct InApp {
-        static let contexts = "contexts"
-        static let impression = "impression"
-        static let click = "click"
-        static let dismissed = "dismissed"
-        static let campaignContext = "campaignContext"
+    public struct InApp {
+        public static let contexts = "contexts"
+        public static let impression = "impression"
+        public static let click = "click"
+        public static let dismissed = "dismissed"
+        public static let campaignContext = "campaignContext"
         static let dismissInterval = "dismissInterval"
-        static let selfHandled = "selfHandled"
-        static let customAction = "customAction"
+        public static let selfHandled = "selfHandled"
+        public static let customAction = "customAction"
         static let screen = "screen"
         static let campaignId = "campaignId"
         static let campaignName = "campaignName"

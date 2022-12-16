@@ -19,6 +19,6 @@ import MoEngagePluginBase
     
     @objc public func startGeofenceMonitoring(_ payload: [String: Any]) {
         let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: payload)
-        MOGeofence.sharedInstance.startGeofenceMonitoring(forAppID: identifier)
+        MoEngageSDKGeofence.sharedInstance.startGeofenceMonitoring(forAppID: identifier)
     }
 }

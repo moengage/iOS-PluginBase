@@ -7,6 +7,7 @@
 
 import Foundation
 import MoEngageSDK
+import MoEngageInApps
 
 @objc final public class MoEngagePluginBridge: NSObject {
 
@@ -40,9 +41,9 @@ import MoEngageSDK
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: sdkState),
            let sdkState = MoEngagePluginParser.fetchSDKState(payload: sdkState) {
             if sdkState {
-                MoEngage.sharedInstance().enableSDK(forAppID: identifier)
+                MoEngage.sharedInstance.enableSDK(appId: identifier)
             } else {
-                MoEngage.sharedInstance().disableSDK(forAppID: identifier)
+                MoEngage.sharedInstance.disableSDK(appId: identifier)
             }
         }
     }
@@ -53,9 +54,9 @@ import MoEngageSDK
             
             if optOutPayload.type == MoEngagePluginConstants.SDKState.data {
                 if optOutPayload.value {
-                    MOAnalytics.sharedInstance.disableDataTracking(forAppID: identifier)
+                    MoEngageSDKAnalytics.sharedInstance.disableDataTracking(forAppID: identifier)
                 } else {
-                    MOAnalytics.sharedInstance.enableDataTracking(forAppID: identifier)
+                    MoEngageSDKAnalytics.sharedInstance.enableDataTracking(forAppID: identifier)
                 }
             }
         }
@@ -64,14 +65,14 @@ import MoEngageSDK
     @objc public func setAppStatus(_ appStatus: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: appStatus),
            let appStatus = MoEngagePluginParser.fetchAppStatus(payload: appStatus) {
-            MoEngage.sharedInstance().appStatus(appStatus, forAppID: identifier)
+            MoEngageSDKAnalytics.sharedInstance.appStatus(appStatus, forAppID: identifier)
         }
     }
     
     @objc public func setAlias(_ alias: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: alias),
            let alias = MoEngagePluginParser.fetchAlias(payload: alias) {
-            MOAnalytics.sharedInstance.setAlias(alias, forAppID: identifier)
+            MoEngageSDKAnalytics.sharedInstance.setAlias(alias, forAppID: identifier)
         }
     }
     
@@ -80,16 +81,16 @@ import MoEngageSDK
            let userAttribute = MoEngagePluginParser.mapJsonToUserAttributeData(payload: userAttribute) {
             switch userAttribute.type {
             case MoEngagePluginConstants.UserAttribute.general:
-                MOAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
+                MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
                 
             case MoEngagePluginConstants.UserAttribute.timestamp:
                 if let timeStamp = userAttribute.value as? String {
-                    MOAnalytics.sharedInstance.setUserAttributeISODate(timeStamp, withAttributeName: userAttribute.name, forAppID: identifier)
+                    MoEngageSDKAnalytics.sharedInstance.setUserAttributeISODate(timeStamp, withAttributeName: userAttribute.name, forAppID: identifier)
                 }
                 
             case MoEngagePluginConstants.UserAttribute.location:
-                if let geoLocation = userAttribute.value as? MOGeoLocation {
-                    MOAnalytics.sharedInstance.setLocation(geoLocation, withAttributeName: userAttribute.name, forAppID: identifier)
+                if let geoLocation = userAttribute.value as? MoEngageGeoLocation {
+                    MoEngageSDKAnalytics.sharedInstance.setLocation(geoLocation, withAttributeName: userAttribute.name, forAppID: identifier)
                 }
                 
             default:
@@ -101,29 +102,28 @@ import MoEngageSDK
     @objc public func trackEvent(_ eventAttribute: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: eventAttribute),
            let event = MoEngagePluginParser.mapJsonToEventData(payload: eventAttribute) {
-            MOAnalytics.sharedInstance.trackEvent(event.name, withProperties: event.properties, forAppID: identifier)
+            MoEngageSDKAnalytics.sharedInstance.trackEvent(event.name, withProperties: event.properties, forAppID: identifier)
         }
     }
     
     @objc public func resetUser(_ userAttribute: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: userAttribute) {
-            MOAnalytics.sharedInstance.resetUser(forAppID: identifier)
+            MoEngageSDKAnalytics.sharedInstance.resetUser(forAppID: identifier)
         }
     }
     
     // MARK: InApp
     @objc public func showInApp(_ inApp: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: inApp) {
-            MOInApp.sharedInstance().showInAppCampaign(forAppID: identifier)
+            MoEngageSDKInApp.sharedInstance.showInApp(forAppId: identifier)
         }
     }
     
     @objc public func getSelfHandledInApp(_ inApp: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: inApp) {
-            MOInApp.sharedInstance().getSelfHandledInApp(forAppID: identifier) { selfHandledCampaign, _
-                in
+            MoEngageSDKInApp.sharedInstance.getSelfHandledInApp(forAppId: identifier) { campaignInfo, accountMeta in
                 let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier)
-                let message = MoEngagePluginUtils.selfHandledCampaignToJSON(selfHandledCampaign: selfHandledCampaign, identifier: identifier)
+                let message = MoEngagePluginUtils.selfHandledCampaignToJSON(selfHandledCampaign: campaignInfo, identifier: identifier)
                 messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.inAppSelfHandled, message: message)
             }
         }
@@ -132,13 +132,13 @@ import MoEngageSDK
     @objc public func setInAppContext(_ context: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: context),
            let contexts = MoEngagePluginParser.fetchContextData(payload: context) {
-            MOInApp.sharedInstance().setCurrentInAppContexts(contexts, forAppID: identifier)
+            MoEngageSDKInApp.sharedInstance.setCurrentInAppContexts(contexts, forAppId: identifier)
         }
     }
     
     @objc public func resetInAppContext(_ context: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: context) {
-            MOInApp.sharedInstance().invalidateInAppContexts(forAppID: identifier)
+            MoEngageSDKInApp.sharedInstance.resetInAppDelegate(forAppId: identifier)
         }
     }
     
@@ -147,11 +147,11 @@ import MoEngageSDK
            let selfHandledImpressionPayload = MoEngagePluginParser.mapJsonToSelfHandledImpressionData(payload: inApp) {
             switch selfHandledImpressionPayload.impressionType {
             case MoEngagePluginConstants.InApp.impression:
-                MOInApp.sharedInstance().selfHandledShown(withCampaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppID: identifier)
+                MoEngageSDKInApp.sharedInstance.selfHandledShown(campaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppId: identifier)
             case MoEngagePluginConstants.InApp.click:
-                MOInApp.sharedInstance().selfHandledClicked(withCampaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppID: identifier)
+                MoEngageSDKInApp.sharedInstance.selfHandledClicked(campaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppId: identifier)
             case MoEngagePluginConstants.InApp.dismissed:
-                MOInApp.sharedInstance().selfHandledDismissed(withCampaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppID: identifier)
+                MoEngageSDKInApp.sharedInstance.selfHandledDismissed(campaignInfo: selfHandledImpressionPayload.selfHandledCampaign, forAppId: identifier)
             default:
                 break
             }
@@ -160,7 +160,7 @@ import MoEngageSDK
     
     // MARK: Push
     @objc public func registerForPush() {
-        MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: UNUserNotificationCenter.current().delegate)
+        MoEngageSDKMessaging.sharedInstance.registerForRemoteNotification(withCategories: nil, andUserNotificationCenterDelegate: UNUserNotificationCenter.current().delegate)
     }
     
     // MARK: Other

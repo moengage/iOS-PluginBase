@@ -22,10 +22,10 @@ struct MoEngagePluginUserAttributeData {
 
 struct MoEngagePluginEventData {
     var name: String
-    var properties: MOProperties
+    var properties: MoEngageProperties
 }
 
 struct MoEngagePluginSelfHandledImpressionData {
-    var selfHandledCampaign: MOInAppSelfHandledCampaign
+    var selfHandledCampaign: MoEngageInAppSelfHandledCampaign
     var impressionType: String
 }

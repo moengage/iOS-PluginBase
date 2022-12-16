@@ -2,6 +2,10 @@
 =================================
 
 ## Change Log:
+### Version 4.0.0   *(Date)*
+-------------------------------------------
+* MoEngage-iOS-SDK dependency updated to 9.1.* and MoEngageInApp dependency updated to 4.1.*.
+
 ### Version 3.1.1  *(12th December, 2022)*
 -------------------------------------------
 * Added an additional check to register for notification on app launch.
