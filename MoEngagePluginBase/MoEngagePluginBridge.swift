@@ -138,7 +138,7 @@ import MoEngageInApps
     
     @objc public func resetInAppContext(_ context: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: context) {
-            MoEngageSDKInApp.sharedInstance.resetInAppDelegate(forAppId: identifier)
+            MoEngageSDKInApp.sharedInstance.invalidateInAppContexts(forAppId: identifier)
         }
     }
     
