@@ -1,23 +1,23 @@
 PODS:
-  - MoEngage-iOS-SDK (8.4.3)
-  - MoEngageGeofence (4.4.0):
-    - MoEngage-iOS-SDK (< 8.5.0, >= 8.4.0)
-  - MoEngageInApp (3.4.1):
-    - MoEngage-iOS-SDK (< 8.5.0, >= 8.4.0)
-  - MoEngageInbox (1.4.1):
-    - MoEngage-iOS-SDK (< 8.5.0, >= 8.4.0)
-    - MoEngageRichNotification (< 6.5.0, >= 6.4.0)
-  - MoEngagePluginBase (3.1.1):
-    - MoEngage-iOS-SDK (< 8.5.0, >= 8.4.0)
-    - MoEngageInApp (< 3.5.0, >= 3.4.0)
-  - MoEngagePluginGeofence (1.1.0):
-    - MoEngageGeofence (< 4.5.0, >= 4.4.0)
-    - MoEngagePluginBase (< 3.2.0, >= 3.1.0)
-  - MoEngagePluginInbox (1.1.0):
-    - MoEngageInbox (< 1.5.0, >= 1.4.0)
-    - MoEngagePluginBase (< 3.2.0, >= 3.1.0)
-  - MoEngageRichNotification (6.4.0):
-    - MoEngage-iOS-SDK (< 8.5.0, >= 8.4.0)
+  - MoEngage-iOS-SDK (9.2.1)
+  - MoEngageGeofence (5.2.0):
+    - MoEngage-iOS-SDK (< 9.3.0, >= 9.2.0)
+  - MoEngageInApp (4.2.0):
+    - MoEngage-iOS-SDK (< 9.3.0, >= 9.2.0)
+  - MoEngageInbox (2.2.0):
+    - MoEngage-iOS-SDK (< 9.3.0, >= 9.2.0)
+    - MoEngageRichNotification (< 7.3.0, >= 7.2.0)
+  - MoEngagePluginBase (4.0.0):
+    - MoEngage-iOS-SDK (< 9.3.0, >= 9.2.0)
+    - MoEngageInApp (< 4.3.0, >= 4.2.0)
+  - MoEngagePluginGeofence (2.0.0):
+    - MoEngageGeofence (< 5.3.0, >= 5.2.0)
+    - MoEngagePluginBase (< 4.1.0, >= 4.0.0)
+  - MoEngagePluginInbox (2.0.0):
+    - MoEngageInbox (< 2.3.0, >= 2.2.0)
+    - MoEngagePluginBase (< 4.1.0, >= 4.0.0)
+  - MoEngageRichNotification (7.2.0):
+    - MoEngage-iOS-SDK (< 9.3.0, >= 9.2.0)
 
 DEPENDENCIES:
   - MoEngagePluginBase (from `../`)
@@ -41,14 +41,14 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MoEngage-iOS-SDK: c1d71e9cad3c17d3bcd8f8b05e75748c8091f4de
-  MoEngageGeofence: 5f0c9d499dac13db3bb8240825e80792f7d5e50b
-  MoEngageInApp: 92b431d7553fa8bfa3a8f6aadef6025a791bb073
-  MoEngageInbox: 53a04ad3715787dcc0e478232d8630ba6b9ca9e9
-  MoEngagePluginBase: 99c6dc62039e92c5bcb1dc3d827162f376f39837
-  MoEngagePluginGeofence: 46d6fc2b2b5fa41cfdb903084f95198577e17431
-  MoEngagePluginInbox: 667a24ba62ac8634b78bf0dcd4780cb88acbaa65
-  MoEngageRichNotification: 2c59fd714be6f84e97b1aa639860c529ea553f0e
+  MoEngage-iOS-SDK: 75d02d9e848cbde4027a5372271c6dd29664fabe
+  MoEngageGeofence: 1080c78e5d3ae7cb357148d5470c27b30cf4d30e
+  MoEngageInApp: f72e189dab11b18b784d0f421f3a86ef656a3342
+  MoEngageInbox: e998296df8294338859538ffc70779f15701c5ca
+  MoEngagePluginBase: b469e3441c49c1421a65886b3352a36c9f4d01e2
+  MoEngagePluginGeofence: 0fa8a5e1b163eaadbeb9f2501a41d3d697aa4692
+  MoEngagePluginInbox: 15413efd458efa136169fe8136d78e4dac0b2e38
+  MoEngageRichNotification: 3aa266bbc73fcc3a95d264529cb85aecd076b905
 
 PODFILE CHECKSUM: 03600eb33379be6dce0e19b6f91e6a4e62084158
 

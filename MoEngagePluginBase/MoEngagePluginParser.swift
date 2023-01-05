@@ -21,7 +21,7 @@ class MoEngagePluginParser {
         return MoEngagePluginOptOutData(type: type, value: state)
     }
     
-    static func fetchAppStatus(payload: [String: Any]) -> AppStatus? {
+    static func fetchAppStatus(payload: [String: Any]) -> MoEngageAppStatus? {
         if let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
            let appStatus = dataDict[MoEngagePluginConstants.AppStatus.appStatus] as? String,
            !appStatus.isEmpty {
@@ -63,7 +63,7 @@ class MoEngagePluginParser {
         if let locationAttributeDict = dataDict[MoEngagePluginConstants.UserAttribute.locationAttribute] as? [String: Any],
            let latitude = locationAttributeDict[MoEngagePluginConstants.UserAttribute.latitude] as? Double,
            let longitude = locationAttributeDict[MoEngagePluginConstants.UserAttribute.longitude] as? Double {
-            attributeValue = MOGeoLocation(withLatitude: latitude, andLongitude: longitude)
+            attributeValue = MoEngageGeoLocation(withLatitude: latitude, andLongitude: longitude)
         }
         
         if let value = attributeValue {
@@ -85,7 +85,7 @@ class MoEngagePluginParser {
             eventAttributeDict?[MoEngagePluginConstants.EventTracking.isNonInteractive] = isNonInteractive
         }
         
-        let properties = MOProperties()
+        let properties = MoEngageProperties()
         properties.updateAttributes(withPluginPayload: eventAttributeDict)
         return MoEngagePluginEventData(name: eventName, properties: properties)
     }
@@ -102,12 +102,19 @@ class MoEngagePluginParser {
     
     static func mapJsonToSelfHandledImpressionData(payload: [String: Any]) -> MoEngagePluginSelfHandledImpressionData? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
-              let impressionType = dataDict[MoEngagePluginConstants.General.type] as? String
+              let impressionType = dataDict[MoEngagePluginConstants.General.type] as? String,
+              let selfHandledDict = dataDict[MoEngagePluginConstants.InApp.selfHandled] as? [String: Any],
+              let campaignContext = dataDict[MoEngagePluginConstants.InApp.campaignContext] as? [String: Any],
+              let campaignId = dataDict[MoEngagePluginConstants.InApp.campaignId] as? String,
+              let campaignName = dataDict[MoEngagePluginConstants.InApp.campaignName] as? String
         else {
             return nil
         }
         
-        let selfHandledCampaign = MOInAppSelfHandledCampaign(campaignPayload: dataDict)
+        let campaignContent = selfHandledDict[MoEngagePluginConstants.General.payload] as? String ?? ""
+        let dismissInterval = selfHandledDict[MoEngagePluginConstants.InApp.dismissInterval] as? Int ?? 0
+        
+        let selfHandledCampaign = MoEngageInAppSelfHandledCampaign(campaignContent: campaignContent, autoDismissInterval: dismissInterval, campaign_id: campaignId, campaign_name: campaignName, expiry_time: NSDate(), isDraft: false, campaignContext: campaignContext)
         return MoEngagePluginSelfHandledImpressionData(selfHandledCampaign: selfHandledCampaign, impressionType: impressionType)
     }
 
