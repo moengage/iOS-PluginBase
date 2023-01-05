@@ -8,7 +8,7 @@
 import Foundation
 import MoEngageSDK
 
-final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate {
+final class MoEngagePluginMessageDelegateHandler: NSObject, MoEngageMessagingDelegate {
     
     private var identifier: String
     
@@ -23,7 +23,7 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate 
     }
     
     private func setMessagingDelegate() {
-        MOMessaging.sharedInstance.setMessagingDelegate(self, forAppID: identifier)
+        MoEngageSDKMessaging.sharedInstance.setMessagingDelegate(self, forAppID: identifier)
         
         let current = UNUserNotificationCenter.current()
         
@@ -32,16 +32,16 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MOMessagingDelegate 
             case .authorized:
                 DispatchQueue.main.async {
                     
-                    guard let sharedApplication = MOCoreUtils.sharedUIApplication(),
+                    guard let sharedApplication = MoEngageCoreUtils.sharedUIApplication(),
                           sharedApplication.isRegisteredForRemoteNotifications
                     else {
                         return
                     }
                     
                     if let currentDelegate = UNUserNotificationCenter.current().delegate {
-                        MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: currentDelegate)
+                        MoEngageSDKMessaging.sharedInstance.registerForRemoteNotification(withCategories: nil, andUserNotificationCenterDelegate: currentDelegate)
                     } else {
-                        MoEngage.sharedInstance().registerForRemoteNotification(withCategories: nil, withUserNotificationCenterDelegate: self)
+                        MoEngageSDKMessaging.sharedInstance.registerForRemoteNotification(withCategories: nil, andUserNotificationCenterDelegate: self)
                     }
                 }
             default:
@@ -68,7 +68,7 @@ extension MoEngagePluginMessageDelegateHandler: UNUserNotificationCenterDelegate
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        MoEngage.sharedInstance().userNotificationCenter(center, didReceive: response)
+        MoEngageSDKMessaging.sharedInstance.userNotificationCenter(center, didReceive: response)
         completionHandler()
     }
 }

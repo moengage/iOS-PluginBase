@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 @import MoEngagePluginBase;
 @import MoEngageSDK;
+@import UserNotifications;
 
 @interface AppDelegate()< UNUserNotificationCenterDelegate, MoEngagePluginBridgeDelegate>
 
@@ -21,23 +22,24 @@
     
     //Primary Instance
     NSString* yourMoEngageAppID = @"";
-    MOSDKConfig* sdkConfig = [[MOSDKConfig alloc] initWithAppID:yourMoEngageAppID];
+    MoEngageSDKConfig* sdkConfig = [[MoEngageSDKConfig alloc] initWithAppID:yourMoEngageAppID];
     sdkConfig.enableLogs = true;
-
+    
     MoEngagePlugin *plugin = [[MoEngagePlugin alloc] init];
-    [plugin initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:true launchOptions:launchOptions];
+    [plugin initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:MoEngageSDKStateEnabled launchOptions:launchOptions];
     
     [[MoEngagePluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:yourMoEngageAppID];
-
+    
     return YES;
 }
 
--(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
     completionHandler((UNNotificationPresentationOptionAlert|UNNotificationPresentationOptionSound));
 }
 
+
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler{
-    [[MoEngage sharedInstance] userNotificationCenter:center didReceiveNotificationResponse:response];
+    [[MoEngageSDKMessaging sharedInstance] userNotificationCenter: center didReceive: response];
     completionHandler();
 }
 

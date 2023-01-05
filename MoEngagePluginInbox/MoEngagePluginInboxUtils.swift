@@ -12,7 +12,7 @@ import MoEngageSDK
 
 class  MoEngagePluginInboxUtils {
     
-    static func inboxEntryToJSON(inboxMessages: [MOInboxEntry], identifier: String) -> [String: Any] {
+    static func inboxEntryToJSON(inboxMessages: [MoEngageInboxEntry], identifier: String) -> [String: Any] {
         let accountMeta = MoEngagePluginUtils.createAccountPayload(identifier: identifier)
         var messages = [[String: Any]]()
         
@@ -23,8 +23,8 @@ class  MoEngagePluginInboxUtils {
             message[MoEngagePluginInboxConstants.Inbox.text] = createTextPayload(inboxMessage: inboxMessage)
             message[MoEngagePluginInboxConstants.Inbox.media] = createMediaPayload(inboxMessage: inboxMessage)
             message[MoEngagePluginInboxConstants.Inbox.isClicked] = inboxMessage.isRead
-            message[MoEngagePluginInboxConstants.Inbox.receivedTime] = MODateUtils.getString(forDate: inboxMessage.receivedDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
-            message[MoEngagePluginInboxConstants.Inbox.expiry] = MODateUtils.getString(forDate: inboxMessage.inboxExpiryDate, withFormat:MOCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
+            message[MoEngagePluginInboxConstants.Inbox.receivedTime] = MoEngageDateUtils.getString(forDate: inboxMessage.receivedDate, withFormat: MoEngageCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
+            message[MoEngagePluginInboxConstants.Inbox.expiry] = MoEngageDateUtils.getString(forDate: inboxMessage.inboxExpiryDate, withFormat:MoEngageCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             message[MoEngagePluginConstants.General.payload] = inboxMessage.notificationPayloadDict
             message[MoEngagePluginInboxConstants.Inbox.action] = MoEngagePluginInboxUtils.createActionPayload(inboxMessage: inboxMessage)
             
@@ -35,7 +35,7 @@ class  MoEngagePluginInboxUtils {
         return [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: data]
     }
     
-    static func createTextPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
+    static func createTextPayload(inboxMessage: MoEngageInboxEntry) -> [String: Any] {
         var textPayload = [String: Any]()
         
         textPayload[MoEngagePluginInboxConstants.Inbox.title] = inboxMessage.notificationTitle
@@ -45,7 +45,7 @@ class  MoEngagePluginInboxUtils {
         return textPayload
     }
     
-    static func createMediaPayload(inboxMessage: MOInboxEntry) -> [String: Any] {
+    static func createMediaPayload(inboxMessage: MoEngageInboxEntry) -> [String: Any] {
         var mediaPayload = [String: Any]()
         
         let moengageDict = inboxMessage.notificationPayloadDict[MoEngagePluginInboxConstants.Inbox.moengage] as? [String: Any]
@@ -55,7 +55,7 @@ class  MoEngagePluginInboxUtils {
         return mediaPayload
     }
     
-    static func createActionPayload(inboxMessage: MOInboxEntry) -> [[String: Any]] {
+    static func createActionPayload(inboxMessage: MoEngageInboxEntry) -> [[String: Any]] {
         var actionDict = [[String: Any]]()
         
         if let deepLinkURL = inboxMessage.deepLinkURL, !deepLinkURL.isEmpty {

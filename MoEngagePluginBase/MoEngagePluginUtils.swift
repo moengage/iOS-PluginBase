@@ -28,7 +28,7 @@ public class MoEngagePluginUtils {
     }
     
     // MARK: InApp Utilities
-    static func inAppCampaignToJSON(inAppCampaign: MOInAppCampaign, inAppAction: MOInAppAction? = nil, identifier: String) -> [String: Any] {
+    static func inAppCampaignToJSON(inAppCampaign: MoEngageInAppCampaign, inAppAction: MoEngageInAppAction? = nil, identifier: String) -> [String: Any] {
         let accountMeta = createAccountPayload(identifier: identifier)
         
         var inAppDataPayload = inAppCampaign.fetchInAppPaylaod()
@@ -49,7 +49,7 @@ public class MoEngagePluginUtils {
         return inAppPayload
     }
     
-    static func selfHandledCampaignToJSON(selfHandledCampaign: MOInAppSelfHandledCampaign?, identifier: String) -> [String: Any] {
+    static func selfHandledCampaignToJSON(selfHandledCampaign: MoEngageInAppSelfHandledCampaign?, identifier: String) -> [String: Any] {
         var inAppPayload = [String: Any]()
         
         let accountMeta = createAccountPayload(identifier: identifier)
@@ -101,14 +101,14 @@ public class MoEngagePluginUtils {
     }
 }
 
-extension MOInAppCampaign {
+extension MoEngageInAppCampaign {
     func fetchInAppPaylaod() -> [String: Any] {
-        let inAppPayload = [MoEngagePluginConstants.General.campaignName: campaign_name, MoEngagePluginConstants.General.campaignId: campaign_id, MoEngagePluginConstants.InApp.campaignContext: campaign_context, MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS] as [String: Any]
+        let inAppPayload = [MoEngagePluginConstants.General.campaignName: campaignName, MoEngagePluginConstants.General.campaignId: campaignId, MoEngagePluginConstants.InApp.campaignContext: campaignContext, MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS] as [String: Any]
         return inAppPayload
     }
 }
 
-extension MOInAppAction {
+extension MoEngageInAppAction {
     func fetchInAppActionPayload() -> [String: Any] {
         var actionPayload = [String: Any]()
         
@@ -116,7 +116,7 @@ extension MOInAppAction {
             actionPayload[MoEngagePluginConstants.General.navigationType] = MoEngagePluginConstants.InApp.screen
         }
         
-        if !screenName.isEmpty {
+        if let screenName = screenName {
             actionPayload[MoEngagePluginConstants.General.value] = screenName
         }
         
@@ -125,24 +125,5 @@ extension MOInAppAction {
         }
         
         return actionPayload
-    }
-}
-
-extension MOInAppSelfHandledCampaign {
-    
-    convenience init(campaignPayload: [String: Any]) {
-        self.init()
-        
-        if let campaign_id = campaignPayload[MoEngagePluginConstants.InApp.campaignId] as? String {
-            self.campaign_id = campaign_id
-        }
-        
-        if let campaign_name = campaignPayload[MoEngagePluginConstants.InApp.campaignName] as? String {
-            self.campaign_name = campaign_name
-        }
-        
-        if let campaign_context = campaignPayload[MoEngagePluginConstants.InApp.campaignContext] as? [String: Any] {
-            self.campaign_context = campaign_context
-        }
     }
 }
