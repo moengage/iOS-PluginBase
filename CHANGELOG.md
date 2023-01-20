@@ -2,6 +2,11 @@
 =================================
 
 ## Change Log:
+### Version 4.1.0 *(Date)*
+-------------------------------------------
+* MoEngage-iOS-SDK dependency updated to 9.3.* and MoEngageInApp dependency updated to 4.3.*.
+* Added `stopGeofenceMonitoring` API support in Geofence plugin `MoEngagePluginGeofence`.
+
 ### Version 4.0.0   *(5th January 2023)*
 -------------------------------------------
 * MoEngage-iOS-SDK dependency updated to 9.2.* and MoEngageInApp dependency updated to 4.2.*.

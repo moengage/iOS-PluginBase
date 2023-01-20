@@ -23,6 +23,7 @@
     [super viewDidLoad];
     self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count",@"Enable SDK",@"Disable SDK",@"Start GeofenceMontioring"];
     self.defaultAppID = @"";
+    self.dataSourceArray = @[@"Plugin Initialized",@"Set AppStatus",@"Track Event",@"Track User Attributes",@"Set Alias",@"Register For Push", @"Show InApp", @"Self Handled InApp", @"Set Context",@"Invalidate Context", @"Reset User", @"Opt-Out Tracking", @"Opt-In Tracking", @"Check Validity", @"Inbox - Get Messages", @"Inbox - Unread Count",@"Enable SDK",@"Disable SDK",@"Start GeofenceMontioring", @"Stop GeofenceMontioring"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -340,6 +341,15 @@
               }
             };
             [[MoEngagePluginGeofenceBridge sharedInstance] startGeofenceMonitoring: payload];
+            break;
+        }
+        case 19: {
+            NSDictionary* payload = @{
+              @"accountMeta": @{
+                @"appId": self.defaultAppID
+              }
+            };
+            [[MoEngagePluginGeofenceBridge sharedInstance] stopGeofenceMonitoring: payload];
             break;
         }
         default:
