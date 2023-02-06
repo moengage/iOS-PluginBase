@@ -2,6 +2,20 @@
 =================================
 
 ## Change Log:
+
+# 6th February 2023
+## Pluginbase 4.1.0
+-------------------------------------------
+* MoEngage-iOS-SDK dependency updated to 9.4.*.
+
+## Inbox 2.1.0
+-------------------------------------------
+* MoEngageInbox dependency updated to 4.4.* 
+
+## Geofence 2.1.0
+-------------------------------------------
+* MoEngageGeofence dependency updated to 5.4.*.
+
 ### Version 4.0.0   *(5th January 2023)*
 -------------------------------------------
 * MoEngage-iOS-SDK dependency updated to 9.2.* and MoEngageInApp dependency updated to 4.2.*.
