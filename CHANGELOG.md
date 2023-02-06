@@ -2,6 +2,10 @@
 =================================
 
 ## Change Log:
+### Version 4.1.0   *(6th February 2023)*
+-------------------------------------------
+* MoEngage-iOS-SDK dependency updated to 9.4.* and MoEngageInApp dependency updated to 4.4.* and MoEngageGeofence dependency updated to 5.4.*.
+
 ### Version 4.0.0   *(5th January 2023)*
 -------------------------------------------
 * MoEngage-iOS-SDK dependency updated to 9.2.* and MoEngageInApp dependency updated to 4.2.*.
