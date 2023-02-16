@@ -2,6 +2,10 @@
 =================================
 
 ## Change Log:
+# 16th February 2023
+### Geofence 2.1.1
+-------------------------------------------
+* Added support for `stopGeofenceMonitoring` API.
 
 # 6th February 2023
 ## Pluginbase 4.1.0
