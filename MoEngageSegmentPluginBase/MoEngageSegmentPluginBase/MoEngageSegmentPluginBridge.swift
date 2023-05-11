@@ -14,6 +14,12 @@ import MoEngageSDK
     
     private override init() {
     }
+
+    @objc public func initialize(_ payload: [String: Any]) {
+        if let identifier = MoEngageSegmentPluginUtils.fetchIdentifierFromPayload(attribute: payload) {
+            MoEngageCoreIntegrator.sharedInstance.enableSDKForSegment(instanceID: identifier)
+        }
+    }
     
     @objc public func trackAnonymousId(_ payload: [String: Any]) {
         if let identifier = MoEngageSegmentPluginUtils.fetchIdentifierFromPayload(attribute: payload),
