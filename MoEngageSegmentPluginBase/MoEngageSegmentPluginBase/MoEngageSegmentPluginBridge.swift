@@ -39,17 +39,17 @@ import MoEngageSDK
         
         for (attributeName, attributeValue) in traits {
             if let epochDate = MoEngageSegmentPluginUtils.fetchEpochDateFromString(value: attributeValue) {
-
+                
                 MoEngageSDKAnalytics.sharedInstance.setUserAttributeDate(epochDate, withAttributeName: attributeName, forAppID: identifier)
-           
+                
             } else if let location = attributeValue as? [String: Any] {
                 if let latitute = location[MoEngageSegmentPluginConstants.UserAttribute.latitude] as? Double, let longitude = location[MoEngageSegmentPluginConstants.UserAttribute.longitude] as? Double {
-                
+                    
                     MoEngageSDKAnalytics.sharedInstance.setLocation(MoEngageGeoLocation(withLatitude: latitute, andLongitude: longitude), forAppID: identifier)
-               
+                    
                 }
             } else {
-              
+                
                 MoEngageSDKAnalytics.sharedInstance.setUserAttribute(attributeValue, withAttributeName: attributeName, forAppID: identifier)
                 
             }

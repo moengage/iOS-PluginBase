@@ -7,6 +7,7 @@
 
 import Foundation
 import MoEngageSDK
+import UIKit
 
 @objc final public class MoEngageSegmentPlugin: NSObject {
     
@@ -14,6 +15,7 @@ import MoEngageSDK
     @objc public func initializeDefaultInstance(sdkConfig: MoEngageSDKConfig, sdkState: MoEngageSDKState, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         guard !sdkConfig.appId.isEmpty else { return }
         
+        sdkConfig.setPartnerIntegrationType(integrationType: .segment)
         initializeMoEngageDefaultInstance(sdkConfig: sdkConfig, sdkState: sdkState)
     }
     
@@ -21,6 +23,7 @@ import MoEngageSDK
         
         guard !sdkConfig.appId.isEmpty else { return }
         
+        sdkConfig.setPartnerIntegrationType(integrationType: .segment)
         initializeMoEngageDefaultInstance(sdkConfig: sdkConfig, launchOptions: launchOptions)
     }
     
@@ -47,12 +50,14 @@ import MoEngageSDK
     @objc public func initializeInstance(sdkConfig: MoEngageSDKConfig, sdkState: MoEngageSDKState, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         guard !sdkConfig.appId.isEmpty else { return }
         
+        sdkConfig.setPartnerIntegrationType(integrationType: .segment)
         initializeMoEngageSecondaryInstance(sdkConfig: sdkConfig, sdkState: sdkState)
     }
     
     @objc public func initializeInstance(sdkConfig: MoEngageSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         guard !sdkConfig.appId.isEmpty else { return }
         
+        sdkConfig.setPartnerIntegrationType(integrationType: .segment)
         initializeMoEngageSecondaryInstance(sdkConfig: sdkConfig, launchOptions: launchOptions)
     }
     

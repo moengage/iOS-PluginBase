@@ -1,0 +1,23 @@
+PODS:
+  - MoEngage-iOS-SDK (9.8.0)
+  - MoEngageSegmentPluginBase (1.0.0):
+    - MoEngage-iOS-SDK (< 9.8.1, >= 9.8.0)
+
+DEPENDENCIES:
+  - MoEngageSegmentPluginBase (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - MoEngage-iOS-SDK
+
+EXTERNAL SOURCES:
+  MoEngageSegmentPluginBase:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MoEngage-iOS-SDK: df69cdd849b18548b4a1cadebfb7ab7a9b6d92b3
+  MoEngageSegmentPluginBase: d5a36c5b5f9c5197975aa02cfed146b586117d97
+
+PODFILE CHECKSUM: a2534b3ed7df244380f026169d9b2db67c5b9e54
+
+COCOAPODS: 1.12.1

@@ -1,0 +1,510 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC2C904F2A0CA2A100D11F2D /* MoEngageSegmentPluginBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2C90462A0CA2A100D11F2D /* MoEngageSegmentPluginBase.framework */; };
+		AC2C90542A0CA2A100D11F2D /* MoEngageSegmentPluginParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C90532A0CA2A100D11F2D /* MoEngageSegmentPluginParserTests.swift */; };
+		AC2C90632A0CA2E300D11F2D /* MoEngageSegmentPluginParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C905E2A0CA2E200D11F2D /* MoEngageSegmentPluginParser.swift */; };
+		AC2C90642A0CA2E300D11F2D /* MoEngageSegmentPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C905F2A0CA2E200D11F2D /* MoEngageSegmentPlugin.swift */; };
+		AC2C90652A0CA2E300D11F2D /* MoEngageSegmentPluginConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C90602A0CA2E200D11F2D /* MoEngageSegmentPluginConstants.swift */; };
+		AC2C90662A0CA2E300D11F2D /* MoEngageSegmentPluginUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C90612A0CA2E200D11F2D /* MoEngageSegmentPluginUtils.swift */; };
+		AC2C90672A0CA2E300D11F2D /* MoEngageSegmentPluginBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C90622A0CA2E300D11F2D /* MoEngageSegmentPluginBridge.swift */; };
+		AC2C906A2A0CA32600D11F2D /* MoEngage-iOS-SDK in Frameworks */ = {isa = PBXBuildFile; productRef = AC2C90692A0CA32600D11F2D /* MoEngage-iOS-SDK */; };
+		AC2C906C2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C906B2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AC2C90502A0CA2A100D11F2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC2C903D2A0CA2A100D11F2D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC2C90452A0CA2A100D11F2D;
+			remoteInfo = MoEngageSegmentPluginBase;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AC2C90462A0CA2A100D11F2D /* MoEngageSegmentPluginBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoEngageSegmentPluginBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2C904E2A0CA2A100D11F2D /* MoEngageSegmentPluginBaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoEngageSegmentPluginBaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2C90532A0CA2A100D11F2D /* MoEngageSegmentPluginParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginParserTests.swift; sourceTree = "<group>"; };
+		AC2C905E2A0CA2E200D11F2D /* MoEngageSegmentPluginParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginParser.swift; sourceTree = "<group>"; };
+		AC2C905F2A0CA2E200D11F2D /* MoEngageSegmentPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPlugin.swift; sourceTree = "<group>"; };
+		AC2C90602A0CA2E200D11F2D /* MoEngageSegmentPluginConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginConstants.swift; sourceTree = "<group>"; };
+		AC2C90612A0CA2E200D11F2D /* MoEngageSegmentPluginUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginUtils.swift; sourceTree = "<group>"; };
+		AC2C90622A0CA2E300D11F2D /* MoEngageSegmentPluginBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginBridge.swift; sourceTree = "<group>"; };
+		AC2C906B2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginUtilsTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC2C90432A0CA2A100D11F2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC2C906A2A0CA32600D11F2D /* MoEngage-iOS-SDK in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C904B2A0CA2A100D11F2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC2C904F2A0CA2A100D11F2D /* MoEngageSegmentPluginBase.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC2C903C2A0CA2A100D11F2D = {
+			isa = PBXGroup;
+			children = (
+				AC2C90482A0CA2A100D11F2D /* MoEngageSegmentPluginBase */,
+				AC2C90522A0CA2A100D11F2D /* MoEngageSegmentPluginBaseTests */,
+				AC2C90472A0CA2A100D11F2D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC2C90472A0CA2A100D11F2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC2C90462A0CA2A100D11F2D /* MoEngageSegmentPluginBase.framework */,
+				AC2C904E2A0CA2A100D11F2D /* MoEngageSegmentPluginBaseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC2C90482A0CA2A100D11F2D /* MoEngageSegmentPluginBase */ = {
+			isa = PBXGroup;
+			children = (
+				AC2C905F2A0CA2E200D11F2D /* MoEngageSegmentPlugin.swift */,
+				AC2C90622A0CA2E300D11F2D /* MoEngageSegmentPluginBridge.swift */,
+				AC2C90602A0CA2E200D11F2D /* MoEngageSegmentPluginConstants.swift */,
+				AC2C905E2A0CA2E200D11F2D /* MoEngageSegmentPluginParser.swift */,
+				AC2C90612A0CA2E200D11F2D /* MoEngageSegmentPluginUtils.swift */,
+			);
+			path = MoEngageSegmentPluginBase;
+			sourceTree = "<group>";
+		};
+		AC2C90522A0CA2A100D11F2D /* MoEngageSegmentPluginBaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC2C90532A0CA2A100D11F2D /* MoEngageSegmentPluginParserTests.swift */,
+				AC2C906B2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift */,
+			);
+			path = MoEngageSegmentPluginBaseTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		AC2C90412A0CA2A100D11F2D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		AC2C90452A0CA2A100D11F2D /* MoEngageSegmentPluginBase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC2C90582A0CA2A100D11F2D /* Build configuration list for PBXNativeTarget "MoEngageSegmentPluginBase" */;
+			buildPhases = (
+				AC2C90412A0CA2A100D11F2D /* Headers */,
+				AC2C90422A0CA2A100D11F2D /* Sources */,
+				AC2C90432A0CA2A100D11F2D /* Frameworks */,
+				AC2C90442A0CA2A100D11F2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MoEngageSegmentPluginBase;
+			packageProductDependencies = (
+				AC2C90692A0CA32600D11F2D /* MoEngage-iOS-SDK */,
+			);
+			productName = MoEngageSegmentPluginBase;
+			productReference = AC2C90462A0CA2A100D11F2D /* MoEngageSegmentPluginBase.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		AC2C904D2A0CA2A100D11F2D /* MoEngageSegmentPluginBaseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC2C905B2A0CA2A100D11F2D /* Build configuration list for PBXNativeTarget "MoEngageSegmentPluginBaseTests" */;
+			buildPhases = (
+				AC2C904A2A0CA2A100D11F2D /* Sources */,
+				AC2C904B2A0CA2A100D11F2D /* Frameworks */,
+				AC2C904C2A0CA2A100D11F2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC2C90512A0CA2A100D11F2D /* PBXTargetDependency */,
+			);
+			name = MoEngageSegmentPluginBaseTests;
+			productName = MoEngageSegmentPluginBaseTests;
+			productReference = AC2C904E2A0CA2A100D11F2D /* MoEngageSegmentPluginBaseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC2C903D2A0CA2A100D11F2D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					AC2C90452A0CA2A100D11F2D = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+					};
+					AC2C904D2A0CA2A100D11F2D = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = AC2C90402A0CA2A100D11F2D /* Build configuration list for PBXProject "MoEngageSegmentPluginBase" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AC2C903C2A0CA2A100D11F2D;
+			packageReferences = (
+				AC2C90682A0CA32600D11F2D /* XCRemoteSwiftPackageReference "MoEngage-iOS-SDK" */,
+			);
+			productRefGroup = AC2C90472A0CA2A100D11F2D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC2C90452A0CA2A100D11F2D /* MoEngageSegmentPluginBase */,
+				AC2C904D2A0CA2A100D11F2D /* MoEngageSegmentPluginBaseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC2C90442A0CA2A100D11F2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C904C2A0CA2A100D11F2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC2C90422A0CA2A100D11F2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC2C90672A0CA2E300D11F2D /* MoEngageSegmentPluginBridge.swift in Sources */,
+				AC2C90632A0CA2E300D11F2D /* MoEngageSegmentPluginParser.swift in Sources */,
+				AC2C90652A0CA2E300D11F2D /* MoEngageSegmentPluginConstants.swift in Sources */,
+				AC2C90662A0CA2E300D11F2D /* MoEngageSegmentPluginUtils.swift in Sources */,
+				AC2C90642A0CA2E300D11F2D /* MoEngageSegmentPlugin.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C904A2A0CA2A100D11F2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC2C90542A0CA2A100D11F2D /* MoEngageSegmentPluginParserTests.swift in Sources */,
+				AC2C906C2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC2C90512A0CA2A100D11F2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC2C90452A0CA2A100D11F2D /* MoEngageSegmentPluginBase */;
+			targetProxy = AC2C90502A0CA2A100D11F2D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AC2C90562A0CA2A100D11F2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AC2C90572A0CA2A100D11F2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AC2C90592A0CA2A100D11F2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BPWYRAF5X7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.moengage.MoEngageSegmentPluginBase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC2C905A2A0CA2A100D11F2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BPWYRAF5X7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.moengage.MoEngageSegmentPluginBase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AC2C905C2A0CA2A100D11F2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BPWYRAF5X7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.moengage.MoEngageSegmentPluginBaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC2C905D2A0CA2A100D11F2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BPWYRAF5X7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.moengage.MoEngageSegmentPluginBaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC2C90402A0CA2A100D11F2D /* Build configuration list for PBXProject "MoEngageSegmentPluginBase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2C90562A0CA2A100D11F2D /* Debug */,
+				AC2C90572A0CA2A100D11F2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC2C90582A0CA2A100D11F2D /* Build configuration list for PBXNativeTarget "MoEngageSegmentPluginBase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2C90592A0CA2A100D11F2D /* Debug */,
+				AC2C905A2A0CA2A100D11F2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC2C905B2A0CA2A100D11F2D /* Build configuration list for PBXNativeTarget "MoEngageSegmentPluginBaseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2C905C2A0CA2A100D11F2D /* Debug */,
+				AC2C905D2A0CA2A100D11F2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AC2C90682A0CA32600D11F2D /* XCRemoteSwiftPackageReference "MoEngage-iOS-SDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/moengage/MoEngage-iOS-SDK.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC2C90692A0CA32600D11F2D /* MoEngage-iOS-SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC2C90682A0CA32600D11F2D /* XCRemoteSwiftPackageReference "MoEngage-iOS-SDK" */;
+			productName = "MoEngage-iOS-SDK";
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = AC2C903D2A0CA2A100D11F2D /* Project object */;
+}

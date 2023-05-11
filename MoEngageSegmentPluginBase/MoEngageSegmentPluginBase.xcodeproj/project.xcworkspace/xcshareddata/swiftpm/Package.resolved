@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "moengage-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/moengage/MoEngage-iOS-SDK.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "28cc550330ba254a14cfa2f73596a584b6fa337c"
+      }
+    }
+  ],
+  "version" : 2
+}
