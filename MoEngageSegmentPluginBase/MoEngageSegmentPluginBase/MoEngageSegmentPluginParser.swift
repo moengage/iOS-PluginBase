@@ -10,7 +10,7 @@ import MoEngageSDK
 
 class MoEngageSegmentPluginParser {
     
-    static func fetchAlias(payload: [String: Any]) -> String? {
+    func fetchAlias(payload: [String: Any]) -> String? {
         guard let dataDict = payload[MoEngageSegmentPluginConstants.General.data] as? [String: Any],
               let aliasValue = dataDict[MoEngageSegmentPluginConstants.UserAttribute.alias] as? String,
               !aliasValue.isEmpty
@@ -21,7 +21,7 @@ class MoEngageSegmentPluginParser {
         return aliasValue
     }
     
-    static func fetchAnonymousId(payload: [String: Any]) -> String? {
+    func fetchAnonymousId(payload: [String: Any]) -> String? {
         guard let dataDict = payload[MoEngageSegmentPluginConstants.General.data] as? [String: Any],
               let id = dataDict[MoEngageSegmentPluginConstants.UserAttribute.anonymousId] as? String,
               !id.isEmpty
@@ -32,7 +32,7 @@ class MoEngageSegmentPluginParser {
         return id
     }
     
-    static func fetchEventProperties(payload: [String: Any]) -> MoEngageProperties {
+    func fetchEventProperties(payload: [String: Any]) -> MoEngageProperties {
         let moeProperties = MoEngageProperties()
         
         if let properties = payload[MoEngageSegmentPluginConstants.EventTracking.properties] as? [String: Any] {

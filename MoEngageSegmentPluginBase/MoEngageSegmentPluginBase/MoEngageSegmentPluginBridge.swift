@@ -23,14 +23,14 @@ import MoEngageSDK
     
     @objc public func trackAnonymousId(_ payload: [String: Any]) {
         if let identifier = MoEngageSegmentPluginUtils.fetchIdentifierFromPayload(attribute: payload),
-           let id = MoEngageSegmentPluginParser.fetchAnonymousId(payload: payload) {
+           let id = MoEngageSegmentPluginParser().fetchAnonymousId(payload: payload) {
             MoEngageSDKAnalytics.sharedInstance.setUserAttribute(id, withAttributeName: MoEngageSegmentPluginConstants.UserAttribute.segmentId, forAppID: identifier)
         }
     }
     
     @objc public func setAlias(_ payload: [String: Any]) {
         if let identifier = MoEngageSegmentPluginUtils.fetchIdentifierFromPayload(attribute: payload),
-           let alias = MoEngageSegmentPluginParser.fetchAlias(payload: payload) {
+           let alias = MoEngageSegmentPluginParser().fetchAlias(payload: payload) {
             MoEngageSDKAnalytics.sharedInstance.setAlias(alias, forAppID: identifier)
         }
     }
@@ -74,7 +74,7 @@ import MoEngageSDK
             return
         }
         
-        let moeProperties = MoEngageSegmentPluginParser.fetchEventProperties(payload: dataDict)
+        let moeProperties = MoEngageSegmentPluginParser().fetchEventProperties(payload: dataDict)
         
         MoEngageSDKAnalytics.sharedInstance.trackEvent(eventName, withProperties: moeProperties, forAppID: identifier)
     }
