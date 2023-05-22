@@ -16,6 +16,7 @@
 		AC2C90672A0CA2E300D11F2D /* MoEngageSegmentPluginBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C90622A0CA2E300D11F2D /* MoEngageSegmentPluginBridge.swift */; };
 		AC2C906A2A0CA32600D11F2D /* MoEngage-iOS-SDK in Frameworks */ = {isa = PBXBuildFile; productRef = AC2C90692A0CA32600D11F2D /* MoEngage-iOS-SDK */; };
 		AC2C906C2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C906B2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift */; };
+		ACC375472A1B7BDB009514D4 /* MoEngageSegmentMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC375462A1B7BDB009514D4 /* MoEngageSegmentMockData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		AC2C90612A0CA2E200D11F2D /* MoEngageSegmentPluginUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginUtils.swift; sourceTree = "<group>"; };
 		AC2C90622A0CA2E300D11F2D /* MoEngageSegmentPluginBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginBridge.swift; sourceTree = "<group>"; };
 		AC2C906B2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentPluginUtilsTests.swift; sourceTree = "<group>"; };
+		ACC375462A1B7BDB009514D4 /* MoEngageSegmentMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoEngageSegmentMockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			children = (
 				AC2C90532A0CA2A100D11F2D /* MoEngageSegmentPluginParserTests.swift */,
 				AC2C906B2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift */,
+				ACC375462A1B7BDB009514D4 /* MoEngageSegmentMockData.swift */,
 			);
 			path = MoEngageSegmentPluginBaseTests;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 			files = (
 				AC2C90542A0CA2A100D11F2D /* MoEngageSegmentPluginParserTests.swift in Sources */,
 				AC2C906C2A0CA9C900D11F2D /* MoEngageSegmentPluginUtilsTests.swift in Sources */,
+				ACC375472A1B7BDB009514D4 /* MoEngageSegmentMockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

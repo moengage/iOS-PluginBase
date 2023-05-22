@@ -20,14 +20,14 @@ final class MoEngageSegmentPluginUtilsTests: XCTestCase {
     
     // MARK: App Identifier
     func test_fetch_identifier_from_payload() {
-        let appId = "123"
+        let appId = MoEngageSegmentMockData.AppIdData.appId
         let idPayload =  ["accountMeta": [ "appId": appId]]
         let appId2 = MoEngageSegmentPluginUtils.fetchIdentifierFromPayload(attribute: idPayload)
         XCTAssertEqual(appId, appId2)
     }
 
     func test_fetch_identifier_with_empty_string() {
-        let appId = ""
+        let appId = MoEngageSegmentMockData.AppIdData.emptyAppId
         let idPayload =  ["accountMeta": [ "appId": appId]]
         let appId2 = MoEngageSegmentPluginUtils.fetchIdentifierFromPayload(attribute: idPayload)
         XCTAssertNil(appId2)
@@ -42,19 +42,19 @@ final class MoEngageSegmentPluginUtilsTests: XCTestCase {
     
     // MARK: Fetch Epoch Date
     func test_epoch_date() {
-        let str = "2020-06-10T12:42:10Z"
+        let str = MoEngageSegmentMockData.CustomDateData.date
         let epochDate = MoEngageSegmentPluginUtils.fetchEpochDateFromString(value: str)
         XCTAssertEqual(epochDate?.timeIntervalSince1970, 1591792930.0)
     }
     
     func test_epoch_date_with_invalid_string() {
-        let str = "abcd"
+        let str = MoEngageSegmentMockData.CustomDateData.invalidDateType
         let epochDate = MoEngageSegmentPluginUtils.fetchEpochDateFromString(value: str)
         XCTAssertNil(epochDate)
     }
     
     func test_epoch_date_with_invalid_format() {
-        let str = "2020-06-10T12:42Z"
+        let str = MoEngageSegmentMockData.CustomDateData.invalidDateFormat
         let epochDate = MoEngageSegmentPluginUtils.fetchEpochDateFromString(value: str)
         XCTAssertNil(epochDate)
     }
