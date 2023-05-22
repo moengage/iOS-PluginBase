@@ -27,6 +27,7 @@ struct MoEngageSegmentPluginConstants {
         static let longitude = "longitude"
         static let location = "location"
         static let segmentId = "USER_ATTRIBUTE_SEGMENT_ID"
+        static let address = "address"
     }
     
     // event

@@ -48,11 +48,15 @@ import MoEngageSDK
                 
                 MoEngageSDKAnalytics.sharedInstance.setUserAttributeDate(epochDate, withAttributeName: attributeName, forAppID: identifier)
                 
-            } else if let location = attributeValue as? [String: Any] {
-                if let latitute = location[MoEngageSegmentPluginConstants.UserAttribute.latitude] as? Double, let longitude = location[MoEngageSegmentPluginConstants.UserAttribute.longitude] as? Double {
+            } else if attributeName == MoEngageSegmentPluginConstants.UserAttribute.location, let locationPayload = attributeValue as? [String: Any] {
+                if let latitute = locationPayload[MoEngageSegmentPluginConstants.UserAttribute.latitude] as? Double, let longitude = locationPayload[MoEngageSegmentPluginConstants.UserAttribute.longitude] as? Double {
                     
                     MoEngageSDKAnalytics.sharedInstance.setLocation(MoEngageGeoLocation(withLatitude: latitute, andLongitude: longitude), forAppID: identifier)
                     
+                }
+            } else if attributeName == MoEngageSegmentPluginConstants.UserAttribute.address, let payload = attributeValue as? [String: Any] {
+                for (key, value) in payload {
+                    MoEngageSDKAnalytics.sharedInstance.setUserAttribute(value, withAttributeName: key, forAppID: identifier)
                 }
             } else {
                 
