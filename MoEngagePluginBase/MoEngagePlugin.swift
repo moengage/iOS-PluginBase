@@ -9,6 +9,7 @@ import Foundation
 import MoEngageSDK
 import MoEngageInApps
 
+@available(iOSApplicationExtension, unavailable)
 @objc final public class MoEngagePlugin: NSObject {
     
     // MARK: Initialization of default instance

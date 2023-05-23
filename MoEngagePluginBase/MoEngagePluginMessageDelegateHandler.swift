@@ -8,6 +8,7 @@
 import Foundation
 import MoEngageSDK
 
+@available(iOSApplicationExtension, unavailable)
 final class MoEngagePluginMessageDelegateHandler: NSObject, MoEngageMessagingDelegate {
     
     private var identifier: String
@@ -62,6 +63,7 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MoEngageMessagingDel
     
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension MoEngagePluginMessageDelegateHandler: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])

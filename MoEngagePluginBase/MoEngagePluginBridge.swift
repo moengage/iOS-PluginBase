@@ -9,6 +9,8 @@ import Foundation
 import MoEngageSDK
 import MoEngageInApps
 
+@available(iOSApplicationExtension, unavailable)
+
 @objc final public class MoEngagePluginBridge: NSObject {
 
     @objc public static let sharedInstance = MoEngagePluginBridge()
