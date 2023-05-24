@@ -9,18 +9,19 @@ import Foundation
 import MoEngageSDK
 import MoEngageInApps
 
+@available(iOSApplicationExtension, unavailable)
 @objc final public class MoEngagePlugin: NSObject {
     
     // MARK: Initialization of default instance
     @objc public func initializeDefaultInstance(sdkConfig: MoEngageSDKConfig, sdkState: MoEngageSDKState, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
-        guard !sdkConfig.identifier.isEmpty else { return }
+        guard !sdkConfig.appId.isEmpty else { return }
         
         initializeMoEngageDefaultInstance(sdkConfig: sdkConfig, sdkState: sdkState)
     }
     
     @objc public func initializeDefaultInstance(sdkConfig: MoEngageSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         
-        guard !sdkConfig.identifier.isEmpty else { return }
+        guard !sdkConfig.appId.isEmpty else { return }
         
         initializeMoEngageDefaultInstance(sdkConfig: sdkConfig, launchOptions: launchOptions)
     }
@@ -32,7 +33,7 @@ import MoEngageInApps
         MoEngage.sharedInstance.initializeDefaultLiveInstance(sdkConfig, sdkState: sdkState)
 #endif
         
-        commonSetUp(identifier: sdkConfig.identifier)
+        commonSetUp(identifier: sdkConfig.appId)
     }
     
     private func initializeMoEngageDefaultInstance(sdkConfig: MoEngageSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
@@ -43,18 +44,18 @@ import MoEngageInApps
         MoEngage.sharedInstance.initializeDefaultLiveInstance(sdkConfig)
 #endif
         
-        commonSetUp(identifier: sdkConfig.identifier)
+        commonSetUp(identifier: sdkConfig.appId)
     }
     
     // MARK: Initialization of secondary instance
     @objc public func initializeInstance(sdkConfig: MoEngageSDKConfig, sdkState: MoEngageSDKState, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
-        guard !sdkConfig.identifier.isEmpty else { return }
+        guard !sdkConfig.appId.isEmpty else { return }
         
         initializeMoEngageSecondaryInstance(sdkConfig: sdkConfig, sdkState: sdkState)
     }
     
     @objc public func initializeInstance(sdkConfig: MoEngageSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
-        guard !sdkConfig.identifier.isEmpty else { return }
+        guard !sdkConfig.appId.isEmpty else { return }
         
         initializeMoEngageSecondaryInstance(sdkConfig: sdkConfig, launchOptions: launchOptions)
     }
@@ -66,7 +67,7 @@ import MoEngageInApps
         MoEngage.sharedInstance.initializeLiveInstance(sdkConfig, sdkState: sdkState)
 #endif
         
-        commonSetUp(identifier: sdkConfig.identifier)
+        commonSetUp(identifier: sdkConfig.appId)
         
     }
     
@@ -77,7 +78,7 @@ import MoEngageInApps
         MoEngage.sharedInstance.initializeLiveInstance(sdkConfig)
 #endif
         
-        commonSetUp(identifier: sdkConfig.identifier)
+        commonSetUp(identifier: sdkConfig.appId)
     }
     
     @objc public func trackPluginInfo(_ pluginType: String, version: String) {
