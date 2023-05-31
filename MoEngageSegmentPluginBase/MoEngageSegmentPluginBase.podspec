@@ -20,6 +20,8 @@ Pod::Spec.new do |s|
                     }
 
     s.source_files = 'MoEngageSegmentPluginBase/**/*.swift'
+    s.exclude_files = 'MoEngageSegmentPluginBase/MoEngageSegmentPluginBaseTests/**'
+
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
     s.dependency 'MoEngage-iOS-SDK', '>= 9.8.0', '< 9.9.0'
