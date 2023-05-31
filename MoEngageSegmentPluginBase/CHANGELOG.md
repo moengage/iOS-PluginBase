@@ -2,6 +2,6 @@ MoEngageSegmentPluginBase
 =================================
 
 # 31-05-2023
-## 1.0.0
+## 0.0.1
 -------------------------------------------
-* Initial release of MoEngageSegmentPluginBase.
+* Beta release
