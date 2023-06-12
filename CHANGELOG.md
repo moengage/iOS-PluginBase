@@ -2,7 +2,13 @@
 =================================
 
 ## Change Log:
-# Next release
+
+# Next Release
+## Pluginbase 
+-------------------------------------------
+* BugFix: Added callback support for Selfhandled test/event triggered campaigns.
+
+# 24th May 2023
 ## Pluginbase 4.2.0
 -------------------------------------------
 * MoEngage-iOS-SDK dependency updated to 9.8.*.

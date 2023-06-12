@@ -50,6 +50,8 @@ final class MoEngagePluginInAppDelegateHandler: NSObject, MoEngageInAppNativeDel
     }
     
     func selfHandledInAppTriggered(withInfo inappCampaign: MoEngageInApps.MoEngageInAppSelfHandledCampaign, forAccountMeta accountMeta: MoEngageCore.MoEngageAccountMeta) {
+        let message = MoEngagePluginUtils.selfHandledCampaignToJSON(selfHandledCampaign: inappCampaign, identifier: identifier)
+        messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.inAppSelfHandled, message: message)
     }
     
 }
