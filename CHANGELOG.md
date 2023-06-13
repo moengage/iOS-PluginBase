@@ -3,8 +3,8 @@
 
 ## Change Log:
 
-# Next Release
-## Pluginbase 
+# 13th June 2023
+## Pluginbase 4.2.1
 -------------------------------------------
 * BugFix: Added callback support for Selfhandled test/event triggered campaigns.
 
