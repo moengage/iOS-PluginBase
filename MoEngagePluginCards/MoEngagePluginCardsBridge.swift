@@ -13,17 +13,17 @@ import MoEngageCards
     func syncComplete(forEventType eventType: MoEngageCardsSyncEventType, withData data: [String: Any])
 }
 
-@objc final public class MoEngagePluginCards: NSObject {
-    @objc public static let sharedInstance = MoEngagePluginCards()
+@objc final public class MoEngagePluginCardsBridge: NSObject {
+    @objc public static let sharedInstance = MoEngagePluginCardsBridge()
 
-    private let handler: MoEngagePluginCardsHandler
+    private let handler: MoEngagePluginCardsBridgeHandler
     private let syncManager: MoEngageCardSyncManagerProtocol
 
     private init(
-        hanler: MoEngagePluginCardsHandler = MoEngageSDKCards.sharedInstance,
+        handler: MoEngagePluginCardsBridgeHandler = MoEngageSDKCards.sharedInstance,
         syncManager: MoEngageCardSyncManagerProtocol = MoEngageCardSyncManager()
     ) {
-        self.handler = hanler
+        self.handler = handler
         self.syncManager = syncManager
     }
 
@@ -85,6 +85,25 @@ import MoEngageCards
         }
 
         MoEngageSDKCards.sharedInstance.onCardSectionLoaded(forAppID: identifier) { data in
+            self.syncManager.sendUpdate(
+                forEventType: .inboxOpen,
+                andAppID: identifier,
+                withNewData: data
+            )
+        }
+    }
+
+    @objc public func setAppOpenSyncListener(_ accountData: [String: Any]) {
+        guard
+            let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(
+                attribute: accountData
+            )
+        else {
+            logAppIdentifierFetchFailed(for: accountData)
+            return
+        }
+
+        MoEngageSDKCards.sharedInstance.onAppOpenSync(forAppID: identifier) { data in
             self.syncManager.sendUpdate(
                 forEventType: .inboxOpen,
                 andAppID: identifier,
@@ -164,7 +183,7 @@ import MoEngageCards
             MoEngageLogger.error("\(error)")
             return
         }
-        self.handler.cardClicked(card, forAppID: identifier)
+        self.handler.cardShown(card, forAppID: identifier)
     }
 
     @objc public func deleteCards(_ cardsData: [String: Any]) {
@@ -346,7 +365,7 @@ import MoEngageCards
     }
 }
 
-protocol MoEngagePluginCardsHandler {
+protocol MoEngagePluginCardsBridgeHandler {
     func onAppOpenSync(
         forAppID appID: String?,
         withCompletion completionBlock: ((_ data: MoEngageCardSyncCompleteData?) -> Void)?
@@ -421,4 +440,4 @@ protocol MoEngagePluginCardsHandler {
     )
 }
 
-extension MoEngageSDKCards: MoEngagePluginCardsHandler {}
+extension MoEngageSDKCards: MoEngagePluginCardsBridgeHandler {}

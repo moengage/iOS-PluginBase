@@ -13,14 +13,13 @@ extension Array where Element == [String: Any] {
         var cards: [MoEngageCardCampaign] = []
         cards.reserveCapacity(self.count)
         for cardData in self {
-            let card: MoEngageCardCampaign
             do {
-                card = try MoEngageHybridSDKCards.buildCardCampaign(fromHybridData: cardData)
+                let card = try MoEngageHybridSDKCards.buildCardCampaign(fromHybridData: cardData)
+                cards.append(card)
             } catch {
                 MoEngageLogger.error("\(error)")
                 continue
             }
-            cards.append(card)
         }
         return cards
     }
