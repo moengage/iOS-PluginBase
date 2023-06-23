@@ -26,8 +26,9 @@ struct MoEngageCardClickData {
             throw MoEngageCardsDecodingError(key: HybridKeys.card, data: data)
         }
 
+        let widgetId = data[HybridKeys.widgetId] as? Int
         return try self.init(
-            widgetId: data[HybridKeys.widgetId] as? Int,
+            widgetId: widgetId == -1 ? nil : widgetId,
             card: MoEngageHybridSDKCards.buildCardCampaign(fromHybridData: cardData)
         )
     }

@@ -12,5 +12,6 @@ enum MoEngagePluginCardsContants {
     static let newCardsCount = "newCardsCount"
     static let unClickedCardsCount = "unClickedCardsCount"
     static let category = "category"
+    static let categories = "categories"
     static let cards = "cards"
 }

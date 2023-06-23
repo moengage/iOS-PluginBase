@@ -18,7 +18,7 @@ import MoEngageCards
 
     private let handler: MoEngagePluginCardsHandler
     private let syncManager: MoEngageCardSyncManagerProtocol
-    
+
     private init(
         hanler: MoEngagePluginCardsHandler = MoEngageSDKCards.sharedInstance,
         syncManager: MoEngageCardSyncManagerProtocol = MoEngageCardSyncManager()
@@ -226,7 +226,9 @@ import MoEngageCards
         self.handler.getCardsCategories(forAppID: identifier) { categories, accountMeta in
             let result = MoEngagePluginCardsUtil.buildHybridPayload(
                 forIdentifier: identifier,
-                containingData: categories
+                containingData: [
+                    MoEngagePluginCardsContants.categories: categories
+                ]
             )
             completionHandler(result)
         }
