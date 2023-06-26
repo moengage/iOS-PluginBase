@@ -13,8 +13,9 @@ extension MoEngageCardStyle: HybridEncodable {
     }
 
     func encodeForHybrid() -> [String : Any?] {
+        guard let bgColor = self.bgColor else { return [:] }
         return [
-            HybridKeys.bgColor: self.bgColor?.convertRGBToHex(),
+            HybridKeys.bgColor: MoEngagePluginCardsUtil.convertRGBColorToHex(bgColor),
         ]
     }
 }

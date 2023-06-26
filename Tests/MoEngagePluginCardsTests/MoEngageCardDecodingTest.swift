@@ -29,7 +29,7 @@ final class MoEngageCardDecodingTest: XCTestCase {
 
     func testCardsCategoryDataDecodingFailureScenario() throws {
         XCTExpectFailure("Decoding failure due to invalid data")
-        let cardCategory = try try MoEngageCardsCategoryData.decodeFromHybrid([:])
+        let _ = try MoEngageCardsCategoryData.decodeFromHybrid([:])
     }
 
     func testCardClickDataDecodeWithWidgetId() throws {
@@ -96,6 +96,6 @@ final class MoEngageCardDecodingTest: XCTestCase {
 
     func testCardClickDataDecodingFailureScenario() throws {
         XCTExpectFailure("Decoding failure due to invalid data")
-        let cardClick = try try MoEngageCardClickData.decodeFromHybrid([:])
+        let _ = try MoEngageCardClickData.decodeFromHybrid([:])
     }
 }

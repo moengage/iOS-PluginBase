@@ -19,7 +19,7 @@ import MoEngageCards
     private let handler: MoEngagePluginCardsBridgeHandler
     private let syncManager: MoEngageCardSyncManagerProtocol
 
-    private init(
+    internal init(
         handler: MoEngagePluginCardsBridgeHandler = MoEngageSDKCards.sharedInstance,
         syncManager: MoEngageCardSyncManagerProtocol = MoEngageCardSyncManager()
     ) {
@@ -46,7 +46,7 @@ import MoEngageCards
 
     @objc public func initialize(_ accountData: [String: Any]) {
         guard
-            let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(
+            let _ = MoEngagePluginUtils.fetchIdentifierFromPayload(
                 attribute: accountData
             )
         else {
@@ -65,7 +65,7 @@ import MoEngageCards
             return
         }
 
-        MoEngageSDKCards.sharedInstance.refreshCards(forAppID: identifier) { data in
+        handler.refreshCards(forAppID: identifier) { data in
             self.syncManager.sendUpdate(
                 forEventType: .pullToRefresh,
                 andAppID: identifier,
@@ -84,7 +84,7 @@ import MoEngageCards
             return
         }
 
-        MoEngageSDKCards.sharedInstance.onCardSectionLoaded(forAppID: identifier) { data in
+        handler.onCardSectionLoaded(forAppID: identifier) { data in
             self.syncManager.sendUpdate(
                 forEventType: .inboxOpen,
                 andAppID: identifier,
@@ -103,7 +103,7 @@ import MoEngageCards
             return
         }
 
-        MoEngageSDKCards.sharedInstance.onAppOpenSync(forAppID: identifier) { data in
+        handler.onAppOpenSync(forAppID: identifier) { data in
             self.syncManager.sendUpdate(
                 forEventType: .inboxOpen,
                 andAppID: identifier,
@@ -134,22 +134,20 @@ import MoEngageCards
             return
         }
 
-        let cardClick: MoEngageCardClickData
         do {
             let clickData: [String: Any] = try MoEngagePluginCardsUtil.getData(fromHybridPayload: cardData)
-            cardClick = try MoEngageCardClickData.decodeFromHybrid(clickData)
+            let cardClick = try MoEngageCardClickData.decodeFromHybrid(clickData)
+            if let widgetId = cardClick.widgetId {
+                self.handler.cardClicked(
+                    cardClick.card, withWidgetID: widgetId,
+                    forAppID: identifier
+                )
+            } else {
+                self.handler.cardClicked(cardClick.card, forAppID: identifier)
+            }
         } catch {
             MoEngageLogger.error("\(error)")
             return
-        }
-
-        if let widgetId = cardClick.widgetId {
-            self.handler.cardClicked(
-                cardClick.card, withWidgetID: widgetId,
-                forAppID: identifier
-            )
-        } else {
-            self.handler.cardClicked(cardClick.card, forAppID: identifier)
         }
     }
 
@@ -175,15 +173,17 @@ import MoEngageCards
             return
         }
 
-        let card: MoEngageCardCampaign
         do {
-            let showData: [String: Any] = try MoEngagePluginCardsUtil.getData(fromHybridPayload: cardData)
-            card = try MoEngageHybridSDKCards.buildCardCampaign(fromHybridData: showData)
+            let showData: [String: Any] = try MoEngagePluginCardsUtil.getNestedData(
+                fromHybridPayload: cardData,
+                forKey: MoEngagePluginCardsContants.card
+            )
+            let card = try MoEngageHybridSDKCards.buildCardCampaign(fromHybridData: showData)
+            self.handler.cardShown(card, forAppID: identifier)
         } catch {
             MoEngageLogger.error("\(error)")
             return
         }
-        self.handler.cardShown(card, forAppID: identifier)
     }
 
     @objc public func deleteCards(_ cardsData: [String: Any]) {
@@ -196,15 +196,17 @@ import MoEngageCards
             return
         }
 
-        let cards: [MoEngageCardCampaign]
         do {
-            let cardsData: [[String: Any]] = try MoEngagePluginCardsUtil.getData(fromHybridPayload: cardsData)
-            cards = cardsData.decodeFromHybrid()
+            let cardsData: [[String: Any]] = try MoEngagePluginCardsUtil.getNestedData(
+                fromHybridPayload: cardsData,
+                forKey: MoEngagePluginCardsContants.cards
+            )
+            let cards = cardsData.decodeFromHybrid()
+            self.handler.deleteCards(cards, forAppID: identifier) { _, _ in }
         } catch {
             MoEngageLogger.error("\(error)")
             return
         }
-        self.handler.deleteCards(cards, forAppID: identifier) { _, _ in }
     }
 
     @objc public func getCardsInfo(
@@ -266,32 +268,31 @@ import MoEngageCards
             return
         }
 
-        let cardsCategory: MoEngageCardsCategoryData
         do {
             let categoryData: [String: Any] = try MoEngagePluginCardsUtil.getData(fromHybridPayload: categoryData)
-            cardsCategory = try MoEngageCardsCategoryData.decodeFromHybrid(categoryData)
+            let cardsCategory = try MoEngageCardsCategoryData.decodeFromHybrid(categoryData)
+
+            self.handler.getCards(
+                forCategory: cardsCategory.category,
+                forAppID: identifier
+            ) { cards, accountMeta in
+                let result = MoEngagePluginCardsUtil.buildHybridPayload(
+                    forIdentifier: identifier,
+                    containingData: [
+                        MoEngagePluginCardsContants.category: cardsCategory.category,
+                        MoEngagePluginCardsContants.cards: cards.encodeForHybrid()
+                    ] as [String : Any]
+                )
+                completionHandler(result)
+            }
         } catch {
             MoEngageLogger.error("\(error)")
             let result = MoEngagePluginCardsUtil.buildHybridPayload(
                 forIdentifier: identifier,
-                containingData: nil
+                containingData: [:] as [String: Any]
             )
             completionHandler(result)
             return
-        }
-
-        self.handler.getCards(
-            forCategory: cardsCategory.category,
-            forAppID: identifier
-        ) { cards, accountMeta in
-            let result = MoEngagePluginCardsUtil.buildHybridPayload(
-                forIdentifier: identifier,
-                containingData: [
-                    MoEngagePluginCardsContants.category: cardsCategory.category,
-                    MoEngagePluginCardsContants.cards: cards.encodeForHybrid()
-                ]
-            )
-            completionHandler(result)
         }
     }
 
