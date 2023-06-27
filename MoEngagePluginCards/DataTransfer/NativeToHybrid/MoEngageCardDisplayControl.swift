@@ -18,13 +18,23 @@ extension MoEngageCardDisplayControl: HybridEncodable {
     }
 
     func encodeForHybrid() -> [String: Any?] {
-        return [
+        var data: [String : Any?] = [
             HybridKeys.isPinned: self.isPinned,
             HybridKeys.maxTimesToShow: self.maxTimesToShow,
-            HybridKeys.expiryDate: self.expiryDate?.timeIntervalSince1970,
-            HybridKeys.expiryAfterSeenDuration: self.expiryAfterSeenDuration,
-            HybridKeys.expiryAfterDeliveredDuration: self.expiryAfterDeliveredDuration,
-            HybridKeys.showTime: self.showTime,
+            HybridKeys.showTime: self.showTime?.encodeForHybrid(),
         ]
+
+        if let expiryDate = self.expiryDate {
+            data[HybridKeys.expiryDate] = MoEngagePluginCardsUtil.convertDateToEpoch(expiryDate)
+        }
+
+        if let expiryAfterSeenDuration = self.expiryAfterSeenDuration {
+            data[HybridKeys.expiryAfterSeenDuration] = expiryAfterSeenDuration.rounded(.down)
+        }
+
+        if let expiryAfterDeliveredDuration = self.expiryAfterDeliveredDuration {
+            data[HybridKeys.expiryAfterDeliveredDuration] = expiryAfterDeliveredDuration.rounded(.down)
+        }
+        return data
     }
 }

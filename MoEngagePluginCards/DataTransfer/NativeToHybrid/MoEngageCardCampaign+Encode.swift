@@ -22,18 +22,21 @@ extension MoEngageCardCampaign: HybridEncodable {
     }
 
     func encodeForHybrid() -> [String: Any?] {
+        var nestedData: [String : Any?] = [
+            HybridKeys.updatedDate: MoEngagePluginCardsUtil.convertDateToEpoch(self.updatedDate),
+            HybridKeys.displayControl: self.displayControl?.encodeForHybrid(),
+            HybridKeys.cardState: self.cardState.encodeForHybrid(),
+            HybridKeys.metaData: self.metaData,
+            HybridKeys.campaignPayload: MoEngageHybridSDKCards.convertCardCampaignToJsonData(self)
+        ]
+        if let createdDate = self.createdDate {
+            nestedData[HybridKeys.createdDate] = MoEngagePluginCardsUtil.convertDateToEpoch(createdDate)
+        }
         return [
             HybridKeys.cardId: self.cardID,
             HybridKeys.category: self.category,
             HybridKeys.templateData: self.templateData?.encodeForHybrid(),
-            HybridKeys.nestedData: [
-                HybridKeys.createdDate: self.createdDate?.timeIntervalSince1970,
-                HybridKeys.updatedDate: self.updatedDate.timeIntervalSince1970,
-                HybridKeys.displayControl: self.displayControl?.encodeForHybrid(),
-                HybridKeys.cardState: self.cardState.encodeForHybrid(),
-                HybridKeys.metaData: self.metaData,
-                HybridKeys.campaignPayload: MoEngageHybridSDKCards.convertCardCampaignToJsonData(self)
-            ] as [String : Any?]
+            HybridKeys.nestedData: nestedData
         ]
     }
 }

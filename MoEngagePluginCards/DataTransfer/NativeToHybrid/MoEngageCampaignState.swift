@@ -17,12 +17,20 @@ extension MoEngageCampaignState: HybridEncodable {
     }
 
     func encodeForHybrid() -> [String: Any?] {
-        return [
+        var data: [String : Any] = [
             HybridKeys.showCountTotal: self.showCountTotal,
             HybridKeys.isClicked: self.isClicked,
-            HybridKeys.firstSeenTime: self.firstSeenTime?.timeIntervalSince1970,
-            HybridKeys.firstDeliveredTime: self.firstDeliveredTime?.timeIntervalSince1970,
             HybridKeys.showCountCurrentDevice: self.showCountCurrentDevice,
         ]
+
+        if let firstSeenTime = self.firstSeenTime {
+            data[HybridKeys.firstSeenTime] = MoEngagePluginCardsUtil.convertDateToEpoch(firstSeenTime)
+        }
+
+        if let firstDeliveredTime = self.firstDeliveredTime {
+            data[HybridKeys.firstDeliveredTime] = MoEngagePluginCardsUtil.convertDateToEpoch(firstDeliveredTime)
+        }
+
+        return data
     }
 }

@@ -66,4 +66,8 @@ enum MoEngagePluginCardsUtil {
         let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         return NSString(format:"#%06x", rgb) as String
     }
+
+    static func convertDateToEpoch(_ date: Date) -> Double {
+        return date.timeIntervalSince1970.rounded(.down)
+    }
 }
