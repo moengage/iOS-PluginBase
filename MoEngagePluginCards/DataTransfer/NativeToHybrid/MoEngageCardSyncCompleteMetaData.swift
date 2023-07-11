@@ -43,15 +43,11 @@ struct MoEngageCardSyncCompleteMetaData: HybridEncodable {
     }
 
     func encodeForHybrid() -> [String : Any?] {
-        self.encodeForHybrid(forceUpdate: false)
-    }
-
-    func encodeForHybrid(forceUpdate: Bool) -> [String : Any?] {
         let syncCompleteData: [String: Any?]?
         if let type = self.type, let data = self.data {
             syncCompleteData = [
                 HybridKeys.type: type.description,
-                HybridKeys.hasUpdates: forceUpdate || data.hasUpdates,
+                HybridKeys.hasUpdates: data.hasUpdates,
             ]
         } else {
             syncCompleteData = nil

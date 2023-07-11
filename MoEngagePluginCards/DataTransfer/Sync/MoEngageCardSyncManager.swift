@@ -23,16 +23,13 @@ final class MoEngageCardSyncManager: MoEngageCardSyncManagerProtocol {
     private let queue: MoEngageCardSyncManagerSynchronizer
     private let dataManager: MoEngageCardSyncDataManagerProtocol
     private var delegate: MoEngageCardSyncDelegate?
-    private var syncedOnce: Bool
 
     init(
         queue: MoEngageCardSyncManagerSynchronizer = MoEngageCoreHandler.globalQueue,
-        dataManager: MoEngageCardSyncDataManagerProtocol = MoEngageCardSyncDataManager(),
-        syncedOnce: Bool = false
+        dataManager: MoEngageCardSyncDataManagerProtocol = MoEngageCardSyncDataManager()
     ) {
         self.queue = queue
         self.dataManager = dataManager
-        self.syncedOnce = syncedOnce
     }
 
     func attachDelegate(_ delegate: MoEngageCardSyncDelegate) {
@@ -64,7 +61,7 @@ final class MoEngageCardSyncManager: MoEngageCardSyncManagerProtocol {
             if let delegate = self.delegate {
                 let dataForHybrid = MoEngagePluginCardsUtil.buildHybridPayload(
                     forIdentifier: appId,
-                    containingData: metadata.encodeForHybrid(forceUpdate: !self.syncedOnce)
+                    containingData: metadata.encodeForHybrid()
                 )
                 DispatchQueue.main.async {
                     delegate.syncComplete(
@@ -72,7 +69,6 @@ final class MoEngageCardSyncManager: MoEngageCardSyncManagerProtocol {
                         withData: dataForHybrid
                     )
                 }
-                self.syncedOnce = true
             } else {
                 self.dataManager.queueCardSyncUpdate(
                     forEventType: eventType,
