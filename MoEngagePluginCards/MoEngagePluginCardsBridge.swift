@@ -105,7 +105,7 @@ import MoEngageCards
 
         handler.onAppOpenSync(forAppID: identifier) { data in
             self.syncManager.sendUpdate(
-                forEventType: .inboxOpen,
+                forEventType: .appOpen,
                 andAppID: identifier,
                 withNewData: data
             )
