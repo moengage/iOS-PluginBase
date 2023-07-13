@@ -11,13 +11,55 @@ import MoEngageCards
 
 final class MoEngageCardSyncTest: XCTestCase {
 
-    func testCardSyncQueueCallbackOnAttach() throws {
+    func testAppOpenSyncQueueCallbackOnAttachAndListnerSet() throws {
         let syncManager = MoEngageCardSyncManager(queue: DispatchQueue.main)
         syncManager.sendUpdate(forEventType: .appOpen, andAppID: "", withNewData: nil)
 
         let exp = XCTestExpectation(description: "Sync delegate called once")
         let mockDelegate = MockSyncDelegate { type, data, count in
             XCTAssertEqual(type, .appOpen)
+            let data: [String: Any?] = try! MoEngagePluginCardsUtil.getData(fromHybridPayload: data)
+            switch data[MoEngageCardSyncCompleteMetaData.HybridKeys.syncCompleteData] {
+            case .none:
+                break
+            case .some(let value):
+                XCTAssertNil(value)
+            }
+            exp.fulfill()
+        }
+        syncManager.attachDelegate(mockDelegate)
+        syncManager.setAppOpenListner()
+        wait(for: [exp], timeout: 5)
+    }
+
+    func testAppOpenSyncQueueCallbackOnAttachAndWithoutListnerSet() throws {
+        let syncManager = MoEngageCardSyncManager(queue: DispatchQueue.main)
+        syncManager.sendUpdate(forEventType: .appOpen, andAppID: "", withNewData: nil)
+
+        let exp = XCTestExpectation(description: "Invalid sync delegate invocation without listner set")
+        exp.isInverted = true
+        let mockDelegate = MockSyncDelegate { type, data, count in
+            XCTAssertEqual(type, .appOpen)
+            let data: [String: Any?] = try! MoEngagePluginCardsUtil.getData(fromHybridPayload: data)
+            switch data[MoEngageCardSyncCompleteMetaData.HybridKeys.syncCompleteData] {
+            case .none:
+                break
+            case .some(let value):
+                XCTAssertNil(value)
+            }
+            exp.fulfill()
+        }
+        syncManager.attachDelegate(mockDelegate)
+        wait(for: [exp], timeout: 5)
+    }
+
+    func testCardSyncQueueCallbackOnAttach() throws {
+        let syncManager = MoEngageCardSyncManager(queue: DispatchQueue.main)
+        syncManager.sendUpdate(forEventType: .inboxOpen, andAppID: "", withNewData: nil)
+
+        let exp = XCTestExpectation(description: "Sync delegate called once")
+        let mockDelegate = MockSyncDelegate { type, data, count in
+            XCTAssertEqual(type, .inboxOpen)
             let data: [String: Any?] = try! MoEngagePluginCardsUtil.getData(fromHybridPayload: data)
             switch data[MoEngageCardSyncCompleteMetaData.HybridKeys.syncCompleteData] {
             case .none:

@@ -8,7 +8,8 @@
 import MoEngageCore
 import MoEngageCards
 
-protocol MoEngageCardSyncManagerProtocol {
+protocol MoEngageCardSyncManagerProtocol: MoEngageHybridSDKCardsDelegate {
+    func setAppOpenListner()
     func attachDelegate(_ delegate: MoEngageCardSyncDelegate)
     func detachDelegate()
 
@@ -23,31 +24,72 @@ final class MoEngageCardSyncManager: MoEngageCardSyncManagerProtocol {
     private let queue: MoEngageCardSyncManagerSynchronizer
     private let dataManager: MoEngageCardSyncDataManagerProtocol
     private var delegate: MoEngageCardSyncDelegate?
+    private var appOpenListnerSet: Bool
 
     init(
         queue: MoEngageCardSyncManagerSynchronizer = MoEngageCoreHandler.globalQueue,
-        dataManager: MoEngageCardSyncDataManagerProtocol = MoEngageCardSyncDataManager()
+        dataManager: MoEngageCardSyncDataManagerProtocol = MoEngageCardSyncDataManager(),
+        appOpenListnerSet: Bool = false
     ) {
         self.queue = queue
         self.dataManager = dataManager
+        self.appOpenListnerSet = appOpenListnerSet
+    }
+
+    func setAppOpenListner() {
+        queue.async {
+            self.appOpenListnerSet = true
+            self.flushSyncEvents()
+        }
     }
 
     func attachDelegate(_ delegate: MoEngageCardSyncDelegate) {
         queue.async {
             self.delegate = delegate
-            for item in self.dataManager.dequeueSyncUpdateItems() {
-                self.sendUpdate(
-                    forEventType: item.eventType,
-                    andAppID: item.appId,
-                    withNewData: item.data
-                )
-            }
+            self.flushSyncEvents()
+        }
+    }
+
+    func flushSyncEvents() {
+        for item in self.dataManager.dequeueSyncUpdateItems() {
+            self.sendUpdate(
+                forEventType: item.eventType,
+                andAppID: item.appId,
+                withNewData: item.data
+            )
         }
     }
 
     func detachDelegate() {
         queue.async {
             self.delegate = nil
+        }
+    }
+
+    func didSyncCards(
+        forEvent event: MoEngageHybridCardsSyncType,
+        recievedUpdate data: MoEngageCardSyncCompleteData
+    ) {
+        switch event {
+        case .appOpen:
+            self.sendUpdate(
+                forEventType: .appOpen,
+                andAppID: data.accountMeta.appID,
+                withNewData: data
+            )
+            let dataForHybrid = MoEngagePluginCardsUtil.buildHybridPayload(
+                forIdentifier: data.accountMeta.appID,
+                containingData: MoEngageCardSyncCompleteMetaData(
+                    type: .appOpen,
+                    data: data
+                ).encodeForHybrid()
+            )
+            MoEngagePluginCardsLogger.debug(
+                "Recieved app open sync callback \(dataForHybrid) in pluginbase",
+                forData: dataForHybrid
+            )
+        default:
+            break
         }
     }
 
@@ -58,7 +100,8 @@ final class MoEngageCardSyncManager: MoEngageCardSyncManagerProtocol {
     ) {
         queue.async {
             let metadata = MoEngageCardSyncCompleteMetaData(type: eventType, data: data)
-            if let delegate = self.delegate {
+            if let delegate = self.delegate,
+               eventType != .appOpen || self.appOpenListnerSet {
                 let dataForHybrid = MoEngagePluginCardsUtil.buildHybridPayload(
                     forIdentifier: appId,
                     containingData: metadata.encodeForHybrid()

@@ -17,7 +17,7 @@ extension Array where Element == [String: Any] {
                 let card = try MoEngageHybridSDKCards.buildCardCampaign(fromHybridData: cardData)
                 cards.append(card)
             } catch {
-                MoEngageLogger.error("\(error)")
+                MoEngagePluginCardsLogger.error("\(error)")
                 continue
             }
         }

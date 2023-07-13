@@ -25,13 +25,14 @@ import MoEngageCards
     ) {
         self.handler = handler
         self.syncManager = syncManager
+        MoEngageHybridSDKCards.hybridCardsDelegate = syncManager
     }
 
     private func logAppIdentifierFetchFailed(
         for payload: [String: Any],
         at function: String = #function
     ) {
-        MoEngageLogger.error(
+        MoEngagePluginCardsLogger.error(
             "Could't find app identifier data for payload: \(payload) at \(function)"
         )
     }
@@ -102,14 +103,7 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
-
-        handler.onAppOpenSync(forAppID: identifier) { data in
-            self.syncManager.sendUpdate(
-                forEventType: .appOpen,
-                andAppID: identifier,
-                withNewData: data
-            )
-        }
+        syncManager.setAppOpenListner()
     }
 
     @objc public func onCardsSectionUnLoaded(_ accountData: [String: Any]) {
@@ -146,7 +140,7 @@ import MoEngageCards
                 self.handler.cardClicked(cardClick.card, forAppID: identifier)
             }
         } catch {
-            MoEngageLogger.error("\(error)")
+            MoEngagePluginCardsLogger.error("\(error)")
             return
         }
     }
@@ -181,7 +175,7 @@ import MoEngageCards
             let card = try MoEngageHybridSDKCards.buildCardCampaign(fromHybridData: showData)
             self.handler.cardShown(card, forAppID: identifier)
         } catch {
-            MoEngageLogger.error("\(error)")
+            MoEngagePluginCardsLogger.error("\(error)")
             return
         }
     }
@@ -204,7 +198,7 @@ import MoEngageCards
             let cards = cardsData.decodeFromHybrid()
             self.handler.deleteCards(cards, forAppID: identifier) { _, _ in }
         } catch {
-            MoEngageLogger.error("\(error)")
+            MoEngagePluginCardsLogger.error("\(error)")
             return
         }
     }
@@ -286,7 +280,7 @@ import MoEngageCards
                 completionHandler(result)
             }
         } catch {
-            MoEngageLogger.error("\(error)")
+            MoEngagePluginCardsLogger.error("\(error)")
             let result = MoEngagePluginCardsUtil.buildHybridPayload(
                 forIdentifier: identifier,
                 containingData: [:] as [String: Any]

@@ -102,7 +102,8 @@ final class MoEngagePluginCardsBridgeTest: XCTestCase {
 
     func testAppOpenSyncListenerSetSuccess() throws {
         let mockHandler = MockMoEngagePluginCardsBridgeHandler()
-        let exp = XCTestExpectation(description: "Native SDK method invoked")
+        let exp = XCTestExpectation(description: "Inavalid native SDK method invocation")
+        exp.isInverted = true
         mockHandler.appOpenSync = { appId, completion in
             XCTAssertEqual(appId, "some_id")
             exp.fulfill()
