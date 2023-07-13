@@ -10,14 +10,14 @@ import MoEngageCore
 import MoEngagePluginBase
 
 public enum MoEngagePluginCardsLogger {
-    static let label = "Cards"
-    static var sdkInstance: MoEngageSDKInstance?
+    private static let label = "Cards"
+    private static var sdkInstance: MoEngageSDKInstance?
 
-    static func debug(_ message: String, forData hybridData: [String: Any]) {
+    public static func debug(_ message: String, forData hybridData: [String: Any]) {
         queueLog(message, forData: hybridData, withType: .debug)
     }
 
-    static func error(
+    public static func error(
         _ message: String,
         forData hybridData: [String: Any] = [:],
         file: String = #file,
