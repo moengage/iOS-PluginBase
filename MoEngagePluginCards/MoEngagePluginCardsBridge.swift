@@ -106,6 +106,27 @@ import MoEngageCards
         syncManager.setAppOpenListner()
     }
 
+    @objc public func fetchCards(
+        _ accountData: [String: Any],
+        completionHandler: @escaping ([String: Any]) -> Void
+    ) {
+        guard
+            let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(
+                attribute: accountData
+            )
+        else {
+            logAppIdentifierFetchFailed(for: accountData)
+            return
+        }
+        handler.fetchCards(forAppID: identifier) { data in
+            let result = MoEngagePluginCardsUtil.buildHybridPayload(
+                forIdentifier: identifier,
+                containingData: data?.encodeForHybrid() ?? [:]
+            )
+            completionHandler(result)
+        }
+    }
+
     @objc public func onCardsSectionUnLoaded(_ accountData: [String: Any]) {
         guard
             let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(
@@ -374,6 +395,11 @@ protocol MoEngagePluginCardsBridgeHandler {
     func refreshCards(
         forAppID appID: String?,
         withCompletion completionBlock: ((_ data: MoEngageCardSyncCompleteData?) -> Void)?
+    )
+
+    func fetchCards(
+        forAppID appID: String?,
+        withCompletion completionBlock: ((_ data: MoEngageCardData?) -> Void)?
     )
 
     func getCardsData(

@@ -293,12 +293,31 @@ final class MoEngagePluginCardsBridgeTest: XCTestCase {
         bridge.deleteCards(data)
         wait(for: [exp], timeout: 5)
     }
+
+    func testFetchCards() throws {
+        let mockHandler = MockMoEngagePluginCardsBridgeHandler()
+        let exp = XCTestExpectation(description: "Native SDK method invoked")
+        mockHandler.fetchCards = { appId, completion in
+            XCTAssertEqual(appId, "some_id")
+            exp.fulfill()
+        }
+
+        let bridge = MoEngagePluginCardsBridge(handler: mockHandler)
+        var data = self.mockBaseData
+        data[MoEngagePluginConstants.General.data] = [
+            MoEngagePluginCardsContants.cards: [try Self.mockHybridCardCampaign()]
+        ]
+        bridge.fetchCards(self.mockBaseData) { payload in }
+        wait(for: [exp], timeout: 5)
+    }
 }
 
 class MockMoEngagePluginCardsBridgeHandler: MoEngagePluginCardsBridgeHandler {
     var appOpenSync: ((String?, ((MoEngageCardSyncCompleteData?) -> Void)?) -> Void)?
     var cardSectionLoaded: ((String?, ((MoEngageCardSyncCompleteData?) -> Void)?) -> Void)?
     var refreshCards: ((String?, ((MoEngageCardSyncCompleteData?) -> Void)?) -> Void)?
+
+    var fetchCards: ((String?, ((MoEngageCardData?) -> Void)?) -> Void)?
 
     var getCardsCategories: ((String?, (([String], MoEngageAccountMeta?) -> Void)) -> Void)?
 
@@ -340,6 +359,13 @@ class MockMoEngagePluginCardsBridgeHandler: MoEngagePluginCardsBridgeHandler {
         withCompletion completionBlock: ((MoEngageCardSyncCompleteData?) -> Void)?
     ) {
         refreshCards?(appID, completionBlock)
+    }
+
+    func fetchCards(
+        forAppID appID: String?,
+        withCompletion completionBlock: ((MoEngageCardData?) -> Void)?
+    ) {
+        fetchCards?(appID, completionBlock)
     }
 
     func getCardsData(
