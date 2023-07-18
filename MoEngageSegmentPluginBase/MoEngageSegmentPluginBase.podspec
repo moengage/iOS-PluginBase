@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'MoEngageSegmentPluginBase'
-    s.version      = '1.0.0'
+    s.version      = '1.1.0'
     s.summary      = 'MoEngage Plugin Base for Hybrid SDKs'
     s.description  = <<-DESC
     MoEngage is a mobile marketing automation company. This framework is used by our plugins built for different hybrid frameworks i.e, Flutter, Cordova, React Native etc in collaboration with Segment.
@@ -24,5 +24,5 @@ Pod::Spec.new do |s|
 
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngage-iOS-SDK', '>= 9.8.0', '< 9.9.0'
+    s.dependency 'MoEngage-iOS-SDK', '>= 9.10.0', '< 9.11.0'
 end
