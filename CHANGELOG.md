@@ -1,7 +1,10 @@
-# MoEngagePluginBase
+# ChangeLog:
 =================================
 
-## Change Log:
+# 25th July 2023
+## Inbox 2.3.1
+-------------------------------------------
+* BugFix: Handled parsing issue is `fetchAllMessages` API.
 
 # 18th Jul 2023
 ## Pluginbase 4.3.0

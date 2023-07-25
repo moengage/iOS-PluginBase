@@ -21,13 +21,15 @@ class  MoEngagePluginInboxUtils {
             
             message[MoEngagePluginConstants.General.campaignId] = inboxMessage.campaignID
             message[MoEngagePluginInboxConstants.Inbox.text] = createTextPayload(inboxMessage: inboxMessage)
-            message[MoEngagePluginInboxConstants.Inbox.media] = createMediaPayload(inboxMessage: inboxMessage)
             message[MoEngagePluginInboxConstants.Inbox.isClicked] = inboxMessage.isRead
             message[MoEngagePluginInboxConstants.Inbox.receivedTime] = MoEngageDateUtils.getString(forDate: inboxMessage.receivedDate, withFormat: MoEngageCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             message[MoEngagePluginInboxConstants.Inbox.expiry] = MoEngageDateUtils.getString(forDate: inboxMessage.inboxExpiryDate, withFormat:MoEngageCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             message[MoEngagePluginConstants.General.payload] = inboxMessage.notificationPayloadDict
             message[MoEngagePluginInboxConstants.Inbox.action] = MoEngagePluginInboxUtils.createActionPayload(inboxMessage: inboxMessage)
             
+            if let mediaPayload = createMediaPayload(inboxMessage: inboxMessage) {
+                message[MoEngagePluginInboxConstants.Inbox.media] = mediaPayload
+            }
             messages.append(message)
         }
         
@@ -45,14 +47,16 @@ class  MoEngagePluginInboxUtils {
         return textPayload
     }
     
-    static func createMediaPayload(inboxMessage: MoEngageInboxEntry) -> [String: Any] {
-        var mediaPayload = [String: Any]()
+    static func createMediaPayload(inboxMessage: MoEngageInboxEntry) -> [String: Any]? {        
+        if let url = inboxMessage.notificationMediaURL,
+           let type = inboxMessage.moengageDict[ MoEngagePluginInboxConstants.Inbox.mediaType]  {
+            var mediaPayload = [String: Any]()
+            mediaPayload[MoEngagePluginInboxConstants.Inbox.type] = type
+            mediaPayload[MoEngagePluginInboxConstants.Inbox.url] = url
+            return mediaPayload
+        }
         
-        let moengageDict = inboxMessage.notificationPayloadDict[MoEngagePluginInboxConstants.Inbox.moengage] as? [String: Any]
-        mediaPayload[MoEngagePluginInboxConstants.Inbox.type] = moengageDict?[MoEngagePluginInboxConstants.Inbox.mediaType]
-        mediaPayload[MoEngagePluginInboxConstants.Inbox.url] = inboxMessage.notificationMediaURL
-        
-        return mediaPayload
+        return nil
     }
     
     static func createActionPayload(inboxMessage: MoEngageInboxEntry) -> [[String: Any]] {
