@@ -3,6 +3,11 @@
 
 ## Change Log:
 
+# Next Release
+## Inbox 
+-------------------------------------------
+* BugFix: Handled parsing issue is `fetchAllMessages` API.
+
 # 18th Jul 2023
 ## Pluginbase 4.3.0
 -------------------------------------------
