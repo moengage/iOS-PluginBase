@@ -94,5 +94,6 @@ import MoEngageInApps
     private func setDelegates(identifier: String) {
         _ = MoEngagePluginInAppDelegateHandler(identifier: identifier)
         _ = MoEngagePluginMessageDelegateHandler(identifier: identifier)
+        MoEngageCardsPluginManager.sharedInstance.initializeCardPlugin()
     }
 }

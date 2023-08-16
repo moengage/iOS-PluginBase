@@ -1,5 +1,14 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase
+-------------------------------------------
+* Handled Cards internal delegate setup.
+
+## Cards 
+-------------------------------------------
+* Handled Cards internal delegate setup.
 
 # 25th July 2023
 ## Inbox 2.3.1
