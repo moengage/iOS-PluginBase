@@ -8,8 +8,9 @@
 import Foundation
 import MoEngagePluginBase
 
-class MoEngagePluginCardsDelegateHandler: MoEngageCardsPluginDelegate {
-    override func initializeCardsPlugin() {
-       MoEngagePluginCardsBridge.sharedInstance
+class MoEngagePluginCardsDelegateHandler: MoEngagePluginBaseProtocol {
+  
+    static func initializePluginBridge() {
+        let _ = MoEngagePluginCardsBridge.sharedInstance
     }
 }
