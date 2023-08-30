@@ -1,14 +1,25 @@
 # ChangeLog:
 =================================
-# Next Release
+# 30th August 2023
 
-## PluginBase
+## PluginBase 4.4.0
 -------------------------------------------
 * Handled Cards internal delegate setup.
+* Updated the dependency to MoEngage-iOS-SDK 9.11.0
 
-## Cards 
+## Cards 1.1.0
 -------------------------------------------
 * Handled Cards internal delegate setup.
+* Updated the dependency to MoEngage-iOS-SDK 9.11.0
+
+## Inbox 2.4.0
+-------------------------------------------
+* Updated the dependency to MoEngage-iOS-SDK 9.11.0
+
+## Geofence 2.4.0
+-------------------------------------------
+* Updated the dependency to MoEngage-iOS-SDK 9.11.0
+
 
 # 25th July 2023
 ## Inbox 2.3.1
