@@ -66,6 +66,7 @@ import MoEngageCards
             return
         }
 
+        MoEngagePluginCardsLogger.debug("Refresh Cards - ", forData: accountData)
         handler.refreshCards(forAppID: identifier) { data in
             self.syncManager.sendUpdate(
                 forEventType: .pullToRefresh,
@@ -85,6 +86,9 @@ import MoEngageCards
             return
         }
 
+        
+        MoEngagePluginCardsLogger.debug("On CardsSection Loaded - ", forData: accountData)
+
         handler.onCardSectionLoaded(forAppID: identifier) { data in
             self.syncManager.sendUpdate(
                 forEventType: .inboxOpen,
@@ -103,6 +107,8 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        
+        MoEngagePluginCardsLogger.debug("AppOpen Sync Listener - ", forData: accountData)
         syncManager.setAppOpenListner()
     }
 
@@ -118,11 +124,13 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        MoEngagePluginCardsLogger.debug("Fetch Cards - ", forData: accountData)
         handler.fetchCards(forAppID: identifier) { data in
             let result = MoEngagePluginCardsUtil.buildHybridPayload(
                 forIdentifier: identifier,
                 containingData: data?.encodeForHybrid() ?? [:]
             )
+            MoEngagePluginCardsLogger.debug("Fetch Cards response - ", forData: result)
             completionHandler(result)
         }
     }
@@ -136,6 +144,7 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        MoEngagePluginCardsLogger.debug("Card Section Unloaded - ", forData: accountData)
         self.handler.cardsViewControllerDismissed(forAppID: identifier)
     }
 
@@ -149,6 +158,7 @@ import MoEngageCards
             return
         }
 
+        MoEngagePluginCardsLogger.debug("Card Clicked - ", forData: cardData)
         do {
             let clickData: [String: Any] = try MoEngagePluginCardsUtil.getData(fromHybridPayload: cardData)
             let cardClick = try MoEngageCardClickData.decodeFromHybrid(clickData)
@@ -175,6 +185,8 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        
+        MoEngagePluginCardsLogger.debug("Card Delivered - ", forData: accountData)
         self.handler.cardDelivered(forAppID: identifier)
     }
 
@@ -187,7 +199,7 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: cardData)
             return
         }
-
+        MoEngagePluginCardsLogger.debug("Cards Shown ", forData: cardData)
         do {
             let showData: [String: Any] = try MoEngagePluginCardsUtil.getNestedData(
                 fromHybridPayload: cardData,
@@ -210,7 +222,7 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: cardsData)
             return
         }
-
+        MoEngagePluginCardsLogger.debug("Delete Cards - ", forData: cardsData)
         do {
             let cardsData: [[String: Any]] = try MoEngagePluginCardsUtil.getNestedData(
                 fromHybridPayload: cardsData,
@@ -236,6 +248,7 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        MoEngagePluginCardsLogger.debug("Get Cards Info - ", forData: accountData)
         self.handler.getCardsData(
             forAppID: identifier
         ) { cardsData, accountMeta in
@@ -243,6 +256,7 @@ import MoEngageCards
                 forIdentifier: identifier,
                 containingData: cardsData?.encodeForHybrid() as Any
             )
+            MoEngagePluginCardsLogger.debug("Get Cards Info response - ", forData: result)
             completionHandler(result)
         }
     }
@@ -259,6 +273,9 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        
+        MoEngagePluginCardsLogger.debug("Get Cards Categories - ", forData: accountData)
+
         self.handler.getCardsCategories(forAppID: identifier) { categories, accountMeta in
             let result = MoEngagePluginCardsUtil.buildHybridPayload(
                 forIdentifier: identifier,
@@ -266,6 +283,7 @@ import MoEngageCards
                     MoEngagePluginCardsContants.categories: categories
                 ]
             )
+            MoEngagePluginCardsLogger.debug("Get Cards Categories response - ", forData: result)
             completionHandler(result)
         }
     }
@@ -282,7 +300,7 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: categoryData)
             return
         }
-
+        MoEngagePluginCardsLogger.debug("Get Cards for Category - ", forData: categoryData)
         do {
             let categoryData: [String: Any] = try MoEngagePluginCardsUtil.getData(fromHybridPayload: categoryData)
             let cardsCategory = try MoEngageCardsCategoryData.decodeFromHybrid(categoryData)
@@ -298,6 +316,7 @@ import MoEngageCards
                         MoEngagePluginCardsContants.cards: cards.encodeForHybrid()
                     ] as [String : Any]
                 )
+                MoEngagePluginCardsLogger.debug("Get Cards for Category response - ", forData: result)
                 completionHandler(result)
             }
         } catch {
@@ -323,6 +342,8 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        MoEngagePluginCardsLogger.debug("All Categories Enabled - ", forData: accountData)
+
         self.handler.isAllCategoryEnabled(forAppID: identifier) { isEnabled in
             let result = MoEngagePluginCardsUtil.buildHybridPayload(
                 forIdentifier: identifier,
@@ -330,6 +351,8 @@ import MoEngageCards
                     MoEngagePluginCardsContants.isAllCategoryEnabled: isEnabled
                 ]
             )
+            
+            MoEngagePluginCardsLogger.debug("All Categories Enabled response - ", forData: result)
             completionHandler(result)
         }
     }
@@ -346,6 +369,8 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        MoEngagePluginCardsLogger.debug("Fetch New Cards Count - ", forData: accountData)
+
         self.handler.getNewCardsCount(forAppID: identifier) { count, accountMeta  in
             let result = MoEngagePluginCardsUtil.buildHybridPayload(
                 forIdentifier: identifier,
@@ -353,6 +378,7 @@ import MoEngageCards
                     MoEngagePluginCardsContants.newCardsCount: count
                 ]
             )
+            MoEngagePluginCardsLogger.debug("Fetch New Cards Count response - ", forData: result)
             completionHandler(result)
         }
     }
@@ -369,6 +395,9 @@ import MoEngageCards
             logAppIdentifierFetchFailed(for: accountData)
             return
         }
+        
+        MoEngagePluginCardsLogger.debug("Fetch Unclicked Cards Count - ", forData: accountData)
+
         self.handler.getUnclickedCardsCount(forAppID: identifier) { count, accountMeta  in
             let result = MoEngagePluginCardsUtil.buildHybridPayload(
                 forIdentifier: identifier,
@@ -376,6 +405,7 @@ import MoEngageCards
                     MoEngagePluginCardsContants.unClickedCardsCount: count
                 ]
             )
+            MoEngagePluginCardsLogger.debug("Fetch Unclicked Cards Count response - ", forData: result)
             completionHandler(result)
         }
     }

@@ -104,4 +104,8 @@ public struct MoEngagePluginConstants {
         public static let pushTokenGenerated = "MoEPushTokenGenerated"
         public static let pushClicked = "MoEPushClicked"
     }
+    
+    struct ExternalPluginBase {
+        static let cardsBridge = "MoEngagePluginCards.MoEngagePluginCardsDelegateHandler"
+    }
 }
