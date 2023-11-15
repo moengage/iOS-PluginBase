@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
     s.dependency 'MoEngagePluginBase', '>= 4.4.0', '< 4.5.0'
-    s.dependency 'MoEngageInbox', '>= 2.11.0', '< 2.12.0'
+    s.dependency 'MoEngageInbox', '>= 2.11.1', '< 2.12.0'
 end

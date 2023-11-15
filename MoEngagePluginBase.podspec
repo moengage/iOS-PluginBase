@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
     s.source_files = 'MoEngagePluginBase/**/*'
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngage-iOS-SDK', '>= 9.11.0', '< 9.12.0'
-    s.dependency 'MoEngageInApp', '>= 4.11.0', '< 4.12.0'
+    s.dependency 'MoEngage-iOS-SDK', '>= 9.12.0', '< 9.13.0'
+    s.dependency 'MoEngageInApp', '>= 4.11.2', '< 4.12.0'
 end
