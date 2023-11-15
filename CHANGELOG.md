@@ -1,22 +1,22 @@
 # ChangeLog:
 =================================
-# Next Release
+# 15th November 2023
 
-## PluginBase 
+## PluginBase 4.5.0 
 -------------------------------------------
-* Updated the dependency to MoEngage-iOS-SDK `9.12.0`
+* Updated the dependency to MoEngage-iOS-SDK `9.13.0`
 
-## Cards 
+## Cards 1.2.0
 -------------------------------------------
-* Updated the dependency to MoEngageCards `4.11.1`
+* Updated the dependency to MoEngageCards `4.12.0`
 
-## Inbox
+## Inbox 2.5.0
 -------------------------------------------
-* Updated the dependency to MoEngageInbox `2.11.1`
+* Updated the dependency to MoEngageInbox `2.12.0`
 
-## Geofence 
+## Geofence 2.5.0
 -------------------------------------------
-* Updated the dependency to MoEngageGeofece `5.11.1`.
+* Updated the dependency to MoEngageGeofece `5.12.0`.
 
 # 30th August 2023
 
