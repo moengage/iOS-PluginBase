@@ -93,7 +93,9 @@ import MoEngageInApps
     // MARK: Delegate setup
     private func setDelegates(identifier: String) {
         _ = MoEngagePluginInAppDelegateHandler(identifier: identifier)
+#if !os(tvOS)
         _ = MoEngagePluginMessageDelegateHandler(identifier: identifier)
+#endif
         MoEngagePluginBaseHandler.initializePluginBridge(className: MoEngagePluginConstants.ExternalPluginBase.cardsBridge)
     }
 }
