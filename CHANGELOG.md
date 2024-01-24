@@ -1,10 +1,23 @@
 # ChangeLog:
 =================================
-# Next Release
+# 24-01-2024
 
-## PluginBase 
+## PluginBase 4.6.0
 -------------------------------------------
 * Added TV OS support.
+* Updated the dependency to MoEngage-iOS-SDK `9.15.0`.
+
+## Cards 1.3.0
+-------------------------------------------
+* Updated the dependency to MoEngageCards `4.14.0`.
+
+## Inbox 2.6.0
+-------------------------------------------
+* Updated the dependency to MoEngageInbox `2.14.0`.
+
+## Geofence 2.6.0
+-------------------------------------------
+* Updated the dependency to MoEngageGeofece `5.14.0`.
 
 # 1st December 2023
 
