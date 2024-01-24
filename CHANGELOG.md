@@ -1,5 +1,11 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase 
+-------------------------------------------
+* Added TV OS support.
+
 # 1st December 2023
 
 ## PluginBase 4.5.1

@@ -93,7 +93,11 @@ import MoEngageInApps
     // MARK: Delegate setup
     private func setDelegates(identifier: String) {
         _ = MoEngagePluginInAppDelegateHandler(identifier: identifier)
-        _ = MoEngagePluginMessageDelegateHandler(identifier: identifier)
+#if os(tvOS)
+        MoEngageLogger.debug("MoEngagePluginMessageDelegateHandler is unavailable for tvOS 🛑")
+#else
+    _ = MoEngagePluginMessageDelegateHandler(identifier: identifier)
+#endif
         MoEngagePluginBaseHandler.initializePluginBridge(className: MoEngagePluginConstants.ExternalPluginBase.cardsBridge)
     }
 }
