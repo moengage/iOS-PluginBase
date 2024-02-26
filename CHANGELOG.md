@@ -1,5 +1,24 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase 
+-------------------------------------------
+* Added Nudges support
+* Updated the dependency to MoEngage-iOS-SDK `9.16.0`.
+
+## Cards 
+-------------------------------------------
+* Updated the dependency to MoEngageCards `4.15.0`.
+
+## Inbox
+-------------------------------------------
+* Updated the dependency to MoEngageInbox `2.15.0`.
+
+## Geofence
+-------------------------------------------
+* Updated the dependency to MoEngageGeofece `5.15.0`.
+
 # 24-01-2024
 
 ## PluginBase 4.6.0

@@ -23,7 +23,7 @@
     //Primary Instance
     NSString* yourMoEngageAppID = @"";
     MoEngageSDKConfig* sdkConfig = [[MoEngageSDKConfig alloc] initWithAppID:yourMoEngageAppID];
-    sdkConfig.enableLogs = true;
+    sdkConfig.consoleLogConfig = [[MoEngageConsoleLogConfig alloc] initWithIsLoggingEnabled:true loglevel:MoEngageLoggerTypeVerbose];
     
     MoEngagePlugin *plugin = [[MoEngagePlugin alloc] init];
     [plugin initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:MoEngageSDKStateEnabled launchOptions:launchOptions];

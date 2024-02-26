@@ -81,17 +81,17 @@ public enum MoEngagePluginCardsLogger {
         let finalMessage = generateLogs(message: message, payload: payload)
         switch type {
         case .debug:
-            MoEngageLogger.debug(finalMessage, label: label, sdkInstance: sdkInstance)
+            sdkInstance.logger.log(logLevel: .debug, message: finalMessage)
         case .error:
-            MoEngageLogger.error(finalMessage, label: label, sdkInstance: sdkInstance, fileName: file, functionName: function, lineNumber: line, columnNumber: column)
+            sdkInstance.logger.log(logLevel: .error, message: finalMessage)
         case .info:
-            MoEngageLogger.info(finalMessage, label: label, sdkInstance: sdkInstance, fileName: file, functionName: function, lineNumber: line, columnNumber: column)
+            sdkInstance.logger.log(logLevel: .info, message: finalMessage)
         case .verbose:
-            MoEngageLogger.verbose(finalMessage, label: label, sdkInstance: sdkInstance)
+            sdkInstance.logger.log(logLevel: .verbose, message: finalMessage)
         case .warning:
-            MoEngageLogger.warning(finalMessage, label: label, sdkInstance: sdkInstance, fileName: file, functionName: function, lineNumber: line, columnNumber: column)
+            sdkInstance.logger.log(logLevel: .warning, message: finalMessage)
         @unknown default:
-            MoEngageLogger.debug(finalMessage, label: label, sdkInstance: sdkInstance)
+            sdkInstance.logger.log(logLevel: .verbose, message: finalMessage)
         }
     }
     

@@ -99,6 +99,24 @@ public class MoEngagePluginUtils {
         let payload = [MoEngagePluginConstants.General.data: data, MoEngagePluginConstants.General.accountMeta: accountMeta]
         return payload
     }
+    
+    static func getNudgePosition(from payload: [String: Any]) -> MoEngageNudgePosition {
+        if let dataPayload = payload[MoEngagePluginConstants.General.data] as? [String: Any], let position = dataPayload[MoEngagePluginConstants.InApp.position] as? String {
+            switch position {
+            case MoEngagePluginConstants.InApp.NudgePosition.top.rawValue:
+                return NudgePositionTop
+            case MoEngagePluginConstants.InApp.NudgePosition.bottom.rawValue:
+                return NudgePositionBottom
+            case MoEngagePluginConstants.InApp.NudgePosition.bottomLeft.rawValue:
+                return NudgePositionBottomLeft
+            case MoEngagePluginConstants.InApp.NudgePosition.bottomRight.rawValue:
+                return NudgePositionBottomRight
+            default:
+                return NudgePositionAny
+            }
+        }
+        return NudgePositionNone
+    }
 }
 
 extension MoEngageInAppCampaign {
