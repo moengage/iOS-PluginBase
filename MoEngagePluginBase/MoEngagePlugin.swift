@@ -94,7 +94,7 @@ import MoEngageInApps
     private func setDelegates(identifier: String) {
         _ = MoEngagePluginInAppDelegateHandler(identifier: identifier)
 #if os(tvOS)
-        MoEngageLogger.debug("MoEngagePluginMessageDelegateHandler is unavailable for tvOS 🛑")
+        MoEngageLogger.logDefault(message: "MoEngagePluginMessageDelegateHandler is unavailable for tvOS 🛑")
 #else
     _ = MoEngagePluginMessageDelegateHandler(identifier: identifier)
 #endif

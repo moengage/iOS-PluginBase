@@ -118,9 +118,20 @@ import MoEngageInApps
     @objc public func showInApp(_ inApp: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: inApp) {
             #if os(tvOS)
-            MoEngageLogger.debug("ShowInApp is unavailable for tvOS 🛑")
+            MoEngageLogger.logDefault(message: "Show InApp is unavailable for tvOS 🛑")
             #else
             MoEngageSDKInApp.sharedInstance.showInApp(forAppId: identifier)
+            #endif
+        }
+    }
+    
+    @objc public func showNudge(_ inApp: [String: Any]) {
+        if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: inApp) {
+            let position = MoEngagePluginUtils.getNudgePosition(from: inApp)
+            #if os(tvOS)
+            MoEngageLogger.logDefault(message: "Show Nudge is unavailable for tvOS 🛑")
+            #else
+            MoEngageSDKInApp.sharedInstance.showNudge(atPosition: position, forAppId: identifier)
             #endif
         }
     }
@@ -167,7 +178,7 @@ import MoEngageInApps
     // MARK: Push
     @objc public func registerForPush() {
         #if os(tvOS)
-        MoEngageLogger.debug("RegisterForPush is unavailable for tvOS 🛑")
+        MoEngageLogger.logDefault(message: "RegisterForPush is unavailable for tvOS 🛑")
         #else
         MoEngageSDKMessaging.sharedInstance.registerForRemoteNotification(withCategories: nil, andUserNotificationCenterDelegate: UNUserNotificationCenter.current().delegate)
         #endif
