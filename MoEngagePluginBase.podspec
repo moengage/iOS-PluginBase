@@ -1,5 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'MoEngagePluginBase'
+    # @todo Update version
     s.version      = '4.7.0'
     s.summary      = 'MoEngage Plugin Base for Hybrid SDKs'
     s.description  = <<-DESC
@@ -22,6 +23,7 @@ Pod::Spec.new do |s|
     s.source_files = 'MoEngagePluginBase/**/*'
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
+    # @todo Update versions
     s.dependency 'MoEngage-iOS-SDK', '>= 9.16.1', '< 9.17.0'
     s.dependency 'MoEngageInApp', '>= 5.01.0', '< 5.02.0'
 end

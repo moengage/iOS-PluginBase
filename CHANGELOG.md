@@ -1,5 +1,11 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase
+-------------------------------------------
+* Added non-intrusive InApp support for tvOS
+
 # 18-03-2024
 
 ## PluginBase 4.7.0
