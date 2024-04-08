@@ -117,11 +117,7 @@ import MoEngageInApps
     // MARK: InApp
     @objc public func showInApp(_ inApp: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: inApp) {
-            #if os(tvOS)
-            MoEngageLogger.logDefault(message: "Show InApp is unavailable for tvOS 🛑")
-            #else
             MoEngageSDKInApp.sharedInstance.showInApp(forAppId: identifier)
-            #endif
         }
     }
     
