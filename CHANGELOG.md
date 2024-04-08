@@ -1,10 +1,23 @@
 # ChangeLog:
 =================================
-# Next Release
+# 08-04-2024
 
-## PluginBase
+## PluginBase 4.8.0
 -------------------------------------------
 * Added non-intrusive InApp support for tvOS
+* Updated the dependency to MoEngage-iOS-SDK `9.17.0`.
+
+## Cards 1.5.0
+-------------------------------------------
+* Updated the dependency to MoEngageCards `4.16.0`.
+
+## Inbox 2.8.0
+-------------------------------------------
+* Updated the dependency to MoEngageInbox `2.16.0`.
+
+## Geofence 2.8.0
+-------------------------------------------
+* Updated the dependency to MoEngageGeofece `5.16.0`.
 
 # 18-03-2024
 
