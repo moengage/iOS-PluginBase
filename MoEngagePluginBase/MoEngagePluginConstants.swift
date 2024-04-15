@@ -81,6 +81,7 @@ public struct MoEngagePluginConstants {
         public static let selfHandled = "selfHandled"
         public static let customAction = "customAction"
         static let screen = "screen"
+        static let deeplink = "deep_linking"
         static let campaignId = "campaignId"
         static let campaignName = "campaignName"
         static let position = "position"

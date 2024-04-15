@@ -1,5 +1,11 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase 
+-------------------------------------------
+* Added support for deeplink callback through inapp delegate.
+
 # 08-04-2024
 
 ## PluginBase 4.8.0
