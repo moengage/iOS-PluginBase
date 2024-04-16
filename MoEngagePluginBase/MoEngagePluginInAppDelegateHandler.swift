@@ -40,7 +40,7 @@ final class MoEngagePluginInAppDelegateHandler: NSObject, MoEngageInAppNativeDel
     }
     
     func inAppClicked(withCampaignInfo inappCampaign: MoEngageInAppCampaign, andNavigationActionInfo navigationAction: MoEngageInAppNavigationAction, forAccountMeta accountMeta: MoEngageAccountMeta) {
-        let message = MoEngagePluginUtils.inAppNavigationCampaignToJSON(inAppCampaign: inappCampaign, inAppAction: navigationAction, identifier: accountMeta.appID)
+        let message = MoEngagePluginUtils.inAppCampaignToJSON(inAppCampaign: inappCampaign, inAppAction: navigationAction, identifier: accountMeta.appID)
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.inAppClicked, message: message)
     }
     

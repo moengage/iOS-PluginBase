@@ -28,33 +28,24 @@ public class MoEngagePluginUtils {
     }
     
     // MARK: InApp Utilities
-    static func inAppNavigationCampaignToJSON(inAppCampaign: MoEngageInAppCampaign, inAppAction: MoEngageInAppNavigationAction, identifier: String) -> [String: Any] {
-        let accountMeta = createAccountPayload(identifier: identifier)
-        
-        var inAppDataPayload = inAppCampaign.fetchInAppPaylaod()
-        
-        let actionPayload = inAppAction.fetchInAppNavigationActionPayload()
-        
-        inAppDataPayload[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.General.navigation
-        inAppDataPayload[MoEngagePluginConstants.General.navigation] = actionPayload
-        
-        let inAppPayload = [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
-        return inAppPayload
-    }
-    
-    
     static func inAppCampaignToJSON(inAppCampaign: MoEngageInAppCampaign, inAppAction: MoEngageInAppAction? = nil, identifier: String) -> [String: Any] {
         let accountMeta = createAccountPayload(identifier: identifier)
         
         var inAppDataPayload = inAppCampaign.fetchInAppPaylaod()
         
         if let inAppAction = inAppAction {
-            let actionPayload = inAppAction.fetchInAppActionPayload()
             
-            inAppDataPayload[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.InApp.customAction
-            inAppDataPayload[MoEngagePluginConstants.InApp.customAction] = actionPayload
+            if let inAppNavigationAction = inAppAction as? MoEngageInAppNavigationAction {
+                let actionPayload = inAppNavigationAction.fetchInAppNavigationActionPayload()
+                inAppDataPayload[MoEngagePluginConstants.General.navigation] = actionPayload
+            }
+            else {
+                let actionPayload = inAppAction.fetchInAppActionPayload()
+                inAppDataPayload[MoEngagePluginConstants.InApp.customAction] = actionPayload
+            }
+            
+            inAppDataPayload[MoEngagePluginConstants.General.actionType] = getInAppActionType(inappAction: inAppAction)
         }
-
         
         let inAppPayload = [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
         return inAppPayload
@@ -127,6 +118,18 @@ public class MoEngagePluginUtils {
             }
         }
         return NudgePositionNone
+    }
+    
+    static func getInAppActionType(inappAction: MoEngageInAppAction) -> String? {
+        var actionType: String? = nil
+        
+        if inappAction.actionType == CustomAction {
+            actionType = MoEngagePluginConstants.InApp.customAction
+        } else if inappAction.actionType == NavigationAction {
+            actionType =  MoEngagePluginConstants.General.navigation
+        }
+         
+        return actionType
     }
 }
 
