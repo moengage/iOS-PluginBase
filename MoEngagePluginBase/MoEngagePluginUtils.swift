@@ -34,15 +34,17 @@ public class MoEngagePluginUtils {
         var inAppDataPayload = inAppCampaign.fetchInAppPaylaod()
         
         if let inAppAction = inAppAction {
-            let actionPayload = inAppAction.fetchInAppActionPayload()
             
-            if inAppAction.actionType == NavigationAction {
-                inAppDataPayload[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.General.navigation
+            if let inAppNavigationAction = inAppAction as? MoEngageInAppNavigationAction {
+                let actionPayload = inAppNavigationAction.fetchInAppNavigationActionPayload()
                 inAppDataPayload[MoEngagePluginConstants.General.navigation] = actionPayload
-            } else if inAppAction.actionType == CustomAction {
-                inAppDataPayload[MoEngagePluginConstants.General.actionType] = MoEngagePluginConstants.InApp.customAction
+            }
+            else {
+                let actionPayload = inAppAction.fetchInAppActionPayload()
                 inAppDataPayload[MoEngagePluginConstants.InApp.customAction] = actionPayload
             }
+            
+            inAppDataPayload[MoEngagePluginConstants.General.actionType] = getInAppActionType(inappAction: inAppAction)
         }
         
         let inAppPayload = [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
@@ -117,6 +119,18 @@ public class MoEngagePluginUtils {
         }
         return NudgePositionNone
     }
+    
+    static func getInAppActionType(inappAction: MoEngageInAppAction) -> String? {
+        var actionType: String? = nil
+        
+        if inappAction.actionType == CustomAction {
+            actionType = MoEngagePluginConstants.InApp.customAction
+        } else if inappAction.actionType == NavigationAction {
+            actionType =  MoEngagePluginConstants.General.navigation
+        }
+         
+        return actionType
+    }
 }
 
 extension MoEngageInAppCampaign {
@@ -126,17 +140,37 @@ extension MoEngageInAppCampaign {
     }
 }
 
+extension MoEngageInAppNavigationAction {
+    func fetchInAppNavigationActionPayload() -> [String: Any] {
+        var actionPayload = [String: Any]()
+        
+        var navigationActionType: String? = nil
+        
+        if navigationType == .deepLink {
+            navigationActionType = MoEngagePluginConstants.InApp.deeplink
+        } else if navigationType == .navigateToScreen {
+            navigationActionType = MoEngagePluginConstants.InApp.screen
+        }
+        
+        if let type = navigationActionType {
+            actionPayload[MoEngagePluginConstants.General.navigationType] = type
+        }
+        
+        if let navigationUrl = navigationUrl {
+            actionPayload[MoEngagePluginConstants.General.value] = navigationUrl
+        }
+        
+        if !keyValuePairs.isEmpty {
+            actionPayload[MoEngagePluginConstants.General.kvPair] = keyValuePairs
+        }
+        
+        return actionPayload
+    }
+}
+
 extension MoEngageInAppAction {
     func fetchInAppActionPayload() -> [String: Any] {
         var actionPayload = [String: Any]()
-        
-        if actionType == NavigationAction {
-            actionPayload[MoEngagePluginConstants.General.navigationType] = MoEngagePluginConstants.InApp.screen
-        }
-        
-        if let screenName = screenName {
-            actionPayload[MoEngagePluginConstants.General.value] = screenName
-        }
         
         if !keyValuePairs.isEmpty {
             actionPayload[MoEngagePluginConstants.General.kvPair] = keyValuePairs
