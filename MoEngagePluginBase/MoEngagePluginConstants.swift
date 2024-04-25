@@ -35,6 +35,9 @@ public struct MoEngagePluginConstants {
         static let campaignName = "campaignName"
         static let event = "event"
         static let message = "message"
+        static let integrationMeta = "integrationMeta"
+        static let integrationType = "type"
+        static let integrationVersion = "version"
     }
     
     // user attribute

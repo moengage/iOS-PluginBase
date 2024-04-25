@@ -23,6 +23,16 @@ import MoEngageInApps
            let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier) {
             messageHandler.flushAllMessages()
         }
+        
+        trackIntegrationType(accountInfo)
+    }
+    
+    private func trackIntegrationType(_ payload: [String : Any]) {
+        if let integrationInfo = payload[MoEngagePluginConstants.General.integrationMeta] as? [String: Any],
+           let type = integrationInfo[MoEngagePluginConstants.General.integrationType] as? String,
+           let version = integrationInfo[MoEngagePluginConstants.General.integrationVersion] as? String {
+            MoEngagePlugin().trackPluginInfo(type, version: version)
+        }
     }
     
     @objc public func setPluginBridgeDelegate(_ delegate: MoEngagePluginBridgeDelegate, identifier: String) {
