@@ -1,8 +1,8 @@
 # ChangeLog:
 =================================
-# Next Release Date
+# 25-04-2024
 
-## PluginBase 
+## PluginBase 4.8.2 
 -------------------------------------------
 * Added support for passing integration type and version from hybrid.
 
