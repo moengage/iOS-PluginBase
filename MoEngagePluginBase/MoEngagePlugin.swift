@@ -12,6 +12,29 @@ import MoEngageInApps
 @available(iOSApplicationExtension, unavailable)
 @objc final public class MoEngagePlugin: NSObject {
     
+    /// Initialize SDK with provided configuration.
+    /// - Parameter initializationConfig: The configuration used for initialization.
+    @objc public func initializeInstance(
+        withConfig initializationConfig: MoEngageSDKInitializationConfig
+    ) {
+        let sdkConfig = initializationConfig.sdkConfig
+        let sdkState = initializationConfig.sdkState
+        if initializationConfig.isDefaultInstance {
+            if initializationConfig.isTestEnvironment {
+                MoEngage.sharedInstance.initializeDefaultTestInstance(sdkConfig, sdkState: sdkState)
+            } else {
+                MoEngage.sharedInstance.initializeDefaultLiveInstance(sdkConfig, sdkState: sdkState)
+            }
+        } else {
+            if initializationConfig.isTestEnvironment {
+                MoEngage.sharedInstance.initializeTestInstance(sdkConfig, sdkState: sdkState)
+            } else {
+                MoEngage.sharedInstance.initializeLiveInstance(sdkConfig, sdkState: sdkState)
+            }
+        }
+        commonSetUp(identifier: sdkConfig.appId)
+    }
+
     // MARK: Initialization of default instance
     @objc public func initializeDefaultInstance(sdkConfig: MoEngageSDKConfig, sdkState: MoEngageSDKState, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         guard !sdkConfig.appId.isEmpty else { return }
