@@ -1,5 +1,11 @@
 # ChangeLog:
 =================================
+# Next Release Date
+
+## PluginBase 
+-------------------------------------------
+* BugFix -  Fixed the issue where custom attribute true/false is tracked as 1/0. 
+
 # 25-04-2024
 
 ## PluginBase 4.8.2 
