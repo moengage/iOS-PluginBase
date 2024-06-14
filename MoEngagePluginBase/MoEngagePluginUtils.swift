@@ -27,6 +27,22 @@ public class MoEngagePluginUtils {
         return appIdDict
     }
     
+        static public func fetchShouldTrackUserAttrBooleanAsNumberFromPayload(attribute: [String: Any]) -> Bool {
+        if let initConfig = attribute[MoEngagePluginConstants.General.initConfig] as? [String: Any],
+           let analyticsConfig = initConfig[MoEngagePluginConstants.General.analyticsConfig] as? [String: Any],
+           let shouldTrackUserAttributeBooleanAsNumber = analyticsConfig[MoEngagePluginConstants.General.shouldTrackUserAttributeBooleanAsNumber] {
+            return shouldTrackUserAttributeBooleanAsNumber as! Bool
+        }
+        return false
+    }
+
+       static public func createInitConfig(shouldTrackUserAttributeBooleanAsNumber: Bool, shouldDeliverCallbackOnForegroundClick: Bool = false) -> [String: Any] {
+        var initConfig:[String: Any] = [:]
+        initConfig[MoEngagePluginConstants.General.analyticsConfig] = [MoEngagePluginConstants.General.shouldTrackUserAttributeBooleanAsNumber: shouldTrackUserAttributeBooleanAsNumber]
+        initConfig[MoEngagePluginConstants.General.pushConfig] = [MoEngagePluginConstants.General.shouldDeliverCallbackOnForegroundClick: shouldDeliverCallbackOnForegroundClick]
+        return initConfig
+    }
+    
     // MARK: InApp Utilities
     static func inAppCampaignToJSON(inAppCampaign: MoEngageInAppCampaign, inAppAction: MoEngageInAppAction? = nil, identifier: String) -> [String: Any] {
         let accountMeta = createAccountPayload(identifier: identifier)
