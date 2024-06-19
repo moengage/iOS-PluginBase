@@ -6,6 +6,18 @@
 -------------------------------------------
 * BugFix -  Fixed the issue where custom attribute true/false is tracked as 1/0. 
 
+## Cards 
+-------------------------------------------
+* Updated the dependency to PluginBase `5.0.0`.
+
+## Inbox 
+-------------------------------------------
+* Updated the dependency to PluginBase `5.0.0`.
+
+## Geofence 
+-------------------------------------------
+* Updated the dependency to PluginBase `5.0.0`.
+
 # 25-04-2024
 
 ## PluginBase 4.8.2 
