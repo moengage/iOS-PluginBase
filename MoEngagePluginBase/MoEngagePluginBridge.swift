@@ -93,7 +93,11 @@ import MoEngageInApps
            let userAttribute = MoEngagePluginParser.mapJsonToUserAttributeData(payload: userAttribute) {
             switch userAttribute.type {
             case MoEngagePluginConstants.UserAttribute.general:
-                MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
+                if (userAttribute.value is NSNumber) && CFGetTypeID(userAttribute.value as CFTypeRef) == CFBooleanGetTypeID() {
+                    MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value as? Bool, withAttributeName: userAttribute.name, forAppID: identifier)
+                } else {
+                    MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
+                }
                 
             case MoEngagePluginConstants.UserAttribute.timestamp:
                 if let timeStamp = userAttribute.value as? String {
