@@ -22,11 +22,14 @@
     
     //Primary Instance
     NSString* yourMoEngageAppID = @"";
-    MoEngageSDKConfig* sdkConfig = [[MoEngageSDKConfig alloc] initWithAppID:yourMoEngageAppID];
+    MoEngageDataCenter yourMoEngageDataCenter = MoEngageDataCenterData_center_01;
+    MoEngageSDKConfig* sdkConfig = [[MoEngageSDKConfig alloc] initWithAppId:yourMoEngageAppID dataCenter:yourMoEngageDataCenter];
     sdkConfig.consoleLogConfig = [[MoEngageConsoleLogConfig alloc] initWithIsLoggingEnabled:true loglevel:MoEngageLoggerTypeVerbose];
+    MoEngageSDKInitializationConfig* initConfig = [[MoEngageSDKInitializationConfig alloc] initWithSdkConfig:sdkConfig];
+    initConfig.launchOptions = launchOptions;
     
     MoEngagePlugin *plugin = [[MoEngagePlugin alloc] init];
-    [plugin initializeDefaultInstanceWithSdkConfig:sdkConfig sdkState:MoEngageSDKStateEnabled launchOptions:launchOptions];
+    [plugin initializeInstanceWithConfig:initConfig];
     
     [[MoEngagePluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:yourMoEngageAppID];
     
