@@ -27,19 +27,18 @@ public class MoEngagePluginUtils {
         return appIdDict
     }
     
-        static public func fetchShouldTrackUserAttrBooleanAsNumberFromPayload(attribute: [String: Any]) -> Bool {
+    static public func fetchShouldTrackUserAttrBooleanAsNumberFromPayload(attribute: [String: Any]) -> Bool {
         if let initConfig = attribute[MoEngagePluginConstants.General.initConfig] as? [String: Any],
            let analyticsConfig = initConfig[MoEngagePluginConstants.General.analyticsConfig] as? [String: Any],
-           let shouldTrackUserAttributeBooleanAsNumber = analyticsConfig[MoEngagePluginConstants.General.shouldTrackUserAttributeBooleanAsNumber] {
-            return shouldTrackUserAttributeBooleanAsNumber as! Bool
+           let shouldTrackUserAttributeBooleanAsNumber = analyticsConfig[MoEngagePluginConstants.General.shouldTrackUserAttributeBooleanAsNumber] as? Bool {
+            return shouldTrackUserAttributeBooleanAsNumber
         }
         return false
     }
 
-       static public func createInitConfig(shouldTrackUserAttributeBooleanAsNumber: Bool, shouldDeliverCallbackOnForegroundClick: Bool = false) -> [String: Any] {
+    static public func createInitConfig(shouldTrackUserAttributeBooleanAsNumber: Bool) -> [String: Any] {
         var initConfig:[String: Any] = [:]
         initConfig[MoEngagePluginConstants.General.analyticsConfig] = [MoEngagePluginConstants.General.shouldTrackUserAttributeBooleanAsNumber: shouldTrackUserAttributeBooleanAsNumber]
-        initConfig[MoEngagePluginConstants.General.pushConfig] = [MoEngagePluginConstants.General.shouldDeliverCallbackOnForegroundClick: shouldDeliverCallbackOnForegroundClick]
         return initConfig
     }
     

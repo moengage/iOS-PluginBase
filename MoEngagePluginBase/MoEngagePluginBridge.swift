@@ -22,10 +22,9 @@ import MoEngageInApps
     @objc public func pluginInitialized(_ accountInfo: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: accountInfo),
            let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier) {
-            shouldTrackUserAttributeBooleanAsNumber = MoEngagePluginUtils.fetchShouldTrackUserAttrBooleanAsNumberFromPayload(attribute: accountInfo)
             messageHandler.flushAllMessages()
         }
-        
+        shouldTrackUserAttributeBooleanAsNumber = MoEngagePluginUtils.fetchShouldTrackUserAttrBooleanAsNumberFromPayload(attribute: accountInfo)
         trackIntegrationType(accountInfo)
     }
     

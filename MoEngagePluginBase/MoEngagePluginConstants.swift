@@ -41,8 +41,6 @@ public struct MoEngagePluginConstants {
         static let integrationVersion = "version"
         static let analyticsConfig = "analyticsConfig"
         static let shouldTrackUserAttributeBooleanAsNumber = "shouldTrackUserAttributeBooleanAsNumber"
-        static let pushConfig = "pushConfig"
-        static let shouldDeliverCallbackOnForegroundClick = "shouldDeliverCallbackOnForegroundClick"
     }
     
     // user attribute
