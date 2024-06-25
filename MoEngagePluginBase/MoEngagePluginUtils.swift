@@ -30,7 +30,8 @@ public class MoEngagePluginUtils {
     static public func fetchShouldTrackUserAttrBooleanAsNumberFromPayload(attribute: [String: Any]) -> Bool {
         if let initConfig = attribute[MoEngagePluginConstants.General.initConfig] as? [String: Any],
            let analyticsConfig = initConfig[MoEngagePluginConstants.General.analyticsConfig] as? [String: Any],
-           let shouldTrackUserAttributeBooleanAsNumber = analyticsConfig[MoEngagePluginConstants.General.shouldTrackUserAttributeBooleanAsNumber] as? Bool {
+           let shouldTrackUserAttributeBooleanAsNumber = analyticsConfig[MoEngagePluginConstants.General.shouldTrackUserAttributeBooleanAsNumber] as? Bool,
+           let appID = fetchIdentifierFromPayload(attribute: attribute)  {
             return shouldTrackUserAttributeBooleanAsNumber
         }
         return false
