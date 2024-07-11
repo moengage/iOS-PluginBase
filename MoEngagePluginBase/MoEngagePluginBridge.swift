@@ -92,7 +92,7 @@ import MoEngageInApps
            let userAttribute = MoEngagePluginParser.mapJsonToUserAttributeData(payload: userAttribute) {
             switch userAttribute.type {
             case MoEngagePluginConstants.UserAttribute.general:
-               let shouldTrackUserAttributeBooleanAsNumber = MoEngageHybridToNativeConfig.sharedInstance.fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: identifier)
+               let shouldTrackUserAttributeBooleanAsNumber = MoEngageInitConfigCache.sharedInstance.fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: identifier)
                 if (!shouldTrackUserAttributeBooleanAsNumber) && (userAttribute.value is NSNumber) && CFGetTypeID(userAttribute.value as CFTypeRef) == CFBooleanGetTypeID() {
                     MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value as? Bool, withAttributeName: userAttribute.name, forAppID: identifier)
                 } else {

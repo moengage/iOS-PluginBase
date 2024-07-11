@@ -7,8 +7,8 @@
 
 import Foundation
 
-public class MoEngageHybridToNativeConfig {
-    public static let sharedInstance = MoEngageHybridToNativeConfig()
+public class MoEngageInitConfigCache {
+    public static let sharedInstance = MoEngageInitConfigCache()
     private var hybridToNativeConfigCache: [String:MoEngageInitConfig] = [:]
     
     private init() {
