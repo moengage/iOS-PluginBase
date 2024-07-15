@@ -20,7 +20,9 @@ import MoEngageInApps
     
     @objc public func pluginInitialized(_ accountInfo: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: accountInfo),
-           let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier) {
+           let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier),
+           let initConfig = MoEngagePluginUtils.fetchInitConfig(attribute: accountInfo) {
+            MoEngageInitConfigCache.sharedInstance.initializeInitConfig(appID: identifier, initConfig: initConfig)
             messageHandler.flushAllMessages()
         }
         trackIntegrationType(accountInfo)

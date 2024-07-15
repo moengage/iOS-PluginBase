@@ -22,6 +22,13 @@ public class MoEngagePluginUtils {
         return nil
     }
     
+    static public func fetchInitConfig(attribute: [String:Any]) -> MoEngageInitConfig? {
+        if let initConfig = attribute[MoEngagePluginConstants.General.initConfig] as? MoEngageInitConfig {
+            return initConfig
+        }
+        return nil
+    }
+
     static public func createAccountPayload(identifier: String) -> [String: Any] {
         let appIdDict = [MoEngagePluginConstants.General.appId: identifier]
         return appIdDict

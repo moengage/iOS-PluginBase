@@ -9,22 +9,22 @@ import Foundation
 
 public class MoEngageInitConfigCache {
     public static let sharedInstance = MoEngageInitConfigCache()
-    private var hybridToNativeConfigCache: [String:MoEngageInitConfig] = [:]
+    private var initConfigCache: [String:MoEngageInitConfig] = [:]
     
     private init() {
         
     }
     
-    public func initializeInitConfig(appID: String, initConfig: MoEngageInitConfig) {
-        if(hybridToNativeConfigCache.keys.contains(appID)) {
+    func initializeInitConfig(appID: String, initConfig: MoEngageInitConfig) {
+        if(initConfigCache.keys.contains(appID)) {
             return
         }
         
-        self.hybridToNativeConfigCache[appID] = initConfig
+        self.initConfigCache[appID] = initConfig
     }
     
-    public func fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: String)->Bool {
-        guard let initConfig = hybridToNativeConfigCache[forAppID] else {
+    func fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: String)->Bool {
+        guard let initConfig = initConfigCache[forAppID] else {
             return false
         }
         
