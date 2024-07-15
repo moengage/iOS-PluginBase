@@ -7,10 +7,10 @@
 
 import Foundation
 
-public class MoEngageInitConfig {
+class MoEngageInitConfig {
     var analyticsConfig: MoEngageAnalyticsConfig
     
-    public init(analyticsConfig: MoEngageAnalyticsConfig) {
+    init(analyticsConfig: MoEngageAnalyticsConfig) {
         self.analyticsConfig = analyticsConfig
     }
 }

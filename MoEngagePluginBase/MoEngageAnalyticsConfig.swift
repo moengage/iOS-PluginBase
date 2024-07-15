@@ -7,10 +7,10 @@
 
 import Foundation
 
-public class MoEngageAnalyticsConfig {
+class MoEngageAnalyticsConfig {
     var shouldTrackUserAttributeBooleanAsNumber: Bool
     
-    public init(shouldTrackUserAttributeBooleanAsNumber: Bool) {
+    init(shouldTrackUserAttributeBooleanAsNumber: Bool) {
         self.shouldTrackUserAttributeBooleanAsNumber = shouldTrackUserAttributeBooleanAsNumber
     }
 }
