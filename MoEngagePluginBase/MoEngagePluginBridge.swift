@@ -14,16 +14,17 @@ import MoEngageInApps
 @objc final public class MoEngagePluginBridge: NSObject {
 
     @objc public static let sharedInstance = MoEngagePluginBridge()
-    
+
     private override init() {
     }
     
     @objc public func pluginInitialized(_ accountInfo: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: accountInfo),
-           let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier) {
+           let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier),
+           let initConfig = MoEngagePluginUtils.fetchInitConfig(attribute: accountInfo) {
+            MoEngageInitConfigCache.sharedInstance.initializeInitConfig(appID: identifier, initConfig: initConfig)
             messageHandler.flushAllMessages()
         }
-        
         trackIntegrationType(accountInfo)
     }
     
@@ -93,7 +94,8 @@ import MoEngageInApps
            let userAttribute = MoEngagePluginParser.mapJsonToUserAttributeData(payload: userAttribute) {
             switch userAttribute.type {
             case MoEngagePluginConstants.UserAttribute.general:
-                if (userAttribute.value is NSNumber) && CFGetTypeID(userAttribute.value as CFTypeRef) == CFBooleanGetTypeID() {
+               let shouldTrackUserAttributeBooleanAsNumber = MoEngageInitConfigCache.sharedInstance.fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: identifier)
+                if (!shouldTrackUserAttributeBooleanAsNumber) && (userAttribute.value is NSNumber) && CFGetTypeID(userAttribute.value as CFTypeRef) == CFBooleanGetTypeID() {
                     MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value as? Bool, withAttributeName: userAttribute.name, forAppID: identifier)
                 } else {
                     MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
