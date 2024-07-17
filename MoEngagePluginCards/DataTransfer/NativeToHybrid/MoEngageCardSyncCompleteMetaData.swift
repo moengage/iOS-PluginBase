@@ -11,6 +11,7 @@ import MoEngageCards
     case pullToRefresh
     case inboxOpen
     case appOpen
+    case immediate
 
     public var description: String {
         switch self {
@@ -20,6 +21,8 @@ import MoEngageCards
             return "INBOX_OPEN"
         case .appOpen:
             return "APP_OPEN"
+        case .immediate:
+            return "IMMEDIATE"
         }
     }
 }

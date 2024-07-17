@@ -1,5 +1,14 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase
+-------------------------------------------
+* Added SDK Initialization API independent of build configuration.
+
+## Cards
+* Added support for Cards on Login
+
 # 03-07-2024
 
 ## PluginBase 4.9.0

@@ -98,9 +98,9 @@ import MoEngageCards
         }
     }
 
-    @objc public func setAppOpenSyncListener(_ accountData: [String: Any]) {
+    @objc public func setSyncListener(_ accountData: [String: Any]) {
         guard
-            let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(
+            let _ = MoEngagePluginUtils.fetchIdentifierFromPayload(
                 attribute: accountData
             )
         else {
@@ -109,7 +109,7 @@ import MoEngageCards
         }
         
         MoEngagePluginCardsLogger.debug("AppOpen Sync Listener - ", forData: accountData)
-        syncManager.setAppOpenListner()
+        syncManager.setSyncListener()
     }
 
     @objc public func fetchCards(
