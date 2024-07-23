@@ -96,7 +96,7 @@ import MoEngageInApps
             case MoEngagePluginConstants.UserAttribute.general:
                 let shouldTrackUserAttributeBooleanAsNumber = MoEngageInitConfigCache.sharedInstance.fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: identifier)
                 if CFGetTypeID(userAttribute.value as CFTypeRef) == CFBooleanGetTypeID() {
-                    MoEngageSDKAnalytics.sharedInstance.setUserAttribute(shouldTrackUserAttributeBooleanAsNumber ? userAttribute.value as? Int: userAttribute.value as? Bool, withAttributeName: userAttribute.name, forAppID: identifier)
+                    MoEngageSDKAnalytics.sharedInstance.setUserAttribute(shouldTrackUserAttributeBooleanAsNumber ? userAttribute.value as? Double: userAttribute.value as? Bool, withAttributeName: userAttribute.name, forAppID: identifier)
                 } else {
                     MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
                 }
