@@ -39,8 +39,8 @@ public struct MoEngagePluginConstants {
         static let integrationMeta = "integrationMeta"
         static let integrationType = "type"
         static let integrationVersion = "version"
-        static let analyticsConfig = "analyticsConfig"
-        static let shouldTrackUserAttributeBooleanAsNumber = "shouldTrackUserAttributeBooleanAsNumber"
+        public static let analyticsConfig = "analyticsConfig"
+        public static let shouldTrackUserAttributeBooleanAsNumber = "shouldTrackUserAttributeBooleanAsNumber"
     }
     
     // user attribute
