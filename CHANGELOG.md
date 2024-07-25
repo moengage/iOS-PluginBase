@@ -2,21 +2,39 @@
 =================================
 # Next Release Date
 
-## PluginBase 
+## PluginBase 5.0.0
 -------------------------------------------
 * BugFix -  Fixed the issue where custom attribute true/false is tracked as 1/0. 
 
-## Cards 
+## Cards 2.0.0
 -------------------------------------------
 * Updated the dependency to PluginBase `5.0.0`.
 
-## Inbox 
+## Inbox 3.0.0
 -------------------------------------------
 * Updated the dependency to PluginBase `5.0.0`.
 
-## Geofence 
+## Geofence 3.0.0
 -------------------------------------------
 * Updated the dependency to PluginBase `5.0.0`.
+
+# 03-07-2024
+
+## PluginBase 4.9.0
+-------------------------------------------
+* Added SDK Initialization API independent of build configuration.
+
+## Cards 1.6.0
+-------------------------------------------
+* Updated the PluginBase `4.9.0`.
+
+## Inbox 2.9.0
+-------------------------------------------
+* Updated the PluginBase `4.9.0`.
+
+## Geofence 2.9.0
+-------------------------------------------
+* Updated the PluginBase `4.9.0`.
 
 # 25-04-2024
 
