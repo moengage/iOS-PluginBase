@@ -18,6 +18,24 @@
 -------------------------------------------
 * Updated the dependency to PluginBase `5.0.0`.
 
+# 31-07-2024
+
+## PluginBase 4.10.0
+-------------------------------------------
+* Updated the dependency to MoEngage-iOS-SDK `9.18.0`.
+
+## Cards 1.7.0
+-------------------------------------------
+* Updated the PluginBase `4.10.0`.
+
+## Inbox 2.10.0
+-------------------------------------------
+* Updated the PluginBase `4.10.0`.
+
+## Geofence 2.10.0
+-------------------------------------------
+* Updated the PluginBase `4.10.0`.
+
 # 03-07-2024
 
 ## PluginBase 4.9.0

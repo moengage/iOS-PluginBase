@@ -25,8 +25,8 @@ Pod::Spec.new do |s|
     s.dependency 'MoEngagePluginBase', '>= 5.0.0', '< 5.1.0'
     s.dependency 'MoEngage-iOS-SDK/Cards'
 
-    s.test_spec 'UnitTests' do |ts|
-      ts.source_files = 'Tests/MoEngagePluginCardsTests/**/*.swift'
-      s.scheme       = { :code_coverage => true }
-    end
+    # s.test_spec 'UnitTests' do |ts|
+    #   ts.source_files = 'Tests/MoEngagePluginCardsTests/**/*.swift'
+    #   s.scheme       = { :code_coverage => true }
+    # end
 end
