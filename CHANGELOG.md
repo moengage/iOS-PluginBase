@@ -5,6 +5,7 @@
 ## PluginBase 5.0.0
 -------------------------------------------
 * BugFix -  Fixed the issue where custom attribute true/false is tracked as 1/0. 
+* Updated the dependency to MoEngage-iOS-SDK `9.18.1`.
 
 ## Cards 2.0.0
 -------------------------------------------
