@@ -31,6 +31,7 @@ public struct MoEngagePluginConstants {
         public static let navigationType = "navigationType"
         public static let actionType = "actionType"
         public static let type = "type"
+        public static let initConfig = "initConfig"
         static let appId = "appId"
         static let campaignName = "campaignName"
         static let event = "event"
@@ -38,6 +39,8 @@ public struct MoEngagePluginConstants {
         static let integrationMeta = "integrationMeta"
         static let integrationType = "type"
         static let integrationVersion = "version"
+        public static let analyticsConfig = "analyticsConfig"
+        public static let shouldTrackUserAttributeBooleanAsNumber = "shouldTrackUserAttributeBooleanAsNumber"
     }
     
     // user attribute

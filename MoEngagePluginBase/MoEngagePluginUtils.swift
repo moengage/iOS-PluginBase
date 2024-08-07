@@ -22,6 +22,15 @@ public class MoEngagePluginUtils {
         return nil
     }
     
+    static func fetchInitConfig(attribute: [String:Any]) -> MoEngageInitConfig? {
+        if let initConfig = attribute[MoEngagePluginConstants.General.initConfig] as? [String:Any],
+           let analyticsConfig = initConfig[MoEngagePluginConstants.General.analyticsConfig] as? [String:Any],
+           let shouldTrackUserAttributeBooleanAsNumber = analyticsConfig[MoEngagePluginConstants.General.shouldTrackUserAttributeBooleanAsNumber] as? Bool{
+            return MoEngageInitConfig(analyticsConfig: MoEngageAnalyticsConfig(shouldTrackUserAttributeBooleanAsNumber: shouldTrackUserAttributeBooleanAsNumber))
+        }
+        return nil
+    }
+
     static public func createAccountPayload(identifier: String) -> [String: Any] {
         let appIdDict = [MoEngagePluginConstants.General.appId: identifier]
         return appIdDict
