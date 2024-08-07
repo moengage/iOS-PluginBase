@@ -14,16 +14,17 @@ import MoEngageInApps
 @objc final public class MoEngagePluginBridge: NSObject {
 
     @objc public static let sharedInstance = MoEngagePluginBridge()
-    
+
     private override init() {
     }
     
     @objc public func pluginInitialized(_ accountInfo: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: accountInfo),
-           let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier) {
+           let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier),
+           let initConfig = MoEngagePluginUtils.fetchInitConfig(attribute: accountInfo) {
+            MoEngageInitConfigCache.sharedInstance.initializeInitConfig(appID: identifier, initConfig: initConfig)
             messageHandler.flushAllMessages()
         }
-        
         trackIntegrationType(accountInfo)
     }
     
@@ -93,7 +94,12 @@ import MoEngageInApps
            let userAttribute = MoEngagePluginParser.mapJsonToUserAttributeData(payload: userAttribute) {
             switch userAttribute.type {
             case MoEngagePluginConstants.UserAttribute.general:
-                MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
+                let shouldTrackUserAttributeBooleanAsNumber = MoEngageInitConfigCache.sharedInstance.fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: identifier)
+                if CFGetTypeID(userAttribute.value as CFTypeRef) == CFBooleanGetTypeID() {
+                    MoEngageSDKAnalytics.sharedInstance.setUserAttribute(shouldTrackUserAttributeBooleanAsNumber ? userAttribute.value as? Double: userAttribute.value as? Bool, withAttributeName: userAttribute.name, forAppID: identifier)
+                } else {
+                    MoEngageSDKAnalytics.sharedInstance.setUserAttribute(userAttribute.value, withAttributeName: userAttribute.name, forAppID: identifier)
+                }
                 
             case MoEngagePluginConstants.UserAttribute.timestamp:
                 if let timeStamp = userAttribute.value as? String {
