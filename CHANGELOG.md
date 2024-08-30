@@ -1,5 +1,10 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## Cards
+
+* Added support for Cards on Login
 
 # 07-08-2024
 
