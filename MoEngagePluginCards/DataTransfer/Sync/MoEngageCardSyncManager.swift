@@ -9,7 +9,7 @@ import MoEngageCore
 import MoEngageCards
 
 protocol MoEngageCardSyncManagerProtocol: MoEngageHybridSDKCardsDelegate {
-    func setAppOpenListner()
+    func setSyncListener()
     func attachDelegate(_ delegate: MoEngageCardSyncDelegate)
     func detachDelegate()
 
@@ -24,21 +24,21 @@ final class MoEngageCardSyncManager: MoEngageCardSyncManagerProtocol {
     private let queue: MoEngageCardSyncManagerSynchronizer
     private let dataManager: MoEngageCardSyncDataManagerProtocol
     private var delegate: MoEngageCardSyncDelegate?
-    private var appOpenListnerSet: Bool
+    private var isSyncListenerSet: Bool
 
     init(
         queue: MoEngageCardSyncManagerSynchronizer = MoEngageCoreHandler.globalQueue,
         dataManager: MoEngageCardSyncDataManagerProtocol = MoEngageCardSyncDataManager(),
-        appOpenListnerSet: Bool = false
+        isSyncListenerSet: Bool = false
     ) {
         self.queue = queue
         self.dataManager = dataManager
-        self.appOpenListnerSet = appOpenListnerSet
+        self.isSyncListenerSet = isSyncListenerSet
     }
 
-    func setAppOpenListner() {
+    func setSyncListener() {
         queue.async {
-            self.appOpenListnerSet = true
+            self.isSyncListenerSet = true
             self.flushSyncEvents()
         }
     }
@@ -88,6 +88,12 @@ final class MoEngageCardSyncManager: MoEngageCardSyncManagerProtocol {
                 "Recieved app open sync callback \(dataForHybrid) in pluginbase",
                 forData: dataForHybrid
             )
+        case .immediateSync:
+            self.sendUpdate(
+                forEventType: .immediate,
+                andAppID: data.accountMeta.appID,
+                withNewData: data
+            )
         default:
             break
         }
@@ -101,7 +107,7 @@ final class MoEngageCardSyncManager: MoEngageCardSyncManagerProtocol {
         queue.async {
             let metadata = MoEngageCardSyncCompleteMetaData(type: eventType, data: data)
             if let delegate = self.delegate,
-               eventType != .appOpen || self.appOpenListnerSet {
+               eventType != .appOpen || eventType != .immediate || self.isSyncListenerSet {
                 let dataForHybrid = MoEngagePluginCardsUtil.buildHybridPayload(
                     forIdentifier: appId,
                     containingData: metadata.encodeForHybrid()
