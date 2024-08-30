@@ -2,9 +2,22 @@
 =================================
 # Next Release
 
-## Cards
+## PluginBase 
+-------------------------------------------
+* Updated the dependency to MoEngage-iOS-SDK `9.x.x`.[Todo]
 
+## Cards
+-------------------------------------------
 * Added support for Cards on Login
+* Updated the dependency to MoEngageCards `4.x.x`..[Todo]
+
+## Inbox
+-------------------------------------------
+* Updated the dependency to MoEngageInbox `2.x.x`..[Todo]
+
+## Geofence
+-------------------------------------------
+* Updated the dependency to MoEngageGeofece `5.x.x`..[Todo]
 
 # 07-08-2024
 
