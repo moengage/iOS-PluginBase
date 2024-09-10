@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
     s.tvos.deployment_target = '11.0'
 
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngage-iOS-SDK', '9.18.1'
+    s.dependency 'MoEngage-iOS-SDK', '9.19.0'
     s.dependency 'MoEngage-iOS-SDK/InApps'
 end

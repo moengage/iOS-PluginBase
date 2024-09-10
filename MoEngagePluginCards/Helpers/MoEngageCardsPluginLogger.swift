@@ -48,17 +48,8 @@ public enum MoEngagePluginCardsLogger {
         } else if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(
             attribute: hybridData
         ) {
-            MoEngageConfigCoordinator.sharedInstance.getSdkInstance(identifier) { instance in
-                guard let instance = instance else { return }
-                Self.sdkInstance = instance
-                log(
-                    message, withPayload: hybridData, withType: type, inInstance: instance,
-                    file: file, function: function, line: line, column: column
-                )
-            }
-        } else {
-            MoEngageConfigCoordinator.sharedInstance.getDefaultSdkInstance { instance in
-                guard let instance = instance else { return }
+            MoEngageCoreHandler.globalQueue.async  {
+                guard let instance = MoEngageSDKInstanceProvider.sharedInstance.getSdkInstance(identifier) else { return }
                 Self.sdkInstance = instance
                 log(
                     message, withPayload: hybridData, withType: type, inInstance: instance,
