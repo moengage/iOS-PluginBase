@@ -41,6 +41,7 @@ public class MoEngagePluginUtils {
         let accountMeta = createAccountPayload(identifier: identifier)
         
         var inAppDataPayload = inAppCampaign.fetchInAppPaylaod()
+        inAppDataPayload[MoEngagePluginConstants.General.platform] = MoEngagePluginConstants.General.iOS
         
         if let inAppAction = inAppAction {
             
@@ -67,6 +68,7 @@ public class MoEngagePluginUtils {
         if let selfHandledCampaign = selfHandledCampaign {
             inAppDataPayload = mapSelfHandledCampaignToJSON(selfHandledCampaign)
         }
+        inAppDataPayload[MoEngagePluginConstants.General.platform] = MoEngagePluginConstants.General.iOS
         return [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
     }
     
@@ -137,12 +139,12 @@ public class MoEngagePluginUtils {
        
         let campaignsPayload = campaignData.campaigns.map { campaign in
             let selfHandledPayload = mapSelfHandledCampaignToJSON(campaign)
-            return selfHandledPayload
+            return [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS,
+                    MoEngagePluginConstants.General.accountMeta: accountPaylaod,
+                    MoEngagePluginConstants.General.data: selfHandledPayload]
         }
         
-        let dataPayload = [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS
-                           , MoEngagePluginConstants.InApp.campaigns: campaignsPayload] as [String : Any]
-        return [MoEngagePluginConstants.General.data: dataPayload, MoEngagePluginConstants.General.accountMeta: accountPaylaod];
+        return [MoEngagePluginConstants.General.accountMeta: accountPaylaod, MoEngagePluginConstants.InApp.campaigns: campaignsPayload] as [String : Any]
     }
     
     private static func mapDisplayRulesToJSON(_ rules: MoEngageInAppRules) -> [String: Any] {
@@ -165,7 +167,7 @@ public class MoEngagePluginUtils {
 
 extension MoEngageInAppCampaign {
     func fetchInAppPaylaod() -> [String: Any] {
-        let inAppPayload = [MoEngagePluginConstants.General.campaignName: campaignName, MoEngagePluginConstants.General.campaignId: campaignId, MoEngagePluginConstants.InApp.campaignContext: campaignContext, MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS] as [String: Any]
+        let inAppPayload = [MoEngagePluginConstants.General.campaignName: campaignName, MoEngagePluginConstants.General.campaignId: campaignId, MoEngagePluginConstants.InApp.campaignContext: campaignContext] as [String: Any]
         return inAppPayload
     }
 }
