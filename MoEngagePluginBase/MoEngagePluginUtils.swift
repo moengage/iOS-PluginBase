@@ -41,7 +41,6 @@ public class MoEngagePluginUtils {
         let accountMeta = createAccountPayload(identifier: identifier)
         
         var inAppDataPayload = inAppCampaign.fetchInAppPaylaod()
-        inAppDataPayload[MoEngagePluginConstants.General.platform] = MoEngagePluginConstants.General.iOS
         
         if let inAppAction = inAppAction {
             
@@ -68,7 +67,6 @@ public class MoEngagePluginUtils {
         if let selfHandledCampaign = selfHandledCampaign {
             inAppDataPayload = mapSelfHandledCampaignToJSON(selfHandledCampaign)
         }
-        inAppDataPayload[MoEngagePluginConstants.General.platform] = MoEngagePluginConstants.General.iOS
         return [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
     }
     
@@ -167,7 +165,7 @@ public class MoEngagePluginUtils {
 
 extension MoEngageInAppCampaign {
     func fetchInAppPaylaod() -> [String: Any] {
-        let inAppPayload = [MoEngagePluginConstants.General.campaignName: campaignName, MoEngagePluginConstants.General.campaignId: campaignId, MoEngagePluginConstants.InApp.campaignContext: campaignContext] as [String: Any]
+        let inAppPayload = [MoEngagePluginConstants.General.campaignName: campaignName, MoEngagePluginConstants.General.campaignId: campaignId, MoEngagePluginConstants.InApp.campaignContext: campaignContext, MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS] as [String: Any]
         return inAppPayload
     }
 }
