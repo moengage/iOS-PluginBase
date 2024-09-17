@@ -158,6 +158,15 @@ import MoEngageInApps
         }
     }
     
+    @objc public func getSelfHandledInApps(_ payload: [String: Any], completionBlock: @escaping(([String: Any]) -> Void)) {
+        if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: payload) {
+            MoEngageSDKInApp.sharedInstance.getSelfHandledInApps(for: identifier) { campaignData in
+                let payload = MoEngagePluginUtils.mapSelfHandledCampaignDataToJSON(campaignData: campaignData)
+                completionBlock(payload)
+            }
+        }
+    }
+    
     @objc public func setInAppContext(_ context: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: context),
            let contexts = MoEngagePluginParser.fetchContextData(payload: context) {

@@ -30,7 +30,7 @@ public class MoEngagePluginUtils {
         }
         return nil
     }
-
+    
     static public func createAccountPayload(identifier: String) -> [String: Any] {
         let appIdDict = [MoEngagePluginConstants.General.appId: identifier]
         return appIdDict
@@ -61,23 +61,13 @@ public class MoEngagePluginUtils {
     }
     
     static func selfHandledCampaignToJSON(selfHandledCampaign: MoEngageInAppSelfHandledCampaign?, identifier: String) -> [String: Any] {
-        var inAppPayload = [String: Any]()
-        
         let accountMeta = createAccountPayload(identifier: identifier)
-        
         var inAppDataPayload = [String: Any]()
         
         if let selfHandledCampaign = selfHandledCampaign {
-            inAppDataPayload = selfHandledCampaign.fetchInAppPaylaod()
-            
-            var selfHandledPayload = [String: Any]()
-            selfHandledPayload[MoEngagePluginConstants.General.payload] = selfHandledCampaign.campaignContent
-            selfHandledPayload[MoEngagePluginConstants.InApp.dismissInterval] = selfHandledCampaign.autoDismissInterval
-            inAppDataPayload[MoEngagePluginConstants.InApp.selfHandled] = selfHandledPayload
+            inAppDataPayload = mapSelfHandledCampaignToJSON(selfHandledCampaign)
         }
-        
-        inAppPayload = [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
-        return inAppPayload
+        return [MoEngagePluginConstants.General.accountMeta: accountMeta, MoEngagePluginConstants.General.data: inAppDataPayload]
     }
     
     // MARK: Push Utilities
@@ -137,10 +127,41 @@ public class MoEngagePluginUtils {
         } else if inappAction.actionType == NavigationAction {
             actionType =  MoEngagePluginConstants.General.navigation
         }
-         
+        
         return actionType
     }
-}
+    
+    static func mapSelfHandledCampaignDataToJSON(campaignData: MoEngageInAppSelfHandledData) -> [String: Any] {
+        let accountMeta = campaignData.accountMeta
+        let accountPaylaod = createAccountPayload(identifier: accountMeta.appID)
+       
+        let campaignsPayload = campaignData.campaigns.map { campaign in
+            let selfHandledPayload = mapSelfHandledCampaignToJSON(campaign)
+            return [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS,
+                    MoEngagePluginConstants.General.accountMeta: accountPaylaod,
+                    MoEngagePluginConstants.General.data: selfHandledPayload]
+        }
+        
+        return [MoEngagePluginConstants.General.accountMeta: accountPaylaod, MoEngagePluginConstants.InApp.campaigns: campaignsPayload] as [String : Any]
+    }
+    
+    private static func mapDisplayRulesToJSON(_ rules: MoEngageInAppRules) -> [String: Any] {
+        return [MoEngagePluginConstants.InApp.screenName: rules.screenName, MoEngagePluginConstants.InApp.contexts: rules.contexts]
+    }
+
+    static func mapSelfHandledCampaignToJSON(_ campaign: MoEngageInAppSelfHandledCampaign) -> [String: Any] {
+        var campaignPayload = campaign.fetchInAppPaylaod()
+      
+        var selfHandledPayload = [String: Any]()
+        selfHandledPayload[MoEngagePluginConstants.General.payload] = campaign.campaignContent
+        selfHandledPayload[MoEngagePluginConstants.InApp.dismissInterval] = campaign.autoDismissInterval
+        selfHandledPayload[MoEngagePluginConstants.InApp.displayRules] = mapDisplayRulesToJSON(campaign.displayRules)
+       
+        campaignPayload[MoEngagePluginConstants.InApp.selfHandled] = selfHandledPayload
+       
+        return campaignPayload
+    }
+} 
 
 extension MoEngageInAppCampaign {
     func fetchInAppPaylaod() -> [String: Any] {
