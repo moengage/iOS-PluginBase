@@ -5,6 +5,7 @@
 ## PluginBase 
 -------------------------------------------
 * Updated the dependency to MoEngage-iOS-SDK `9.19.0`.
+* Added support for Multiple Self Handled InApps
 
 ## Cards
 -------------------------------------------

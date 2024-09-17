@@ -113,8 +113,9 @@ class MoEngagePluginParser {
         
         let campaignContent = selfHandledDict[MoEngagePluginConstants.General.payload] as? String ?? ""
         let dismissInterval = selfHandledDict[MoEngagePluginConstants.InApp.dismissInterval] as? Int ?? 0
+        let displayRules = mapJSONToInAppRulesData(payload: selfHandledDict[MoEngagePluginConstants.InApp.displayRules] as? [String: Any] ?? [:])
         
-        let selfHandledCampaign = MoEngageInAppSelfHandledCampaign(campaignContent: campaignContent, autoDismissInterval: dismissInterval, campaign_id: campaignId, campaign_name: campaignName, expiry_time: NSDate(), isDraft: false, campaignContext: campaignContext)
+        let selfHandledCampaign = MoEngageInAppSelfHandledCampaign(campaignContent: campaignContent, autoDismissInterval: dismissInterval, campaign_id: campaignId, campaign_name: campaignName, expiry_time: NSDate(), isDraft: false, campaignContext: campaignContext, displayRules: displayRules)
         return MoEngagePluginSelfHandledImpressionData(selfHandledCampaign: selfHandledCampaign, impressionType: impressionType)
     }
 
@@ -127,5 +128,10 @@ class MoEngagePluginParser {
         
         return sdkState
     }
-
+    
+    static func mapJSONToInAppRulesData(payload: [String: Any]) -> MoEngageInAppRules {
+        let screenName = payload[MoEngagePluginConstants.InApp.screenName] as? String
+        let contexts = payload[MoEngagePluginConstants.InApp.contexts] as? [String] ?? []
+        return MoEngageInAppRules(screenName: screenName, contexts: contexts)
+    }
 }
