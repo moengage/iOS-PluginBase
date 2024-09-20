@@ -6,6 +6,7 @@
 -------------------------------------------
 * Updated the dependency to MoEngage-iOS-SDK `9.19.0`.
 * Added support for Multiple Self Handled InApps
+* Added support for Provisional Push
 
 ## Cards
 -------------------------------------------

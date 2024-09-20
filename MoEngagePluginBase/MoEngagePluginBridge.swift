@@ -205,6 +205,14 @@ import MoEngageInApps
         #endif
     }
     
+    @objc public func registerForProvisionalPush() {
+        #if os(tvOS)
+        MoEngageLogger.logDefault(message: "RegisterForProvisionalPush is unavailable for tvOS 🛑")
+        #else
+        MoEngageSDKMessaging.sharedInstance.registerForRemoteProvisionalNotification(withCategories: nil, andUserNotificationCenterDelegate: UNUserNotificationCenter.current().delegate)
+        #endif
+    }
+    
     // MARK: Other
     @objc public func validateSDKVersion() -> Bool {
         if MoEngagePluginConstants.SDKVersions.currentVersion >=  MoEngagePluginConstants.SDKVersions.minimumVersion &&  MoEngagePluginConstants.SDKVersions.currentVersion < MoEngagePluginConstants.SDKVersions.maximumVersion {
