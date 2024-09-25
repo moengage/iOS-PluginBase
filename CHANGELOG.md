@@ -4,7 +4,7 @@
 
 ## PluginBase 
 -------------------------------------------
-* Updated the dependency to MoEngage-iOS-SDK `9.19.0`.
+* Updated the dependency to MoEngage-iOS-SDK `9.20.0`.
 * Added support for Multiple Self Handled InApps
 * Added support for Provisional Push
 
