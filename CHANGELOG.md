@@ -1,25 +1,25 @@
 # ChangeLog:
 =================================
-# Next Release
+# 25-09-2024
 
-## PluginBase 
+## PluginBase 5.1.0
 -------------------------------------------
 * Updated the dependency to MoEngage-iOS-SDK `9.20.0`.
 * Added support for Multiple Self Handled InApps
 * Added support for Provisional Push
 
-## Cards
+## Cards 2.1.0
 -------------------------------------------
 * Added support for Cards on Login
-* Updated the dependency to MoEngageCards `4.18.0`
+* Updated the dependency to PluginBase `5.1.0`
 
-## Inbox
+## Inbox 3.1.0
 -------------------------------------------
-* Updated the dependency to MoEngageInbox `2.18.0`
+* Updated the dependency to MoEngageInbox `5.1.0`
 
-## Geofence
+## Geofence 3.1.0
 -------------------------------------------
-* Updated the dependency to MoEngageGeofece `5.18.0`
+* Updated the dependency to MoEngageGeofece `5.1.0`
 
 # 07-08-2024
 
