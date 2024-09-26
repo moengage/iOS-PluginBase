@@ -205,6 +205,8 @@ import MoEngageInApps
         #endif
     }
     
+    @available(tvOS, unavailable)
+    @available(iOS 12.0, *)
     @objc public func registerForProvisionalPush() {
         #if os(tvOS)
         MoEngageLogger.logDefault(message: "RegisterForProvisionalPush is unavailable for tvOS 🛑")
