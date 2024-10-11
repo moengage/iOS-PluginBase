@@ -1,0 +1,29 @@
+name: Prepare for release
+
+on: workflow_dispatch
+
+jobs:
+  prepare-release:
+    name: Update master
+    runs-on: ubuntu-latest
+    if: contains(fromJSON('["umangmoe", "babulmoengage", "RakshithaAcharya"]'), github.actor)
+    steps:
+      - name: Checkout development
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          token: ${{ secrets.SDK_BOT_ACCESS_TOKEN }}
+          ref: development
+
+      # This step prepares the master branch for release.
+      # Rebase-merges the development branch into the master branch.
+      - name: Merge development to master
+        run: |
+          # back merge master to development(mostly a safe check)
+          git merge origin/master
+          # switch to master and merge development
+          git checkout master
+          git merge development
+          # push merged changes to remote
+          git push origin master
