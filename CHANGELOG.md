@@ -1,5 +1,11 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase
+-------------------------------------------
+* Fixed the compiler issue in TV target due to the attribute check in `registerForProvisionalPush` method.
+  
 # 26-09-2024
 
 ## PluginBase 5.1.0
