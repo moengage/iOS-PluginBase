@@ -1,11 +1,23 @@
 # ChangeLog:
 =================================
-# Next Release
+# 22-11-2024
 
-## PluginBase
+## PluginBase 5.1.1
 -------------------------------------------
 * Fixed the compiler issue in TV target due to the attribute check in `registerForProvisionalPush` method.
   
+## Cards 2.1.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.1.1`
+
+## Inbox 3.1.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.1.1`
+
+## Geofence 3.1.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.1.1`
+
 # 26-09-2024
 
 ## PluginBase 5.1.0
