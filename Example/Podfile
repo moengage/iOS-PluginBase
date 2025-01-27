@@ -6,7 +6,7 @@ target 'MoEPluginBaseExample' do
   pod 'MoEngagePluginBase', :path => '../'
   pod 'MoEngagePluginGeofence', :path => '../'
   pod 'MoEngagePluginInbox', :path => '../'
-  pod 'MoEngagePluginCards', :path => '../', :testspecs => ['UnitTests']
+  pod 'MoEngagePluginCards', :path => '../'
 
   target 'MoEPluginBaseExampleTests' do
     inherit! :search_paths
