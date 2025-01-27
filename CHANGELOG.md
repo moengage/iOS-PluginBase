@@ -4,7 +4,7 @@
 
 ## PluginBase 5.2.0
 -------------------------------------------
-* Updated the dependency to MoEngage-iOS-SDK `9.22.0`
+* Updated the dependency to MoEngage-iOS-SDK `9.22.1`
 
 ## Cards 2.2.0
 -------------------------------------------
