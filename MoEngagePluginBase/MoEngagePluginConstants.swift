@@ -26,6 +26,7 @@ public struct MoEngagePluginConstants {
         public static let iOS = "iOS"
         public static let kvPair = "kvPair"
         public static let value = "value"
+        public static let navigationUrl = "navigationUrl"
         public static let navigation = "navigation"
         public static let payload = "payload"
         public static let navigationType = "navigationType"

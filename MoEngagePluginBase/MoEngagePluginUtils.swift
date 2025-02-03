@@ -187,7 +187,7 @@ extension MoEngageInAppNavigationAction {
         }
         
         if let navigationUrl = navigationUrl {
-            actionPayload[MoEngagePluginConstants.General.value] = navigationUrl
+            actionPayload[MoEngagePluginConstants.General.navigationUrl] = navigationUrl
         }
         
         if !keyValuePairs.isEmpty {

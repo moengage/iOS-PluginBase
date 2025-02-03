@@ -1,5 +1,8 @@
 # ChangeLog:
 =================================
+# Next Release
+* BugFix -  Fixed the issue of incorrect key being passed on InAppClick with Navigation action in JSON Payload to Hybrid listeners.
+
 # 27-01-2025
 
 ## PluginBase 5.2.0
