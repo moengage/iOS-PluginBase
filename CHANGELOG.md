@@ -1,5 +1,10 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## Plugin
+* Added support for user multi-ID tracking.
+
 # 27-01-2025
 
 ## PluginBase 5.2.0
