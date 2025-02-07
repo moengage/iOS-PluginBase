@@ -21,6 +21,7 @@ public struct MoEngagePluginConstants {
     public struct General {
         public static let accountMeta = "accountMeta"
         public static let data = "data"
+        public static let identity = "identity"
         public static let campaignId = "campaignId"
         public static let platform = "platform"
         public static let iOS = "iOS"
