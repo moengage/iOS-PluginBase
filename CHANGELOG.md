@@ -1,5 +1,23 @@
 # ChangeLog:
 =================================
+# 18-02-2025
+
+## PluginBase 5.2.1
+-------------------------------------------
+* Updated the dependency to MoEngage-iOS-SDK `9.22.2`
+
+## Cards 2.2.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.2.1`
+
+## Inbox 3.2.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.2.1`
+
+## Geofence 3.2.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.2.1`
+
 # 27-01-2025
 
 ## PluginBase 5.2.0
