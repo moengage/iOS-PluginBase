@@ -42,6 +42,10 @@ module MoEngagePluginSDK
         plugin_base_package = MoEngagePluginSDK.config.packages[plugin_base_index]
         self.dependency plugin_base, plugin_base_package.version
       end
+      self.test_spec 'Tests' do |ts|
+            ts.ios.deployment_target = '11.0'
+            ts.source_files = "Tests/#{self.name}Tests/**/*.{swift}"
+      end
     end
   end
 end

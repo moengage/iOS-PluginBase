@@ -94,7 +94,16 @@ public class MoEngagePluginUtils {
             clickedActionDict[MoEngagePluginConstants.General.payload] = actionPayloadDict
         }
         
-        let data = [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS, MoEngagePluginConstants.General.payload: userInfo, MoEngagePluginConstants.Push.clickedAction: clickedActionDict] as [String: Any]
+        var data = [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS, MoEngagePluginConstants.General.payload: userInfo, MoEngagePluginConstants.Push.clickedAction: clickedActionDict] as [String: Any]
+        
+        if let moeFeatures = userInfo[MoEngagePluginConstants.Push.moeFeatures] as? [String: Any],
+           let richPush = moeFeatures[MoEngagePluginConstants.Push.richPush] as? [String: Any],
+           let defaultActions = richPush[MoEngagePluginConstants.Push.defaultActions] as? [[String: Any]],
+           let firstElement = defaultActions.first, !firstElement.isEmpty {
+          data[MoEngagePluginConstants.Push.isDefaultAction] = true
+        } else {
+          data[MoEngagePluginConstants.Push.isDefaultAction] = false
+        }
         
         let accountMeta = createAccountPayload(identifier: identifier)
         let payload = [MoEngagePluginConstants.General.data: data, MoEngagePluginConstants.General.accountMeta: accountMeta]

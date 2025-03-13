@@ -106,6 +106,10 @@ public struct MoEngagePluginConstants {
         static let token = "token"
         static let screenName = "screenName"
         static let clickedAction = "clickedAction"
+        static let isDefaultAction = "isDefaultAction"
+        static let defaultActions = "defaultActions"
+        static let moeFeatures = "moeFeatures"
+        static let richPush = "richPush"
     }
     
     // Callback
