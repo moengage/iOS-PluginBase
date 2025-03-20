@@ -75,6 +75,26 @@ import MoEngageInApps
         }
     }
     
+    @objc public func identifyUser(_ identities: [String: Any]) {
+        MoEngageLogger.logDefault(logLevel: .verbose, message: "identifyUser called with \(identities)")
+        if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: identities),
+           let identitiesDict = MoEngagePluginParser.fetchIdentities(payload: identities) {
+            MoEngageSDKAnalytics.sharedInstance.identifyUser(identities: identitiesDict, workspaceId: identifier)
+        }
+    }
+
+    @objc public func getUserIdentities(_ payload: [String: Any], completionHandler: @escaping ([String: String]) -> Void) {
+        MoEngageLogger.logDefault(logLevel: .verbose, message: "getUserIdentities called with \(payload)")
+        guard let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: payload) else {
+            completionHandler([:])
+            return
+        }
+        MoEngageSDKAnalytics.sharedInstance.getUserIdentities(workspaceId: identifier) { identities in
+            MoEngageLogger.logDefault(logLevel: .verbose, message: "getUserIdentities completed with \(identities)")
+            completionHandler(identities)
+        }
+    }
+
     @objc public func setAppStatus(_ appStatus: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: appStatus),
            let appStatus = MoEngagePluginParser.fetchAppStatus(payload: appStatus) {

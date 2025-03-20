@@ -39,6 +39,14 @@ class MoEngagePluginParser {
         return nil
     }
     
+    static func fetchIdentities(payload: [String: Any]) -> [String: String]? {
+        guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
+              let identitiesDict = dataDict[MoEngagePluginConstants.General.identity] as? [String: Any] else {
+            return nil
+        }
+        return identitiesDict.compactMapValues { $0 as? String }
+    }
+
     static func fetchAlias(payload: [String: Any]) -> String? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let aliasValue = dataDict[MoEngagePluginConstants.UserAttribute.alias] as? String,
