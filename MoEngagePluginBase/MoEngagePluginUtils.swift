@@ -189,10 +189,8 @@ extension MoEngageInAppNavigationAction {
         if let navigationUrl = navigationUrl {
             actionPayload[MoEngagePluginConstants.General.value] = navigationUrl
         }
-        
-        if !keyValuePairs.isEmpty {
-            actionPayload[MoEngagePluginConstants.General.kvPair] = keyValuePairs
-        }
+
+        actionPayload[MoEngagePluginConstants.General.kvPair] = keyValuePairs
         
         return actionPayload
     }

@@ -4,6 +4,8 @@
 
 ## Plugin
 * Added support for user multi-ID tracking.
+* BugFix:
+  * Always send key value pairs for inapp navigation payload.
 
 # 18-02-2025
 
