@@ -1,11 +1,24 @@
 # ChangeLog:
 =================================
-# Next Release
+# 24-03-2025
 
-## Plugin
+## PluginBase 5.3.0
 * Added support for user multi-ID tracking.
+* Updated the dependency to MoEngage-iOS-SDK `9.23.1`
 * BugFix:
   * Always send key value pairs for inapp navigation payload.
+
+## Cards 2.3.0
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.0`
+
+## Inbox 3.3.0
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.0`
+
+## Geofence 3.3.0
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.0`
 
 # 18-02-2025
 
