@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MoEngageCore
 
 public class MoEngageInitConfigCache {
     public static let sharedInstance = MoEngageInitConfigCache()
@@ -16,19 +17,23 @@ public class MoEngageInitConfigCache {
     }
     
     func initializeInitConfig(appID: String, initConfig: MoEngageInitConfig) {
-        if(initConfigCache.keys.contains(appID)) {
-            return
+        MoEngageCoreHandler.globalQueue.async {
+            if(self.initConfigCache.keys.contains(appID)) {
+                return
+            }
+            
+            self.initConfigCache[appID] = initConfig
         }
-        
-        self.initConfigCache[appID] = initConfig
     }
     
-    func fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: String)->Bool {
-        guard let initConfig = initConfigCache[forAppID] else {
-            return false
+    func fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: String, completionHandler: @escaping(Bool) -> Void) {
+        MoEngageCoreHandler.globalQueue.async {
+            guard let initConfig = self.initConfigCache[forAppID] else {
+                completionHandler(false)
+                return
+            }
+            
+            completionHandler(initConfig.analyticsConfig.shouldTrackUserAttributeBooleanAsNumber)
         }
-        
-        return initConfig.analyticsConfig.shouldTrackUserAttributeBooleanAsNumber
     }
-    
 }
