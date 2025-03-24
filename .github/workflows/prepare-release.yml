@@ -6,7 +6,7 @@ jobs:
   prepare-release:
     name: Update master
     runs-on: ubuntu-latest
-    if: contains(fromJSON('["umangmoe", "babulmoengage", "RakshithaAcharya"]'), github.actor)
+    if: contains(fromJSON('["umangmoe", "msoumya-engg-sdk", "RakshithaAcharya"]'), github.actor)
     steps:
       - name: Checkout development
         uses: actions/checkout@v3
