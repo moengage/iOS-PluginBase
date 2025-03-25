@@ -42,10 +42,11 @@ module MoEngagePluginSDK
         plugin_base_package = MoEngagePluginSDK.config.packages[plugin_base_index]
         self.dependency plugin_base, plugin_base_package.version
       end
+      test_file_glob = "Tests/#{self.name}Tests/**/*.{swift}"
       self.test_spec 'Tests' do |ts|
-         ts.ios.deployment_target = '11.0'
-         ts.source_files = "Tests/#{self.name}Tests/**/*.{swift}"
-      end   
+         ts.ios.deployment_target = '13.0'
+         ts.source_files = test_file_glob
+      end unless Dir.glob(test_file_glob).empty?
     end
   end
 end

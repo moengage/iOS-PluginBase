@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import MoEngageCore
+import MoEngageSDK
 
 public class MoEngageInitConfigCache {
     public static let sharedInstance = MoEngageInitConfigCache()

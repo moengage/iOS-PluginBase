@@ -18,17 +18,18 @@ final class ShouldTrackUserAttributeAsBooleanReadWriteTest: XCTestCase {
         initConfig = MoEngageInitConfig(analyticsConfig: MoEngageAnalyticsConfig(shouldTrackUserAttributeBooleanAsNumber: true))
     }
     
-    func testReadAndWriteFromDifferentThreads() {
+    func testReadAndWriteFromDifferentThreads() async {
         let appID = "abcd"
         MoEngageInitConfigCache.sharedInstance.initializeInitConfig(appID: appID, initConfig: self.initConfig)
         
-        queue1.async {
-            MoEngageInitConfigCache.sharedInstance.fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: appID) { shouldTrack in
-                XCTAssertTrue(shouldTrack)
-                self.expectation.fulfill()
+        let shouldTrack = await withCheckedContinuation { continuation in
+            queue1.async {
+                MoEngageInitConfigCache.sharedInstance.fetchShouldTrackUserAttributeBooleanAsNumber(forAppID: appID) { shouldTrack in
+                    continuation.resume(returning: shouldTrack)
+                }
             }
         }
         
-        wait(for: [expectation], timeout: 5)
+        XCTAssertTrue(shouldTrack)
     }
 }
