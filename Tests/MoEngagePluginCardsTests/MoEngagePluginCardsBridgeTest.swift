@@ -96,7 +96,7 @@ final class MoEngagePluginCardsBridgeTest: XCTestCase {
         }
 
         let bridge = MoEngagePluginCardsBridge(handler: mockHandler)
-        bridge.setAppOpenSyncListener([:])
+        bridge.setSyncListener([:])
         wait(for: [exp], timeout: 5)
     }
 
@@ -110,7 +110,7 @@ final class MoEngagePluginCardsBridgeTest: XCTestCase {
         }
 
         let bridge = MoEngagePluginCardsBridge(handler: mockHandler)
-        bridge.setAppOpenSyncListener(self.mockBaseData)
+        bridge.setSyncListener(self.mockBaseData)
         wait(for: [exp], timeout: 5)
     }
 
