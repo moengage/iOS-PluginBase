@@ -30,10 +30,10 @@ jobs:
         fetch-depth: 0
         fetch-tags: true
 
-    - name: Setup dev environment
+    - name: Merge Development to Master
       uses: ./scripts/actions/action-git-development-to-master
       with:
-        dir: source
+        working-directory: source
 
     - name: Create release
       uses: ./scripts/actions/ios-sdk-client-release
