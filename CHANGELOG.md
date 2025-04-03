@@ -1,8 +1,8 @@
 # ChangeLog:
 =================================
-# Next Release
+# 03-04-2025
 
-## PluginBase
+## PluginBase 5.3.1
 -------------------------------------------
 * Fixed initConfig caching and fetching data racing issue.
 
