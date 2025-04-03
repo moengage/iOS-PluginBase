@@ -1,10 +1,22 @@
 # ChangeLog:
 =================================
-# Next Release
+# 03-04-2025
 
-## PluginBase
+## PluginBase 5.3.1
 -------------------------------------------
 * Fixed initConfig caching and fetching data racing issue.
+
+## Cards 2.3.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.1`
+
+## Inbox 3.3.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.1`
+
+## Geofence 3.3.1
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.1`
 
 # 24-03-2025
 
