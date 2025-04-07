@@ -37,8 +37,9 @@ final class MoEngageCardSyncTest: XCTestCase {
         syncManager.sendUpdate(forEventType: .appOpen, andAppID: "", withNewData: nil)
 
         let exp = XCTestExpectation(description: "Invalid sync delegate invocation without listner set")
-      //TODO: Check this later
-       // exp.isInverted = true
+        
+        //TODO: Check this later
+        // exp.isInverted = true
         let mockDelegate = MockSyncDelegate { type, data, count in
             XCTAssertEqual(type, .appOpen)
             let data: [String: Any?] = try! MoEngagePluginCardsUtil.getData(fromHybridPayload: data)
