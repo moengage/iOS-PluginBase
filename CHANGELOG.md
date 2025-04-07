@@ -1,5 +1,11 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase
+-------------------------------------------
+* Fixed initConfig caching and fetching data racing issue.
+
 # 18-02-2025
 
 ## PluginBase 5.2.1
