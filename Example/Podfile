@@ -3,7 +3,7 @@ use_frameworks!
 platform :ios, '11.0'
 
 target 'MoEPluginBaseExample' do
-  pod 'MoEngagePluginBase', :path => '../'
+  pod 'MoEngagePluginBase', :path => '../', :testspecs => ['UnitTests']
   pod 'MoEngagePluginGeofence', :path => '../'
   pod 'MoEngagePluginInbox', :path => '../'
   pod 'MoEngagePluginCards', :path => '../', :testspecs => ['UnitTests']
