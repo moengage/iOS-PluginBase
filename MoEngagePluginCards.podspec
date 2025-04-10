@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
     s.source_files = 'MoEngagePluginCards/**/*'
     s.swift_version = '5.0'
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngagePluginBase', '5.0.0'
+    s.dependency 'MoEngagePluginBase', '5.0.1'
     s.dependency 'MoEngage-iOS-SDK/Cards'
 
     s.test_spec 'UnitTests' do |ts|
