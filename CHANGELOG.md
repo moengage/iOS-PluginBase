@@ -1,5 +1,25 @@
 # ChangeLog:
 =================================
+# 15-04-2025
+
+## PluginBase 5.3.2
+-------------------------------------------
+* Updated the dependency to MoEngage-iOS-SDK `9.23.4`
+* Notification Click not getting tracked when app launched from Killed state by clicking notification fix.
+* Fixed push opt-in tracked as false if banners notification settings is disabled.
+
+## Cards 2.3.2
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.2`
+
+## Inbox 3.3.2
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.2`
+
+## Geofence 3.3.2
+-------------------------------------------
+* Updated the dependency to PluginBase `5.3.2`
+
 # 03-04-2025
 
 ## PluginBase 5.3.1
