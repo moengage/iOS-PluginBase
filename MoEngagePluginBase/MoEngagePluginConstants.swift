@@ -94,7 +94,7 @@ public struct MoEngagePluginConstants {
         static let position = "position"
         static let campaigns = "campaigns"
         static let displayRules = "displayRules"
-        static let screenName = "screenName";
+        static let screenNames = "screenNames";
         enum NudgePosition: String {
             case top, bottom, bottomLeft, bottomRight, any
         }
