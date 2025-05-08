@@ -4,20 +4,28 @@
 
 ## PluginBase 
 -------------------------------------------
-* Updated the dependency to MoEngage-iOS-SDK `9.24.0`
+* Updated the dependency to MoEngage-iOS-SDK `10.00.0`
 * Added support for Simplify inapp triggers.
+* BREAKING CHANGE:
+    * Updated iOS and tvOS deployment target to 13
 
 ## Cards
 -------------------------------------------
-* Updated the dependency to PluginBase `4.20.1`
+* Updated the dependency to PluginBase `5.00.0`
+* BREAKING CHANGE:
+    * Updated iOS deployment target to 13
 
 ## Inbox 
 -------------------------------------------
-* Updated the dependency to PluginBase `2.20.0`
+* Updated the dependency to PluginBase `3.00.0`
+* BREAKING CHANGE:
+    * Updated iOS deployment target to 13
 
 ## Geofence 
 -------------------------------------------
-* Updated the dependency to PluginBase `5.19.1`
+* Updated the dependency to PluginBase `6.00.0`
+* BREAKING CHANGE:
+    * Updated iOS deployment target to 13
 
 # ChangeLog:
 =================================

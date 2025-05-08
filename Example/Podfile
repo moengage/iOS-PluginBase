@@ -1,8 +1,21 @@
 use_frameworks!
 
-platform :ios, '11.0'
+platform :ios, '13.0'
 
 target 'MoEPluginBaseExample' do
+  # test_source = { :git => 'https://github.com/moengage/MoEngage-iPhone-SDK.git', :branch => 'MOEN-37979_ver-upgrade' }
+  # pod 'MoEngage-iOS-SDK', **test_source
+  # pod 'MoEngageSecurity', **test_source
+  # pod 'MoEngageCore', **test_source
+  # pod 'MoEngageMessaging', **test_source
+  # pod 'MoEngageSDK', **test_source
+  # pod 'MoEngageTriggerEvaluator', **test_source
+  # pod 'MoEngageInApps', **test_source
+  # pod 'MoEngageCards', **test_source
+  # pod 'MoEngageInbox', **test_source
+  # pod 'MoEngageGeofence', **test_source
+  # pod 'MoEngageRichNotification', **test_source
+  # pod 'MoEngageRealTimeTrigger', **test_source
   pod 'MoEngagePluginBase', :testspecs => ['Tests'], :path => '../'
   pod 'MoEngagePluginGeofence', :path => '../'
   pod 'MoEngagePluginInbox', :path => '../'

@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.author       = { 'MobileDevs' => 'mobiledevs@moengage.com' }
     s.social_media_url   = 'https://twitter.com/moengage'
     s.platform     = :ios
-    s.ios.deployment_target = '11.0'
+    s.ios.deployment_target = '13.0'
     
     s.source       = {
                         :git => 'https://github.com/moengage/iOS-PluginBase.git',
