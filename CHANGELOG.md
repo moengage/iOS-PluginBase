@@ -1,5 +1,26 @@
 # ChangeLog:
 =================================
+# Next Release
+
+## PluginBase 
+-------------------------------------------
+* Updated the dependency to MoEngage-iOS-SDK `9.24.0`
+* Added support for Simplify inapp triggers.
+
+## Cards
+-------------------------------------------
+* Updated the dependency to PluginBase `4.20.1`
+
+## Inbox 
+-------------------------------------------
+* Updated the dependency to PluginBase `2.20.0`
+
+## Geofence 
+-------------------------------------------
+* Updated the dependency to PluginBase `5.19.1`
+
+# ChangeLog:
+=================================
 # 15-04-2025
 
 ## PluginBase 5.3.2
