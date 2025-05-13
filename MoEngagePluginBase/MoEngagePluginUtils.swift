@@ -146,7 +146,9 @@ public class MoEngagePluginUtils {
     }
     
     private static func mapDisplayRulesToJSON(_ rules: MoEngageInAppRules) -> [String: Any] {
-        return [MoEngagePluginConstants.InApp.screenNames: rules.screenNames, MoEngagePluginConstants.InApp.contexts: rules.contexts]
+        return [MoEngagePluginConstants.InApp.screenNames: rules.screenNames,
+                MoEngagePluginConstants.InApp.screenName: rules.screenName,
+                MoEngagePluginConstants.InApp.contexts: rules.contexts]
     }
 
     static func mapSelfHandledCampaignToJSON(_ campaign: MoEngageInAppSelfHandledCampaign) -> [String: Any] {
