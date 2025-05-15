@@ -30,7 +30,7 @@ module MoEngagePluginSDK
         :tag => package.tagPrefix + self.version.to_s
       }
 
-      self.ios.deployment_target = '11.0'
+      self.ios.deployment_target = '13.0'
       self.swift_version = '5.0'
       self.requires_arc = true
       self.source_files = "#{self.name}/**/*"
