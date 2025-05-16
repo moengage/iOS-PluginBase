@@ -18,6 +18,7 @@
 ## Inbox 
 -------------------------------------------
 * Updated the dependency to PluginBase `2.20.0`
+* Added support for Notification grouping and replacement
 * BREAKING CHANGE:
     * Updated iOS deployment target to 13
 

@@ -30,6 +30,9 @@ class  MoEngagePluginInboxUtils {
             if let mediaPayload = createMediaPayload(inboxMessage: inboxMessage) {
                 message[MoEngagePluginInboxConstants.Inbox.media] = mediaPayload
             }
+            message[MoEngagePluginInboxConstants.Inbox.groupKey] = inboxMessage.groupKey
+            message[MoEngagePluginInboxConstants.Inbox.notificationId] = inboxMessage.collapseId
+            message[MoEngagePluginInboxConstants.Inbox.sentTime] = inboxMessage.sentTime
             messages.append(message)
         }
         
