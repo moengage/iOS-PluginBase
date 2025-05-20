@@ -12,6 +12,7 @@
 -------------------------------------------
 * Updated the dependency to MoEngage-iOS-SDK `10.00.0`
 * Added support for Simplify inapp triggers.
+* Added support for Accessibility for Push, InApps.
 * BREAKING CHANGE:
     * Updated iOS and tvOS deployment target to 13
 
@@ -24,6 +25,7 @@
 ## Inbox 4.0.0
 -------------------------------------------
 * Updated the dependency to PluginBase `3.00.0`
+* Added support for Accessibility in Inbox.
 * BREAKING CHANGE:
     * Updated iOS deployment target to 13
 
