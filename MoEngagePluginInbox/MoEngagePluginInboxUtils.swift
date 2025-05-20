@@ -32,7 +32,7 @@ class  MoEngagePluginInboxUtils {
             }
             message[MoEngagePluginInboxConstants.Inbox.groupKey] = inboxMessage.groupKey
             message[MoEngagePluginInboxConstants.Inbox.notificationId] = inboxMessage.collapseId
-            message[MoEngagePluginInboxConstants.Inbox.sentTime] = inboxMessage.sentTime
+            message[MoEngagePluginInboxConstants.Inbox.sentTime] = MoEngageDateUtils.getString(forDate: inboxMessage.sentTime, withFormat:MoEngageCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             messages.append(message)
         }
         
