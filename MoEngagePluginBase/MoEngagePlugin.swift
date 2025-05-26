@@ -35,6 +35,27 @@ import MoEngageInApps
         commonSetUp(identifier: sdkConfig.appId)
     }
 
+    /// Initialize default instance SDK with provided `Info.plist` configuration.
+    /// - Parameter defaultInitializationConfig: The additional configuration used for initialization.
+    @objc public func initializeDefaultInstance(
+        withAdditionalConfig defaultInitializationConfig: MoEngageSDKDefaultInitializationConfig = MoEngageSDKDefaultInitializationConfig()
+    ) {
+        if let sdkState = defaultInitializationConfig.sdkState {
+            MoEngage.sharedInstance.initializeDefaultInstance(sdkState: sdkState)
+        } else {
+            MoEngage.sharedInstance.initializeDefaultInstance()
+        }
+
+        guard
+            let sdkConfig = try? MoEngageInitialization.fetchSDKConfigurationFromInfoPlist(),
+            !sdkConfig.appId.isEmpty
+        else {
+            MoEngageLogger.logDefault(message: "App ID is empty. Please provide a valid App ID to setup the SDK.")
+            return
+        }
+        commonSetUp(identifier: sdkConfig.appId)
+    }
+
     // MARK: Initialization of default instance
     @objc public func initializeDefaultInstance(sdkConfig: MoEngageSDKConfig, sdkState: MoEngageSDKState, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         guard !sdkConfig.appId.isEmpty else { return }
