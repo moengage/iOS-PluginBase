@@ -84,7 +84,7 @@
 
 		<key>IsTestEnvironment</key>
 		<!-- <false/> -->
-		<!-- true/false, customer seletected option -->
+		<!-- true/false, customer selected option -->
 		<!-- or -->
 		<string>$(SWIFT_ACTIVE_COMPILATION_CONDITIONS)|$(GCC_PREPROCESSOR_DEFINITIONS)</string>
 		<!-- by default added if customer hasn't provided preference -->
