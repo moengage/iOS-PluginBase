@@ -19,20 +19,24 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-    
-    //Primary Instance
-    NSString* yourMoEngageAppID = @"";
-    MoEngageDataCenter yourMoEngageDataCenter = MoEngageDataCenterData_center_01;
-    MoEngageSDKConfig* sdkConfig = [[MoEngageSDKConfig alloc] initWithAppId:yourMoEngageAppID dataCenter:yourMoEngageDataCenter];
-    sdkConfig.consoleLogConfig = [[MoEngageConsoleLogConfig alloc] initWithIsLoggingEnabled:true loglevel:MoEngageLoggerTypeVerbose];
-    MoEngageSDKInitializationConfig* initConfig = [[MoEngageSDKInitializationConfig alloc] initWithSdkConfig:sdkConfig];
-    initConfig.launchOptions = launchOptions;
-    
+
     MoEngagePlugin *plugin = [[MoEngagePlugin alloc] init];
-    [plugin initializeInstanceWithConfig:initConfig];
+    [plugin initializeDefaultInstanceWithAdditionalConfig:[[MoEngageSDKDefaultInitializationConfig alloc] init]];
+    [[MoEngagePluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:@""];
+
+    //Primary Instance
+    // Native Initialization
+    // NSString* yourMoEngageAppID = @"";
+    // MoEngageDataCenter yourMoEngageDataCenter = MoEngageDataCenterData_center_01;
+    // MoEngageSDKConfig* sdkConfig = [[MoEngageSDKConfig alloc] initWithAppId:yourMoEngageAppID dataCenter:yourMoEngageDataCenter];
+    // sdkConfig.consoleLogConfig = [[MoEngageConsoleLogConfig alloc] initWithIsLoggingEnabled:true loglevel:MoEngageLoggerTypeVerbose];
+    // MoEngageSDKInitializationConfig* initConfig = [[MoEngageSDKInitializationConfig alloc] initWithSdkConfig:sdkConfig];
+    // initConfig.launchOptions = launchOptions;
     
-    [[MoEngagePluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:yourMoEngageAppID];
+    // MoEngagePlugin *plugin = [[MoEngagePlugin alloc] init];
+    // [plugin initializeInstanceWithConfig:initConfig];
     
+    // [[MoEngagePluginBridge sharedInstance] setPluginBridgeDelegate:self identifier:yourMoEngageAppID];
     return YES;
 }
 
