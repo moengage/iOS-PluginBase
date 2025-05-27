@@ -4,6 +4,16 @@
 
 ## PluginBase 
 -------------------------------------------
+* Added file based initialization support
+
+## Cards
+-------------------------------------------
+* Added file based initialization support
+
+# Next Release
+
+## PluginBase 
+-------------------------------------------
 * Updated the dependency to MoEngage-iOS-SDK `9.24.0`
 * Added support for Simplify inapp triggers.
 * BREAKING CHANGE:
