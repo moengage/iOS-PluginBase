@@ -138,8 +138,8 @@ class MoEngagePluginParser {
     }
     
     static func mapJSONToInAppRulesData(payload: [String: Any]) -> MoEngageInAppRules {
-        let screenName = payload[MoEngagePluginConstants.InApp.screenName] as? String
+        let screenNames = payload[MoEngagePluginConstants.InApp.screenNames] as? [String] ?? []
         let contexts = payload[MoEngagePluginConstants.InApp.contexts] as? [String] ?? []
-        return MoEngageInAppRules(screenName: screenName, contexts: contexts)
+        return MoEngageInAppRules(screenNames: screenNames, contexts: contexts)
     }
 }
