@@ -3,22 +3,22 @@
   "packages": [
     {
       "name": "MoEngagePluginBase",
-      "version": "5.3.2",
+      "version": "6.0.0",
       "tagPrefix": "pluginBase-"
     },
     {
       "name": "MoEngagePluginCards",
-      "version": "2.3.2",
+      "version": "3.0.0",
       "tagPrefix": "pluginCards-"
     },
     {
       "name": "MoEngagePluginGeofence",
-      "version": "3.3.2",
+      "version": "4.0.0",
       "tagPrefix": "pluginGeofence-"
     },
     {
       "name": "MoEngagePluginInbox",
-      "version": "3.3.2",
+      "version": "4.0.0",
       "tagPrefix": "pluginInbox-"
     }
   ]
