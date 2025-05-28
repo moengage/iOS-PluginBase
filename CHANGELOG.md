@@ -1,4 +1,10 @@
 # ChangeLog:
+
+# Next release
+
+## Inbox
+* Added support for notification grouping and replacement
+
 =================================
 # 27-05-2025
 
