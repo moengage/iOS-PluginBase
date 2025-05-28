@@ -28,5 +28,8 @@ struct MoEngagePluginInboxConstants {
         static let deepLink = "deepLink"
         static let richLanding = "richLanding"
         static let screenName = "screenName"
+        static let groupKey = "groupKey"
+        static let notificationId = "notificationId"
+        static let sentTime = "sentTime"
     }
 }
