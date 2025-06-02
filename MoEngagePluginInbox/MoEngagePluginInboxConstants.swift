@@ -32,7 +32,7 @@ struct MoEngagePluginInboxConstants {
         static let notificationId = "notificationId"
         static let sentTime = "sentTime"
         static let accessibilityData = "accessibilityData"
-        static let accessibilityLabel = "label"
+        static let accessibilityText = "text"
         static let accessibilityHint = "hint"
     }
 }
