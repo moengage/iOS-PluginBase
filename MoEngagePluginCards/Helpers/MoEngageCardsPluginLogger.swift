@@ -49,7 +49,7 @@ public enum MoEngagePluginCardsLogger {
             attribute: hybridData
         ) {
             MoEngageCoreHandler.globalQueue.async  {
-                guard let instance = MoEngageSDKInstanceProvider.getSDKInstance(appId: identifier) else { return }
+                guard let instance = MoEngageSDKInstanceProvider.getSDKInstance(workspaceId: identifier) else { return }
                 Self.sdkInstance = instance
                 log(
                     message, withPayload: hybridData, withType: type, inInstance: instance,
