@@ -10,7 +10,7 @@
 
 ## PluginBase 6.0.0
 -------------------------------------------
-* Updated the dependency to MoEngage-iOS-SDK `10.00.0`
+* Updated the dependency to MoEngage-iOS-SDK `10.01.0`
 * Added support for Simplify inapp triggers.
 * Added support for Accessibility for Push, InApps.
 * BREAKING CHANGE:
