@@ -28,5 +28,8 @@ struct MoEngagePluginInboxConstants {
         static let deepLink = "deepLink"
         static let richLanding = "richLanding"
         static let screenName = "screenName"
+        static let accessibility = "accessibility"
+        static let accessibilityText = "text"
+        static let accessibilityHint = "hint"
     }
 }
