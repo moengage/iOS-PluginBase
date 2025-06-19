@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     s.tvos.deployment_target = '13.0'
 
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
-    s.dependency 'MoEngage-iOS-SDK', '10.00.0'
+    s.dependency 'MoEngage-iOS-SDK', '10.01.0'
     s.dependency 'MoEngage-iOS-SDK/InApps'
     s.dependency 'MoEngageCampaignsCore'
 end
