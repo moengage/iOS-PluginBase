@@ -15,4 +15,5 @@ enum MoEngagePluginCardsContants {
     static let categories = "categories"
     static let cards = "cards"
     static let card = "card"
+    static let accessibility = "accessibility"
 }
