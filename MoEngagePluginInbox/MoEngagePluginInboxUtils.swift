@@ -30,6 +30,9 @@ class  MoEngagePluginInboxUtils {
             if let mediaPayload = createMediaPayload(inboxMessage: inboxMessage) {
                 message[MoEngagePluginInboxConstants.Inbox.media] = mediaPayload
             }
+            message[MoEngagePluginInboxConstants.Inbox.groupKey] = inboxMessage.groupKey
+            message[MoEngagePluginInboxConstants.Inbox.notificationId] = inboxMessage.collapseId
+            message[MoEngagePluginInboxConstants.Inbox.sentTime] = MoEngageDateUtils.getString(forDate: inboxMessage.sentTime, withFormat:MoEngageCoreConstants.DateTimeFormats.iso8601, andForGMTTimeZone: true)
             messages.append(message)
         }
         
