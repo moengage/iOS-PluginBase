@@ -31,5 +31,8 @@ struct MoEngagePluginInboxConstants {
         static let groupKey = "groupKey"
         static let notificationId = "notificationId"
         static let sentTime = "sentTime"
+        static let accessibility = "accessibility"
+        static let accessibilityText = "text"
+        static let accessibilityHint = "hint"
     }
 }

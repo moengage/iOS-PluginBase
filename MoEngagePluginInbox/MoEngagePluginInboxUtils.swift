@@ -56,10 +56,20 @@ class  MoEngagePluginInboxUtils {
             var mediaPayload = [String: Any]()
             mediaPayload[MoEngagePluginInboxConstants.Inbox.type] = type
             mediaPayload[MoEngagePluginInboxConstants.Inbox.url] = url
+            mediaPayload[MoEngagePluginInboxConstants.Inbox.accessibility] = createAccessibilityPayload(for: inboxMessage)
             return mediaPayload
         }
         
         return nil
+    }
+    
+    static func createAccessibilityPayload(for inboxMessage: MoEngageInboxEntry) -> [String: Any]? {
+        var payload = [String: Any]()
+        if let accessibilityData = inboxMessage.accessibilityData {
+            payload[MoEngagePluginInboxConstants.Inbox.accessibilityText] = accessibilityData.label
+            payload[MoEngagePluginInboxConstants.Inbox.accessibilityHint] = accessibilityData.hint
+        }
+        return payload
     }
     
     static func createActionPayload(inboxMessage: MoEngageInboxEntry) -> [[String: Any]] {
