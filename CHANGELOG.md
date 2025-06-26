@@ -3,6 +3,7 @@
 # 26-06-2025
 
 ## PluginBase 6.1.0
+* Updated the dependency to MoEngage-iOS-SDK `10.02.1`
 * Added LiveActivity Module
 * Added support for Simplify inapp triggers.
 * Added support for Accessibility for Push.
