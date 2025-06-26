@@ -4,10 +4,12 @@
 
 ## PluginBase 6.1.0
 * Added LiveActivity Module
+* Added support for Simplify inapp triggers.
+* Added support for Accessibility for Push.
+* Added support for Accessibility for InApps.
 * Fixed Notification Click Impressions not tracking with proxy enabled when application launched from killed state with delay introduced in initialization.
 
 ## Cards 3.1.0
-* Added Accessibility support in cards
 * Updated the dependency to PluginBase `6.1.0`
 
 ## Inbox 4.1.0
