@@ -1,9 +1,25 @@
 # ChangeLog:
 
-# Next release
+# 26-06-2025
 
-## Inbox
+## PluginBase 6.1.0
+* Updated the dependency to MoEngage-iOS-SDK `10.02.1`
+* Added LiveActivity Module
+* Added support for Simplify inapp triggers.
+* Added support for Accessibility for Push.
+* Added support for Accessibility for InApps.
+* Fixed Notification Click Impressions not tracking with proxy enabled when application launched from killed state with delay introduced in initialization.
+
+## Cards 3.1.0
+* Updated the dependency to PluginBase `6.1.0`
+
+## Inbox 4.1.0
 * Added support for notification grouping and replacement
+* Updated the dependency to PluginBase `6.1.0`
+
+## Geofence 4.1.0
+* Updated the dependency to PluginBase `6.1.0`
+
 
 =================================
 # 27-05-2025
