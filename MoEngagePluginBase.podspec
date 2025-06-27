@@ -13,5 +13,4 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit', 'Foundation', 'UserNotifications'
     s.dependency 'MoEngage-iOS-SDK', '10.02.1'
     s.dependency 'MoEngage-iOS-SDK/InApps'
-    s.dependency 'MoEngageCampaignsCore'
 end
