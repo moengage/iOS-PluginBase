@@ -1,6 +1,6 @@
-# Release Date
+# 03-07-2025
 
-## Release Version
+## 3.2.0
 
-- [NA] Added automated version and changelog update
-- [minor] Added support for Accessibility for Cards.
+- Added automated version and changelog update
+- Added support for Accessibility for Cards.
