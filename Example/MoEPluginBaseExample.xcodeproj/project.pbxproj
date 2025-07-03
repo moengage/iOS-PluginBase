@@ -318,6 +318,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MoEPluginBaseExample/Pods-MoEPluginBaseExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MoEngageCards/MoEngageCards.framework",
+				"${BUILT_PRODUCTS_DIR}/MoEngageCore/MoEngageCore.framework",
+				"${BUILT_PRODUCTS_DIR}/MoEngageGeofence/MoEngageGeofence.framework",
+				"${BUILT_PRODUCTS_DIR}/MoEngageInApps/MoEngageInApps.framework",
+				"${BUILT_PRODUCTS_DIR}/MoEngageInbox/MoEngageInbox.framework",
+				"${BUILT_PRODUCTS_DIR}/MoEngageMessaging/MoEngageMessaging.framework",
 				"${BUILT_PRODUCTS_DIR}/MoEngagePluginBase/MoEngagePluginBase.framework",
 				"${BUILT_PRODUCTS_DIR}/MoEngagePluginCards/MoEngagePluginCards.framework",
 				"${BUILT_PRODUCTS_DIR}/MoEngagePluginGeofence/MoEngagePluginGeofence.framework",
