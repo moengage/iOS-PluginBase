@@ -339,7 +339,8 @@ class MockMoEngagePluginCardsBridgeHandler: MoEngagePluginCardsBridgeHandler {
     var getNewCardsCount: ((String?, ((Int, MoEngageAccountMeta?) -> Void)) -> Void)?
     var getUnclickedCardsCount: ((String?, ((Int, MoEngageAccountMeta?) -> Void)) -> Void)?
     var getClickedCardsCount: ((String?, ((Int, MoEngageAccountMeta?) -> Void)) -> Void)?
-
+    var getCardData: ((String, String?, ((MoEngageCardData?) -> Void)) -> Void)?
+    
     func onAppOpenSync(
         forAppID appID: String?,
         withCompletion completionBlock: ((MoEngageCardSyncCompleteData?) -> Void)?
@@ -454,5 +455,9 @@ class MockMoEngagePluginCardsBridgeHandler: MoEngagePluginCardsBridgeHandler {
         @escaping ((Int, MoEngageAccountMeta?) -> Void)
     ) {
         self.getClickedCardsCount?(appID, completionBlock)
+    }
+    
+    func getCardData(for category: String, appID: String?, completionBlock: @escaping (MoEngageCards.MoEngageCardData?) -> Void) {
+        self.getCardData?(category,appID, completionBlock)
     }
 }
