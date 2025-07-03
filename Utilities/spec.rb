@@ -41,6 +41,8 @@ module MoEngagePluginSDK
         plugin_base_index = MoEngagePluginSDK.config.packages.find_index { |package| package.name == plugin_base }
         plugin_base_package = MoEngagePluginSDK.config.packages[plugin_base_index]
         self.dependency plugin_base, plugin_base_package.version
+      else
+        self.dependency 'MoEngage-iOS-SDK', MoEngagePluginSDK.config.sdkVerMin
       end
       test_file_glob = "Tests/#{self.name}Tests/**/*.{swift}"
       self.test_spec 'Tests' do |ts|
