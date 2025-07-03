@@ -305,16 +305,17 @@ import MoEngageCards
             let categoryData: [String: Any] = try MoEngagePluginCardsUtil.getData(fromHybridPayload: categoryData)
             let cardsCategory = try MoEngageCardsCategoryData.decodeFromHybrid(categoryData)
 
-            self.handler.getCards(
-                forCategory: cardsCategory.category,
-                forAppID: identifier
-            ) { cards, accountMeta in
+            self.handler.getCardData(
+                for: cardsCategory.category,
+                appID: identifier
+            ) { data in
+                var containingData: [String: Any] = [MoEngagePluginCardsContants.category: cardsCategory.category]
+                if let data = data?.encodeForHybrid() as? [String: Any] {
+                    containingData.merge(data) { _, new in new }
+                }
                 let result = MoEngagePluginCardsUtil.buildHybridPayload(
                     forIdentifier: identifier,
-                    containingData: [
-                        MoEngagePluginCardsContants.category: cardsCategory.category,
-                        MoEngagePluginCardsContants.cards: cards.encodeForHybrid()
-                    ] as [String : Any]
+                    containingData: containingData
                 )
                 MoEngagePluginCardsLogger.debug("Get Cards for Category response - ", forData: result)
                 completionHandler(result)
@@ -443,13 +444,10 @@ protocol MoEngagePluginCardsBridgeHandler {
         @escaping ((_ categories: [String], _ accountMeta: MoEngageAccountMeta?) -> ())
     )
 
-    func getCards(
-        forCategory category: String,
-        forAppID appID: String?,
-        withCompletionBlock completionBlock:
-        @escaping ((_ cards: [MoEngageCardCampaign], _ accountMeta: MoEngageAccountMeta?) -> Void)
-    )
-
+    func getCardData(for category: String,
+                     appID: String?,
+                     completionBlock: @escaping (MoEngageCardData?) -> Void)
+    
     func isAllCategoryEnabled(
         forAppID appID: String?,
         withCompletionBlock completionBlock: @escaping ((Bool) -> Void)

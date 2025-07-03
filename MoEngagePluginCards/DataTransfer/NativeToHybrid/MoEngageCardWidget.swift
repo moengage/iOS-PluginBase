@@ -14,6 +14,7 @@ extension MoEngageCardWidget: HybridEncodable {
         static let content = "content"
         static let style = "style"
         static let actions = "actions"
+        static let accessibility = "accessibility"
     }
 
     func encodeForHybrid() -> [String : Any?] {
@@ -23,6 +24,7 @@ extension MoEngageCardWidget: HybridEncodable {
             HybridKeys.content: self.content,
             HybridKeys.style: self.style?.encodeForHybrid(),
             HybridKeys.actions: self.actions.encodeForHybrid(),
+            HybridKeys.accessibility: self.accessibilityData?.encodeForHybrid()
         ]
     }
 }

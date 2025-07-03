@@ -1,5 +1,11 @@
 # ChangeLog:
 
+# Next release date
+
+## Cards 
+-------------------------------------------
+* Added support for Accessibility for Cards.
+
 # 26-06-2025
 
 ## PluginBase 6.1.0
@@ -21,7 +27,6 @@
 * Updated the dependency to PluginBase `6.1.0`
 
 
-=================================
 # 27-05-2025
 
 ## PluginBase 6.0.0
