@@ -1,6 +1,7 @@
-# Release Date
+# 15-07-2025
 
-## Release Version
+## 6.2.0
 
-- [NA] Added automated version and changelog update
-- [minor] Added support for file based initialization
+- Updated MoEngage-iOS-SDK to 10.03.0
+- Added automated version and changelog update
+- Added support for file based initialization
