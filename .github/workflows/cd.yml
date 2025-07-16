@@ -16,7 +16,7 @@ on:
 jobs:
   release:
     name: Create release
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
     - name: Checkout scripts
       uses: actions/checkout@v4
