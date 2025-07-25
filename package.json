@@ -1,28 +1,28 @@
 {
   "name": "MoEngagePluginBase",
-  "sdkVerMin": "10.03.1",
+  "sdkVerMin": "10.03.2",
   "packages": [
     {
       "name": "MoEngagePluginBase",
-      "version": "6.2.1",
+      "version": "6.2.2",
       "changelog": "MoEngagePluginBase/CHANGELOG.md",
       "tagPrefix": "pluginBase-"
     },
     {
       "name": "MoEngagePluginCards",
-      "version": "3.3.1",
+      "version": "3.3.2",
       "changelog": "MoEngagePluginCards/CHANGELOG.md",
       "tagPrefix": "pluginCards-"
     },
     {
       "name": "MoEngagePluginGeofence",
-      "version": "4.2.1",
+      "version": "4.2.2",
       "changelog": "MoEngagePluginGeofence/CHANGELOG.md",
       "tagPrefix": "pluginGeofence-"
     },
     {
       "name": "MoEngagePluginInbox",
-      "version": "4.2.1",
+      "version": "4.2.2",
       "changelog": "MoEngagePluginInbox/CHANGELOG.md",
       "tagPrefix": "pluginInbox-"
     }
