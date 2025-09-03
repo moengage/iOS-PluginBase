@@ -1,73 +1,80 @@
 PODS:
-  - MoEngage-iOS-SDK (10.00.0):
-    - MoEngage-iOS-SDK/KMMedCore (= 10.00.0)
-  - MoEngage-iOS-SDK/Cards (10.00.0):
+  - MoEngage-iOS-SDK (10.04.2):
+    - MoEngage-iOS-SDK/KMMedCore (= 10.04.2)
+  - MoEngage-iOS-SDK/Cards (10.04.2):
     - MoEngage-iOS-SDK/Core
-    - MoEngageCards (= 5.00.0)
-  - MoEngage-iOS-SDK/Core (10.00.0):
-    - MoEngageCore (= 10.00.0)
-    - MoEngageMessaging (= 5.00.0)
-    - MoEngageSDK (= 10.00.0)
-    - MoEngageSecurity (= 2.00.0)
-  - MoEngage-iOS-SDK/GeoFence (10.00.0):
+    - MoEngageCards (= 5.01.4)
+  - MoEngage-iOS-SDK/Core (10.04.2):
+    - MoEngageCampaignsCore (= 1.00.2)
+    - MoEngageCore (= 10.03.5)
+    - MoEngageMessaging (= 5.01.6)
+    - MoEngageSDK (= 10.01.0)
+    - MoEngageSecurity (= 2.00.1)
+  - MoEngage-iOS-SDK/GeoFence (10.04.2):
     - MoEngage-iOS-SDK/Core
-    - MoEngageGeofence (= 6.00.0)
-  - MoEngage-iOS-SDK/InApps (10.00.0):
+    - MoEngageGeofence (= 6.00.2)
+  - MoEngage-iOS-SDK/InApps (10.04.2):
     - MoEngage-iOS-SDK/Core
-    - MoEngageInApps (= 7.00.0)
-    - MoEngageTriggerEvaluator (= 2.00.0)
-  - MoEngage-iOS-SDK/Inbox (10.00.0):
+    - MoEngageInApps (= 7.02.2)
+    - MoEngageTriggerEvaluator (= 2.00.2)
+  - MoEngage-iOS-SDK/Inbox (10.04.2):
     - MoEngage-iOS-SDK/Core
     - MoEngage-iOS-SDK/RichNotification
-    - MoEngageInbox (= 3.00.0)
-  - MoEngage-iOS-SDK/KMMedCore (10.00.0):
+    - MoEngageInbox (= 3.01.1)
+  - MoEngage-iOS-SDK/KMMedCore (10.04.2):
     - MoEngage-iOS-SDK/Core
     - MoEngageKMMConditionEvaluator (= 1.0.0)
-  - MoEngage-iOS-SDK/RichNotification (10.00.0):
+  - MoEngage-iOS-SDK/RichNotification (10.04.2):
     - MoEngage-iOS-SDK/Core
-    - MoEngageRichNotification (= 8.00.0)
-  - MoEngageCards (5.00.0):
+    - MoEngageRichNotification (= 8.01.3)
+  - MoEngageCampaignsCore (1.00.2):
     - MoEngageCore
-  - MoEngageCore (10.00.0):
+  - MoEngageCards (5.01.4):
+    - MoEngageCore
+  - MoEngageCore (10.03.5):
     - MoEngageSecurity
-  - MoEngageGeofence (6.00.0):
+  - MoEngageGeofence (6.00.2):
     - MoEngageCore
-  - MoEngageInApps (7.00.0):
+  - MoEngageInApps (7.02.2):
+    - MoEngageCampaignsCore
     - MoEngageCore
     - MoEngageMessaging
     - MoEngageTriggerEvaluator
-  - MoEngageInbox (3.00.0):
+  - MoEngageInbox (3.01.1):
+    - MoEngageCampaignsCore
     - MoEngageCore
     - MoEngageMessaging
   - MoEngageKMMConditionEvaluator (1.0.0)
-  - MoEngageMessaging (5.00.0):
+  - MoEngageMessaging (5.01.6):
+    - MoEngageCampaignsCore
     - MoEngageCore
-  - MoEngagePluginBase (5.3.2):
-    - MoEngage-iOS-SDK (= 10.00.0)
+  - MoEngagePluginBase (6.3.1):
+    - MoEngage-iOS-SDK (= 10.04.2)
     - MoEngage-iOS-SDK/InApps
-  - MoEngagePluginBase/Tests (5.3.2):
-    - MoEngage-iOS-SDK (= 10.00.0)
+  - MoEngagePluginBase/Tests (6.3.1):
+    - MoEngage-iOS-SDK (= 10.04.2)
     - MoEngage-iOS-SDK/InApps
-  - MoEngagePluginCards (2.3.2):
+  - MoEngagePluginCards (3.4.1):
     - MoEngage-iOS-SDK/Cards
-    - MoEngagePluginBase (= 5.3.2)
-  - MoEngagePluginCards/Tests (2.3.2):
+    - MoEngagePluginBase (= 6.3.1)
+  - MoEngagePluginCards/Tests (3.4.1):
     - MoEngage-iOS-SDK/Cards
-    - MoEngagePluginBase (= 5.3.2)
-  - MoEngagePluginGeofence (3.3.2):
+    - MoEngagePluginBase (= 6.3.1)
+  - MoEngagePluginGeofence (4.3.1):
     - MoEngage-iOS-SDK/GeoFence
-    - MoEngagePluginBase (= 5.3.2)
-  - MoEngagePluginInbox (3.3.2):
+    - MoEngagePluginBase (= 6.3.1)
+  - MoEngagePluginInbox (4.3.1):
     - MoEngage-iOS-SDK/Inbox
-    - MoEngagePluginBase (= 5.3.2)
-  - MoEngageRichNotification (8.00.0):
+    - MoEngagePluginBase (= 6.3.1)
+  - MoEngageRichNotification (8.01.3):
+    - MoEngageCampaignsCore
     - MoEngageCore
     - MoEngageMessaging
-  - MoEngageSDK (10.00.0):
+  - MoEngageSDK (10.01.0):
     - MoEngageCore
     - MoEngageMessaging
-  - MoEngageSecurity (2.00.0)
-  - MoEngageTriggerEvaluator (2.00.0):
+  - MoEngageSecurity (2.00.1)
+  - MoEngageTriggerEvaluator (2.00.2):
     - MoEngageCore
 
 DEPENDENCIES:
@@ -79,8 +86,9 @@ DEPENDENCIES:
   - MoEngagePluginInbox (from `../`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - MoEngage-iOS-SDK
+    - MoEngageCampaignsCore
     - MoEngageCards
     - MoEngageCore
     - MoEngageGeofence
@@ -104,23 +112,24 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MoEngage-iOS-SDK: 41f93f385575e5c99a3553e81e8445eaca55ac36
-  MoEngageCards: d64d51f2296e85dd863379d228d097948a093004
-  MoEngageCore: c6e16a4b2c895d8f858ca1215d4603fcbdac8a1d
-  MoEngageGeofence: a59a9520063a4170226ba5f29fa929e197bf5123
-  MoEngageInApps: 778f124693e99644a2860a96518434faaea335bd
-  MoEngageInbox: 8c2c54e0e8d36f3e98ca355d030119057b60a794
+  MoEngage-iOS-SDK: b46812187ca89a298b3153a4426a798472841bca
+  MoEngageCampaignsCore: 5215efc27da71bd9cd1ee9b4aec011f72ad781d2
+  MoEngageCards: 1171290c90a88029c029e50db5a76263af6ad994
+  MoEngageCore: 818ef1344baf9e8a61300db0797859f50bf9deee
+  MoEngageGeofence: e59205c56cbc96350ac8d6c50a3f95558c973be6
+  MoEngageInApps: 365c53f1cefb4d034ac0e506fef14f0c63e22815
+  MoEngageInbox: e80f22791851b87049e6b422ef015d65cccfc60b
   MoEngageKMMConditionEvaluator: 052e7d21773e5e864b311747295f9b076f41e3a0
-  MoEngageMessaging: b84ac4cfd9ab3ce4a4fa1b4e13c59488e001fa67
-  MoEngagePluginBase: 812f3a8cbf84837f757f8d1bcbe1ae4dbd87a09a
-  MoEngagePluginCards: 3ac223eaefc3235f3b10f04400c66beca9b637b0
-  MoEngagePluginGeofence: 09ac654a76ae27607e353a419188c741141a5403
-  MoEngagePluginInbox: 890631793d311dc3943e62ae4d2a944cd4113027
-  MoEngageRichNotification: 1a2543ceef6470ec12da6d7e187f3457a4281935
-  MoEngageSDK: 421b60b7e4303b8c3752f6d5c596eb859d8cfc09
-  MoEngageSecurity: f4c26dd8bf63d2983879113c911707a2d868a75e
-  MoEngageTriggerEvaluator: 32e73cf3d7bcf37f75cce80fd36cbd8b1c6f3316
+  MoEngageMessaging: 53d11305f37d13feb5ece6fd1039cc9111113129
+  MoEngagePluginBase: 247308503146bb0e37087e4046a7cd49861ad7a7
+  MoEngagePluginCards: 1ea66cd05e46eaabc7b3b31d937618bdda5a6f08
+  MoEngagePluginGeofence: d464e3e4ef5a948b9fdcf597e5a87deb6cd920f2
+  MoEngagePluginInbox: 6ec0e54aa0f1620b488ff07e2fe82ebc596c788c
+  MoEngageRichNotification: 163e737c944c71459d912224a93a4c2c3a9ee99f
+  MoEngageSDK: 0b4fb11fb4a4c218c39b2da2325b64f2e03fdeef
+  MoEngageSecurity: 1864195fa1e3d7a02ddb75efc8f5d49ab336371d
+  MoEngageTriggerEvaluator: 6089f43560efe2dbe4512468d74f16d72d8c33c5
 
-PODFILE CHECKSUM: 8741372b5d30f7f786c90bff0679cb604ce9f954
+PODFILE CHECKSUM: 34d3668e6f1cdb7ca65105b8f7b994395b0bc16e
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.15.2
