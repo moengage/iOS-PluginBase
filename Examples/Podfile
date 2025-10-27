@@ -1,0 +1,25 @@
+# source 'https://github.com/moengage/PodSpecs'
+# source 'https://github.com/CocoaPods/Specs.git'
+
+use_frameworks!
+
+platform :ios, '13.0'
+target 'MoEngagePluginBaseCocoaiOS' do
+  # test_source = { :git => 'https://github.com/moengage/MoEngage-iPhone-SDK.git', :branch => 'MOEN-37979_ver-upgrade' }
+  # pod 'MoEngage-iOS-SDK', **test_source
+  # pod 'MoEngageSecurity', **test_source
+  # pod 'MoEngageCore', **test_source
+  # pod 'MoEngageMessaging', **test_source
+  # pod 'MoEngageSDK', **test_source
+  # pod 'MoEngageTriggerEvaluator', **test_source
+  # pod 'MoEngageInApps', **test_source
+  # pod 'MoEngageCards', **test_source
+  # pod 'MoEngageInbox', **test_source
+  # pod 'MoEngageGeofence', **test_source
+  # pod 'MoEngageRichNotification', **test_source
+  # pod 'MoEngageRealTimeTrigger', **test_source
+  pod 'MoEngagePluginBase', :testspecs => ['Tests'], :path => '../'
+  pod 'MoEngagePluginGeofence', :path => '../../apple-plugin-geofence'
+  pod 'MoEngagePluginInbox', :path => '../../apple-plugin-inbox'
+  pod 'MoEngagePluginCards', :testspecs => ['Tests'], :path => '../../apple-plugin-cards'
+end

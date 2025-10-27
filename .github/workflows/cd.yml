@@ -12,6 +12,21 @@ on:
         type: string
         required: false
         default: ''
+      release-cards:
+        description: Whether to release Cards
+        type: boolean
+        required: false
+        default: true
+      release-geofence:
+        description: Whether to release Geofence
+        type: boolean
+        required: false
+        default: true
+      release-inbox:
+        description: Whether to release Inbox
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   release:
@@ -24,8 +39,6 @@ jobs:
         path: scripts
         repository: moengage/sdk-automation-scripts
         token: ${{ secrets.SDK_BOT_ACCESS_TOKEN }}
-        fetch-depth: 0
-        fetch-tags: true
 
     - name: Setup dev environment
       uses: ./scripts/actions/ios-action-setup
@@ -49,3 +62,11 @@ jobs:
         COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
         MO_RELEASE_TICKET: ${{ inputs.ticket }}
         MO_SDK_DEPENDENCY_VERSION: ${{ inputs.sdk-version }}
+
+    - name: Release dependents
+      run: ${{ github.workspace }}/source/Utilities/release_dependents.rb
+      working-directory: source
+      env:
+        GH_TOKEN: ${{ secrets.SDK_BOT_ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.SDK_BOT_ACCESS_TOKEN }}
+        MO_WORKFLOW_INPUTS: ${{ toJSON(inputs) }}
