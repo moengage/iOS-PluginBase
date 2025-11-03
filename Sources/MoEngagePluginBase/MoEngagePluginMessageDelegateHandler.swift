@@ -26,30 +26,6 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MoEngageMessagingDel
     
     private func setMessagingDelegate() {
         MoEngageSDKMessaging.sharedInstance.setMessagingDelegate(self, forAppID: identifier)
-        
-        let current = UNUserNotificationCenter.current()
-        
-        current.getNotificationSettings(completionHandler: { (settings) in
-            switch settings.authorizationStatus {
-            case .authorized:
-                DispatchQueue.main.async {
-                    
-                    guard let sharedApplication = MoEngageCoreUtils.sharedUIApplication(),
-                          sharedApplication.isRegisteredForRemoteNotifications
-                    else {
-                        return
-                    }
-                    
-                    if let currentDelegate = UNUserNotificationCenter.current().delegate {
-                        MoEngageSDKMessaging.sharedInstance.registerForRemoteNotification(withCategories: nil, andUserNotificationCenterDelegate: currentDelegate)
-                    } else {
-                        MoEngageSDKMessaging.sharedInstance.registerForRemoteNotification(withCategories: nil, andUserNotificationCenterDelegate: self)
-                    }
-                }
-            default:
-                break
-            }
-        })
     }
     
     func notificationRegistered(withDeviceToken deviceToken: String) {
@@ -62,19 +38,4 @@ final class MoEngagePluginMessageDelegateHandler: NSObject, MoEngageMessagingDel
         messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.pushClicked, message: message)
     }
     
-}
-
-@available(iOSApplicationExtension, unavailable)
-@available(tvOS, unavailable)
-extension MoEngagePluginMessageDelegateHandler: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
-    }
-    
-    #if !os(tvOS)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        MoEngageSDKMessaging.sharedInstance.userNotificationCenter(center, didReceive: response)
-        completionHandler()
-    }
-    #endif
 }

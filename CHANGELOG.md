@@ -2,7 +2,8 @@
 
 ## Release Version
 
-- [minor] Added Swift Package Manager distribution support
+- [minor] Added Swift Package Manager distribution support.
+- [patch] Fixed the issue of Category on Push notifications.
 
 # 17-10-2025
 
