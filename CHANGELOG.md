@@ -1,9 +1,10 @@
-# Release Date
+# 18-11-2025
 
-## Release Version
+## 6.7.0
 
-- [minor] Added Swift Package Manager distribution support
-- [patch] Fixed the issue of Category on Push notifications.
+- Updated MoEngage-iOS-SDK to 10.08.0
+- Added Swift Package Manager distribution support
+- Fixed the issue of Category on Push notifications.
 
 # 17-10-2025
 
