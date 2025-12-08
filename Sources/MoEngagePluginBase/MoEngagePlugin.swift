@@ -32,7 +32,6 @@ import MoEngageInApps
                 MoEngage.sharedInstance.initializeLiveInstance(sdkConfig, sdkState: sdkState)
             }
         }
-        commonSetUp(identifier: sdkConfig.appId)
     }
 
     /// Initialize default instance SDK with provided `Info.plist` configuration.
@@ -54,7 +53,6 @@ import MoEngageInApps
             MoEngageLogger.logDefault(message: "App ID is empty. Please provide a valid App ID to setup the SDK.")
             return nil
         }
-        commonSetUp(identifier: sdkConfig.appId)
         return sdkConfig
     }
 
@@ -78,8 +76,6 @@ import MoEngageInApps
 #else
         MoEngage.sharedInstance.initializeDefaultLiveInstance(sdkConfig, sdkState: sdkState)
 #endif
-        
-        commonSetUp(identifier: sdkConfig.appId)
     }
     
     private func initializeMoEngageDefaultInstance(sdkConfig: MoEngageSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
@@ -89,8 +85,6 @@ import MoEngageInApps
 #else
         MoEngage.sharedInstance.initializeDefaultLiveInstance(sdkConfig)
 #endif
-        
-        commonSetUp(identifier: sdkConfig.appId)
     }
     
     // MARK: Initialization of secondary instance
@@ -113,8 +107,6 @@ import MoEngageInApps
         MoEngage.sharedInstance.initializeLiveInstance(sdkConfig, sdkState: sdkState)
 #endif
         
-        commonSetUp(identifier: sdkConfig.appId)
-        
     }
     
     private func initializeMoEngageSecondaryInstance(sdkConfig: MoEngageSDKConfig, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
@@ -123,21 +115,33 @@ import MoEngageInApps
 #else
         MoEngage.sharedInstance.initializeLiveInstance(sdkConfig)
 #endif
-        
-        commonSetUp(identifier: sdkConfig.appId)
     }
     
     @objc public func trackPluginInfo(_ pluginType: String, version: String) {
         let integrationInfo = MoEngageIntegrationInfo(pluginType: pluginType, version: version)
         MoEngageCoreIntegrator.sharedInstance.addIntergrationInfo(info: integrationInfo)
     }
-    
-    private func commonSetUp(identifier: String) {
-        setDelegates(identifier: identifier)
+}
+
+extension MoEngagePlugin: MoEngageModule.Item {
+    static let context: MoEngageSynchronizationContext = "com.moengage.pluginBase"
+
+    public static func getInfo(sdkInstance: MoEngageSDKInstance) -> MoEngageModule.Info {
+        return .init(name: "pluginBase", version: MoEngagePluginConstants.version)
     }
-    
-    // MARK: Delegate setup
-    private func setDelegates(identifier: String) {
+
+    public static func process(event: MoEngageModule.Event, sdkInstance: MoEngageSDKInstance) {
+        context.execute {
+            switch event {
+            case .`init`:
+                Self.setDelegates(identifier: sdkInstance.sdkConfig.appId)
+            default:
+                break
+            }
+        }
+    }
+
+    private static func setDelegates(identifier: String) {
         _ = MoEngagePluginInAppDelegateHandler(identifier: identifier)
 #if os(tvOS)
         MoEngageLogger.logDefault(message: "MoEngagePluginMessageDelegateHandler is unavailable for tvOS 🛑")

@@ -41,6 +41,13 @@ Pod::Spec.new do |s|
   s.dependency 'MoEngage-iOS-SDK', config.sdkVerMin
   s.dependency 'MoEngage-iOS-SDK/InApps'
 
+  version_file = "Sources/#{s.name}/MoEngagePluginConstants+Version.swift"
+  s.prepare_command = <<-CMD
+    echo "// Generated file, do not edit\n" > #{version_file}
+    echo "import Foundation\n" >> #{version_file}
+    echo "extension MoEngagePluginConstants {\n    static let version = \\"#{s.version}\\"\n}" >> #{version_file}
+  CMD
+
   test_file_glob = "Tests/#{s.name}Tests/**/*.{swift}"
   s.test_spec 'Tests' do |ts|
      ts.ios.deployment_target = '13.0'
