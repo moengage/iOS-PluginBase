@@ -55,3 +55,15 @@ PACKAGE
 File.open('Package.swift', 'w') do |file|
   file.write(package_swift)
 end
+
+version_constant = <<VERSION
+// Generated file, do not edit
+import Foundation
+
+extension MoEngagePluginConstants {
+    static let version = "#{config.packages.find { |package| package.name == 'MoEngagePluginBase' }.version}"
+}
+VERSION
+File.open('Sources/MoEngagePluginBase/MoEngagePluginConstants+Version.swift', 'w') do |file|
+  file.write(version_constant)
+end

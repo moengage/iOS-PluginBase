@@ -1,3 +1,9 @@
+# Release Date
+
+## Release Version
+
+- [minor] Added no-code SDK file based initialization
+
 # 18-11-2025
 
 ## 6.7.0
