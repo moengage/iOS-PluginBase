@@ -50,9 +50,10 @@ Pod::Spec.new do |s|
 
   test_file_glob = "Tests/#{s.name}Tests/**/*.{swift}"
   s.test_spec 'Tests' do |ts|
-     ts.ios.deployment_target = '13.0'
-     ts.tvos.deployment_target = '13.0'
-     ts.source_files = test_file_glob
-     s.scheme = { :code_coverage => true }
+    ts.ios.deployment_target = '13.0'
+    ts.tvos.deployment_target = '13.0'
+    ts.source_files = test_file_glob
+    ts.requires_app_host = true
+    s.scheme = { :code_coverage => true }
   end unless Dir.glob(test_file_glob).empty?
 end

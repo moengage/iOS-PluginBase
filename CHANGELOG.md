@@ -3,6 +3,7 @@
 ## Release Version
 
 - [minor] Added no-code SDK file based initialization
+- [NA] Updated CD token usage
 
 # 18-11-2025
 
