@@ -1,9 +1,10 @@
-# Release Date
+# 02-02-2026
 
-## Release Version
+## 6.8.0
 
-- [minor] Added no-code SDK file based initialization
-- [NA] Updated CD token usage
+- Updated MoEngage-iOS-SDK to 10.10.0
+- Added no-code SDK file based initialization
+- Updated CD token usage
 
 # 18-11-2025
 
