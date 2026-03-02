@@ -119,6 +119,7 @@ public struct MoEngagePluginConstants {
         public static let inAppSelfHandled = "MoEInAppCampaignSelfHandled"
         public static let pushTokenGenerated = "MoEPushTokenGenerated"
         public static let pushClicked = "MoEPushClicked"
+        public static let logOutCompleted = "MoELogoutComplete"
     }
     
     struct ExternalPluginBase {

@@ -147,7 +147,12 @@ import MoEngageInApps
     
     @objc public func resetUser(_ userAttribute: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: userAttribute) {
-            MoEngageSDKAnalytics.sharedInstance.resetUser(forAppID: identifier)
+            MoEngageSDKAnalytics.sharedInstance.resetUser { success in
+                let messageHandler = MoEngagePluginMessageDelegate.fetchMessageQueueHandler(identifier: identifier)
+                let message = MoEngagePluginUtils.fetchLogOutPayload(identifier: identifier)
+                messageHandler?.flushMessage(eventName: MoEngagePluginConstants.CallBackEvents.logOutCompleted, message: message)
+            }
+            
         }
     }
     
