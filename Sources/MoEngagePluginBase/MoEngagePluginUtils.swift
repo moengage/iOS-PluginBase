@@ -163,7 +163,13 @@ public class MoEngagePluginUtils {
        
         return campaignPayload
     }
-} 
+    
+    static func fetchLogOutPayload(identifier: String) -> [String: Any] {
+        return [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS,
+                MoEngagePluginConstants.General.accountMeta: createAccountPayload(identifier: identifier)
+        ]
+    }
+}
 
 extension MoEngageInAppCampaign {
     func fetchInAppPaylaod() -> [String: Any] {

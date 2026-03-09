@@ -1,3 +1,9 @@
+# Release Date
+
+## Release Version
+
+- [patch] Added support for logout callback.
+
 # 02-02-2026
 
 ## 6.8.0
