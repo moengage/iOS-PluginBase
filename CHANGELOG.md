@@ -1,8 +1,9 @@
-# Release Date
+# 09-03-2026
 
-## Release Version
+## 6.8.1
 
-- [patch] Added support for logout callback.
+- Updated MoEngage-iOS-SDK to 10.10.1
+- Added support for logout callback.
 
 # 02-02-2026
 
