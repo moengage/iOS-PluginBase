@@ -16,6 +16,7 @@ let project = Project(
         .local(path: "../../apple-plugin-cards"),
         .local(path: "../../apple-plugin-geofence"),
         .local(path: "../../apple-plugin-inbox"),
+        .local(path: "../../apple-plugin-personalize"),
     ],
     targets: [
         // Sample Apps
@@ -56,6 +57,7 @@ let project = Project(
                 .package(product: "MoEngagePluginCards", type: .runtime),
                 .package(product: "MoEngagePluginGeofence", type: .runtime),
                 .package(product: "MoEngagePluginInbox", type: .runtime),
+                .package(product: "MoEngagePluginPersonalize", type: .runtime),
             ],
             settings: .settings(base:defaultSettings)
         ),

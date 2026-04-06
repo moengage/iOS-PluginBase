@@ -23,9 +23,10 @@ Before you begin, ensure you have the following installed:
    git clone https://github.com/moengage/apple-plugin-cards.git
    git clone https://github.com/moengage/apple-plugin-geofence.git
    git clone https://github.com/moengage/apple-plugin-inbox.git
+   git clone https://github.com/moengage/apple-plugin-personalize.git
    ```
 
-1. **Comment out `iOS-PluginBase` version based dependency in cards, geofence and inbox `Package.swift` package manifest and uncomment relative path dependency.** i.e
+1. **Comment out `iOS-PluginBase` version based dependency in cards, geofence, inbox and personalize `Package.swift` package manifest and uncomment relative path dependency.** i.e
 
   ```swift
     // comment out following by prefixing with "// "
@@ -67,7 +68,8 @@ your-workspace/
 ├── iOS-PluginBase/                    # This repository
 ├── apple-plugin-cards/                # Cards plugin repository
 ├── apple-plugin-geofence/             # Geofence plugin repository
-└── apple-plugin-inbox/                # Inbox plugin repository
+├── apple-plugin-inbox/                # Inbox plugin repository
+├── apple-plugin-personalize/          # Personalize plugin repository
 └── hybrid/                            # Hybrid package repository (Flutter, RN etc.)
 ```
 
@@ -110,7 +112,7 @@ The project depends on:
 
 - **MoEngage Apple SDK** (version 10.07.1+)
 - **UIKit, Foundation, UserNotifications** frameworks
-- **Cards, Geofence, Inbox plugins** (for full functionality)
+- **Cards, Geofence, Inbox, Personalize plugins** (for full functionality)
 
 ### Version Management
 
@@ -133,7 +135,7 @@ The project includes:
 The project uses automated release workflows:
 
 - **CI/CD**: GitHub Actions for testing and deployment
-- **Dependent releases**: Automated release of dependent plugins (Cards, Geofence, Inbox)
+- **Dependent releases**: Automated release of dependent plugins (Cards, Geofence, Inbox, Personalize)
 - **Version bumping**: Automated version management across related repositories
 
 ### Troubleshooting
