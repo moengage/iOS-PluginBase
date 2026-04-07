@@ -29,4 +29,5 @@ target 'MoEngagePluginBaseCocoaiOS' do
   pod 'MoEngagePluginGeofence', :path => '../../apple-plugin-geofence'
   pod 'MoEngagePluginInbox', :path => '../../apple-plugin-inbox'
   pod 'MoEngagePluginCards', :testspecs => ['Tests'], :path => '../../apple-plugin-cards'
+  pod 'MoEngagePluginPersonalize', :path => '../../apple-plugin-personalize'
 end

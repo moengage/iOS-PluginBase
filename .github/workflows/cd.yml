@@ -27,6 +27,11 @@ on:
         type: boolean
         required: false
         default: true
+      release-personalize:
+        description: Whether to release Personalize
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   release:
