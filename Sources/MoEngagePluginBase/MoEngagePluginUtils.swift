@@ -169,6 +169,67 @@ public class MoEngagePluginUtils {
                 MoEngagePluginConstants.General.accountMeta: createAccountPayload(identifier: identifier)
         ]
     }
+
+#if !os(tvOS)
+    static func authenticationErrorToJSON(error: MoEngageAuthenticationError) -> [String: Any] {
+        let accountMeta = createAccountPayload(identifier: error.accountMeta.appID)
+        var dataPayload = [String: Any]()
+
+        if let jwtError = error as? MoEngageJwtAuthenticationError {
+            dataPayload[MoEngagePluginConstants.Authentication.errorCode] = jwtErrorCodeString(for: jwtError)
+            dataPayload[MoEngagePluginConstants.General.message] = jwtError.details.message ?? MoEngagePluginConstants.General.emptyString
+            dataPayload[MoEngagePluginConstants.Authentication.token] = jwtError.details.token ?? MoEngagePluginConstants.General.emptyString
+            dataPayload[MoEngagePluginConstants.Authentication.userIdentifier] = jwtError.details.identifier ?? MoEngagePluginConstants.General.emptyString
+        }
+        
+        return [
+            MoEngagePluginConstants.General.accountMeta: accountMeta,
+            MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS,
+            MoEngagePluginConstants.Authentication.authType:MoEngagePluginConstants.Authentication.jwt,
+            MoEngagePluginConstants.General.data: dataPayload
+        ]
+    }
+
+    private static func jwtErrorCodeString(for jwtError: MoEngageJwtAuthenticationError) -> String {
+        switch jwtError.details.code {
+        case .timeConstraintFailure:
+            return "TIME_CONSTRAINT_FAILURE"
+        case .decryptionFailed:
+            return "DECRYPTION_FAILED"
+        case .headerTypeIncompatible:
+            return "HEADER_TYPE_INCOMPATIBLE"
+        case .tokenPayloadContentMissing:
+            return "PAYLOAD_CONTENT_MISSING"
+        case .invalidSignature:
+            return "INVALID_SIGNATURE"
+        case .identifierMismatch:
+            return "IDENTIFIER_MISMATCH"
+        case .tokenNotAvailable:
+            return "TOKEN_NOT_AVAILABLE"
+        case .unknown:
+            return "UNKNOWN"
+        }
+    }
+#endif
+    static func authPayloadToNativeModel(payload: [String: Any]) -> MoEngageAuthenticationDetails? {
+        guard let authData = payload[MoEngagePluginConstants.General.data] as? [String: Any] else {
+            return nil
+        }
+        guard let authType = authData[MoEngagePluginConstants.Authentication.authType] as? String,
+              let token = authData[MoEngagePluginConstants.Authentication.token] as? String,
+              let userIdentifier = authData[MoEngagePluginConstants.Authentication.userIdentifier] as? String
+        else {
+            MoEngageLogger.logDefault(logLevel: .error, message: "Authentication details missing required fields: type, token, or identifier")
+            return nil
+        }
+        if authType == MoEngagePluginConstants.Authentication.jwt{
+            return MoEngageJwtAuthenticationDetails(token: token, identifier: userIdentifier)
+        }
+        else {
+            MoEngageLogger.logDefault(logLevel: .error, message: "Authentication type '\(authType)' is not supported.")
+            return nil
+        }
+    }
 }
 
 extension MoEngageInAppCampaign {

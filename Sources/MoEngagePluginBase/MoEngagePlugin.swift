@@ -147,6 +147,7 @@ extension MoEngagePlugin: MoEngageModule.Item {
         MoEngageLogger.logDefault(message: "MoEngagePluginMessageDelegateHandler is unavailable for tvOS 🛑")
 #else
     _ = MoEngagePluginMessageDelegateHandler(identifier: identifier)
+    _ = MoEngagePluginAuthenticationListenerHandler(identifier: identifier)
 #endif
         MoEngagePluginBaseHandler.initializePluginBridge(className: MoEngagePluginConstants.ExternalPluginBase.cardsBridge)
     }

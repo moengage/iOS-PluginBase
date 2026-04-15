@@ -42,6 +42,7 @@ public struct MoEngagePluginConstants {
         static let integrationVersion = "version"
         public static let analyticsConfig = "analyticsConfig"
         public static let shouldTrackUserAttributeBooleanAsNumber = "shouldTrackUserAttributeBooleanAsNumber"
+        public static let emptyString = ""
     }
     
     // user attribute
@@ -109,6 +110,15 @@ public struct MoEngagePluginConstants {
         static let screenName = "screenName"
         static let clickedAction = "clickedAction"
     }
+
+    public struct Authentication {
+        public static let authType = "authenticationType"
+        public static let errorCode = "code"
+        public static let errorMessage = "message"
+        public static let token = "token"
+        public static let userIdentifier = "userIdentifier"
+        public static let jwt = "JWT"
+    }
     
     // Callback
     public struct CallBackEvents {
@@ -120,6 +130,7 @@ public struct MoEngagePluginConstants {
         public static let pushTokenGenerated = "MoEPushTokenGenerated"
         public static let pushClicked = "MoEPushClicked"
         public static let logOutCompleted = "MoELogoutComplete"
+        public static let authenticationError = "MoEAuthenticationError"
     }
     
     struct ExternalPluginBase {

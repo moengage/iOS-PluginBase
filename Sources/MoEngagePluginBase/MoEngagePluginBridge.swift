@@ -240,6 +240,23 @@ import MoEngageInApps
         #endif
     }
     
+    @objc public func passAuthenticationDetails(_ authenticationDetails: [String: Any]) {
+        if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: authenticationDetails),
+           let authDetails = MoEngagePluginUtils.authPayloadToNativeModel(payload: authenticationDetails) {
+            MoEngageSDKCore.sharedInstance.passAuthenticationDetails(authDetails, workspaceId: identifier)
+            
+            MoEngageLogger.logDefault(
+                logLevel: .verbose,
+                message: "Authentication details passed for identifier: \(identifier)"
+            )
+        } else {
+            MoEngageLogger.logDefault(
+                logLevel: .error,
+                message: "Failed to map Authentication details or missing AppID"
+            )
+        }
+    }
+    
     // MARK: Other
     @objc public func validateSDKVersion() -> Bool {
         if MoEngagePluginConstants.SDKVersions.currentVersion >=  MoEngagePluginConstants.SDKVersions.minimumVersion &&  MoEngagePluginConstants.SDKVersions.currentVersion < MoEngagePluginConstants.SDKVersions.maximumVersion {
