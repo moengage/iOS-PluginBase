@@ -170,7 +170,6 @@ public class MoEngagePluginUtils {
         ]
     }
 
-#if !os(tvOS)
     static func authenticationErrorToJSON(error: MoEngageAuthenticationError) -> [String: Any] {
         let accountMeta = createAccountPayload(identifier: error.accountMeta.appID)
         var dataPayload = [String: Any]()
@@ -210,12 +209,11 @@ public class MoEngagePluginUtils {
             return "UNKNOWN"
         }
     }
-#endif
     static func authPayloadToNativeModel(payload: [String: Any]) -> MoEngageAuthenticationDetails? {
         guard let authData = payload[MoEngagePluginConstants.General.data] as? [String: Any] else {
             return nil
         }
-        guard let authType = authData[MoEngagePluginConstants.Authentication.authType] as? String,
+        guard let authType = payload[MoEngagePluginConstants.Authentication.authType] as? String,
               let token = authData[MoEngagePluginConstants.Authentication.token] as? String,
               let userIdentifier = authData[MoEngagePluginConstants.Authentication.userIdentifier] as? String
         else {
