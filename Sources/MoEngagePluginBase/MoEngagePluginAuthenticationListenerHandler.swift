@@ -6,10 +6,8 @@
 import Foundation
 import MoEngageSDK
 
-#if !os(tvOS)
 
 @available(iOSApplicationExtension, unavailable)
-@available(tvOS, unavailable)
 final class MoEngagePluginAuthenticationListenerHandler: NSObject, MoEngageAuthenticationError.Listener {
 
     private static var handlers = [String: Any]()
@@ -40,4 +38,3 @@ final class MoEngagePluginAuthenticationListenerHandler: NSObject, MoEngageAuthe
     }
 }
 
-#endif
