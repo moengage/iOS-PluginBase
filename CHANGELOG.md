@@ -1,3 +1,9 @@
+# Release Date
+
+## Release Version
+
+- [patch] MOEN-44062: Added jwt support
+
 # 07-04-2026
 
 ## 6.8.2
