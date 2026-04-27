@@ -42,7 +42,6 @@ public struct MoEngagePluginConstants {
         static let integrationVersion = "version"
         public static let analyticsConfig = "analyticsConfig"
         public static let shouldTrackUserAttributeBooleanAsNumber = "shouldTrackUserAttributeBooleanAsNumber"
-        public static let emptyString = ""
     }
     
     // user attribute
@@ -118,6 +117,16 @@ public struct MoEngagePluginConstants {
         public static let token = "token"
         public static let userIdentifier = "userIdentifier"
         public static let jwt = "JWT"
+        public struct Error {
+            public static let timeConstraintFailure = "TIME_CONSTRAINT_FAILURE"
+            public static let decryptionFailed = "DECRYPTION_FAILED"
+            public static let headerTypeIncompatible = "HEADER_TYPE_INCOMPATIBLE"
+            public static let tokenPayloadContentMissing = "PAYLOAD_CONTENT_MISSING"
+            public static let invalidSignature = "INVALID_SIGNATURE"
+            public static let identifierMismatch = "IDENTIFIER_MISMATCH"
+            public static let tokenNotAvailable = "TOKEN_NOT_AVAILABLE"
+            public static let unknown = "UNKNOWN"
+        }
     }
     
     // Callback

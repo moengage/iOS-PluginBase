@@ -252,7 +252,7 @@ import MoEngageInApps
         } else {
             MoEngageLogger.logDefault(
                 logLevel: .error,
-                message: "Failed to map Authentication details or missing AppID"
+                message: "Failed to map Authentication details unsupported type or missing AppID"
             )
         }
     }
