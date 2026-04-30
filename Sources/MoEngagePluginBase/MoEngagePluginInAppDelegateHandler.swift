@@ -7,6 +7,7 @@
 
 import Foundation
 import MoEngageInApps
+import MoEngageCore
 
 final class MoEngagePluginInAppDelegateHandler: NSObject, MoEngageInAppNativeDelegate {
     private static var handlers = [String: Any]()
