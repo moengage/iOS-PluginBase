@@ -1,9 +1,10 @@
-# Release Date
+# 04-05-2026
 
-## Release Version
+## 6.9.0
 
-- [patch] MOEN-44062: Added jwt support
-- [minor] Added Personalize module and support
+- Updated MoEngage-iOS-SDK to 10.12.0
+- MOEN-44062: Added jwt support
+- Added Personalize module and support
 
 # 07-04-2026
 
