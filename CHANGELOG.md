@@ -3,6 +3,7 @@
 ## Release Version
 
 - [patch] MOEN-44062: Added jwt support
+- [minor] Added Personalize module and support
 
 # 07-04-2026
 
