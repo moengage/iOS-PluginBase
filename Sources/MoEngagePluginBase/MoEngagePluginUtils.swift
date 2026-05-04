@@ -134,7 +134,7 @@ public class MoEngagePluginUtils {
     static func mapSelfHandledCampaignDataToJSON(campaignData: MoEngageInAppSelfHandledData) -> [String: Any] {
         let accountMeta = campaignData.accountMeta
         let accountPaylaod = createAccountPayload(identifier: accountMeta.appID)
-       
+        
         let campaignsPayload = campaignData.campaigns.map { campaign in
             let selfHandledPayload = mapSelfHandledCampaignToJSON(campaign)
             return [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS,
@@ -150,17 +150,17 @@ public class MoEngagePluginUtils {
                 MoEngagePluginConstants.InApp.screenName: rules.screenName,
                 MoEngagePluginConstants.InApp.contexts: rules.contexts]
     }
-
+    
     static func mapSelfHandledCampaignToJSON(_ campaign: MoEngageInAppSelfHandledCampaign) -> [String: Any] {
         var campaignPayload = campaign.fetchInAppPaylaod()
-      
+        
         var selfHandledPayload = [String: Any]()
         selfHandledPayload[MoEngagePluginConstants.General.payload] = campaign.campaignContent
         selfHandledPayload[MoEngagePluginConstants.InApp.dismissInterval] = campaign.autoDismissInterval
         selfHandledPayload[MoEngagePluginConstants.InApp.displayRules] = mapDisplayRulesToJSON(campaign.displayRules)
-       
+        
         campaignPayload[MoEngagePluginConstants.InApp.selfHandled] = selfHandledPayload
-       
+        
         return campaignPayload
     }
     
@@ -168,6 +168,69 @@ public class MoEngagePluginUtils {
         return [MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS,
                 MoEngagePluginConstants.General.accountMeta: createAccountPayload(identifier: identifier)
         ]
+    }
+    
+    static func authenticationErrorToJSON(error: MoEngageAuthenticationError) -> [String: Any]? {
+        let accountMeta = createAccountPayload(identifier: error.accountMeta.appID)
+        var dataPayload = [String: Any]()
+        
+        guard let jwtError = error as? MoEngageJwtAuthenticationError else {
+            MoEngageLogger.logDefault(message: "Other type of authentication is not supported in the sdk")
+            return nil
+            
+        }
+        dataPayload[MoEngagePluginConstants.Authentication.authType] = MoEngagePluginConstants.Authentication.jwt
+        dataPayload[MoEngagePluginConstants.Authentication.errorCode] = jwtErrorCodeString(for: jwtError)
+        dataPayload[MoEngagePluginConstants.General.message] = jwtError.details.message ?? ""
+        dataPayload[MoEngagePluginConstants.Authentication.token] = jwtError.details.token ?? ""
+        dataPayload[MoEngagePluginConstants.Authentication.userIdentifier] = jwtError.details.identifier ?? ""
+        return [
+            MoEngagePluginConstants.General.accountMeta: accountMeta,
+            MoEngagePluginConstants.General.platform: MoEngagePluginConstants.General.iOS,
+            MoEngagePluginConstants.General.data: dataPayload
+        ]
+    }
+    
+    private static func jwtErrorCodeString(for jwtError: MoEngageJwtAuthenticationError) -> String {
+        
+        switch jwtError.details.code {
+        case .timeConstraintFailure:
+            return MoEngagePluginConstants.Authentication.Error.timeConstraintFailure
+        case .decryptionFailed:
+            return MoEngagePluginConstants.Authentication.Error.decryptionFailed
+        case .headerTypeIncompatible:
+            return MoEngagePluginConstants.Authentication.Error.headerTypeIncompatible
+        case .tokenPayloadContentMissing:
+            return MoEngagePluginConstants.Authentication.Error.tokenPayloadContentMissing
+        case .invalidSignature:
+            return MoEngagePluginConstants.Authentication.Error.invalidSignature
+        case .identifierMismatch:
+            return MoEngagePluginConstants.Authentication.Error.identifierMismatch
+        case .tokenNotAvailable:
+            return MoEngagePluginConstants.Authentication.Error.tokenNotAvailable
+        case .unknown:
+            return MoEngagePluginConstants.Authentication.Error.unknown
+        }
+    }
+    static func authPayloadToNativeModel(payload: [String: Any]) -> MoEngageAuthenticationDetails? {
+        guard let authData = payload[MoEngagePluginConstants.General.data] as? [String: Any],
+              let authType = authData[MoEngagePluginConstants.Authentication.authType] as? String
+        else {
+            MoEngageLogger.logDefault(logLevel: .error, message: "Authentication details missing 'data' or 'authType'")
+            return nil
+        }
+        if authType == MoEngagePluginConstants.Authentication.jwt {
+            guard let token = authData[MoEngagePluginConstants.Authentication.token] as? String,
+                  let userIdentifier = authData[MoEngagePluginConstants.Authentication.userIdentifier] as? String
+            else {
+                MoEngageLogger.logDefault(logLevel: .error, message: "JWT Authentication details missing token or identifier")
+                return nil
+            }
+            return MoEngageJwtAuthenticationDetails(token: token, identifier: userIdentifier)
+        } else {
+            MoEngageLogger.logDefault(logLevel: .error, message: "Authentication type '\(authType)' is not supported.")
+            return nil
+        }
     }
 }
 

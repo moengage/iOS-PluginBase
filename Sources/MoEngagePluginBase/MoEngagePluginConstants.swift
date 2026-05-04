@@ -109,6 +109,25 @@ public struct MoEngagePluginConstants {
         static let screenName = "screenName"
         static let clickedAction = "clickedAction"
     }
+
+    public struct Authentication {
+        public static let authType = "authenticationType"
+        public static let errorCode = "code"
+        public static let errorMessage = "message"
+        public static let token = "token"
+        public static let userIdentifier = "userIdentifier"
+        public static let jwt = "JWT"
+        public struct Error {
+            public static let timeConstraintFailure = "TIME_CONSTRAINT_FAILURE"
+            public static let decryptionFailed = "DECRYPTION_FAILED"
+            public static let headerTypeIncompatible = "HEADER_TYPE_INCOMPATIBLE"
+            public static let tokenPayloadContentMissing = "PAYLOAD_CONTENT_MISSING"
+            public static let invalidSignature = "INVALID_SIGNATURE"
+            public static let identifierMismatch = "IDENTIFIER_MISMATCH"
+            public static let tokenNotAvailable = "TOKEN_NOT_AVAILABLE"
+            public static let unknown = "UNKNOWN"
+        }
+    }
     
     // Callback
     public struct CallBackEvents {
@@ -120,6 +139,7 @@ public struct MoEngagePluginConstants {
         public static let pushTokenGenerated = "MoEPushTokenGenerated"
         public static let pushClicked = "MoEPushClicked"
         public static let logOutCompleted = "MoELogoutComplete"
+        public static let authenticationError = "MoEAuthenticationError"
     }
     
     struct ExternalPluginBase {
