@@ -83,7 +83,7 @@ Prepend a new block at the very top:
 Format rules (from existing CHANGELOG):
 - Date line: literal `# Release Date` (placeholder — replaced during release)
 - Version header: literal `## Release Version` (placeholder — replaced during release)
-- Each entry: `- <text>` (no ticket number, no `[minor]` prefix)
+- Each entry: `- <text>` (no ticket number; SDK line uses `[<sdk_bump_type>]` prefix, feature entries do not)
 
 ---
 

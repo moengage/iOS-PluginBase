@@ -252,7 +252,14 @@ Add the new `@objc public func` under the correct `// MARK:` section.
 - Always `@objc public` — hybrid SDKs reach this via ObjC runtime or direct Swift call
 - First parameter is always `_ payload: [String: Any]`
 - Extract `identifier` via `MoEngagePluginUtils.fetchIdentifierFromPayload` first
-- **Always pass `identifier` to every native API call** — native methods use different parameter labels (`forAppId:`, `for:`, `workspaceId:`) — use whichever the native signature requires, but always supply the identifier
+- **Always pass `identifier` to every native API call** — the parameter label varies by framework; extract the correct label from the native method signature in Phase 2:
+
+  | Framework | Typical label |
+  |---|---|
+  | `analytics` | `forAppID:` or `workspaceId:` |
+  | `inapps` | `forAppId:` |
+  | `messaging` | `forAppId:` |
+  | `core` | `workspaceId:` |
 - Add `#if os(tvOS)` guard with a descriptive log if the native API is iOS-only
 - Response payload keys must exactly match the `nativeToHybrid` contract file read in Phase 1
 
@@ -265,13 +272,18 @@ Read the relevant example file before generating code:
 | Type 3 — flush event | `examples/Type3_FlushEvent.swift` |
 | Type 4 — dedicated listener handler | `examples/Type4_DedicatedListenerHandler.swift` |
 
-For **Type 4**, two things must be created:
+For **Type 4**, three things must be done:
 1. A new file `MoEngagePlugin<Feature>ListenerHandler.swift` — the `NSObject` subclass conforming
    to the feature-specific listener protocol. The `init(identifier:)` calls `registerListenerInSDK()`
    which registers `self` with the native SDK immediately at construction time.
-2. The bridge method in `MoEngagePluginBridge.swift` — instantiates the listener handler (which
-   self-registers via `init`), then calls the native method. Do **not** call a separate
-   `set<Feature>Listener` on the bridge — registration happens inside the handler's `init`.
+2. **Update `MoEngagePlugin.setDelegates()`** (in `MoEngagePlugin.swift`) — add a line to instantiate
+   the listener handler once per SDK instance during module initialization:
+   ```swift
+   _ = MoEngagePlugin<Feature>ListenerHandler(identifier: identifier)
+   ```
+   Listener handlers are registered **once at SDK init**, not inside individual bridge method calls.
+3. The bridge method in `MoEngagePluginBridge.swift` — calls the native method directly. Do **not**
+   instantiate the listener handler inside the bridge method — it is already registered via `setDelegates()`.
 
 Add `// TODO: verify listener protocol method name and error mapping` if the exact protocol
 method signature is unknown.
