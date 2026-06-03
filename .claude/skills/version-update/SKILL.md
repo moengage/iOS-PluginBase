@@ -33,8 +33,8 @@ Read `package.json` and extract:
 **Plugin bump type** — compare `new_version` against `currentVersion` using semver `MAJOR.MINOR.PATCH`:
 
 | What changed | Bump type |
-|---|---|
-| MAJOR digit increased | `major` |
+ --- || --- | --- || --- | --- || --- |
+ --- || MAJOR digit increased | `major` |
 | MINOR digit increased | `minor` |
 | PATCH digit increased | `patch` |
 
