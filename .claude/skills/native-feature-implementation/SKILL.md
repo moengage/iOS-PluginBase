@@ -81,25 +81,25 @@ https://raw.githubusercontent.com/moengage/mobile-sdk-contracts/<contractBranch>
 
 First determine whether the contract file is new or modified:
 
-| File status | Meaning |
- --- || --- | --- || --- | --- || --- |
- --- || **New file** added | New method — full bridge implementation needed (Phase 2 required) |
-| **Existing file** modified | Payload change only — no new native API, no new bridge method |
+| File status                | Meaning                                                           |
+| -------------------------- | ----------------------------------------------------------------- |
+| **New file** added         | New method — full bridge implementation needed (Phase 2 required) |
+| **Existing file** modified | Payload change only — no new native API, no new bridge method     |
 
 For **payload changes on existing files**:
 
-| Modified file | Implementation change |
- --- || --- | --- || --- | --- || --- |
- --- || `hybridToNative` modified | Hybrid sends additional fields to PluginBase → update the existing bridge method to extract and pass the new fields to the native SDK call |
+| Modified file             | Implementation change                                                                                                                                             |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hybridToNative` modified | Hybrid sends additional fields to PluginBase → update the existing bridge method to extract and pass the new fields to the native SDK call                        |
 | `nativeToHybrid` modified | Native sends additional fields back → update the existing response/event builder in `MoEngagePluginUtils` to include the new fields in the payload sent to hybrid |
 
 For payload changes, **skip Phase 2** (no new native API needed) and go directly to Phase 3.
 
 For new files, classify response presence and continue to Phase 2:
 
-| New contract files | Classification |
- --- || --- | --- || --- | --- || --- |
- --- || `hybridToNative` only | **Fire-and-forget** — no response expected |
+| New contract files                         | Classification                                          |
+| ------------------------------------------ | ------------------------------------------------------- |
+| `hybridToNative` only                      | **Fire-and-forget** — no response expected              |
 | both `hybridToNative` and `nativeToHybrid` | **Expects response** — type (2/3/4) resolved in Phase 2 |
 
 Print a `### Contract Summary` with method name(s), file status (new/modified), payload schema changes, and classification.
@@ -128,12 +128,12 @@ https://raw.githubusercontent.com/moengage/MoEngage-iPhone-SDK/<nativeBranch>/<p
 **If `native_sdk_pr_url` was NOT provided:**
 Resolve the source path from the framework mentioned in `feature_description`:
 
-| Framework keyword | Source path prefix | Public SDK class |
- --- || --- | --- || --- | --- || --- | --- || --- |
- --- || `analytics` | `Sources/MoEngageCore/Analytics/` | `MoEngageSDKAnalytics` |
-| `inapps` | `Sources/MoEngageInApps/` | `MoEngageSDKInApp` |
-| `messaging` | `Sources/MoEngageMessaging/` | `MoEngageSDKMessaging` |
-| `core` | `Sources/MoEngageCore/` | `MoEngageSDKCore` |
+| Framework keyword | Source path prefix                | Public SDK class       |
+| ----------------- | --------------------------------- | ---------------------- |
+| `analytics`       | `Sources/MoEngageCore/Analytics/` | `MoEngageSDKAnalytics` |
+| `inapps`          | `Sources/MoEngageInApps/`         | `MoEngageSDKInApp`     |
+| `messaging`       | `Sources/MoEngageMessaging/`      | `MoEngageSDKMessaging` |
+| `core`            | `Sources/MoEngageCore/`           | `MoEngageSDKCore`      |
 
 Fetch the public SDK class file directly on `master`, e.g. for analytics:
 ```
@@ -254,22 +254,22 @@ Add the new `@objc public func` under the correct `// MARK:` section.
 - Extract `identifier` via `MoEngagePluginUtils.fetchIdentifierFromPayload` first
 - **Always pass `identifier` to every native API call** — the parameter label varies by framework; extract the correct label from the native method signature in Phase 2:
 
-  | Framework | Typical label |
- --- |  --- |  --- || --- | --- || --- | --- || --- |
- --- |  | `analytics` | `forAppID:` or `workspaceId:` |
-  | `inapps` | `forAppId:` |
-  | `messaging` | `forAppId:` |
-  | `core` | `workspaceId:` |
+  | Framework   | Typical label                 |
+  | ----------- | ----------------------------- |
+  | `analytics` | `forAppID:` or `workspaceId:` |
+  | `inapps`    | `forAppId:`                   |
+  | `messaging` | `forAppId:`                   |
+  | `core`      | `workspaceId:`                |
 - Add `#if os(tvOS)` guard with a descriptive log if the native API is iOS-only
 - Response payload keys must exactly match the `nativeToHybrid` contract file read in Phase 1
 
 Read the relevant example file before generating code:
 
-| Type | Example file |
- --- || --- | --- || --- | --- || --- |
- --- || Type 1 — fire-and-forget | `examples/Type1_FireAndForget.swift` |
-| Type 2 — completion handler | `examples/Type2_CompletionHandler.swift` |
-| Type 3 — flush event | `examples/Type3_FlushEvent.swift` |
+| Type                                | Example file                                    |
+| ----------------------------------- | ----------------------------------------------- |
+| Type 1 — fire-and-forget            | `examples/Type1_FireAndForget.swift`            |
+| Type 2 — completion handler         | `examples/Type2_CompletionHandler.swift`        |
+| Type 3 — flush event                | `examples/Type3_FlushEvent.swift`               |
 | Type 4 — dedicated listener handler | `examples/Type4_DedicatedListenerHandler.swift` |
 
 For **Type 4**, three things must be done:

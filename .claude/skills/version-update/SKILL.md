@@ -32,11 +32,11 @@ Read `package.json` and extract:
 
 **Plugin bump type** — compare `new_version` against `currentVersion` using semver `MAJOR.MINOR.PATCH`:
 
-| What changed | Bump type |
- --- || --- | --- || --- | --- || --- |
- --- || MAJOR digit increased | `major` |
-| MINOR digit increased | `minor` |
-| PATCH digit increased | `patch` |
+| What changed          | Bump type |
+| --------------------- | --------- |
+| MAJOR digit increased | `major`   |
+| MINOR digit increased | `minor`   |
+| PATCH digit increased | `patch`   |
 
 **SDK bump type** (only when `native_sdk_version` provided) — compare `native_sdk_version` against `currentSdkVerMin` using the same rule. This prefix is used in the SDK CHANGELOG line.
 
