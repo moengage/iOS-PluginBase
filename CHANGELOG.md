@@ -1,3 +1,9 @@
+# Release Date
+
+## Release Version
+
+- [minor] Added support for tracking epoch time in User Attribute
+
 # 04-05-2026
 
 ## 6.9.0

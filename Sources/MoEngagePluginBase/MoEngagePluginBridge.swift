@@ -125,6 +125,8 @@ import MoEngageInApps
             case MoEngagePluginConstants.UserAttribute.timestamp:
                 if let timeStamp = userAttribute.value as? String {
                     MoEngageSDKAnalytics.sharedInstance.setUserAttributeISODate(timeStamp, withAttributeName: userAttribute.name, forAppID: identifier)
+                } else if let timeStamp = userAttribute.value as? Double {
+                    MoEngageSDKAnalytics.sharedInstance.setUserAttributeEpochTime(timeStamp, withAttributeName: userAttribute.name, forAppID: identifier)
                 }
                 
             case MoEngagePluginConstants.UserAttribute.location:
