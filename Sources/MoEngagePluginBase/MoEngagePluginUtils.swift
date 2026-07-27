@@ -105,26 +105,26 @@ public class MoEngagePluginUtils {
         if let dataPayload = payload[MoEngagePluginConstants.General.data] as? [String: Any], let position = dataPayload[MoEngagePluginConstants.InApp.position] as? String {
             switch position {
             case MoEngagePluginConstants.InApp.NudgePosition.top.rawValue:
-                return NudgePositionTop
+                return .top
             case MoEngagePluginConstants.InApp.NudgePosition.bottom.rawValue:
-                return NudgePositionBottom
+                return .bottom
             case MoEngagePluginConstants.InApp.NudgePosition.bottomLeft.rawValue:
-                return NudgePositionBottomLeft
+                return .bottomLeft
             case MoEngagePluginConstants.InApp.NudgePosition.bottomRight.rawValue:
-                return NudgePositionBottomRight
+                return .bottomRight
             default:
-                return NudgePositionAny
+                return .any
             }
         }
-        return NudgePositionNone
+        return .none
     }
     
     static func getInAppActionType(inappAction: MoEngageInAppAction) -> String? {
         var actionType: String? = nil
         
-        if inappAction.actionType == CustomAction {
+        if inappAction.actionType == .customAction {
             actionType = MoEngagePluginConstants.InApp.customAction
-        } else if inappAction.actionType == NavigationAction {
+        } else if inappAction.actionType == .navigationAction {
             actionType =  MoEngagePluginConstants.General.navigation
         }
         
