@@ -127,7 +127,10 @@ extension MoEngagePlugin: MoEngageModule.Item {
     static let context: MoEngageSynchronizationContext = "com.moengage.pluginBase"
 
     public static func getInfo(sdkInstance: isolated MoEngageSDKInstance) -> MoEngageModule.Info? {
-        return MoEngageModule.Info(identity: .init(name: "pluginBase", version: MoEngagePluginConstants.version))
+        // Return a nil identity so PluginBase is not
+        // reported in the backend `integratedModules` payload
+        // The hybrid integration + version is reported separately via `trackPluginInfo`.
+        return MoEngageModule.Info(identity: nil)
     }
 
     public static func process(event: MoEngageModule.Event, sdkInstance: isolated MoEngageSDKInstance) {
