@@ -2,7 +2,7 @@
 
 ## Release Version
 
-- [minor] MOEN-46338: Added support for the MoEngage iOS SDK 11.0.0 major release (Swift concurrency migration)
+- [minor] Added support for the MoEngage iOS SDK 11.0.0 major release (Swift concurrency migration)
 - [major] Updated MoEngage-iOS-SDK to 11.00.0
 
 # 01-07-2026
