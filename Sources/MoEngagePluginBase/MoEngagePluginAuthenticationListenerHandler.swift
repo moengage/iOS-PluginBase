@@ -8,6 +8,7 @@ import MoEngageSDK
 
 
 @available(iOSApplicationExtension, unavailable)
+@MainActor
 final class MoEngagePluginAuthenticationListenerHandler: NSObject, MoEngageAuthenticationError.Listener {
 
     private let  identifier: String

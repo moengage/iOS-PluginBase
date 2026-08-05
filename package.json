@@ -1,7 +1,7 @@
 {
   "name": "MoEngagePluginBase",
   "postBuild": "Utilities/post_build.rb",
-  "sdkVerMin": "10.14.0",
+  "sdkVerMin": "11.00.0",
   "packages": [
     {
       "name": "MoEngagePluginBase",

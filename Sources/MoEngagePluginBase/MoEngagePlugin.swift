@@ -47,13 +47,13 @@ import MoEngageInApps
         }
 
         guard
-            let sdkConfig = try? MoEngageInitialization.fetchSDKConfigurationFromInfoPlist(),
-            !sdkConfig.appId.isEmpty
+            let sdkConfigData = try? MoEngageConfig.FileBased.fetchSDKConfigurationFromInfoPlist(),
+            !sdkConfigData.workspaceId.isEmpty
         else {
             MoEngageLogger.logDefault(message: "App ID is empty. Please provide a valid App ID to setup the SDK.")
             return nil
         }
-        return sdkConfig
+        return sdkConfigData.asSdkConfig
     }
 
     // MARK: Initialization of default instance
@@ -126,19 +126,30 @@ import MoEngageInApps
 extension MoEngagePlugin: MoEngageModule.Item {
     static let context: MoEngageSynchronizationContext = "com.moengage.pluginBase"
 
-    public static func getInfo(sdkInstance: MoEngageSDKInstance) -> MoEngageModule.Info {
-        return .init(name: "pluginBase", version: MoEngagePluginConstants.version)
+    public static func getInfo(sdkInstance: isolated MoEngageSDKInstance) -> MoEngageModule.Info? {
+        // Return a nil identity so PluginBase is not
+        // reported in the backend `integratedModules` payload
+        // The hybrid integration + version is reported separately via `trackPluginInfo`.
+        return MoEngageModule.Info(identity: nil)
     }
 
-    public static func process(event: MoEngageModule.Event, sdkInstance: MoEngageSDKInstance) {
+    public static func process(event: MoEngageModule.Event, sdkInstance: isolated MoEngageSDKInstance) {
         context.execute {
             switch event {
             case .`init`:
-                Self.setDelegates(identifier: sdkInstance.sdkConfig.appId)
+                Self.setDelegates(identifier: sdkInstance.config.workspaceId)
             default:
                 break
             }
         }
+    }
+
+    public static func process(event: MoEngageModule.AsyncEvent, sdkInstance: isolated MoEngageSDKInstance) async {
+        // MoEngagePluginBase has no asynchronous lifecycle work.
+    }
+
+    public static func listensToAdditionalNotifications() -> [Notification.Name] {
+        return []
     }
 
     private static func setDelegates(identifier: String) {
@@ -147,7 +158,11 @@ extension MoEngagePlugin: MoEngageModule.Item {
         MoEngageLogger.logDefault(message: "MoEngagePluginMessageDelegateHandler is unavailable for tvOS 🛑")
 #else
     _ = MoEngagePluginMessageDelegateHandler(identifier: identifier)
-    _ = MoEngagePluginAuthenticationListenerHandler(identifier: identifier)
+    // `MoEngageAuthenticationError.Listener` is `@MainActor` isolated in SDK 11, so the
+    // conforming handler must be instantiated on the main actor.
+    Task { @MainActor in
+        _ = MoEngagePluginAuthenticationListenerHandler(identifier: identifier)
+    }
 #endif
         MoEngagePluginBaseHandler.initializePluginBridge(className: MoEngagePluginConstants.ExternalPluginBase.cardsBridge)
     }
