@@ -5,7 +5,7 @@
   "packages": [
     {
       "name": "MoEngagePluginBase",
-      "version": "6.10.0",
+      "version": "7.00.0",
       "changelog": "CHANGELOG.md",
       "tagPrefix": "pluginBase-"
     }

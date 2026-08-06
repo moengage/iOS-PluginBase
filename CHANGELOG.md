@@ -1,9 +1,9 @@
-# Release Date
+# 06-08-2026
 
-## Release Version
+## 7.00.0
 
-- [minor] Added support for the MoEngage iOS SDK 11.0.0 major release (Swift concurrency migration)
-- [major] Updated MoEngage-iOS-SDK to 11.00.0
+- Added support for the MoEngage iOS SDK 11.0.0 major release (Swift concurrency migration)
+- Updated MoEngage-iOS-SDK to 11.00.0
 
 # 01-07-2026
 
