@@ -27,6 +27,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '13.0'
   s.swift_version = '5.0'
   s.requires_arc = true
+  s.static_framework = true
   s.source_files = "Sources/#{s.name}/**/*.{swift}"
   s.preserve_paths = "*.md", "LICENSE"
 
