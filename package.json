@@ -1,11 +1,11 @@
 {
   "name": "MoEngagePluginBase",
   "postBuild": "Utilities/post_build.rb",
-  "sdkVerMin": "11.00.0",
+  "sdkVerMin": "11.01.0",
   "packages": [
     {
       "name": "MoEngagePluginBase",
-      "version": "7.00.0",
+      "version": "7.01.0",
       "changelog": "CHANGELOG.md",
       "tagPrefix": "pluginBase-"
     }
