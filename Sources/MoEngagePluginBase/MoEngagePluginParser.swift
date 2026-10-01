@@ -8,6 +8,7 @@
 import Foundation
 import MoEngageSDK
 import MoEngageInApps
+import MoEngageCore
 
 class MoEngagePluginParser {
     static func mapJsonToOptOutData(payload: [String: Any]) -> MoEngagePluginOptOutData? {
@@ -81,6 +82,15 @@ class MoEngagePluginParser {
         return nil
     }
     
+    // A missing name is passed on as empty, so the SDK rejects it as an invalid parameter
+    static func mapJsonToUnsetUserAttributeData(payload: [String: Any]) -> MoEngagePluginUnsetUserAttributeData {
+        let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any] ?? [:]
+        let attributeName = dataDict[MoEngagePluginConstants.UserAttribute.attributeName] as? String ?? ""
+        let attributeLevel = dataDict[MoEngagePluginConstants.UserAttribute.attributeLevel] as? String
+        let level: MoEngageUserAttributeLevel = attributeLevel == MoEngagePluginConstants.UserAttribute.portfolio ? .portfolio : .project
+        return MoEngagePluginUnsetUserAttributeData(name: attributeName, level: level)
+    }
+
     static func mapJsonToEventData(payload: [String: Any]) -> MoEngagePluginEventData? {
         guard let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any],
               let eventName = dataDict[MoEngagePluginConstants.EventTracking.eventName] as? String

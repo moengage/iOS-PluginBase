@@ -56,6 +56,10 @@ public struct MoEngagePluginConstants {
         public static let general = "general"
         public static let timestamp = "timestamp"
         public static let location = "location"
+        static let attributeLevel = "attributeLevel"
+        static let project = "project"
+        static let portfolio = "portfolio"
+        static let isUnsetSuccess = "isUnsetSuccess"
     }
     
     // event
@@ -129,6 +133,18 @@ public struct MoEngagePluginConstants {
         }
     }
     
+    // Request failure
+    struct RequestFailure {
+        static let failure = "failure"
+        static let reason = "reason"
+        struct Reason {
+            static let invalidParameters = "INVALID_PARAMETERS"
+            static let invalidInitialisationConfiguration = "INVALID_INITIALISATION_CONFIGURATION"
+            static let sdkState = "SDK_STATE"
+            static let unknownError = "UNKNOWN_ERROR"
+        }
+    }
+
     // Callback
     public struct CallBackEvents {
         public static let inAppShown = "MoEInAppCampaignShown"

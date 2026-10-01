@@ -8,6 +8,7 @@
 import Foundation
 import MoEngageSDK
 import MoEngageInApps
+import MoEngageCore
 
 struct MoEngagePluginOptOutData {
     var type: String
@@ -18,6 +19,11 @@ struct MoEngagePluginUserAttributeData {
     var name: String
     var value: Any
     var type: String
+}
+
+struct MoEngagePluginUnsetUserAttributeData {
+    var name: String
+    var level: MoEngageUserAttributeLevel
 }
 
 struct MoEngagePluginEventData {

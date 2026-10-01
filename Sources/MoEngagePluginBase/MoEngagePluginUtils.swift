@@ -8,6 +8,7 @@
 import Foundation
 import MoEngageInApps
 import MoEngageSDK
+import MoEngageCore
 
 public class MoEngagePluginUtils {
     
@@ -170,6 +171,61 @@ public class MoEngagePluginUtils {
         ]
     }
     
+    // MARK: Analytics Utilities
+    static func unsetUserAttributeResultToJSON(attributeName: String, attributeLevel: MoEngageUserAttributeLevel, failure: MoEngageRequestFailure? = nil, identifier: String) -> [String: Any] {
+        var dataPayload: [String: Any] = [
+            MoEngagePluginConstants.UserAttribute.isUnsetSuccess: failure == nil,
+            MoEngagePluginConstants.UserAttribute.attributeName: attributeName,
+            MoEngagePluginConstants.UserAttribute.attributeLevel: attributeLevelString(for: attributeLevel)
+        ]
+        if let failure = failure {
+            dataPayload[MoEngagePluginConstants.RequestFailure.failure] = [
+                MoEngagePluginConstants.RequestFailure.reason: requestFailureReasonString(for: failure.reason),
+                MoEngagePluginConstants.General.message: failure.message
+            ]
+        }
+        return [
+            MoEngagePluginConstants.General.accountMeta: createAccountPayload(identifier: identifier),
+            MoEngagePluginConstants.General.data: dataPayload
+        ]
+    }
+
+    private static func attributeLevelString(for level: MoEngageUserAttributeLevel) -> String {
+        switch level {
+        case .portfolio:
+            return MoEngagePluginConstants.UserAttribute.portfolio
+        case .project:
+            return MoEngagePluginConstants.UserAttribute.project
+        @unknown default:
+            return MoEngagePluginConstants.UserAttribute.project
+        }
+    }
+
+    private static func requestFailureReasonString(for reason: MoEngageRequestFailureReason) -> String {
+        // Module codes are checked first, as their shared codes are coarser
+        if let coreReason = reason as? MoEngageCoreRequestFailureReason,
+           let rawModuleCode = coreReason.moduleCode?.intValue,
+           let moduleCode = MoEngageCoreRequestFailureReason.ModuleCode(rawValue: rawModuleCode) {
+            switch moduleCode {
+            case .invalidInitialisationConfiguration:
+                return MoEngagePluginConstants.RequestFailure.Reason.invalidInitialisationConfiguration
+            case .sdkState:
+                return MoEngagePluginConstants.RequestFailure.Reason.sdkState
+            default:
+                break
+            }
+        }
+
+        switch reason.code {
+        case .invalidParameters:
+            return MoEngagePluginConstants.RequestFailure.Reason.invalidParameters
+        case .sdkNotInitialized, .featureDisabled:
+            return MoEngagePluginConstants.RequestFailure.Reason.sdkState
+        default:
+            return MoEngagePluginConstants.RequestFailure.Reason.unknownError
+        }
+    }
+
     static func authenticationErrorToJSON(error: MoEngageAuthenticationError) -> [String: Any]? {
         let accountMeta = createAccountPayload(identifier: error.accountMeta.appID)
         var dataPayload = [String: Any]()
