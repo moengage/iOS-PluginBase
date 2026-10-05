@@ -32,6 +32,11 @@ on:
         type: boolean
         required: false
         default: true
+      release-recommendations:
+        description: Whether to release Recommendations
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   release:

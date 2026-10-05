@@ -1,3 +1,10 @@
+# Release Date
+
+## Release Version
+
+- [minor] Added common hybrid failure reasons (`MoEngagePluginConstants.FailureReason`) and `MoEngagePluginUtils.hybridReason(forSharedCode:)` to map shared SDK failure codes to them
+- [minor] Added MoEngagePluginRecommendations to the dependent release chain
+
 # 16-09-2026
 
 ## 7.02.0

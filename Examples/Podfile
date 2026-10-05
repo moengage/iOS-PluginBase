@@ -20,6 +20,7 @@ def moengage_dev_pods
   pod 'MoEngageGeofence', **test_source
   pod 'MoEngageRichNotification', **test_source
   pod 'MoEngageRealTimeTrigger', **test_source
+  pod 'MoEngageRecommendations', **test_source
 end
 
 platform :ios, '13.0'
@@ -30,4 +31,5 @@ target 'MoEngagePluginBaseCocoaiOS' do
   pod 'MoEngagePluginInbox', :path => '../../apple-plugin-inbox'
   pod 'MoEngagePluginCards', :testspecs => ['Tests'], :path => '../../apple-plugin-cards'
   pod 'MoEngagePluginPersonalize', :path => '../../apple-plugin-personalize'
+  pod 'MoEngagePluginRecommendations', :path => '../../apple-plugin-recommendations'
 end
