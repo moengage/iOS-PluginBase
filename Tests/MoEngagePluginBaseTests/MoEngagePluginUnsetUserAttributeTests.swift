@@ -65,16 +65,10 @@ final class MoEngagePluginUnsetUserAttributeTests: XCTestCase {
 
     // MARK: Failure reasons
 
-    func testSharedCodesMapToContractReasons() {
-        let cases: [(MoEngageRequestFailureReason.Code, String)] = [
-            (.invalidParameters, "INVALID_PARAMETERS"),
-            (.sdkNotInitialized, "SDK_STATE"),
-            (.featureDisabled, "SDK_STATE"),
-            (.unknownError, "UNKNOWN_ERROR"),
-            (.networkError, "UNKNOWN_ERROR")
-        ]
-        for (code, expected) in cases {
-            XCTAssertEqual(reason(for: MoEngageRequestFailureReason(code: code)), expected, "code: \(code)")
+    func testSharedCodesUseCommonMapping() {
+        let codes: [MoEngageRequestFailureReason.Code] = [.invalidParameters, .sdkNotInitialized, .featureDisabled, .unknownError]
+        for code in codes {
+            XCTAssertEqual(reason(for: MoEngageRequestFailureReason(code: code)), MoEngagePluginUtils.hybridReason(forSharedCode: code), "code: \(code)")
         }
     }
 

@@ -208,22 +208,15 @@ public class MoEngagePluginUtils {
            let moduleCode = MoEngageCoreRequestFailureReason.ModuleCode(rawValue: rawModuleCode) {
             switch moduleCode {
             case .invalidInitialisationConfiguration:
-                return MoEngagePluginConstants.RequestFailure.Reason.invalidInitialisationConfiguration
+                return MoEngagePluginConstants.FailureReason.invalidInitialisationConfiguration
             case .sdkState:
-                return MoEngagePluginConstants.RequestFailure.Reason.sdkState
+                return MoEngagePluginConstants.FailureReason.sdkState
             default:
                 break
             }
         }
 
-        switch reason.code {
-        case .invalidParameters:
-            return MoEngagePluginConstants.RequestFailure.Reason.invalidParameters
-        case .sdkNotInitialized, .featureDisabled:
-            return MoEngagePluginConstants.RequestFailure.Reason.sdkState
-        default:
-            return MoEngagePluginConstants.RequestFailure.Reason.unknownError
-        }
+        return hybridReason(forSharedCode: reason.code)
     }
 
     static func authenticationErrorToJSON(error: MoEngageAuthenticationError) -> [String: Any]? {

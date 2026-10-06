@@ -137,12 +137,6 @@ public struct MoEngagePluginConstants {
     struct RequestFailure {
         static let failure = "failure"
         static let reason = "reason"
-        struct Reason {
-            static let invalidParameters = "INVALID_PARAMETERS"
-            static let invalidInitialisationConfiguration = "INVALID_INITIALISATION_CONFIGURATION"
-            static let sdkState = "SDK_STATE"
-            static let unknownError = "UNKNOWN_ERROR"
-        }
     }
 
     // Callback
@@ -166,6 +160,7 @@ public struct MoEngagePluginConstants {
         public static let networkError = "NETWORK_ERROR"
         public static let parseError = "PARSE_ERROR"
         public static let invalidParameters = "INVALID_PARAMETERS"
+        public static let invalidInitialisationConfiguration = "INVALID_INITIALISATION_CONFIGURATION"
         public static let serverError = "SERVER_ERROR"
         public static let authenticationFailed = "AUTHENTICATION_FAILED"
         public static let unknownError = "UNKNOWN_ERROR"
