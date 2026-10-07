@@ -20,7 +20,9 @@ struct MoEngagePluginFailureReasonTests {
         #expect(FailureReason.networkError == "NETWORK_ERROR")
         #expect(FailureReason.parseError == "PARSE_ERROR")
         #expect(FailureReason.invalidParameters == "INVALID_PARAMETERS")
+        #expect(FailureReason.invalidInitialisationConfiguration == "INVALID_INITIALISATION_CONFIGURATION")
         #expect(FailureReason.serverError == "SERVER_ERROR")
+        #expect(FailureReason.duplicateFunctionCall == "DUPLICATE_FUNCTION_CALL")
         #expect(FailureReason.authenticationFailed == "AUTHENTICATION_FAILED")
         #expect(FailureReason.unknownError == "UNKNOWN_ERROR")
     }
