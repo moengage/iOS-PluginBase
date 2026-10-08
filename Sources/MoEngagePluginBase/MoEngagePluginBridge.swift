@@ -8,6 +8,7 @@
 import Foundation
 import MoEngageSDK
 import MoEngageInApps
+import MoEngageCore
 
 @available(iOSApplicationExtension, unavailable)
 
@@ -136,6 +137,30 @@ import MoEngageInApps
                 break
             }
         }
+    }
+
+    @objc public func unsetUserAttribute(_ payload: [String: Any], completionHandler: @escaping ([String: Any]) -> Void) {
+        MoEngageLogger.logDefault(logLevel: .verbose, message: "unsetUserAttribute called with \(payload)")
+        let unsetData = MoEngagePluginParser.mapJsonToUnsetUserAttributeData(payload: payload)
+        guard let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: payload) else {
+            let failure = MoEngageRequestFailure(reason: MoEngageRequestFailureReason(code: .sdkNotInitialized), message: "App identifier missing in payload")
+            completionHandler(MoEngagePluginUtils.unsetUserAttributeResultToJSON(attributeName: unsetData.name, attributeLevelValue: unsetData.levelValue, failure: failure, identifier: ""))
+            return
+        }
+        guard let level = unsetData.level else {
+            let failure = MoEngageRequestFailure(reason: MoEngageRequestFailureReason(code: .invalidParameters), message: "Attribute level must be project or portfolio")
+            MoEngageLogger.logDefault(logLevel: .verbose, message: "unsetUserAttribute failed with \(failure)")
+            completionHandler(MoEngagePluginUtils.unsetUserAttributeResultToJSON(attributeName: unsetData.name, attributeLevelValue: unsetData.levelValue, failure: failure, identifier: identifier))
+            return
+        }
+        MoEngageSDKAnalytics.sharedInstance.unsetUserAttribute(withAttributeName: unsetData.name, level: level, workspaceId: identifier)
+            .onSuccess { result in
+                completionHandler(MoEngagePluginUtils.unsetUserAttributeResultToJSON(attributeName: result.attributeName, attributeLevel: result.attributeLevel, identifier: identifier))
+            }
+            .onFailure { failure in
+                MoEngageLogger.logDefault(logLevel: .verbose, message: "unsetUserAttribute failed with \(failure)")
+                completionHandler(MoEngagePluginUtils.unsetUserAttributeResultToJSON(attributeName: unsetData.name, attributeLevel: level, failure: failure, identifier: identifier))
+            }
     }
     
     @objc public func trackEvent(_ eventAttribute: [String: Any]) {

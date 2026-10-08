@@ -56,6 +56,10 @@ public struct MoEngagePluginConstants {
         public static let general = "general"
         public static let timestamp = "timestamp"
         public static let location = "location"
+        static let attributeLevel = "attributeLevel"
+        static let project = "project"
+        static let portfolio = "portfolio"
+        static let isUnsetSuccess = "isUnsetSuccess"
     }
     
     // event
@@ -129,6 +133,12 @@ public struct MoEngagePluginConstants {
         }
     }
     
+    // Request failure
+    struct RequestFailure {
+        static let failure = "failure"
+        static let reason = "reason"
+    }
+
     // Callback
     public struct CallBackEvents {
         public static let inAppShown = "MoEInAppCampaignShown"
@@ -150,7 +160,9 @@ public struct MoEngagePluginConstants {
         public static let networkError = "NETWORK_ERROR"
         public static let parseError = "PARSE_ERROR"
         public static let invalidParameters = "INVALID_PARAMETERS"
+        public static let invalidInitialisationConfiguration = "INVALID_INITIALISATION_CONFIGURATION"
         public static let serverError = "SERVER_ERROR"
+        public static let duplicateFunctionCall = "DUPLICATE_FUNCTION_CALL"
         public static let authenticationFailed = "AUTHENTICATION_FAILED"
         public static let unknownError = "UNKNOWN_ERROR"
     }

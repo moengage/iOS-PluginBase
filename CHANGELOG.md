@@ -4,6 +4,7 @@
 
 - [minor] Added common hybrid failure reasons (`MoEngagePluginConstants.FailureReason`) and `MoEngagePluginUtils.hybridReason(forSharedCode:)` to map shared SDK failure codes to them
 - [minor] Added MoEngagePluginRecommendations to the dependent release chain
+- [minor] Added support for unsetting a user attribute.
 
 # 16-09-2026
 
