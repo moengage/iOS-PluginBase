@@ -22,10 +22,31 @@ struct MoEngagePluginUnsetUserAttributeTests {
         #expect(data.level == .portfolio)
     }
 
-    @Test("Other levels fall back to project", arguments: ["project", "PORTFOLIO", "abc", nil] as [String?])
-    func parserDefaultsToProjectLevel(level: String?) {
-        let data = MoEngagePluginParser.mapJsonToUnsetUserAttributeData(payload: payload(name: "trial_status", level: level))
+    @Test("Parser reads the project level")
+    func parserReadsProjectLevel() {
+        let data = MoEngagePluginParser.mapJsonToUnsetUserAttributeData(payload: payload(name: "trial_status", level: "project"))
         #expect(data.level == .project)
+        #expect(data.levelValue as? String == "project")
+    }
+
+    @Test("A missing level defaults to project")
+    func parserDefaultsMissingLevelToProject() {
+        let data = MoEngagePluginParser.mapJsonToUnsetUserAttributeData(payload: payload(name: "trial_status", level: nil))
+        #expect(data.level == .project)
+        #expect(data.levelValue as? String == "project")
+    }
+
+    @Test("Unsupported levels are invalid and kept as received", arguments: ["PORTFOLIO", "Portfolio", "PROJECT", "abc", "", " project"])
+    func parserRejectsUnsupportedLevel(level: String) {
+        let data = MoEngagePluginParser.mapJsonToUnsetUserAttributeData(payload: payload(name: "trial_status", level: level))
+        #expect(data.level == nil)
+        #expect(data.levelValue as? String == level)
+    }
+
+    @Test("Null and non-string levels are invalid")
+    func parserRejectsNonStringLevel() {
+        #expect(MoEngagePluginParser.mapJsonToUserAttributeLevel(value: NSNull()) == nil)
+        #expect(MoEngagePluginParser.mapJsonToUserAttributeLevel(value: 1) == nil)
     }
 
     @Test("A missing name is passed on as empty")
@@ -109,6 +130,23 @@ struct MoEngagePluginUnsetUserAttributeTests {
                 "attributeName": "trial_status",
                 "attributeLevel": "portfolio",
                 "failure": ["reason": "SDK_STATE", "message": "App identifier missing in payload"]
+            ]
+        ]
+        #expect(reply as NSDictionary? == expected as NSDictionary)
+    }
+
+    @Test("Unsupported level replies with INVALID_PARAMETERS and echoes the level")
+    func unsupportedLevelRepliesWithInvalidParameters() {
+        var reply: [String: Any]?
+        let payload: [String: Any] = ["accountMeta": ["appId": appId], "data": ["attributeName": "trial_status", "attributeLevel": "PORTFOLIO"]]
+        MoEngagePluginBridge.sharedInstance.unsetUserAttribute(payload) { reply = $0 }
+        let expected: [String: Any] = [
+            "accountMeta": ["appId": appId],
+            "data": [
+                "isUnsetSuccess": false,
+                "attributeName": "trial_status",
+                "attributeLevel": "PORTFOLIO",
+                "failure": ["reason": "INVALID_PARAMETERS", "message": "Attribute level must be project or portfolio"]
             ]
         ]
         #expect(reply as NSDictionary? == expected as NSDictionary)

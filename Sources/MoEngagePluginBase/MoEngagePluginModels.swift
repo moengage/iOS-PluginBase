@@ -23,7 +23,10 @@ struct MoEngagePluginUserAttributeData {
 
 struct MoEngagePluginUnsetUserAttributeData {
     var name: String
-    var level: MoEngageUserAttributeLevel
+    // nil when the payload has a level that is not supported
+    var level: MoEngageUserAttributeLevel?
+    // Level as received, echoed back in the reply
+    var levelValue: Any
 }
 
 struct MoEngagePluginEventData {

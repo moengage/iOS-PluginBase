@@ -173,10 +173,15 @@ public class MoEngagePluginUtils {
     
     // MARK: Analytics Utilities
     static func unsetUserAttributeResultToJSON(attributeName: String, attributeLevel: MoEngageUserAttributeLevel, failure: MoEngageRequestFailure? = nil, identifier: String) -> [String: Any] {
+        return unsetUserAttributeResultToJSON(attributeName: attributeName, attributeLevelValue: attributeLevelString(for: attributeLevel), failure: failure, identifier: identifier)
+    }
+
+    // Takes the level as received, so an unsupported level is echoed back unchanged
+    static func unsetUserAttributeResultToJSON(attributeName: String, attributeLevelValue: Any, failure: MoEngageRequestFailure? = nil, identifier: String) -> [String: Any] {
         var dataPayload: [String: Any] = [
             MoEngagePluginConstants.UserAttribute.isUnsetSuccess: failure == nil,
             MoEngagePluginConstants.UserAttribute.attributeName: attributeName,
-            MoEngagePluginConstants.UserAttribute.attributeLevel: attributeLevelString(for: attributeLevel)
+            MoEngagePluginConstants.UserAttribute.attributeLevel: attributeLevelValue
         ]
         if let failure = failure {
             dataPayload[MoEngagePluginConstants.RequestFailure.failure] = [

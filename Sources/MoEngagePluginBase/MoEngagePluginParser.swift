@@ -86,9 +86,28 @@ class MoEngagePluginParser {
     static func mapJsonToUnsetUserAttributeData(payload: [String: Any]) -> MoEngagePluginUnsetUserAttributeData {
         let dataDict = payload[MoEngagePluginConstants.General.data] as? [String: Any] ?? [:]
         let attributeName = dataDict[MoEngagePluginConstants.UserAttribute.attributeName] as? String ?? ""
-        let attributeLevel = dataDict[MoEngagePluginConstants.UserAttribute.attributeLevel] as? String
-        let level: MoEngageUserAttributeLevel = attributeLevel == MoEngagePluginConstants.UserAttribute.portfolio ? .portfolio : .project
-        return MoEngagePluginUnsetUserAttributeData(name: attributeName, level: level)
+        let levelValue = dataDict[MoEngagePluginConstants.UserAttribute.attributeLevel]
+        return MoEngagePluginUnsetUserAttributeData(
+            name: attributeName,
+            level: mapJsonToUserAttributeLevel(value: levelValue),
+            levelValue: levelValue ?? MoEngagePluginConstants.UserAttribute.project
+        )
+    }
+
+    // A missing level defaults to project. Any other value must be exactly "project" or "portfolio",
+    // else nil is returned; a different case or a null is never treated as project.
+    static func mapJsonToUserAttributeLevel(value: Any?) -> MoEngageUserAttributeLevel? {
+        guard let value = value else {
+            return .project
+        }
+        switch value as? String {
+        case MoEngagePluginConstants.UserAttribute.project:
+            return .project
+        case MoEngagePluginConstants.UserAttribute.portfolio:
+            return .portfolio
+        default:
+            return nil
+        }
     }
 
     static func mapJsonToEventData(payload: [String: Any]) -> MoEngagePluginEventData? {
