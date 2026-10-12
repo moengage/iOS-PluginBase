@@ -14,7 +14,8 @@ repo_flag_mapping = {
   'apple-plugin-cards' => 'release-cards',
   'apple-plugin-geofence' => 'release-geofence',
   'apple-plugin-inbox' => 'release-inbox',
-  'apple-plugin-personalize' => 'release-personalize'
+  'apple-plugin-personalize' => 'release-personalize',
+  'apple-plugin-recommendations' => 'release-recommendations'
 }
 
 inputs = JSON.parse(ENV['MO_WORKFLOW_INPUTS'])

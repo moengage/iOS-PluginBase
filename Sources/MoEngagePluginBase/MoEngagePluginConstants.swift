@@ -142,6 +142,19 @@ public struct MoEngagePluginConstants {
         public static let authenticationError = "MoEAuthenticationError"
     }
     
+    /// Failure reasons shared by all modules, reported to the hybrid layer as
+    /// `{ accountMeta, data: { reason, message } }`. Modules add their own reasons on top of these.
+    public enum FailureReason {
+        public static let sdkState = "SDK_STATE"
+        public static let featureDisabled = "FEATURE_DISABLED"
+        public static let networkError = "NETWORK_ERROR"
+        public static let parseError = "PARSE_ERROR"
+        public static let invalidParameters = "INVALID_PARAMETERS"
+        public static let serverError = "SERVER_ERROR"
+        public static let authenticationFailed = "AUTHENTICATION_FAILED"
+        public static let unknownError = "UNKNOWN_ERROR"
+    }
+
     struct ExternalPluginBase {
         static let cardsBridge = "MoEngagePluginCards.MoEngagePluginCardsDelegateHandler"
     }
