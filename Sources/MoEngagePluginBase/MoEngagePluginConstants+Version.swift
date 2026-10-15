@@ -2,5 +2,5 @@
 import Foundation
 
 extension MoEngagePluginConstants {
-    static let version = "7.02.0"
+    static let version = "7.03.0"
 }

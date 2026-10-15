@@ -1,9 +1,10 @@
-# Release Date
+# 15-10-2026
 
-## Release Version
+## 7.03.0
 
-- [minor] Added common hybrid failure reasons (`MoEngagePluginConstants.FailureReason`) and `MoEngagePluginUtils.hybridReason(forSharedCode:)` to map shared SDK failure codes to them
-- [minor] Added MoEngagePluginRecommendations to the dependent release chain
+- Updated MoEngage-iOS-SDK to 11.04.0
+- Added common hybrid failure reasons (`MoEngagePluginConstants.FailureReason`) and `MoEngagePluginUtils.hybridReason(forSharedCode:)` to map shared SDK failure codes to them
+- Added MoEngagePluginRecommendations to the dependent release chain
 
 # 16-09-2026
 
