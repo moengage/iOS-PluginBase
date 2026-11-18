@@ -95,6 +95,47 @@ import MoEngageInApps
         }
     }
 
+    /// Updates the user's identities and asks MoEngage to merge the change.
+    ///
+    /// The completion handler is always called, exactly once. On success the payload follows
+    /// `nativeToHybrid/dataTracking/updateUserIdentifier.json`; on failure it is
+    /// `{ accountMeta, data: { reason, message } }`.
+    ///
+    /// - Parameters:
+    ///   - payload: Payload following `hybridToNative/dataTracking/userIdentify.json`.
+    ///   - completionHandler: Called with the success or failure payload.
+    @objc public func updateUserIdentifier(_ payload: [String: Any], completionHandler: @escaping ([String: Any]) -> Void) {
+        guard let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: payload) else {
+            MoEngageLogger.logDefault(logLevel: .error, message: "updateUserIdentifier: app identifier missing in payload")
+            let failure = MoEngageRequestFailure(
+                reason: MoEngageRequestFailureReason(code: .unknownError),
+                message: "Couldn't find app identifier in payload"
+            )
+            completionHandler(MoEngagePluginUtils.hybridFailurePayload(forIdentifier: nil, failure: failure))
+            return
+        }
+
+        // A missing identity goes to native as empty, which native rejects with invalidParameters.
+        let identities = MoEngagePluginParser.fetchIdentities(payload: payload) ?? [:]
+        // Only the keys are logged: identity values are personal data.
+        MoEngageLogger.logDefault(
+            logLevel: .verbose,
+            message: "updateUserIdentifier called for \(identifier) with keys \(Array(identities.keys))"
+        )
+
+        MoEngageSDKAnalytics.sharedInstance.updateUserIdentifier(identities: identities, workspaceId: identifier)
+            .onSuccess { result in
+                completionHandler(MoEngagePluginUtils.hybridPayload(
+                    forIdentifier: identifier,
+                    data: [MoEngagePluginConstants.General.identities: result.identities]
+                ))
+            }
+            .onFailure { failure in
+                MoEngageLogger.logDefault(logLevel: .error, message: "updateUserIdentifier failed for \(identifier): \(failure)")
+                completionHandler(MoEngagePluginUtils.hybridFailurePayload(forIdentifier: identifier, failure: failure))
+            }
+    }
+
     @objc public func setAppStatus(_ appStatus: [String: Any]) {
         if let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: appStatus),
            let appStatus = MoEngagePluginParser.fetchAppStatus(payload: appStatus) {
