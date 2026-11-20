@@ -23,9 +23,33 @@ extension MoEngagePluginUtils {
 
     /// Builds the failure reply for the hybrid layer: `{ accountMeta, data: { reason, message } }`.
     ///
-    /// The reason is the shared hybrid failure reason for the failure's code, and it is also the
-    /// message when the failure has none. `accountMeta.appId` is empty when the identifier could
-    /// not be read from the request.
+    /// Use it for any failure reason: a shared one, a module specific one, or one found by the
+    /// bridge itself, such as a missing app identifier. The reason is also the message when the
+    /// message is empty. `accountMeta.appId` is empty when the identifier could not be read
+    /// from the request.
+    ///
+    /// - Parameters:
+    ///   - identifier: The workspace id the request was made for, `nil` when it is missing.
+    ///   - reason: The hybrid failure reason, e.g. `MoEngagePluginConstants.FailureReason.unknownError`.
+    ///   - message: The failure message, for logs.
+    /// - Returns: The payload to send to the hybrid layer.
+    public static func hybridFailurePayload(
+        forIdentifier identifier: String?,
+        reason: String,
+        message: String
+    ) -> [String: Any] {
+        return hybridPayload(
+            forIdentifier: identifier ?? "",
+            data: [
+                MoEngagePluginConstants.General.reason: reason,
+                MoEngagePluginConstants.General.message: message.isEmpty ? reason : message
+            ]
+        )
+    }
+
+    /// Builds the failure reply for a native request failure with a shared SDK failure code.
+    ///
+    /// The reason is the shared hybrid failure reason for the failure's code.
     ///
     /// - Parameters:
     ///   - identifier: The workspace id the request was made for, `nil` when it is missing.
@@ -35,15 +59,11 @@ extension MoEngagePluginUtils {
         forIdentifier identifier: String?,
         failure: MoEngageRequestFailure
     ) -> [String: Any] {
-        let reason = hybridReason(forSharedCode: failure.reason.code)
-        // The code itself prints as `Code(rawValue: n)`, so the readable reason is the fallback.
-        let message = failure.message.isEmpty ? reason : failure.message
-        return hybridPayload(
-            forIdentifier: identifier ?? "",
-            data: [
-                MoEngagePluginConstants.General.reason: reason,
-                MoEngagePluginConstants.General.message: message
-            ]
+        // The code itself prints as `Code(rawValue: n)`, so the readable reason is the message fallback.
+        return hybridFailurePayload(
+            forIdentifier: identifier,
+            reason: hybridReason(forSharedCode: failure.reason.code),
+            message: failure.message
         )
     }
 }

@@ -107,11 +107,11 @@ import MoEngageInApps
     @objc public func updateUserIdentifier(_ payload: [String: Any], completionHandler: @escaping ([String: Any]) -> Void) {
         guard let identifier = MoEngagePluginUtils.fetchIdentifierFromPayload(attribute: payload) else {
             MoEngageLogger.logDefault(logLevel: .error, message: "updateUserIdentifier: app identifier missing in payload")
-            let failure = MoEngageRequestFailure(
-                reason: MoEngageRequestFailureReason(code: .unknownError),
+            completionHandler(MoEngagePluginUtils.hybridFailurePayload(
+                forIdentifier: nil,
+                reason: MoEngagePluginConstants.FailureReason.unknownError,
                 message: "Couldn't find app identifier in payload"
-            )
-            completionHandler(MoEngagePluginUtils.hybridFailurePayload(forIdentifier: nil, failure: failure))
+            ))
             return
         }
 

@@ -3,7 +3,7 @@
 ## Release Version
 
 - [minor] Added `updateUserIdentifier(_:completionHandler:)` to update the user's identities with a merge request
-- [minor] Added `MoEngagePluginUtils.hybridPayload(forIdentifier:data:)` and `MoEngagePluginUtils.hybridFailurePayload(forIdentifier:failure:)` to build the hybrid success and failure replies
+- [minor] Added `MoEngagePluginUtils.hybridPayload(forIdentifier:data:)` and `MoEngagePluginUtils.hybridFailurePayload(forIdentifier:failure:)` / `hybridFailurePayload(forIdentifier:reason:message:)` to build the hybrid success and failure replies
 
 # 18-11-2026
 

@@ -33,7 +33,10 @@ struct MoEngagePluginUpdateUserIdentifierTests {
             (MoEngageRequestFailureReason.Code.sdkNotInitialized, "SDK_STATE"),
             (.featureDisabled, "FEATURE_DISABLED"),
             (.invalidParameters, "INVALID_PARAMETERS"),
-            (.unknownError, "UNKNOWN_ERROR")
+            (.unknownError, "UNKNOWN_ERROR"),
+            // Shared codes with no hybrid reason of their own are reported as UNKNOWN_ERROR
+            (.cancelled, "UNKNOWN_ERROR"),
+            (.requiredPermissionMissing, "UNKNOWN_ERROR")
         ]
     )
     func failurePayloadMapsReason(code: MoEngageRequestFailureReason.Code, expectedReason: String) {
@@ -57,6 +60,25 @@ struct MoEngagePluginUpdateUserIdentifierTests {
         let failure = MoEngageRequestFailure(reason: MoEngageRequestFailureReason(code: .featureDisabled), message: "")
         let payload = MoEngagePluginUtils.hybridFailurePayload(forIdentifier: appId, failure: failure)
         #expect(data(payload)?["message"] as? String == "FEATURE_DISABLED")
+    }
+
+    @Test("A reason given directly is passed through with its message")
+    func failurePayloadWithReason() {
+        let payload = MoEngagePluginUtils.hybridFailurePayload(
+            forIdentifier: nil,
+            reason: "UNKNOWN_ERROR",
+            message: "Couldn't find app identifier in payload"
+        )
+        #expect(accountMetaAppId(payload) == "")
+        #expect(data(payload)?["reason"] as? String == "UNKNOWN_ERROR")
+        #expect(data(payload)?["message"] as? String == "Couldn't find app identifier in payload")
+    }
+
+    @Test("A reason given directly is also the message when the message is empty")
+    func failurePayloadWithReasonMessageFallback() {
+        let payload = MoEngagePluginUtils.hybridFailurePayload(forIdentifier: appId, reason: "SDK_STATE", message: "")
+        #expect(accountMetaAppId(payload) == appId)
+        #expect(data(payload)?["message"] as? String == "SDK_STATE")
     }
 
     // MARK: Parser
