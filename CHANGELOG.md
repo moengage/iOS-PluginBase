@@ -1,3 +1,9 @@
+# Release Date
+
+## Release Version
+
+- [minor] Added `updateUserIdentifier(_:completionHandler:)` to update the user's identities with a merge request
+
 # 18-11-2026
 
 ## 7.04.0
